@@ -1,0 +1,36 @@
+\section{Discussion and open problems}\label{sec:discussion}
+
+\paragraph{Summary.}
+A loss ratio carries its own premium and its own risk measure. The premium is the price point of the cash
+line, the sure payment at which the book changes hands, and the risk measure is loss ratio times premium,
+visible even where the ratio explodes as the residue of the singularity. With this reading, a single
+substantive axiom, premium-weighted comonotone pooling, together with law invariance and regularity of the
+implied pair, characterizes the loss ratios that are ratios of two Choquet-type functionals. The
+characterization is sharp, and the pair is unique. At the level of representations it is a transfer of the
+theory of \citet{yaari1987}, \citet{schmeidler1986}, \citet{wyp1997} and \citet{www2020}; at the level of the
+loss ratio it is new, and it comes with facts that have no single-functional counterpart: no non-trivial loss
+ratio is monotone (Proposition~\ref{prop:F2}), the association holds exactly off $\{\rho=\Pi=0\}$ and is
+signed (Corollary~\ref{cor:assoc}), and pooling extends consistently to books with infinite or indeterminate
+loss ratios (Corollary~\ref{cor:projpool}).
+
+\paragraph{Open problems.}
+\begin{enumerate}[label=(\arabic*)]
+\item \emph{Beyond comonotone pooling.} The most promising direction is to drop \axCM{} in favour of an axiom
+  that allows diversification, so that the implied premium and risk measure are convex or subadditive rather
+  than comonotonic additive. The implied premium and the implied risk measure are defined without \axCM{} only
+  partly (the premium needs only \axP; the accounting reading of $\rho$ needs pooling with sure losses), and the
+  resulting class, a ratio of Kusuoka-type functionals, has no characterization yet. Replacing comonotonic
+  additivity by convexity leads to suprema of signed Choquet integrals \citep{liu2020}, so no single pair $(h,g)$
+  and no uniqueness should be expected.
+\item \emph{Weaker cardinal axioms.} Can \axCM{} be replaced by the mediant inequality plus a supplementary
+  condition? The inequality implies additivity for comonotone pairs strictly on the same side of break-even, but
+  not for pairs straddling $1$ or lying in the break-even set.
+\item \emph{Order properties of $\LR$.} \axRM{} is monotonicity of the implied pair. Whether it is equivalent to a
+  natural order property of $\LR$ is open; by Proposition~\ref{prop:F2} it cannot be pointwise monotonicity.
+\item \emph{Loadings on sure losses.} We conjecture that an analogue of Theorem~\ref{thm:A} holds for ratios
+  $\bracket{I_h}{\kappa I_g}$ with a known loading $\kappa>0$, which would admit constant loss ratios $\ne1$.
+\item \emph{Quasi-convexity.} Necessity of the conditions in Corollary~\ref{cor:shape}(d) is open.
+\item \emph{Actuarial domain.} Whether (A4) imposed only on pairs with $X,Y,X+Y\notin N_0$ suffices is open; a
+  truncation-continuity (Greco-type) version of the signed tier on the cone is not known.
+\item \emph{Unbounded losses.} Extensions to $L^p$ and Orlicz spaces via \citet{www2020b} are not treated.
+\end{enumerate}

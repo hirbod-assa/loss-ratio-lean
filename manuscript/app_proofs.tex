@@ -1,0 +1,143 @@
+\section{Proof of Theorem~\ref{thm:A0} (no law invariance)}\label{app:A0}
+
+
+Lemmas~\ref{lem:premium}, \ref{lem:implied}, \ref{lem:comon} and~\ref{lem:cashlip} do not use \axLI. Put
+$\nu_1(A):=\rho(\1_A)$ and $\nu_2(A):=\Pi(\1_A)$. They are null-invariant, because $\rho$ and $\Pi$ act on
+almost-sure classes, normalized by $\rho(1)=\Pi(1)=1$, and the layer formula \eqref{eq:layer} holds with
+$\nu_i(C_j)$ in place of $h(P(C_j))$, for every chain $C_1\supset\dots\supset C_m$.
+
+\emph{Bounded variation.} Given a chain $\emptyset=A_0\subset\dots\subset A_n=\Omega$, run the proof of
+Lemma~\ref{lem:bv} with $I_j:=A_j\setminus A_{j-1}$; then $\{W\ge2(n-j)\}=A_j$, and one obtains
+$\|\nu_1\|_{bv}\le2L$. Under \axRM, $\nu_1$ is monotone, i.e.\ a capacity.
+
+\emph{Jordan decomposition of a game.} For $\nu\in\mathcal V$ let $\nu^+(A):=\sup\sum_j(\nu(A_j)-\nu(A_{j-1}))^+$
+over chains from $\emptyset$ to $A$, and $\nu^-:=\nu^+-\nu$.
+For $A\subset B$, appending $B$ to a chain for $A$ gives $\nu^+(B)\ge\nu^+(A)+(\nu(B)-\nu(A))^+$. Hence $\nu^+$ is
+non-decreasing, and $\nu^-(B)-\nu^-(A)\ge(\nu(B)-\nu(A))^+-(\nu(B)-\nu(A))\ge0$, so $\nu^-$ is non-decreasing.
+Moreover $\nu^+(A)\le\|\nu\|_{bv}$ (append $\Omega$), and null-invariance passes to $\nu^\pm$ (if $P(A\triangle A')=0$,
+map $A_j\mapsto A_j\cap A'$ for $j<n$ and $A_n\mapsto A'$, which preserves all $\nu$-values).
+
+\emph{Representation.} $C_{\nu^\pm}$ (with the correction term by $\nu^\pm(\Omega)$) is monotone with cash slope
+$\nu^\pm(\Omega)$, hence Lipschitz, and $C_\nu=C_{\nu^+}-C_{\nu^-}$ by linearity in $\nu$. Now $\rho$ and
+$C_{\nu_1}$ are Lipschitz and agree on simple positions by \eqref{eq:layer}, so $\rho=C_{\nu_1}$; likewise
+$\Pi=C_{\nu_2}$.
+
+\emph{Converse and uniqueness.} As in the proof of Theorems~\ref{thm:A} and~\ref{thm:B}, with $\nu$ in place of
+$h\circ P$; null-invariance makes $C_\nu$ well defined on almost-sure classes and makes almost-sure nestedness
+sufficient. Uniqueness follows because $\Pi(\1_A)$ is minus the price point of $\1_A$ and $\rho(\1_A)$ is given by
+Proposition~\ref{prop:readings}(b).
+
+\emph{Law invariance.} If \axLI{} holds, Lemma~\ref{lem:LI} makes $\nu_i(A)$ a function of $P(A)$ alone, so
+$\nu_i=k_i\circ P$; since the space is atomless, $\|k\circ P\|_{bv}=\TV(k)$, so $k_i\in\Hset_1$. Conversely
+$k\circ P$ gives a law-invariant functional. \qed
+
+\section{Proofs for the actuarial domain}\label{app:C}
+
+
+\begin{proof}[Proof of Lemma~\ref{lem:halfline}]
+$a/b=\LR_0(X)\ne1$, so $a\ne b$. \emph{Uniqueness.} If $(a+c)(b'+c)=(a'+c)(b+c)$ for all $c\ge0$, comparing
+coefficients gives $a+b'=a'+b$ and $ab'=a'b$; writing $a'=a+t$, $b'=b+t$ gives $t(a-b)=0$, so $t=0$.
+\emph{Positivity.} If $b\le0$, the pole $-b\ge0$, at which the numerator does not vanish, would contradict finiteness
+of $\LR_0$. \emph{Shifts.} $\LR_0(X+c_0)=(a+c_0)/(b+c_0)\ne1$, and the profile of $X+c_0$ is the shifted profile of $X$. \qedhere
+\end{proof}
+
+\begin{lemma}[Sierpi\'nski and quantile coupling]\label{lem:coupling}
+(a) If $P(B)>0$, $P(\cdot\mid B)$ carries a uniform random variable. (b) For every $Y\in L^\infty$ there is a uniform
+$U$ with $Y=q_Y(U)$ a.s. If $X\eqd Y$ and $X_n\to X$ in norm, then $Y_n:=q_{X_n}(U)$ satisfies $Y_n\eqd X_n$ and
+$\|Y_n-Y\|\le\|X_n-X\|$.
+\end{lemma}
+
+\begin{proof}
+(a) $P(\cdot\mid B)$ is atomless; by Sierpi\'nski's theorem there are sets $B_t\subset B$, increasing in dyadic
+$t\in[0,1]$, with $B_1=B$ and $P(B_t)=tP(B)$. Put $W:=\inf\{t:\omega\in B_t\}$; then $\{W<t\}\subset B_t\subset\{W\le t\}$,
+so $P(W\le t\mid B)=t$. (b) Off the atoms of $Y$ set $U:=F_Y(Y)$; on each atom $\{Y=y\}$ set
+$U:=F_Y(y-)+(F_Y(y)-F_Y(y-))W_y$ with $W_y$ uniform under $P(\cdot\mid Y=y)$ by (a). Then $U$ is uniform and
+$q_Y(U)=Y$. If $|X_n-X|\le\varepsilon$ a.s., quantiles move by at most $\varepsilon$, so
+$\|q_{X_n}(U)-q_X(U)\|\le\|X_n-X\|$ and $q_X=q_Y$. \qedhere
+\end{proof}
+
+\begin{lemma}[Extension]\label{lem:ext}
+Assume (A0)--(A2) and (A3) (respectively (A3$_s$)). Then $\rho,\Pi$ are $1$-Lipschitz (respectively uniformly
+continuous) on $\Xp\setminus N_0$, hence extend uniquely to continuous $\bar\rho,\bar\Pi$ on $\Xp$. The extensions
+are cash additive for $c\ge0$, law invariant, monotone under (A3), and $\bar\Pi\ge0$.
+\end{lemma}
+
+\begin{proof}
+Let $X,Y\notin N_0$ and $t=\|X-Y\|$. Then $Y+t\notin N_0$ (Lemma~\ref{lem:halfline}) and $X\le Y+t$, so (A3) gives
+$\rho(X)\le\rho(Y)+t$; thus $\rho,\Pi$ are $1$-Lipschitz, and $\Xp\setminus N_0$ is dense by (A0). Cash additivity
+passes to the limit. Monotonicity: if $X\le Y$, choose $X_n,Y_n\notin N_0$ within $1/n$ of $X,Y$; then
+$X_n\le Y_n+2/n\notin N_0$, and let $n\to\infty$. Law invariance: $N_0$ is law invariant by (A2), and off $N_0$ so are
+$\rho,\Pi$ by uniqueness in Lemma~\ref{lem:halfline}. If $X\eqd Y$ and $X_n\to X$ with $X_n\notin N_0$, then
+$Y_n:=q_{X_n}(U)\notin N_0$ satisfies $\rho(Y_n)=\rho(X_n)$ and $Y_n\to Y$ (Lemma~\ref{lem:coupling}), so
+$\bar\rho(X)=\bar\rho(Y)$. Finally $\Pi>0$ off $N_0$ gives $\bar\Pi\ge0$. Under (A3$_s$) the same argument applies with
+extension by uniform continuity. \qedhere
+\end{proof}
+
+\begin{lemma}[Sweep]\label{lem:sweep}
+Let $k$ be bounded Borel with $k(0)=0$, such that $C_k$ is comonotonic additive on $\Xp$ (true for $k\in\Hset$ and
+for continuous $k$). If $k(p_0)\ne0$ for some $p_0\in(0,1]$, then $\Xp\cap\{C_k=0\}$ has empty interior.
+\end{lemma}
+
+\begin{proof}
+Write $X=q_X(U)$ and $A=\{U>1-p_0\}$. Then $X$ and $\1_A$ are comonotone, so $C_k(X+t\1_A)=C_k(X)+t\,k(p_0)$ for
+$t>0$, which vanishes for at most one $t$. Since $\|X+t\1_A-X\|=t$, every ball around $X$ meets $\{C_k\ne0\}$. \qedhere
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:C}]
+\emph{Step C1 (law invariance, extension).} Lemma~\ref{lem:ext}.
+
+\emph{Step C2 (pole).} $\bar\Pi$ is comonotonic additive by (A4a) and continuous, hence positively homogeneous. Then
+$\bar\Pi(2)=2\bar\Pi(1)$ and $\bar\Pi(2)=\bar\Pi(1)+1$ give $\bar\Pi(1)=1$.
+
+\emph{Step C3 (zero).} $\bar\rho$ and $\LR_0\bar\Pi$ are continuous (by (A5) for the second) and agree off $N_0$,
+where $a_X=\LR_0(X)b_X$; so $\bar\rho=\LR_0\bar\Pi$ on $\Xp$. By (A4b), $\bar\rho$ is comonotonic additive, hence
+homogeneous, and $\bar\rho(1)=1$ as in C2.
+
+\emph{Step C4 (representation).} For $P(A)=p>0$ put $h(p):=\bar\rho(\1_A)$, $g(p):=\bar\Pi(\1_A)$ and
+$h(0)=g(0)=0$. They are well defined (law invariance) and non-decreasing (monotonicity). Since
+$\varepsilon\1_A\le\1_A$, homogeneity and monotonicity give $(1-\varepsilon)h(p)\ge0$, so $h,g\ge0$; thus $h,g$ are
+distortion functions. A simple $X\in\Xp$ equals $\sum_i(x_i-x_{i-1})\1_{B_i}$ with $x_{-1}=0$, $B_i=\{X\ge x_i\}$,
+a comonotone sum of positive multiples of indicators, so $\bar\rho(X)=C_h(X)$; approximating $X$ by the simple
+$\lceil nX\rceil/n\in\Xp$ gives $\bar\rho=C_h$ on $\Xp$, and likewise $\bar\Pi=C_g$.
+
+\emph{Step C5 (positivity of $g$).} (a) If $g(p)=0$ then $h(p)=\LR_0(\1_A)\cdot0=0$. (b) By (A0) some $W\notin N_0$
+exists and, by Lemma~\ref{lem:halfline}, $\bar\rho(W)\ne\bar\Pi(W)$, so $h(q_0)\ne g(q_0)$ for some $q_0$; as
+$g(q_0)\ge0$ and $g(q_0)\ne0$ by (a), $g(q_0)>0$. (c) Suppose $g(p)=0$ for some $p>0$ and take nested $B,C$ with
+$P(B)=p$, $P(C)=q_0$ and $X_n=\1_B+n^{-1}\1_C$. Then $\bar\Pi(X_n)=g(q_0)/n>0$, $\bar\rho(X_n)=h(q_0)/n$, so
+$\LR_0(X_n)=h(q_0)/g(q_0)\ne1$. But $\bar\Pi(\1_B)=g(p)=0$ forces $\1_B\in N_0$, so $\LR_0(\1_B)=1$, contradicting (A5)
+since $X_n\to\1_B$.
+
+\emph{Step C6 (conclusion).} $\LR_0=\bar\rho/\bar\Pi=C_h/C_g$. If $h=g$ then $N_0=\Xp$, contradicting (A0).
+
+\emph{Converse.} Let $\LR_0=C_h/C_g$ with $h\ne g$ and $g>0$ on $(0,1]$; then $C_g>0$ on $\Xp$, because
+$P(X>x)>0$ for $x\in[0,\ess X)$. (A1) holds with $a_X=C_h(X)$, $b_X=C_g(X)$;
+(A2)--(A5) are immediate; (A0) follows from Lemma~\ref{lem:sweep} with $k=h-g$, since
+$N_0=\Xp\cap\{C_{h-g}=0\}$.
+
+\emph{Uniqueness among signed pairs.} If also $\LR_0=C_{h'}/C_{g'}$ with $(h',g')\in\Hset_1^2$ and $C_{g'}>0$, then by
+Lemma~\ref{lem:halfline} $C_{h'}=\rho$ and $C_{g'}=\Pi$ off $N_0$. The set $N_0$ is determined by $\LR_0$ and has dense
+complement (Lemma~\ref{lem:sweep}, $h\ne g$), so by continuity $C_{h'}=\bar\rho=C_h$ and $C_{g'}=C_g$; evaluating at
+indicators gives $h'=h$, $g'=g$. \qedhere
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:Cp}]
+Steps C1, C2 and the extension hold with uniform continuity in place of monotonicity. For $Z\in L^\infty$ and
+$M>\|Z\|$ put $\tilde\rho(Z):=\bar\rho(Z+M)-M$, independent of $M$ by cash additivity. Then $\tilde\rho$ is law
+invariant, cash additive, uniformly continuous and comonotonic additive (the shifts $Z_i+M$ are comonotone elements
+of $\Xp$, and Step C3 with (A4b) applies). Lemmas~\ref{lem:cashlip}--\ref{lem:rep}, applied to $\tilde\rho$ and
+likewise to $\tilde\Pi$ (using (A4a)), give $\tilde\rho=I_h$, $\tilde\Pi=I_g$ with $h,g\in\Hset_1$. Step C5 holds
+verbatim: in (b) the sign $g\ge0$ comes from $\bar\Pi\ge0$, not from monotonicity, and in (c) nested sets are
+comonotone in either direction. The converse uses the Lipschitz bounds for (A3$_s$) and Lemma~\ref{lem:sweep} for
+(A0). \qedhere
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:bridge}]
+($\Rightarrow$) Extend $\LR_0$ to $L^\infty$ by $\bracket{I_h}{I_g}$; this satisfies Theorem~\ref{thm:B}, and
+$I_g>0$ on $\Xp$ because $g>0$. ($\Leftarrow$) Theorem~\ref{thm:B} gives distortions $h,g$, and $I_g>0$ on $\Xp$
+forces $g>0$ on $(0,1]$ (otherwise $I_g(\1_A)=g(P(A))=0$ for some $A$). \emph{Uniqueness.} If $\LR_0\not\equiv1$ then
+$h\ne g$, and two extensions have pairs that agree by the uniqueness in Theorem~\ref{thm:C}. Their finite values,
+$I_h/I_g$ on $\{I_g\ne0\}$, and their non-finite locations, $\{I_g=0\}$, therefore coincide; the labels at the
+non-finite values are fixed by \ax{S} and are otherwise arbitrary (for instance, the value at $0$ may be $\infty$ or
+$\star$). If $\LR_0\equiv1$, $\bracket{I_{\mathrm{id}}}{I_{\mathrm{id}}}$ and $\bracket{I_{\sqrt\cdot}}{I_{\sqrt\cdot}}$ have
+different representing pairs: the price point of $\1_A$ is $-P(A)$ for the first and $-\sqrt{P(A)}$ for the second. \qedhere
+\end{proof}

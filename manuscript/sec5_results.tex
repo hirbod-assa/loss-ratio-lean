@@ -1,0 +1,118 @@
+\section{Main results}\label{sec:results}
+
+Throughout this section $\LR:L^\infty\to\widehat{\R}_\star$, and $\Pi$ and $\rho$ denote the implied
+premium and the implied risk measure (Definitions~\ref{def:impliedprem} and~\ref{def:impliedrisk},
+Proposition~\ref{prop:readings}).
+
+\subsection{The two characterization theorems}
+
+\begin{theorem}[Signed tier]\label{thm:A}
+The following are equivalent.
+\begin{enumerate}[label=(\roman*),nosep]
+\item $\LR$ satisfies \axP, \axN, \axCM, \axLI{} and \axRC.
+\item There is a pair $(h,g)\in\Hset_1^2$ such that $\LR(X)=I_h(X)/I_g(X)$ whenever $I_g(X)\neq0$, and
+  $\LR(X)\notin\R$ whenever $I_g(X)=0$.
+\end{enumerate}
+In that case the implied premium is $\Pi=I_g$ and the implied risk measure is $\rho=I_h$. If, in addition,
+the labelling convention \ax{S} holds, then $\LR=\bracket{I_h}{I_g}$ on all of $L^\infty$.
+\end{theorem}
+
+\begin{theorem}[Distortion tier]\label{thm:B}
+The following are equivalent.
+\begin{enumerate}[label=(\roman*),nosep]
+\item $\LR$ satisfies \axP, \axN, \axCM, \axLI{} and \axRM.
+\item Statement (ii) of Theorem~\ref{thm:A} holds with $h,g$ distortion functions (non-decreasing elements
+  of $\Hset_1$).
+\end{enumerate}
+\end{theorem}
+
+The proofs are given in Section~\ref{sec:proofs}; Section~\ref{sec:necessity} shows that none of the axioms
+can be dropped.
+
+\subsection{Uniqueness and derived properties}
+
+\begin{proposition}\label{prop:unique}
+In Theorems~\ref{thm:A} and~\ref{thm:B}, $(h,g)$ is unique. For an event $A$ with $P(A)=p$,
+\begin{align*}
+ g(p)&=-c^*,\qquad c^*=\text{the price point of }\1_A;\\
+ h(p)&=\big(g(p)+c\big)\,\LR(\1_A+c)-c\qquad\text{for any }c\neq-g(p).
+\end{align*}
+Moreover $D=\{I_g\ne0\}$ and the break-even set is $N:=\{\rho=\Pi\}=\{I_{h-g}=0\}$. Within
+Theorem~\ref{thm:A}, $\rho$ (respectively $\Pi$) is monotone if and only if $h$ (respectively $g$) is
+non-decreasing.
+\end{proposition}
+
+\begin{proposition}\label{prop:derived}
+Under the axioms of Theorem~\ref{thm:A}:
+\begin{enumerate}[label=(\roman*),nosep]
+\item every cash line is a unit-slope Möbius map, $\LR(X+c)=(\rho(X)+c)/(\Pi(X)+c)$ for $c\ne-\Pi(X)$;
+\item $\rho$ and $\Pi$ are cash additive, $\rho(c)=\Pi(c)=c$, and they are Lipschitz with constants
+  $\TV(h)$ and $\TV(g)$;
+\item $\rho$ and $\Pi$ are comonotonic additive and positively homogeneous, hence $\LR$ is scale invariant:
+  $\LR(\lambda X)=\LR(X)$ for $\lambda>0$ and $X\in D$, and for all $X$ under \ax{S}.
+\end{enumerate}
+\end{proposition}
+
+Properties that are often postulated for the numerator and the denominator of a loss ratio are thus derived;
+the association itself is derived in
+Corollary~\ref{cor:assoc}.
+
+\subsection{Examples}
+
+\begin{example}[Expected loss over a proportional hazard premium]\label{ex:PH}
+Let $h=\mathrm{id}$ and $g_r(p)=p^r$ with $r\in(0,1)$, so that $\rho=\E$ and $\Pi$ is the proportional hazard
+premium. For $P(A)=p$, $\LR(\1_A)=p^{1-r}$, and Proposition~\ref{prop:unique} recovers the premium distortion
+from the loss ratios of Bernoulli books, $g_r(p)=p/\LR(\1_A)$. For a loss $U$ uniform on $[0,1]$,
+$\E U=\tfrac12$ and $\Pi(U)=\int_0^1(1-x)^r\,dx=1/(1+r)$, so $\LR(U)=(1+r)/2$. Since $g_r$ is concave and $h$ is
+linear, $\LR\le1$ on $\Xp$ (Corollary~\ref{cor:shape}). The left panel of Figure~\ref{fig:examples} shows
+$p\mapsto\LR(\1_A)$ for three values of $r$.
+\end{example}
+
+\begin{example}[Expected shortfall over expected loss]\label{ex:ES}
+Let $h_\alpha(p)=\min\{p/(1-\alpha),1\}$, $\alpha\in(0,1)$, and $g=\mathrm{id}$, so that $\rho=\mathrm{ES}_\alpha$ and
+$\Pi=\E$. Then $\LR(\1_A)=\min\{1/(1-\alpha),1/p\}$ and $\LR(U)=1+\alpha$ for $U$ uniform on $[0,1]$. Here $h_\alpha$ is
+concave and $g$ is convex, so $\LR\ge1$ and $\LR$ is quasi-convex on $\{\Pi>0\}$
+(Corollary~\ref{cor:shape}(d)); see the right panel of Figure~\ref{fig:examples}.
+\end{example}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=left,width=0.48\textwidth,height=5.2cm,xmin=0,xmax=1,ymin=0,ymax=1.05,
+  xlabel={$p=P(A)$},ylabel={$\LR(\1_A)$},tick label style={font=\footnotesize},samples=120,domain=0:1,
+  title={\small $\E/\Pi_{g_r}$},legend style={font=\footnotesize,at={(0.97,0.03)},anchor=south east}]
+\addplot[thick,blue!70!black] {x^0.5}; \addlegendentry{$r=0.5$}
+\addplot[thick,red!70!black,dashed] {x^0.3}; \addlegendentry{$r=0.7$}
+\addplot[thick,green!45!black,dotted] {x^0.1}; \addlegendentry{$r=0.9$}
+\end{axis}
+\begin{axis}[at={(left.south east)},xshift=1.6cm,width=0.48\textwidth,height=5.2cm,xmin=0,xmax=1,ymin=0,ymax=22,
+  xlabel={$p=P(A)$},tick label style={font=\footnotesize},samples=200,domain=0.03:1,
+  title={\small $\mathrm{ES}_\alpha/\E$},legend style={font=\footnotesize,at={(0.97,0.97)},anchor=north east}]
+\addplot[thick,blue!70!black] {min(1/(1-0.9),1/x)}; \addlegendentry{$\alpha=0.9$}
+\addplot[thick,red!70!black,dashed] {min(1/(1-0.95),1/x)}; \addlegendentry{$\alpha=0.95$}
+\end{axis}
+\end{tikzpicture}
+\caption{Loss ratios of Bernoulli books $\1_A$ as functions of $p=P(A)$. Left: expected loss over the
+proportional hazard premium (Example~\ref{ex:PH}); the curves identify $g_r(p)=p/\LR(\1_A)$. Right: expected
+shortfall over expected loss (Example~\ref{ex:ES}).}\label{fig:examples}
+\end{figure}
+
+\subsection{Dropping law invariance}
+
+We state the version without \axLI, which covers scenario-dependent loss ratios. A \emph{game} is a map $\nu:\mathcal F\to\R$ with $\nu(\emptyset)=0$. It is
+\emph{null-invariant} if $P(A\triangle B)=0$ implies $\nu(A)=\nu(B)$; its \emph{chain variation} is
+$\|\nu\|_{bv}=\sup\sum_j|\nu(A_j)-\nu(A_{j-1})|$ over chains
+$\emptyset=A_0\subset\dots\subset A_n=\Omega$. Let $\mathcal V_1$ be the null-invariant games with
+$\|\nu\|_{bv}<\infty$ and $\nu(\Omega)=1$, and for $\nu\in\mathcal V_1$ let
+$C_\nu(X)=\int_0^\infty\nu(X>x)\,dx+\int_{-\infty}^0[\nu(X>x)-1]\,dx$. A \emph{capacity} is a monotone game.
+
+\begin{theorem}[Without law invariance]\label{thm:A0}
+$\LR$ satisfies \axP, \axN, \axCM{} and \axRC{} if and only if $\LR=C_{\nu_1}/C_{\nu_2}$ where
+$C_{\nu_2}\ne0$ and $\LR\notin\R$ where $C_{\nu_2}=0$, for $\nu_1,\nu_2\in\mathcal V_1$; with \axRM{} in place
+of \axRC{}, if and only if the same holds with capacities $\nu_1,\nu_2$. The pair is unique:
+$\nu_1(A)=\rho(\1_A)$ and $\nu_2(A)=\Pi(\1_A)$. The loss ratio is in addition law invariant if and only if
+$\nu_i=k_i\circ P$ with $k_i\in\Hset_1$, which recovers Theorems~\ref{thm:A} and~\ref{thm:B}.
+\end{theorem}
+
+The set-function representation in Theorem~\ref{thm:A0} is that of \citet{msm1994} and
+\citet{cmmm2012,cmmm2015}; the proof is in Appendix~\ref{app:A0}.

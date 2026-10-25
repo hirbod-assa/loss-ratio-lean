@@ -1,0 +1,163 @@
+\section{Related literature and what is different here}\label{sec:lit}
+
+The loss ratio touches four literatures: the axiomatic theory of premia and risk measures, the
+theory of performance ratios and acceptability indices, implicitly defined risk functionals, and
+ratio representations in decision theory and statistics. For each we say what is known, what we use,
+and where our problem differs. Section~\ref{sec:lit-table} collects the differences in a table.
+
+\subsection{Distortion premia, Choquet integrals and signed Choquet integrals}
+
+The axiomatic theory of insurance premia starts from properties of a single premium functional
+$H$ on losses: translation invariance, $H(X+c)=H(X)+c$, and ``no unjustified loading'', $H(c)=c$ for constant
+losses \citep{gerber1974},
+monotonicity, law invariance, and, most importantly, additivity for comonotonic risks. The dual
+theory of \citet{yaari1987} replaces utility transformations of payoffs by distortions of probabilities, which
+leads to the Choquet-type representation $\int g(P(X>x))\,dx$ and to additivity for comonotonic risks, and \citet{wang1996} introduced it as a premium principle. \citet{wyp1997}
+characterize the \emph{distortion premium} $C_g$ by law invariance, monotonicity, comonotonic
+additivity, a continuity condition and $H(1)=1$. The mathematical backbone is Schmeidler's
+(\citeyear{schmeidler1986}) theorem: a monotone, comonotonic additive functional on bounded
+measurable functions is a Choquet integral with respect to a capacity, with no continuity needed;
+see also \citet{greco1982} and \citet{denneberg1994} on cones. Coherent risk measures are defined by
+monotonicity, translation invariance, subadditivity and positive homogeneity \citep{adeh1999,delbaen2002}; in the
+law-invariant case, comonotonic coherent risk measures are mixtures of expected shortfalls over levels in $[0,1]$
+\citep{kusuoka2001,jst2006,folmerschied2016}.
+
+Without monotonicity the corresponding representation theory is that of \emph{signed} Choquet
+integrals. \citet{msm1994} and \citet{cmmm2012,cmmm2015} show that comonotonic additive functionals
+of bounded variation are exactly differences of Choquet integrals with respect to set functions of
+bounded variation. \citet{www2020} prove the law-invariant version used here: on an atomless
+$L^\infty$, a functional is law invariant, comonotonic additive and uniformly norm continuous if and
+only if it is a signed Choquet integral $I_h$ with $h$ of bounded variation. They also show that
+$I_h$ is convex if and only if $h$ is concave, and \citet{wangwei2020} study when level sets of such
+functionals are convex. \citet{www2020b} extend the characterization to law-invariant convex cones containing
+$L^\infty$, such as $L^p$, by adding continuity at infinity, which holds automatically on $L^\infty$, and give a
+representation of convex signed Choquet integrals by mixtures of expected shortfalls.
+
+These theorems underlie our representation step, and
+Theorems~\ref{thm:A} and~\ref{thm:B} are the loss-ratio counterparts of \citet[Thm.~1]{www2020} and
+of \citet{wyp1997}. We re-prove the representation directly (Steps~5--8 of Section~\ref{sec:proofs})
+to keep track of constants and because we need no continuity in the monotone tier.
+
+All of these results characterize one functional by axioms placed on that
+functional. A loss ratio is a ratio of two, and the axioms must be placed on the ratio, which does
+not determine its parts (Section~\ref{sec:intro}). Bridging this gap is the content of
+Sections~\ref{sec:axioms} and~\ref{sec:proofs}. We are not aware of an if-and-only-if
+characterization of a ratio of two Choquet integrals, or of two risk measures, in this literature.
+
+\subsection{Performance ratios and acceptability indices}
+
+The best-known ratios of risk functionals are performance measures. The gain--loss ratio of
+\citet{bernardoledoit2000} divides the expected positive part of a payoff by the expected negative
+part, and \citet{biaginipinar2013} study its optimization. \citet{chernymadan2009} give an
+axiomatic theory of \emph{acceptability indices}: a map $\alpha$ that is monotone, quasi-concave,
+scale invariant and Fatou is characterized by an increasing family of coherent risk measures
+$\{\rho_x\}$ with $\alpha(X)=\sup\{x:\rho_x(X)\le0\}$, and the family is recovered by the cash-shift
+formula $\rho_x(X)=\inf\{c:\alpha(X+c)\ge x\}$. Dynamic versions and the correspondence between
+indices and families are developed by \citet{bcz2014} and \citet{bbn2014}, and the correspondence
+between quasi-convex functionals and acceptance families by \citet{drapeaukupper2013}. The
+Sharpe ratio is not an index in this sense, and the conic-finance programme of
+\citet{chernymadan2010} uses the \emph{spread} between ask and bid prices instead of a ratio.
+\citet{ck2013} propose reward--risk ratios, a reward functional divided by a risk functional, and
+list axioms that make such a ratio a performance measure, giving sufficient conditions rather than a
+characterization. 
+
+\citet{hlw2025} give an axiomatic theory of diversification indices. They note that the diversification
+ratio $\phi(\sum_iX_i)/\sum_i\phi(X_i)$ of a risk measure $\phi$ may be negative, needs the conventions $0/0=0$
+and $1/0=\infty$, and is not location invariant, and they characterize instead the \emph{diversification
+quotient} $\alpha^*/\alpha$, where $\alpha^*$ is the level at which a decreasing family $(\rho_\beta)$ of risk
+measures, evaluated at the pooled portfolio, reaches $\sum_i\rho_\alpha(X_i)$. Six axioms (non-negativity,
+location and scale invariance, rationality, normalization and continuity) characterize the quotients built from
+monotone, cash-additive and positively homogeneous families \citep[Thm.~1]{hlw2025}, and portfolio convexity
+restricts the class to coherent families when there are at least four assets \citep[Thm.~2]{hlw2025}; they also
+relate the quotient to the acceptability indices of \citet{chernymadan2009}. This is the closest if-and-only-if
+result of association type. It shares two features with ours: a ratio-type quantity is recovered as the level at
+which a family of risk measures crosses a threshold (compare Corollary~\ref{cor:assoc}), and the naive ratio
+needs conventions where its denominator vanishes (compare the labels $\infty$ and $\star$). It differs in the
+object, an index on vectors of risks that is invariant under location and scale, whereas a loss ratio is a
+function of a single book that moves along each cash line as a M\"obius map; and in monotonicity, which their
+rationality axiom uses and which a loss ratio cannot have (Proposition~\ref{prop:F2}).
+
+The cash-shift recovery formula of \citet{chernymadan2009} and its
+generalizations is the model for our reading of $\rho$ and $\Pi$ from cash lines, and the association is the
+loss-ratio analogue of the level-crossing definition of an index. Three differences matter.
+
+First, \emph{direction}. In an acceptability index, larger gains are better, so
+the index is monotone and the family $\{\rho_x\}$ is monotone in the level. In a reward--risk ratio,
+the numerator is a reward and the denominator a risk, so the ratio is monotone again. In a loss
+ratio, numerator and denominator are both increasing in the loss. We show that the ratio is then
+not monotone (Proposition~\ref{prop:F2}), and that the associated family
+$\rho_\beta=(\rho-\beta\Pi)/(1-\beta)$ is not monotone either (Corollary~\ref{cor:assoc}): it is a
+\emph{signed} Choquet integral even when $\rho$ and $\Pi$ are distortion premia. The index theorems
+therefore do not apply, and the signed tier of Theorem~\ref{thm:A} is not a luxury but the natural
+home of the associated family. Second, \emph{cardinality}. Indices are ordinal objects, determined up to
+increasing transformations, whereas the loss ratio is cardinal: it obeys an accounting identity
+under pooling (Section~\ref{sec:cm}). Third, \emph{what is characterized}. We characterize
+the ratio together with its numerator and denominator, not an index through a family.
+
+\subsection{Level-crossing and implicitly defined functionals}
+
+Several risk functionals are defined implicitly, by where a monotone family crosses a level. Orlicz
+premia solve $\E[\varphi(X/\pi)]=1-\alpha$ for $\pi$ \citep{hg1982,brg2008}, and PELVE is the
+level at which expected shortfall equals a given value-at-risk
+\citep{liwang2023,fiorirg2023}. Return risk measures \citep{blrg2018} and star-shaped risk measures
+\citep{castagnoli2022} replace cash additivity by positive homogeneity or star-shapedness. The
+association belongs to this family: it defines $\LR(X)$ as the level $\beta$ at which a
+cash-additive family $\rho_\beta$ vanishes.
+
+The results in this literature establish \emph{existence, uniqueness and
+comparative statics} of the implicit functional. They do not represent it as a ratio of two
+explicit functionals. In our setting the implicit definition is recovered as a corollary
+(Corollary~\ref{cor:assoc}), and it holds exactly off the set $\{\rho=\Pi=0\}$, not on all of $L^\infty$,
+a point that the implicit definition alone obscures.
+
+\subsection{Ratio representations in decision theory and statistics}
+
+In decision theory, \citet{chew1983} shows that weighted-utility preferences are represented by a
+\emph{ratio} of two linear functionals, while \citet{dekel1986} and \citet{fishburn1983} show that
+the weaker \emph{betweenness} property yields only an implicit, ordinal representation. This
+distinction is exactly the one we meet: a mediant inequality for pooled loss ratios is a betweenness
+property and cannot characterize the ratio, whereas the premium-weighted identity is the
+weighted-utility analogue and can (Section~\ref{sec:cm} and the cube witness in
+Section~\ref{sec:necessity}). In statistics, \citet{gneiting2011} shows that ratios of expectations
+$\E[r(Y)]/\E[s(Y)]$ are elicitable, which is the only published if-and-only-if statement about a
+ratio functional that we know of; it concerns forecasting, not pricing, and has no counterpart of
+pooling or cash shifts.
+
+\subsection{Summary of the differences}\label{sec:lit-table}
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Literature} & \textbf{What it characterizes} & \textbf{Difference from this paper}\\
+\midrule
+Yaari (1987); Wang, Young, Panjer (1997)
+ & One premium functional $H$; axioms on $H$ (law invariance, monotonicity, comonotonic additivity).
+ & We characterize a \emph{ratio} of two such functionals with axioms on the ratio. Monotonicity is placed on the \emph{implied premium and risk measure}, never on the ratio.\\
+Schmeidler (1986); Murofushi--Sugeno--Machida (1994); Cerreia-Vioglio et al.\ (2012, 2015); Wang--Wei--Willmot (2020)
+ & Representation of one comonotonic additive functional as a (signed) Choquet integral.
+ & Used as the engine (applied to $\rho$ and $\Pi$). New: the axioms are on $\LR$, comonotonic additivity of $\rho$ and $\Pi$ is \emph{derived} (also on the break-even set), and uniqueness is unconditional.\\
+Cherny--Madan (2009); Bielecki--Cialenco--Zhang (2014); Biagini--Bion-Nadal (2014)
+ & Monotone, quasi-concave indices $\Leftrightarrow$ increasing families of coherent measures.
+ & $\LR$ cannot be monotone (Prop.~\ref{prop:F2}); the associated family is signed and non-monotone. Cardinal (pooling identity) rather than ordinal.\\
+Cheridito--Kromer (2013)
+ & Axioms for reward--risk ratios (sufficient conditions).
+ & Reward over risk is monotone; loss over premium is not. We give an \emph{iff}, within a stated class.\\
+Han--Lin--Wang (2025)
+ & Diversification quotient: iff axiomatization of a level-crossing index.
+ & Closest in spirit; monotone families and a portfolio index. We characterize the ratio and its parts.\\
+Haezendonck--Goovaerts (1982); Li--Wang (2023); Bellini et al.\ (2018)
+ & Implicitly defined premia/risk measures, return risk measures.
+ & Existence and uniqueness of an implicit functional, not a ratio representation. The association is recovered as a corollary and shown to hold only off $\{\rho=\Pi=0\}$.\\
+Chew (1983); Dekel (1986)
+ & Ratio (weighted utility) versus implicit (betweenness) representations.
+ & Explains why a mediant inequality is not enough and a premium-weighted identity is needed.\\
+Gneiting (2011)
+ & Elicitability of ratios of expectations.
+ & Statistical, no axioms on pooling or cash shifts.\\
+\bottomrule
+\end{tabularx}
+\caption{Positioning of the paper. ``Iff'' means a characterization by necessary and sufficient axioms.}
+\end{table}
+
+None of our proofs depends on a citation: every load-bearing step is proved in the text.

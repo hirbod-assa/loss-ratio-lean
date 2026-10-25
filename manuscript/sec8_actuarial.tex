@@ -1,0 +1,63 @@
+\section{Nonnegative losses}\label{sec:actuarial}
+
+Insurance losses are nonnegative and premiums are positive. On $\Xp=L^\infty_+\setminus\{0\}$ only upward
+shifts $X+c$, $c\ge0$, are available, and the price point $-\Pi(X)<0$ lies outside the domain, so that \axP{}
+cannot be used. In this section the loss ratio is a map $\LR_0:\Xp\to\R$, and $N_0:=\{X\in\Xp:\LR_0(X)=1\}$.
+
+\subsection{Axioms}
+
+\begin{definition}[Axioms (A0)--(A5)]\label{def:Axioms}
+\begin{description}[leftmargin=0pt,labelindent=0pt,itemsep=3pt,style=unboxed]
+\item[(A0)] $N_0$ has empty interior in $(\Xp,\|\cdot\|_\infty)$.
+\item[(A1)] For each $X\in\Xp\setminus N_0$ there are reals $a_X,b_X$ with $\LR_0(X+c)=(a_X+c)/(b_X+c)$ for all
+  $c\ge0$. By Lemma~\ref{lem:halfline}, $a_X\ne b_X$, the pair is unique and $b_X>0$; put $\rho(X):=a_X$ and
+  $\Pi(X):=b_X$ on $\Xp\setminus N_0$.
+\item[(A2)] $\LR_0$ is law invariant.
+\item[(A3)] $\rho$ and $\Pi$ are non-decreasing on $\Xp\setminus N_0$. Variant (A3$_s$): $\rho$ and $\Pi$ are
+  uniformly continuous on $\Xp\setminus N_0$.
+\item[(A4)] Let $\bar\rho,\bar\Pi$ be the continuous extensions of $\rho,\Pi$ to $\Xp$ (they exist under (A3) or
+  (A3$_s$) by Lemma~\ref{lem:ext}). For comonotone $X,Y\in\Xp$:
+  \begin{itemize}[nosep]
+  \item[(A4a)] $\bar\Pi(X+Y)=\bar\Pi(X)+\bar\Pi(Y)$;
+  \item[(A4b)] $\bar\Pi(X+Y)\LR_0(X+Y)=\bar\Pi(X)\LR_0(X)+\bar\Pi(Y)\LR_0(Y)$.
+  \end{itemize}
+\item[(A5)] $\LR_0$ is norm-continuous on $\Xp$.
+\end{description}
+\end{definition}
+
+Axiom (A0) excludes $\LR_0\equiv1$, for which $\rho$ and $\Pi$ are not identified, and ensures that $\rho,\Pi$ are
+defined on a dense set. Axiom (A1) is the counterpart of Proposition~\ref{prop:readings}(a) on a half line: since
+the price point is not observed, the premium must be extrapolated from $c\ge0$, which requires the functional
+form to be assumed rather than derived. Axiom (A4b) is the pooling identity \axCM, and (A4a) states that premiums
+add under comonotone pooling; on $\Xp$ the two must be stated separately. Axiom (A5) excludes jumps of $\LR_0$
+where the premium distortion vanishes; it excludes, for example, value-at-risk-type premium distortions
+$g=\1_{(a,1]}$, and it implies $g>0$ (Step C5 in Appendix~\ref{app:C}).
+
+\begin{lemma}\label{lem:halfline}
+If $X\notin N_0$ satisfies (A1) with $(a,b)$, then $a\ne b$, the pair is unique, $b>0$, and for every
+$c_0\ge0$ one has $X+c_0\notin N_0$ with $\rho(X+c_0)=\rho(X)+c_0$ and $\Pi(X+c_0)=\Pi(X)+c_0$.
+\end{lemma}
+
+\subsection{Results}
+
+\begin{theorem}\label{thm:C}
+$\LR_0$ satisfies (A0)--(A5) if and only if $\LR_0=C_h/C_g$ on $\Xp$ for distortion functions $h\ne g$
+with $g>0$ on $(0,1]$. In that case $(h,g)$ is unique, also among pairs in $\Hset_1^2$ with
+$C_{g'}>0$ on $\Xp$; moreover $\bar\rho=C_h$, $\bar\Pi=C_g$ and $N_0=\Xp\cap\{C_h=C_g\}$.
+\end{theorem}
+
+\begin{theorem}\label{thm:Cp}
+Axioms (A0)--(A2), (A3$_s$), (A4) and (A5) hold if and only if $\LR_0=C_h/C_g$ with $h,g\in\Hset_1$, $h\ne g$,
+and $g>0$ on $(0,1]$.
+\end{theorem}
+
+\begin{proposition}\label{prop:bridge}
+$\LR_0=C_h/C_g$ with distortion functions $h,g$ and $g>0$ on $(0,1]$ if and only if $\LR_0$ is the restriction to
+$\Xp$ of an extended loss ratio satisfying the axioms of Theorem~\ref{thm:B} with $\Pi>0$ on $\Xp$. The representing
+pair $(h,g)$ of such an extension is unique if and only if $\LR_0\not\equiv1$. In that case the extension is unique up
+to the labels $\infty,\star$ at its non-finite values, and unique under convention \ax{S}.
+\end{proposition}
+
+Theorem~\ref{thm:C} is the loss-ratio analogue of the characterization of \citet{wyp1997}. Unlike that result,
+the pair $(\rho,\Pi)$ is defined only off $N_0$, and positivity of $g$ is derived from (A5). The proofs are given in
+Appendix~\ref{app:C}, and Section~\ref{sec:necessity} shows that none of (A2)--(A5) can be dropped.

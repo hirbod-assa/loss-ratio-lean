@@ -1,0 +1,224 @@
+\section{Use of artificial intelligence}\label{sec:collab}
+
+This paper also serves as a brief case study of the use of AI in mathematical research in actuarial science. This
+section describes how AI was used and how the process was handled, and is meant to illustrate a standard for
+reporting such use in a mathematical paper. The tools are identified in the declaration before the references. The section also describes how
+the models acquire knowledge, the risks this entails for mathematical work, the guardrails used, the formal check
+in Lean, and what has and has not been checked.
+
+\subsection{Organization of the work}
+
+The work used Claude (Anthropic) through the Claude desktop application in Cowork mode, which runs the assistant in
+a sandboxed environment and can coordinate several AI agents in a workflow. AI agents worked on designated parts of
+the project, under the author's direction. A main assistant organized the work and drafted and revised the
+manuscript. A roundtable of six agents, five of them each assigned a strand of the literature and one acting as
+chair, surveyed the axiomatic theory of premiums, risk measures and performance ratios and produced a synthesis. A
+larger panel of agents covered ten literature strands, proposed candidate statements, ranked them by means of judge
+agents, drafted proofs, and subjected the proofs to separate AI-assisted checking runs over several rounds. The
+literature review was conducted by these AI assistants under the author's supervision: the author defined the
+strands to be covered and the questions to be answered, and selected and framed the material presented in
+Section~\ref{sec:lit}. Some agents were given the names of researchers as personas, to represent the
+perspective of a literature strand; these were simulations, and the researchers concerned did not participate, were
+not consulted and bear no responsibility for the content. The research questions, the choice of formulation and all
+decisions on the content of the paper were made by the author.
+
+Figures~\ref{fig:workflow} and~\ref{fig:panel} show the organization of the work. In Figure~\ref{fig:workflow}
+the author assigns the task of each AI component and reviews its output. Figure~\ref{fig:panel} shows the internal pipeline of the panel, in which candidate statements and
+proofs pass through ranking and repeated critical review before being returned to the author.
+Figure~\ref{fig:panelpic} gives a schematic picture of the panel: the ten strand agents around a shared digest,
+the proof bench of judge, prover and checking agents, and the author's place in the loop.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[font=\footnotesize,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=4pt,minimum height=1.55cm,text width=3.05cm,fill=blue!4},
+  hum/.style={draw,thick,rounded corners=2pt,align=center,inner sep=5pt,fill=orange!12},
+  arr/.style={-{Stealth[length=2.2mm]},thick},
+  sarr/.style={-{Stealth[length=1.8mm]},semithick,gray!70!black}]
+\node[box] (rt) {\textbf{Roundtable}\\ 5 literature agents\\ + 1 chair\\ $\to$ synthesis};
+\node[box,right=0.45cm of rt] (pn) {\textbf{Panel}\\ 10 literature strands\\ candidate statements\\ judge agents};
+\node[box,right=0.45cm of pn] (pr) {\textbf{Proof and review}\\ prover agent\\ AI-assisted checking\\ runs, repair rounds};
+\node[box,right=0.45cm of pr] (ma) {\textbf{Main assistant}\\ dialogue, examples,\\ drafting and revision};
+\draw[arr] (rt) -- (pn); \draw[arr] (pn) -- (pr); \draw[arr] (pr) -- (ma);
+\node[hum,minimum width=14.6cm,above=1.35cm of $(pn.north)!0.5!(pr.north)$] (au)
+  {\textbf{Author}: research questions, choice of formulation, decisions on content, review of all outputs};
+\foreach \n in {rt,pn,pr,ma}{
+  \draw[sarr] ([xshift=-4mm]au.south -| \n.north) -- node[left,font=\scriptsize]{task} ([xshift=-4mm]\n.north);
+  \draw[sarr] ([xshift=4mm]\n.north) -- node[right,font=\scriptsize]{output} ([xshift=4mm]au.south -| \n.north);}
+\node[hum,below=0.9cm of $(pn.south)!0.5!(pr.south)$,minimum width=6cm] (ms) {\textbf{Manuscript} (author's decisions)};
+\draw[arr] (au.east) -- ++(0.35,0) |- (ms.east);
+\end{tikzpicture}
+\caption{Organization of the work. The author assigns tasks to each AI component and reviews every output; the
+manuscript reflects the author's decisions. The stages were used in the order shown, with returns to earlier
+stages when the author redirected the work.}\label{fig:workflow}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[font=\footnotesize,
+  st/.style={draw,rounded corners=2pt,align=center,inner sep=3pt,minimum height=1.25cm,text width=2.25cm,fill=blue!4},
+  hum/.style={draw,thick,rounded corners=2pt,align=center,inner sep=4pt,text width=2.25cm,minimum height=1.25cm,fill=orange!12},
+  arr/.style={-{Stealth[length=2mm]},thick}]
+\node[st] (lit) {\textbf{Literature}\\ 10 strand agents};
+\node[st,right=0.32cm of lit] (prop) {\textbf{Proposals}\\ candidate\\ statements};
+\node[st,right=0.32cm of prop] (jud) {\textbf{Judges}\\ 3 agents rank\\ the candidates};
+\node[st,right=0.32cm of jud] (prv) {\textbf{Prover}\\ full statement\\ and proof};
+\node[st,right=0.32cm of prv] (chk) {\textbf{Checking}\\ 3 AI-assisted\\ runs};
+\node[st,below=1.1cm of chk] (cha) {\textbf{Chair}\\ written note};
+\node[hum,below=1.1cm of prv] (aut) {\textbf{Author review}\\ accept, redirect\\ or reject};
+\draw[arr] (lit) -- (prop); \draw[arr] (prop) -- (jud); \draw[arr] (jud) -- (prv); \draw[arr] (prv) -- (chk);
+\draw[arr] (chk.north) to[bend right=35] node[above,font=\scriptsize]{errors found: repair} (prv.north);
+\draw[arr] (chk.south) -- node[right,font=\scriptsize,align=left]{no\\ objections} (cha.north);
+\draw[arr] (cha) -- (aut);
+\draw[arr,dashed] (aut.west) -- node[above,font=\scriptsize]{new questions and formulations from the author} (aut.west -| lit.south) -- (lit.south);
+\end{tikzpicture}
+\caption{Pipeline of the panel. Literature agents survey their strands; proposal agents formulate candidate
+statements, which judge agents rank. A prover agent drafts a full statement and proof, which separate AI-assisted
+checking runs examine; reported errors are sent back for repair over several rounds. A chair agent writes up the
+result for the author, who accepts it, redirects the work or rejects it. Agreement among checking runs does not
+establish correctness.}\label{fig:panel}
+\end{figure}
+
+\input{fig_panelpic}
+
+AI assisted with the following tasks:
+\begin{itemize}[nosep]
+\item literature exploration;
+\item formulation of mathematical statements and drafting of proofs;
+\item construction of counterexamples and examples;
+\item manuscript drafting and revision.
+\end{itemize}
+
+
+\subsection{How the knowledge base for this paper was assembled}
+
+The agents draw on two kinds of knowledge: what their underlying models learned in training, which can be
+recalled only approximately, and documents read into their working context during the task. In this project the
+second kind was organized as follows.
+
+The five strands of the roundtable were identified by the author: premium principles and capital allocation;
+conic finance and performance ratios; coherent risk measures and acceptance sets; axiomatic risk measures and
+elicitability; and the extended-loss-ratio framework with its association. Its synthesis served as the starting
+point of the panel.
+
+The panel divided the literature into ten strands: insurance-pricing axiomatics; Choquet integrals and comonotonic
+additivity; signed Choquet integrals; law-invariant coherent and convex risk measures; acceptability indices and
+quasi-convex duality; return and star-shaped risk measures; elicitability; performance-ratio axiomatics; decision
+theory and functional equations; and a critique of the earlier synthesis. Each strand agent returned exact
+statements of if-and-only-if theorems with their hypotheses, a confidence label (high, medium or low) and a note
+on its source. For example, the signed representation results of
+\citet{cmmm2012,cmmm2015} were taken from their working paper versions.
+
+There was no separate retrieval index. Instead, the strand reports were merged into a written digest of about
+415{,}000 characters, which, together with the ten candidate formulations (about 245{,}000 characters), formed the
+shared knowledge base of the later stages: the judge and prover agents were instructed to read these files in full
+before working, and Section~\ref{sec:lit} was written from the digest. The confidence labels therefore
+travelled with each statement into the stages that used it.
+
+In addition, the author used Gemini (Google) to prepare summaries of the key works cited in
+Section~\ref{sec:lit}: \citet{gerber1974}, \citet{yaari1987} and \citet{wyp1997} on premium principles;
+\citet{msm1994}, \citet{cmmm2012,cmmm2015} and \citet{www2020} on signed Choquet integrals; \citet{adeh1999} and
+\citet{kusuoka2001} on coherent risk measures; and \citet{chernymadan2009}, \citet{chew1983} and \citet{dekel1986} on
+performance ratios and ratio representations. Each summary stated the core results of the work and their role in
+this paper. The descriptions in Section~\ref{sec:lit} and the uses of these works in Sections~\ref{sec:axioms},
+\ref{sec:results}, \ref{sec:necessity} and~\ref{sec:consequences} were compared with these summaries; no
+discrepancy was found, and three descriptions in Section~\ref{sec:lit} were made more precise. Since the summaries
+are themselves AI output, this comparison is a consistency check, not a check against the original publications.
+
+Later, the author supplied author versions of three cited papers: \citet{www2020} (working paper of June 2019),
+\citet{www2020b} (version of May 2020, with a correction of May 2023) and \citet{hlw2025} (version of June 2024).
+The statements taken from them were checked against these versions: the definition of $I_h$, the
+characterization theorem used in the representation step and the convexity theorem of \citet{www2020}; the
+monotonicity criterion and Lipschitz bound, which are also stated there; the extension to general spaces, the
+convention $\mathrm{ES}_1=\operatorname{ess\,sup}$ and the mixture representation of \citet{www2020b}; and the
+axioms and the two characterization theorems of \citet{hlw2025}. No discrepancy was found. Lemma numbers that
+could differ between these versions and the published articles were removed, and the description of
+\citet{hlw2025} in Section~\ref{sec:lit} was rewritten from the paper.
+
+\subsection{Hallucinations and semantic errors encountered}
+
+\emph{Statements about the literature.} The main risk of hallucination concerned the exact hypotheses, conclusions
+and numbering of cited results. Two entries of the digest disagreed on whether the mixing measure in the Kusuoka
+representation includes an atom at the endpoint; the paper therefore states the mixture over $[0,1]$ with an
+explicit convention (Corollary~\ref{cor:shape}(a)) and cites the representation without theorem numbers. For the
+same reason, the representation step used in the proofs is not taken from the literature but reproved
+(Lemmas~\ref{lem:cashlip}--\ref{lem:rep}).
+
+\emph{Errors in mathematical content.} Table~\ref{tab:errors} lists the errors in AI-generated mathematics that were
+found during the project. Most are semantic: the statement proved, or claimed, differed from the statement
+intended, typically at a degenerate case (zero premium, the break-even set, the labels $\infty$ and $\star$) or in
+the scope of a claim.
+
+\begin{table}[ht]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Error} & \textbf{Found by} & \textbf{Resolution}\\
+\midrule
+$\E/C_g$ with concave $g$ claimed quasi-convex (early synthesis) & panel agents & quasi-concave; Cor.~\ref{cor:shape}(d)\\
+quasi-convexity stated as an if-and-only-if in four candidate formulations & judge agent ($h=t$, $g=\sqrt t$, $\beta=2$) & only sufficient conditions kept\\
+candidate route via Sincov and Cauchy equations & judge agent (continuous $h$ not of bounded variation) & route abandoned\\
+main argument claimed to apply verbatim when $(\rho,\Pi)$ is only assumed to exist & checking run & separate argument given\\
+association claimed to hold exactly on the finite domain & checking run & holds off $\{\rho=\Pi=0\}$; Cor.~\ref{cor:assoc}(a)\\
+``$h-g$ concave'' as a sufficient condition for quasi-convexity & main assistant, during rewriting & $h$ concave, $g$ convex\\
+converse of Theorem~\ref{thm:A} failed for \axLI{} (labels unconstrained) & checking run & \axLI{} compares finite values only\\
+claimed equivalence with the cash-line formulation & checking run & convention \ax{S} added; Remark~\ref{rem:oldCP}\\
+regularity axioms undefined for two counterexamples & checking run & \axRC, \axRM{} stated for $\Pi$ and $\rho_D$\\
+uniqueness of the extension in Prop.~\ref{prop:bridge} & review with ChatGPT & unique up to labels, unique under \ax{S}\\
+independence claimed for (A0) and (A1) & review with ChatGPT & treated as illustrations; Sec.~\ref{sec:necessity}\\
+mixture of expected shortfalls missing the endpoint & review with ChatGPT & $\mathrm{ES}_1:=\operatorname{ess\,sup}$; Cor.~\ref{cor:shape}(a)\\
+\bottomrule
+\end{tabularx}
+\caption{Errors in AI-generated mathematics found during the project, and their resolution.}\label{tab:errors}
+\end{table}
+
+\subsection{Guardrails applied in this project}
+
+\begin{itemize}[nosep]
+\item \emph{Labels on knowledge.} Every literature statement in the digest carried a confidence label and a note on
+  its source, as described above.
+\item \emph{Independent summaries.} Summaries of the key cited works prepared with Gemini were compared with their
+  descriptions and uses in the paper.
+\item \emph{Self-contained proofs.} Results whose exact statements were uncertain are reproved; in particular the
+  representation of comonotonic additive functionals, for which the proof cites \citet[Thm.~1]{www2020}, is
+  reproved in Lemmas~\ref{lem:cashlip}--\ref{lem:rep}.
+\item \emph{Adversarial checking.} The three checking runs on the panel's proofs were instructed to refute; one tested
+  the degenerate case $\LR\equiv1$ with a premium that is not comonotonic additive, and two recomputed the numbers in
+  the counterexamples. The restructured formulation of Sections~\ref{sec:axioms}--\ref{sec:proofs} was given to a
+  further checking run with instructions to look for circularity and for the cases $\Pi(X)=0$, break-even books,
+  $\LR\equiv1$ and $c=0$.
+\item \emph{Repair loop.} Reported gaps were returned to the prover agent; the panel's proofs went through two
+  repair rounds before the final checking round.
+\item \emph{Counterexamples.} Each axiom other than \axP{} is tested against an explicit loss ratio
+  (Section~\ref{sec:necessity}).
+\item \emph{Recomputation.} The values in Examples~\ref{ex:PH}, \ref{ex:ES}, \ref{ex:qc} and in the counterexamples
+  were recomputed by script, and the monotonicity range in Example~\ref{ex:family} was confirmed on a grid.
+\item \emph{Formal checking.} The loss-ratio-specific steps were formalized in Lean and compiled; see
+  Section~\ref{sec:collab-lean}.
+\item \emph{A second system.} The review with ChatGPT, a model from a different provider, found three of the errors in
+  Table~\ref{tab:errors} that the earlier checks had missed.
+\end{itemize}
+
+\subsection{What the prover produced and what was formally checked}
+
+The ``prover'' of Figure~\ref{fig:panel} is a language-model agent that writes proofs in ordinary mathematical
+language; it is not a formal theorem prover. In this project it drafted the first complete if-and-only-if theorem,
+in a formulation based on an assumed cash-line axiom, with proofs of the results that are now
+Theorems~\ref{thm:A}, \ref{thm:B}, \ref{thm:A0}, \ref{thm:C} and~\ref{thm:Cp} and of the appendix lemmas; the final
+checking round of these proofs returned two reports without objections and one report of gaps in side claims, which
+were repaired. The present formulation through the implied premium and risk measure
+(Lemmas~\ref{lem:premium}--\ref{lem:LI} and Proposition~\ref{prop:readings}) was drafted afterwards by the main
+assistant and checked by one further run, whose findings appear in Table~\ref{tab:errors}.
+
+The loss-ratio-specific steps were also checked formally in Lean (Section~\ref{sec:collab-lean}).
+
+\input{sec13_lean}
+
+\subsection{Verification status}\label{sec:collab-status}
+
+The proofs have undergone AI-assisted critical review. Such review is fallible and does not
+constitute formal verification; this applies equally to the informal review with ChatGPT. No claim of
+machine-checked correctness is made beyond the results formalized in Lean, in the abstract setting and with the
+hypothesis described in Section~\ref{sec:collab-lean}. Independent human review of all proofs, and journal peer review, have not yet taken
+place, and apart from the three papers named above the references have not yet been checked against the original
+publications.

@@ -10,6 +10,16 @@ the cash line `c ↦ LR(X + c)`, and the implied risk measure follows from loss 
 The file [`LossRatioLean/Basic.lean`](LossRatioLean/Basic.lean) checks the steps of the argument that are
 specific to loss ratios.
 
+## Contents
+
+| Path | What it holds |
+|---|---|
+| `LossRatioLean/Basic.lean` | The Lean 4 formalization (Mathlib). |
+| `lakefile.toml`, `lean-toolchain`, `lake-manifest.json` | Lake project files (Lean and Mathlib `v4.36.0-rc1`). |
+| `manuscript/` | LaTeX source of the paper, `refs.bib`, and the compiled PDF `loss_ratio_paper_v18.pdf`. See `manuscript/BUILD.md`. |
+| `ai_process/` | Records behind Section 12 ("Use of artificial intelligence"): the literature-panel digest (`digest.md`), the ten candidate formulations (`proposals.md`), one judge report (`judge1.md`) and the chair agent's note (`chair_note_final.tex`). |
+| `lean_snapshot_2026-10-25/build_log.txt` | Build log of the Lean file exactly as reported in subsection 12.6 (build successful, no `sorry`). |
+
 ## What is checked
 
 | Result in the paper | Lean name |
@@ -66,6 +76,13 @@ and the same three standard axioms for the other nine theorems listed at the end
 The file contains no `sorry`. The remaining warnings concern style and renamed library lemmas.
 
 Versions: Lean `v4.36.0-rc1`, Mathlib `v4.36.0-rc1`.
+
+## Building the manuscript
+
+```
+cd manuscript
+pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
+```
 
 ## How this was produced
 

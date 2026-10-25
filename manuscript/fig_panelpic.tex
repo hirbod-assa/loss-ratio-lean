@@ -1,0 +1,61 @@
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[font=\scriptsize,
+  person/.pic={
+    \fill[pic actions] (0,0.30) circle (0.15);
+    \fill[pic actions] (-0.24,-0.18) .. controls (-0.24,0.10) and (-0.12,0.13) .. (0,0.13)
+                        .. controls (0.12,0.13) and (0.24,0.10) .. (0.24,-0.18) -- cycle;},
+  lab/.style={align=center,text width=2.0cm,inner sep=1pt},
+  arr/.style={-{Stealth[length=2mm]},thick},
+  darr/.style={-{Stealth[length=2mm]},thick,dashed,orange!70!black}]
+% table
+\fill[brown!12] (0,0) ellipse (2.6 and 1.85);
+\draw[brown!60!black,thick] (0,0) ellipse (2.6 and 1.85);
+\node[align=center,text width=3.4cm] at (0,0.55) {\textbf{Shared digest}\\[1pt] exact statements with\\ hypotheses, confidence\\ labels and sources\\[1pt] \textbf{+ candidate formulations}};
+\pic[fill=teal!70!black,scale=1.15] at (0,-0.95) {person};
+\node at (0,-1.45) {\textbf{chair}: synthesis};
+% ten strand agents
+\foreach \ang [count=\k] in {65.0,90.6,116.1,141.7,167.2,192.8,218.3,243.9,269.4,295.0}{
+  \pgfmathsetmacro{\px}{3.05*cos(\ang)} \pgfmathsetmacro{\py}{2.3*sin(\ang)}
+  \pic[fill=blue!55!black] at (\px,\py) {person};
+  \node[font=\scriptsize\bfseries,blue!55!black] at ($(\px,\py)+(\ang:0.58)$) {\k};
+}
+% proof bench on the right
+\begin{scope}[xshift=6.0cm,yshift=-0.2cm]
+  \draw[rounded corners=3pt,fill=gray!8,draw=gray!60] (-1.3,-2.6) rectangle (2.55,2.3);
+  \node[font=\footnotesize\bfseries] at (0.6,2.0) {proof bench};
+  \foreach \y in {0,1,2} {\pic[fill=purple!60!black] at (-0.45+0.45*\y,1.25) {person};}
+  \node[anchor=west] at (0.8,1.3) {judges rank};
+  \pic[fill=red!60!black,scale=1.15] at (0,0.05) {person};
+  \node[anchor=west] at (0.8,0.05) {prover drafts};
+  \foreach \y in {0,1,2} {\pic[fill=green!40!black] at (-0.45+0.45*\y,-1.35) {person};}
+  \node[anchor=west,align=left] at (0.8,-1.3) {checking runs\\ try to refute};
+  \draw[arr] (0,0.95) -- (0,0.55);
+  \draw[arr] (0,-0.35) -- (0,-0.95);
+  \draw[arr,red!60!black] (-0.75,-1.3) to[bend left=55] node[left]{repair} (-0.35,0.0);
+  \node at (0.6,-2.25) {several rounds};
+\end{scope}
+\draw[arr] (2.75,0.7) -- node[above,align=center]{candidate\\ statements} (4.65,0.7);
+\draw[arr] (4.65,-1.3) -- node[below,align=center]{reviewed\\ result} (2.65,-1.3);
+% author
+\pic[fill=orange!80!black,scale=1.5] at (2.3,4.9) {person};
+\node[align=left,anchor=west] at (2.85,4.9) {\textbf{Author}: chooses the strands and\\ questions, reviews every output\\ and decides the formulation};
+\draw[darr] (1.75,4.8) to[bend right=25] node[above left,pos=0.4]{strands, questions} (0.3,3.0);
+\draw[darr] (5.6,4.35) to[bend left=15] node[right,pos=0.5,align=left]{accept, redirect\\ or reject} (6.6,2.2);
+% key
+\node[anchor=north,align=left,text width=14.2cm,font=\scriptsize] at (1.6,-3.15) {%
+\begin{tabular}{@{}l@{\hspace{2.5em}}l@{}}
+1 insurance-pricing axiomatics & 6 return and star-shaped risk measures\\
+2 Choquet integrals and comonotonic additivity & 7 elicitability\\
+3 signed Choquet integrals & 8 performance-ratio axiomatics\\
+4 law-invariant coherent and convex risk measures & 9 decision theory and functional equations\\
+5 acceptability indices and quasi-convex duality & 10 critique of the earlier synthesis
+\end{tabular}};
+\end{tikzpicture}
+\caption{The panel at work. Ten literature agents (numbered as in the key), each assigned a strand by the author, write exact statements
+into a shared digest, which together with the candidate formulations forms the knowledge base read in full by the
+later agents; a chair agent synthesizes. Candidate statements pass to the proof bench, where judge agents rank them,
+a prover agent drafts proofs and separate checking runs try to refute them, with errors returned for repair. The
+author sets the strands and questions and accepts, redirects or rejects each result. The icons are schematic: the
+agents are separate runs of a language model.}\label{fig:panelpic}
+\end{figure}

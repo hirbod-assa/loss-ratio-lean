@@ -1,0 +1,196 @@
+\section{Proofs of the main results}\label{sec:proofs}
+
+Figure~\ref{fig:flow} shows the structure of the proof. Lemmas~\ref{lem:premium}--\ref{lem:LI} are
+specific to loss ratios; Lemmas~\ref{lem:cashlip}--\ref{lem:rep} reprove the representation of comonotonic
+additive functionals in the form needed here.
+
+\begin{figure}[ht]
+\centering\small
+\fbox{\begin{minipage}{0.92\textwidth}\centering
+\textbf{Lemma~\ref{lem:premium}} (implied premium): $\Pi$ from the price point; cash additive; $\Pi(c)=c$\ \ (\axP, \axN)\\[2pt]
+$\Downarrow$\\[2pt]
+\textbf{Lemma~\ref{lem:implied}} (implied risk measure): $\rho=\Pi\cdot\LR$ extends; Möbius cash lines\ \ (\axCM{} with sure losses)\\[2pt]
+$\Downarrow$\\[2pt]
+\textbf{Lemma~\ref{lem:comon}}: $\rho,\Pi$ comonotonic additive, also on the break-even set\ \ (\axCM)\\[2pt]
+$\Downarrow$\\[2pt]
+\textbf{Lemma~\ref{lem:LI}}: $\rho,\Pi$ law invariant\ \ (\axLI)\\[2pt]
+$\Downarrow$\\[2pt]
+\textbf{Lemma~\ref{lem:cashlip}}: homogeneity, Lipschitz\ \ (\axRC{} or \axRM)\\[2pt]
+$\Downarrow$\\[2pt]
+\textbf{Lemma~\ref{lem:layer}}: layer formula; $h(p)=\rho(\1_A)$, $g(p)=\Pi(\1_A)$\ \ $\Rightarrow$\ \
+\textbf{Lemma~\ref{lem:bv}}: bounded variation\ \ $\Rightarrow$\ \ \textbf{Lemma~\ref{lem:rep}}: $\rho=I_h$, $\Pi=I_g$
+\end{minipage}}
+\caption{Logical structure of the proof of Theorems~\ref{thm:A} and~\ref{thm:B}.}\label{fig:flow}
+\end{figure}
+
+\begin{lemma}[Implied premium]\label{lem:premium}
+Assume \axP. Then $\Pi(X+c)=\Pi(X)+c$ for all $X$ and $c$, and $D=\{\Pi\ne0\}$. If also \axN, then
+$\Pi(c)=c$ for every constant $c$.
+\end{lemma}
+
+\begin{proof}
+The cash line of $X+c$ is $d\mapsto\LR(X+c+d)$, the cash line of $X$ shifted by $c$; its price point is
+therefore the price point of $X$ minus $c$, which is \eqref{eq:Picash}. $X\in D$ means that $0$ is not the
+price point, i.e.\ $\Pi(X)\ne0$. Under \axN{} the cash line of $0$ takes the value $1$ at every $d\neq0$, so
+its price point is $0$, $\Pi(0)=0$, and $\Pi(c)=c$. \qedhere
+\end{proof}
+
+\begin{lemma}[Implied risk measure]\label{lem:implied}
+Assume \axP, \axN, \axCM. If $X\in D$ and $X+c\in D$, then $\rho(X+c)=\rho(X)+c$. Consequently
+$\rho(X):=\rho(X+c)-c$, for any $c\ne-\Pi(X)$, defines a cash-additive functional on $L^\infty$ that agrees
+with $\Pi\cdot\LR$ on $D$, satisfies $\rho(c)=c$, and
+\begin{equation}\label{eq:mobius}
+ \LR(X+c)=\frac{\rho(X)+c}{\Pi(X)+c}\qquad\text{for all }c\ne-\Pi(X).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $X,X+c\in D$ with $c\ne0$. The constant $c$ lies in $D$ (by \axN), is comonotone with $X$, and
+$\Pi(X)+\Pi(c)=\Pi(X+c)\ne0$ by Lemma~\ref{lem:premium}. So \axCM{} applies to the pair $(X,c)$ and gives
+$\LR(X+c)=(\Pi(X)\LR(X)+c)/(\Pi(X)+c)$, i.e.\ $\rho(X+c)=\Pi(X+c)\LR(X+c)=\rho(X)+c$.
+
+For arbitrary $X$, $X+c\in D$ exactly when $c\ne-\Pi(X)$. If $c,c'$ are two such values, then
+$X+c'=(X+c)+(c'-c)$ with both $X+c$ and $X+c'$ in $D$, so $\rho(X+c')=\rho(X+c)+(c'-c)$; hence
+$\rho(X+c)-c$ does not depend on $c$, and for $X\in D$ (take $c=0$) it equals $\Pi(X)\LR(X)$. Cash additivity
+of the extension is immediate. For $c\neq-\Pi(X)$,
+$\LR(X+c)=\rho(X+c)/\Pi(X+c)=(\rho(X)+c)/(\Pi(X)+c)$. Finally $\rho(c)=\Pi(c)\LR(c)=c$ for $c\ne0$, and
+$\rho(0)=\rho(1)-1=0$. \qedhere
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:readings}]
+(a) is \eqref{eq:mobius}, and (b) restates it. For (c), $(c+\Pi(X))\LR(X+c)=\rho(X)+c\to\rho(X)-\Pi(X)$ as
+$c\to-\Pi(X)$. For (d), the right-hand side of \eqref{eq:mobius} vanishes only at $c=-\rho(X)$, which differs
+from the price point when $\rho(X)\ne\Pi(X)$; when $\rho(X)=\Pi(X)$ it equals $1$ for every $c\ne-\Pi(X)$.
+Uniqueness of the extension is clear, since any cash-additive extension must satisfy (b). \qedhere
+\end{proof}
+
+\begin{lemma}[Comonotonic additivity]\label{lem:comon}
+Assume \axP{} and \axN.
+\begin{enumerate}[label=(\alph*),nosep]
+\item If \axCM{} holds, then $\rho$ and $\Pi$ are comonotonic additive.
+\item Conversely, if $\Pi$ is comonotonic additive and there is a comonotonic additive $\tilde\rho$ with
+  $\tilde\rho=\Pi\cdot\LR$ on $D$, then \axCM{} holds and the implied risk measure equals $\tilde\rho$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Let $X,Y$ be comonotone, $Z=X+Y$, $r=\rho(X)+\rho(Y)$ and $q=\Pi(X)+\Pi(Y)$. Fix $s\neq-q$ and choose
+$u\notin\{-\Pi(X),\,s+\Pi(Y)\}$.
+\begin{enumerate}[label=(\arabic*),nosep]
+\item $X+u$ and $Y+s-u$ are comonotone, and by Lemma~\ref{lem:premium} their premiums $\Pi(X)+u$ and
+  $\Pi(Y)+s-u$ are non-zero. So both lie in $D$, and their premiums sum to $q+s\neq0$.
+\item Apply \axCM{} to this pair and use $\rho=\Pi\cdot\LR$ on $D$ with Lemma~\ref{lem:implied}:
+  \[
+  \LR(Z+s)=\frac{(\rho(X)+u)+(\rho(Y)+s-u)}{q+s}=\frac{r+s}{q+s}\in\R .
+  \]
+\item Thus the cash line of $Z$ is finite at every $s\neq-q$. By \axP{} it has exactly one non-finite
+  point, so that point is $-q$, and $\Pi(Z)=q$.
+\item For $s\ne-q$, Lemma~\ref{lem:implied} gives $\rho(Z)+s=\rho(Z+s)=\Pi(Z+s)\LR(Z+s)=r+s$, so $\rho(Z)=r$.
+\end{enumerate}
+The argument never asks whether $X$, $Y$ or $Z$ break even: \axP{} locates the price point even when the
+cash line equals $1$ everywhere else.
+
+(b) Let $X,Y\in D$ be comonotone with $q=\Pi(X)+\Pi(Y)\ne0$. Then $\Pi(X+Y)=q\ne0$, so $X+Y\in D$, and
+$\LR(X+Y)=\tilde\rho(X+Y)/q=(\tilde\rho(X)+\tilde\rho(Y))/q=(\Pi(X)\LR(X)+\Pi(Y)\LR(Y))/q$. Both $\tilde\rho$ and
+the implied risk measure are cash additive (the former by additivity with constants and $\tilde\rho(c)=\Pi(c)\LR(c)=c$)
+and agree on $D$, hence everywhere. \qedhere
+\end{proof}
+
+\begin{lemma}[Law invariance of the implied pair]\label{lem:LI}
+Assume \axP, \axN, \axCM{} and \axLI. Then $\rho$ and $\Pi$ are law invariant.
+\end{lemma}
+
+\begin{proof}
+If $X\eqd Y$ then $X+c\eqd Y+c$ for every $c$, so by \axLI{} the cash lines of $X$ and $Y$ have the same finite
+values and the same non-finite locations. Hence they have the same price point, $\Pi(X)=\Pi(Y)$, and by Proposition~\ref{prop:readings}(b) $\rho(X)=\rho(Y)$. \qedhere
+\end{proof}
+
+\begin{lemma}[Homogeneity and Lipschitz continuity]\label{lem:cashlip}
+Assume \axP, \axN, \axCM, and let $F\in\{\rho,\Pi\}$. If \axRC{} or \axRM{} holds, $F$ is positively homogeneous
+and Lipschitz; under \axRM{} it is $1$-Lipschitz.
+\end{lemma}
+
+\begin{proof}
+First, the axioms transfer from $\rho_D$ to $\rho$. Given $X,Y$, choose $c$ with $|c|$ arbitrarily small and
+$X+c,Y+c\in D$ (only two values are excluded). Then $\rho(X)-\rho(Y)=\rho_D(X+c)-\rho_D(Y+c)$ with
+$\|(X+c)-(Y+c)\|=\|X-Y\|$, and $X\le Y$ implies $X+c\le Y+c$; so $\rho$ is uniformly continuous with the modulus
+of $\rho_D$ under \axRC, and monotone under \axRM.
+Since $X$ is comonotone with itself, $F(nX)=nF(X)$ by Lemma~\ref{lem:comon}, so $F(qX)=qF(X)$ for rational $q>0$.
+\emph{Under \axRM:} $X\le Y+\|X-Y\|$ gives $F(X)\le F(Y)+\|X-Y\|$ by monotonicity and cash additivity, so $F$ is
+$1$-Lipschitz, and homogeneity extends to real $\lambda>0$. \emph{Under \axRC:} continuity gives
+$F(\lambda X)=\lambda F(X)$ for real $\lambda>0$. Choose $\delta>0$ with $|F(X')-F(Y')|\le1$ whenever
+$\|X'-Y'\|\le\delta$, and apply it to $tX,tY$ with $t=\delta/\|X-Y\|$; this gives
+$|F(X)-F(Y)|\le\|X-Y\|/\delta$. \qedhere
+\end{proof}
+
+\begin{lemma}[Layer formula]\label{lem:layer}
+Assume \axP, \axN, \axCM, \axLI{} and \axRC{} (or \axRM). Define, for $P(A)=p$, $h(p):=\rho(\1_A)$ and
+$g(p):=\Pi(\1_A)$. These are well defined by Lemma~\ref{lem:LI}, defined for every $p\in[0,1]$ because the
+space is atomless, and $h(0)=g(0)=0$, $h(1)=g(1)=1$. For every chain $C_1\supset\dots\supset C_m$, $x_0\in\R$
+and $a_i\ge0$,
+\begin{equation}\label{eq:layer}
+ \rho\Big(x_0+\sum_i a_i\1_{C_i}\Big)=x_0+\sum_i a_i\,h(P(C_i)),
+\end{equation}
+and likewise for $\Pi$ with $g$.
+\end{lemma}
+
+\begin{proof}
+The partial sum $S_{j-1}=\sum_{i<j}a_i\1_{C_i}$ attains its maximum on $C_j$, so it is comonotone with
+$\1_{C_j}$. Apply Lemma~\ref{lem:comon} and cash additivity successively, with
+$\rho(a\1_C)=a\rho(\1_C)=a\,h(P(C))$ by Lemma~\ref{lem:cashlip}. The values at $0$ and $1$ come from
+$\rho(0)=\Pi(0)=0$ and $\rho(1)=\Pi(1)=1$. \qedhere
+\end{proof}
+
+\begin{lemma}[Bounded variation]\label{lem:bv}
+Under the assumptions of Lemma~\ref{lem:layer}, $h,g\in\Hset_1$. Under \axRM{} they are non-decreasing.
+\end{lemma}
+
+\begin{proof}
+\emph{Under \axRM.} For $p\le q$ choose nested $A\subset B$ with $P(A)=p$, $P(B)=q$; then $\1_A\le\1_B$ gives
+$h(p)\le h(q)$, and likewise for $g$.
+
+\emph{Under \axRC.} Let $L$ be a Lipschitz constant of $\rho$. Take $0=p_0<\dots<p_n=1$ and a uniform random
+variable $U$. Put $I_j=\{1-p_j<U\le1-p_{j-1}\}$ and $\delta_j=h(p_j)-h(p_{j-1})$. For $\sigma\in\{0,1\}^n$ let
+$W=\sum_j2(n-j)\1_{I_j}$ and $Y_\sigma=W+\sum_j\sigma_j\1_{I_j}$. The values $2(n-j)+\sigma_j$ are strictly
+decreasing in $j$, so $W$ and $Y_\sigma$ have the same upper sets $\{U>1-p_j\}$, of probability $p_j$. By
+\eqref{eq:layer} and summation by parts, $\rho\big(\sum_jv_j\1_{I_j}\big)=\sum_jv_j\delta_j$ for every
+non-increasing $v\ge0$. Hence $|\sum_j\sigma_j\delta_j|=|\rho(Y_\sigma)-\rho(W)|\le L\|Y_\sigma-W\|\le L$.
+Choosing $\sigma_j=\1\{\delta_j>0\}$ and then $\sigma_j=\1\{\delta_j<0\}$ gives $\sum_j|\delta_j|\le2L$. \qedhere
+\end{proof}
+
+\begin{lemma}[Representation]\label{lem:rep}
+Under the assumptions of Lemma~\ref{lem:layer}, $\rho=I_h$ and $\Pi=I_g$.
+\end{lemma}
+
+\begin{proof}
+For a simple $X=x_0+\sum_ia_i\1_{C_i}$ with $a_i\ge0$ and $C_i=\{X\ge x_i\}$, a direct computation gives
+$I_h(X)=x_0+\sum_ia_ih(P(C_i))=\rho(X)$. Simple positions are uniformly dense in $L^\infty$, and $\rho$ and
+$I_h$ are both Lipschitz (Lemma~\ref{lem:cashlip} and $|I_h(X)-I_h(Y)|\le\TV(h)\|X-Y\|$), so $\rho=I_h$.
+Likewise $\Pi=I_g$. \qedhere
+\end{proof}
+
+\begin{proof}[Proof of Theorems~\ref{thm:A} and~\ref{thm:B}]
+\emph{(i)$\Rightarrow$(ii).} Lemmas~\ref{lem:premium}--\ref{lem:rep} give $\Pi=I_g$ and $\rho=I_h$ with
+$h,g\in\Hset_1$, non-decreasing under \axRM. On $D=\{\Pi\ne0\}=\{I_g\ne0\}$, $\LR=\rho/\Pi=I_h/I_g$, and off $D$
+the loss ratio is not finite. Under \ax{S}, at a book with $I_g(X)=0$ the label is $\star$ exactly when the
+residue $\rho(X)=I_h(X)$ vanishes, which is the value of $\bracket{I_h(X)}{0}$.
+
+\emph{(ii)$\Rightarrow$(i).} Let $\LR$ be as in (ii). Since $I_g(X+c)=I_g(X)+c$, the cash line of $X$ is non-finite
+exactly at $c=-I_g(X)$, so \axP{} holds and $\Pi=I_g$. \axN{} holds because $I_h(c)=I_g(c)=c$. Next, $I_k$ is
+comonotonic additive for $k\in\Hset$: for comonotone $X,Y$, any two upper sets $\{X\ge a\}$, $\{Y\ge b\}$ are almost
+surely nested (otherwise comonotonicity fails on a $P\otimes P$-positive set); for simple comonotone $X,Y$ the
+union of their upper sets is therefore a chain, giving $X=x_0+\sum a_i\1_{C_i}$, $Y=y_0+\sum b_i\1_{C_i}$ with
+$a_i,b_i\ge0$, and additivity follows from the layer computation; for general $X,Y$ approximate by the comonotone
+simple pairs $\lfloor nX\rfloor/n$, $\lfloor nY\rfloor/n$ and use the Lipschitz bound. Lemma~\ref{lem:comon}(b) with
+$\tilde\rho=I_h$ gives \axCM{} and $\rho=I_h$. \axLI{} holds because $I_k$ depends on $X$ only through
+$x\mapsto P(X>x)$, \axRC{} because $I_h,I_g$ are Lipschitz, and \axRM{} when $h,g$ are non-decreasing. \qedhere
+\end{proof}
+
+\begin{proof}[Proof of Propositions~\ref{prop:unique} and~\ref{prop:derived}]
+$g(p)=\Pi(\1_A)$ is minus the price point of $\1_A$, and $h(p)=\rho(\1_A)$ is given by
+Proposition~\ref{prop:readings}(b); both are determined by $\LR$, including when $h=g$. The identities for $D$ and
+$N$ follow from $\Pi=I_g$, $\rho=I_h$. Monotonicity of $\rho$ is equivalent to monotonicity of $h$ because $I_h$ is
+monotone if and only if $h$ is non-decreasing. Proposition~\ref{prop:derived} collects
+Lemmas~\ref{lem:premium}--\ref{lem:comon} and~\ref{lem:cashlip}, the Lipschitz bound for $I_k$, and
+$\LR(\lambda X)=\lambda\rho(X)/(\lambda\Pi(X))=\LR(X)$ on $D$ (and $\lambda D=D$). \qedhere
+\end{proof}

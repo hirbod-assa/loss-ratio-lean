@@ -1,8 +1,8 @@
-# Lean formalization: An Axiomatic Characterization of the Loss Ratio
+# Lean formalization: An Axiomatic Characterization of the Loss Ratio: A Case Study of Using AI in Mathematical Papers
 
 This repository contains a Lean 4 formalization of the loss-ratio-specific results of
 
-> H. Assa, *An Axiomatic Characterization of the Loss Ratio* (2026).
+> H. Assa, *An Axiomatic Characterization of the Loss Ratio: A Case Study of Using AI in Mathematical Papers* (2026).
 
 The loss ratio of a book `X` is `LR(X) = ρ(X)/Π(X)`. The paper shows that the premium `Π` and the loss
 measure `ρ` are *implied* by the loss ratio: the implied premium is minus the unique non-finite point of

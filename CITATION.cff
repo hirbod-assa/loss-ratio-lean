@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite the paper."
+title: "Lean formalization of: An Axiomatic Characterization of the Loss Ratio: A Case Study of Using AI in Mathematical Papers"
+authors:
+  - family-names: Assa
+    given-names: Hirbod
+version: "1.0"
+date-released: "2026-10-25"
+license: MIT

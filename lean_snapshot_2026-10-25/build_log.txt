@@ -1,0 +1,68 @@
+⚠ [18110/18114] Built LossRatioLean.Basic (8.8s)
+warning: LossRatioLean/Basic.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: LossRatioLean/Basic.lean:1:1: * `-/`:
+Copyright too short!
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: LossRatioLean/Basic.lean:26:5: please avoid 'open (scoped) Classical' statements: this can hide theorem statements which would be better stated with explicit decidability statements.
+Instead, use `open Classical in` for definitions or instances, the `classical` tactic for proofs.
+For theorem statements, either add missing decidability assumptions or use `open Classical in`.
+
+Note: This linter can be disabled with `set_option linter.style.openClassical false`
+warning: LossRatioLean/Basic.lean:146:4: The `show` tactic should only be used to indicate intermediate goal states for readability.
+However, this tactic invocation changed the goal. Please use `change` instead for these purposes.
+
+Note: This linter can be disabled with `set_option linter.style.show false`
+warning: LossRatioLean/Basic.lean:376:24: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: LossRatioLean/Basic.lean:385:75: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: LossRatioLean/Basic.lean:395:35: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: LossRatioLean/Basic.lean:403:48: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: LossRatioLean/Basic.lean:420:78: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: LossRatioLean/Basic.lean:429:20: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: LossRatioLean/Basic.lean:448:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: LossRatioLean/Basic.lean:454:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+info: LossRatioLean/Basic.lean:491:0: 'LossRatio.mobius' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:492:0: 'LossRatio.residue' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:493:0: 'LossRatio.comon_additive' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:494:0: 'LossRatio.LI_transfer' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:495:0: 'LossRatio.pooling_extended' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:496:0: 'LossRatio.association' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:497:0: 'LossRatio.converse' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:498:0: 'LossRatio.unique_pair' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:499:0: 'LossRatio.no_monotone_core' depends on axioms: [propext, choice, Quot.sound]
+info: LossRatioLean/Basic.lean:500:0: 'LossRatio.main_conditional' depends on axioms: [propext, choice, Quot.sound]
+⚠ [18111/18114] Ran LossRatioLean.Basic:irArts
+warning: LossRatioLean/Basic.lean: imports `Mathlib` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+✔ [18112/18114] Built LossRatioLean (2.9s)
+Build completed successfully (18114 jobs).

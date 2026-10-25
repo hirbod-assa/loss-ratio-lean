@@ -1,0 +1,1090 @@
+\section{Setting and notation}
+
+\subsection{Background and aim}
+
+Assa (2024) studies a bounded loss $X\ge 0$, a risk measure $\rho$ and a premium functional $\Pi$. The \emph{extended loss ratio} is $LR(X)=\rho(X)/\Pi(X)$. A family $\{\rho_\beta\}$ is \emph{in association} with $LR$ if $LR(X)=\beta\iff\rho_\beta(X)=0$. The canonical family is
+\[
+\rho_\beta=\frac{\rho-\beta\Pi}{1-\beta},\qquad \beta\neq 1 .
+\]
+The panel worked with the survival-form Choquet integral $C_g(X)=\int_0^\infty g(P(X>x))\,dx$, with $\rho=C_h$ and $\Pi=C_g$. In this setting the following facts were established before the panel convened.
+
+\begin{itemize}
+\item[(F1)] $LR=C_h/C_g$ has these properties:
+  \begin{itemize}
+  \item it is scale invariant and law invariant;
+  \item it has a M\"obius (linear-fractional) cash profile $c\mapsto LR(X+c)=(\rho(X)+c)/(\Pi(X)+c)$;
+  \item it satisfies the comonotone mediant property;
+  \item it is continuous along bounded a.s.\ convergence when $h$ and $g$ are continuous.
+  \end{itemize}
+\item[(F2)] Pointwise monotonicity is impossible. If $X\le Y$ a.s.\ implies $LR(X)\le LR(Y)$, then $h=g$ and $LR\equiv 1$.
+\item[(F3)] Within the distortion class, $LR$ determines $(h,g)$ unless $LR\equiv 1$. Two-layer losses $a+c\mathbf 1_B$ identify $g$.
+\item[(F7)] The canonical $\rho_\beta$ is a \emph{signed} (non-monotone) Choquet integral with distortion $(h-\beta g)/(1-\beta)$.
+\end{itemize}
+
+The earlier synthesis also contained claims F4 (quasi-convexity), F5 (conic level sets) and F6 (identification). F4's ``actuarial'' clause is corrected in the section on corollaries. F6 is only a zero-set identification; see the section on alternative routes.
+
+This note gives a true if-and-only-if characterization of the loss ratio. Its hypotheses are placed on $LR$ and are as weak as the panel could make them. The note also proves uniqueness, shows that each axiom is necessary, and states the remaining gaps.
+
+The main results are the following.
+\begin{itemize}
+\item Theorems A and B characterize the extended loss ratio on $L^\infty$. The axioms are:
+  \begin{itemize}
+  \item a unit-slope M\"obius cash profile;
+  \item law invariance;
+  \item a premium-weighted comonotone identity;
+  \item either uniform continuity (Theorem A) or monotonicity (Theorem B) of the \emph{zero} and the \emph{pole} of the cash profile.
+  \end{itemize}
+\item Theorem A$^0$ drops law invariance.
+\item Theorems C and C$'$ work on the actuarial domain $L^\infty_+\setminus\{0\}$, using upward cash shifts only.
+\item The Bridge Proposition connects the two settings.
+\end{itemize}
+
+\subsection{Conventions}
+
+$(\Omega,\mathcal F,P)$ is an atomless probability space. $L^\infty$ is the space of a.s.-classes of essentially bounded random variables, with $\|\cdot\|=\|\cdot\|_\infty$. We write $\mathcal X:=L^\infty_+\setminus\{0\}$.
+
+$X$ and $Y$ are \emph{comonotone} if $(X(\omega)-X(\omega'))(Y(\omega)-Y(\omega'))\ge 0$ for $P\otimes P$-a.e.\ $(\omega,\omega')$. Constants are comonotone with every $X$.
+
+The quantile function is $q_X(u):=\inf\{x:P(X\le x)\ge u\}$. $X\overset{d}{=}Y$ means equality in law.
+
+\begin{definition}[Games and Choquet integrals]
+A \emph{game} is a map $\nu:\mathcal F\to\mathbb R$ with $\nu(\emptyset)=0$.
+\begin{itemize}
+\item $\nu$ is \emph{null-invariant} if $P(A\triangle B)=0$ implies $\nu(A)=\nu(B)$.
+\item Its \emph{chain variation} is $\|\nu\|_{bv}:=\sup\sum_j|\nu(A_j)-\nu(A_{j-1})|$, the supremum taken over chains $\emptyset=A_0\subset\dots\subset A_n=\Omega$.
+\item $\mathcal V$ is the set of null-invariant games with $\|\nu\|_{bv}<\infty$, and $\mathcal V_1:=\{\nu\in\mathcal V:\nu(\Omega)=1\}$.
+\item A \emph{capacity} is a game that is nondecreasing for inclusion.
+\end{itemize}
+For $\nu\in\mathcal V$ and $X\in L^\infty$,
+\[
+C_\nu(X):=\int_0^\infty\nu(X>x)\,dx+\int_{-\infty}^0\big[\nu(X>x)-\nu(\Omega)\big]\,dx .
+\]
+\end{definition}
+
+\begin{remark}[Measurability]
+The sets $\{X>x\}$ form a chain. Hence $x\mapsto\nu(X>x)$ has total variation at most $\|\nu\|_{bv}$ on $\mathbb R$. It is therefore a difference of monotone functions, and so Borel. It is constant outside $[-\|X\|,\|X\|]$, so $C_\nu(X)$ is a finite Riemann--Stieltjes-type integral.
+\end{remark}
+
+\begin{definition}[Distortions]
+For a bounded Borel $k:[0,1]\to\mathbb R$ with $k(0)=0$ put
+\[
+I_k(X):=\int_0^\infty k(P(X>x))\,dx+\int_{-\infty}^0\big[k(P(X>x))-k(1)\big]\,dx .
+\]
+No normalization of $k(1)$ is required. We use the following notation.
+\begin{itemize}
+\item $\mathcal H$ is the set of $k$ of bounded variation with $k(0)=0$.
+\item $\mathcal H_1:=\{k\in\mathcal H:k(1)=1\}$.
+\item A \emph{distortion function} is a nondecreasing $k\in\mathcal H_1$. Jumps are allowed, including at $0$, so VaR-type distortions are admissible.
+\item On $L^\infty_+$ we write $C_k:=I_k$.
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+For $k\in\mathcal H$, $I_k$ is the signed Choquet integral of Wang, Wei and Willmot (2020, Def.~1).
+\begin{itemize}
+\item That definition uses $P(X\ge x)$. The two integrands differ at only countably many $x$, so the integrals coincide.
+\item For $k\notin\mathcal H$ the same formula is used here, which extends their Definition~1 beyond the bounded-variation case.
+\item $I_k=C_{k\circ P}$.
+\item Because the space is atomless, $\|k\circ P\|_{bv}=TV(k)$, the total variation of $k$ on $[0,1]$. Chains of events realize every partition of $[0,1]$ by their probabilities.
+\end{itemize}
+\end{remark}
+
+\begin{definition}[Values and the extended loss ratio]
+Put $\widehat{\mathbb R}_\star:=\mathbb R\cup\{\infty\}\cup\{\star\}$. For $r,s\in\mathbb R$ let
+\[
+[r:s]:=r/s \text{ if } s\neq 0,\qquad [r:s]:=\infty \text{ if } s=0\ne r,\qquad [r:s]:=\star \text{ if } r=s=0 .
+\]
+An \emph{extended loss ratio} is a map $LR:L^\infty\to\widehat{\mathbb R}_\star$.
+\begin{itemize}
+\item Its \emph{cash profile} at $X$ is $\phi_X(c):=LR(X+c)$, $c\in\mathbb R$.
+\item Its \emph{finite domain} is $D:=\{X:LR(X)\in\mathbb R\}$.
+\end{itemize}
+This is the object Assa's Proposition~1 uses when it evaluates $LR(X-m)$ at cash-shifted, possibly negative, positions. The symbol $\infty$ records ``zero premium, nonzero risk''. The symbol $\star$ records ``$0/0$''.
+\end{definition}
+
+\section{If-and-only-if theorems in the literature}
+
+Ten scholars surveyed ten strands of the literature. Organization-wide web search was disabled during the panel, and several publisher hosts were blocked. Each entry below is therefore marked with a confidence label:
+\begin{itemize}
+\item \textbf{[read]}: the statement was read in the primary source, or in a verbatim restatement, by at least one scholar;
+\item \textbf{[memory]}: the statement was reconstructed from memory or from secondary citations;
+\item \textbf{[abstract]}: only an abstract could be accessed.
+\end{itemize}
+For each entry we also say whether it is used, and how. Every load-bearing step of the proofs below is proved directly. The citations locate the results; the proofs do not depend on them.
+
+\subsection{Comonotone additivity with monotonicity}
+
+\begin{description}
+\item[Schmeidler (1986), main theorem. {[read]}] This is restated verbatim as Theorem~2 of Cerreia-Vioglio et al.\ (2015).
+  \begin{itemize}
+  \item Setting: $B(\Omega,\mathcal F)$, the bounded measurable functions, and $V:B\to\mathbb R$.
+  \item Statement: $V$ is monotone and comonotonic additive iff $V(f)=\int f\,d\mu$ (Choquet) for a unique capacity $\mu$, namely $\mu(A)=V(\mathbf 1_A)$.
+  \item No continuity hypothesis is needed.
+  \item Used only as a remark in Step~8. Steps 6--8 reprove the law-invariant case directly.
+  \end{itemize}
+\item[Schmeidler (1986), norm-continuous form. {[read]}] This is quoted as Theorem~7 of Wang, Wei and Willmot (2020).
+  \begin{itemize}
+  \item Statement: if $I:B\to\mathbb R$ is comonotonic additive and sup-norm continuous, then $I$ is the Choquet-type integral with respect to $v(E)=I(\mathbf 1_E)$, with no monotonicity assumed.
+  \item This is the ancestor of the signed results. Not used.
+  \end{itemize}
+\item[Greco (1982); Denneberg (1994, Thm.~13.2). {[memory]}] On cones of nonnegative functions, monotone and comonotonic additive functionals with truncation continuity are Choquet integrals. Not used. No non-monotone Greco-type theorem is known; see open point~5.
+\item[Yaari (1987), Theorem~1. {[memory]}] A preference on $[0,1]$-valued risks is a weak order, continuous, FSD-monotone and dual-independent iff it is represented by $\int f(G_v(t))\,dt$ with a unique continuous nondecreasing $f$. Motivation only.
+\item[Wang, Young and Panjer (1997). {[memory]}]
+  \begin{itemize}
+  \item Setting: a premium functional $H$ on nonnegative risks.
+  \item Axioms: law invariance, monotonicity, comonotonic additivity, truncation continuity, and $H(1)=1$.
+  \item Statement: these hold iff $H=C_g$ with $g$ a distortion function.
+  \item Theorem~B is its loss-ratio analogue. On bounded losses no truncation axiom is needed.
+  \end{itemize}
+\item[Guo, Wang, Xia and Yang (2025), Prop.~2(i). {[read]}] On an atomless $L^\infty$, a Choquet risk measure is law-invariant iff its capacity is $h\circ P$ with $h$ a distortion. Reproved in Step~6.
+\item[Wang, Wang and Wei (2020), Cor.~1. {[read]}] On law-invariant cones of $L^1$, a functional that is law-invariant, increasing, cash-invariant, continuous at infinity and comonotonic-additive is $I_h$ with $h$ increasing and $h(1)=1$. Not used.
+\end{description}
+
+\subsection{Comonotone additivity without monotonicity}
+
+\begin{description}
+\item[Murofushi, Sugeno and Machida (1994), Thm.~4.2. {[memory, low--medium confidence]}]
+  \begin{itemize}
+  \item Setting: $B(\Sigma)$.
+  \item Statement: $I$ is comonotonically additive and of bounded variation (in some versions, bounded on the unit ball) iff $I$ is the Choquet integral with respect to a set function of bounded chain variation, namely $\mu(A)=I(\mathbf 1_A)$.
+  \item Used for attribution of Theorem A$^0$.
+  \end{itemize}
+\item[Cerreia-Vioglio, Maccheroni, Marinacci and Montrucchio (2012), Thm.~13, Lemma~14(iii), Cor.~18. {[read]}] This is IGIER WP~366.
+  \begin{itemize}
+  \item Thm.~13: on a comonotonic Stone lattice, $V$ is comonotonic additive, of bounded variation and outer continuous iff it is a Choquet integral with respect to an outer continuous set function of bounded variation, iff it is a difference of two Choquet integrals with respect to capacities.
+  \item Lemma~14(iii): such $V$ are Lipschitz, translation invariant and positively homogeneous.
+  \item Cor.~18: the case $L=B(\Sigma)$, with $\nu(A)=V(\mathbf 1_A)$.
+  \item Used for attribution of Theorem A$^0$.
+  \end{itemize}
+\item[Cerreia-Vioglio et al.\ (2015). {[read]}] This is IGIER WP~433.
+  \begin{itemize}
+  \item Thm.~6: on an Archimedean Riesz space with unit, \emph{dual} comonotonic additivity plus bounded variation is equivalent to a Choquet representation on the Stone space $U(E)$, with an outer continuous $\mu$. This is a Riesz-space statement, not one about games on $\mathcal F$.
+  \item Thm.~19: on a Stone vector lattice of functions, comonotonic additivity plus bounded variation gives a unique $\mu\in bv(L)$.
+  \item Lemma~18: bounded variation iff difference of two monotone such functionals.
+  \item Prop.~16(iii): monotone and unit-additive implies Lipschitz.
+  \item Thm.~19 is the function-level analogue of Theorem A$^0$.
+  \item Prop.~16(iii) is cited in Step~5, which reproves it.
+  \end{itemize}
+\item[Wang, Wei and Willmot (2020). {[read]}]
+  \begin{itemize}
+  \item Thm.~1: on atomless $L^\infty$, $I$ is law-invariant, comonotonic-additive and uniformly norm-continuous iff $I=I_h$ for some $h\in\mathcal H$.
+  \item Lemma~1: for $h_1(1)=h_2(1)$, $h_1\le h_2$ iff $I_{h_1}\le I_{h_2}$.
+  \item Lemma~2: (i) $I_h$ is increasing iff $h$ is increasing; (ii) $I_h(X+c)=I_h(X)+c\,h(1)$; (iii) positive homogeneity.
+  \item Lemma~4: $|I_h(X)-I_h(Y)|\le TV(h)\|X-Y\|$.
+  \item Remark~3: with mere norm continuity the representation persists with $h$ possibly of unbounded variation. For positively homogeneous functionals, uniform continuity is equivalent to Lipschitz continuity.
+  \item Thm.~3: for $h\in\mathcal H$ these are equivalent: $h$ concave; $I_h$ convex-order consistent; subadditive; convex; quasi-convex; concave on mixtures.
+  \item Theorem~A packages Thm.~1 at the loss-ratio level. Lemma~4 and Thm.~3 are used in the corollaries.
+  \end{itemize}
+\item[Wang, Wang and Wei (2020). {[read]}]
+  \begin{itemize}
+  \item Thm.~1: on law-invariant convex cones containing $L^\infty$, law invariance, comonotonic additivity, continuity at infinity and uniform sup-continuity are equivalent to $\rho=I_h$ with $h\in\mathcal H$.
+  \item Prop.~2(i): ordering. Thm.~5: ES-mixture form of convex distortion riskmetrics.
+  \item Relevant to open point~6. Not used.
+  \end{itemize}
+\item[Wang and Wei (2020), Prop.~5.2. {[read]}] A map on bounded laws is comonotonic-additive and uniformly continuous for the Wasserstein-$L^\infty$ metric iff it is a $d$-dimensional signed Choquet integral. This is a pair-level version of Thm.~1. Not used.
+\end{description}
+
+\subsection{Law-invariant coherent risk measures}
+
+\begin{description}
+\item[Kusuoka (2001), Thms.~4 and 7. {[memory]}; Jouini, Schachermayer and Touzi (2006), Thm.~2.3. {[read]}; F\"ollmer and Schied (2016), Thm.~4.93. {[memory, numbering]}]
+  \begin{itemize}
+  \item A monetary risk measure on atomless $L^\infty$ is law-invariant, comonotonic and coherent iff it is a single mixture $\int ES_\alpha\,d\mu$, iff it is a Choquet integral with a concave distortion.
+  \item The mixing domain differs between restatements. JST use $[0,1]$ with $U_0=\operatorname{ess\,inf}$ in the gain convention. The digest's Kusuoka entry uses $(0,1]$.
+  \item Used in the Uniqueness Proposition, item~7, only as a statement. The uniqueness of $\mu$ is proved directly there.
+  \end{itemize}
+\item[Shapiro (2013), Thm.~3.1. {[read]}] On $L^p$, $p<\infty$, the Kusuoka measure of a comonotonic law-invariant coherent risk measure is unique. Not used.
+\item[Acerbi (2002), Thm.~4.1. {[read]}] A spectral measure $M_\phi$ is coherent iff $\phi$ is an admissible spectrum. Not used.
+\item[Liu, Cai, Lemieux and Wang (2020), Thms.~2.2 and 2.4, Prop.~2.7. {[read]}]
+  \begin{itemize}
+  \item A law-invariant, convex, $L^p$-continuous functional with cash slope $c$, and with no monotonicity, is a supremum of signed Choquet integrals with concave distortions, minus a penalty.
+  \item Prop.~2.7: quasi-convexity is equivalent to convexity when the cash slope is nonzero.
+  \item Used in Corollary B(c) and open point~8.
+  \end{itemize}
+\end{description}
+
+\subsection{Indices defined by level crossing, and premia}
+
+\begin{description}
+\item[Cherny and Madan (2009), Thm.~1. {[read, via the restatement in Bielecki, Cialenco and Zhang (2014)]}]
+  \begin{itemize}
+  \item A scale-invariant, quasi-concave, Fatou acceptability index that is monotone is $\sup\{x:\rho_x(X)\le 0\}$ for an increasing family of coherent risk measures.
+  \item The recovery formula $\rho^x(X)=\inf\{c:\alpha(X+c)\ge x\}$ is Assa's cash-shift construction.
+  \item Not applicable, because monotonicity fails for $LR$ (F2).
+  \end{itemize}
+\item[Bielecki, Cialenco and Zhang (2014), Thms.~4.6--4.8; Biagini and Bion-Nadal (2014), Prop.~3.12 and Rem.~3.13. {[read]}] Indices correspond to families through cash shifts. The cash-shift step uses no monotonicity in $X$. Not used.
+\item[Drapeau and Kupper (2013). {[partly read]}] Quasi-convex functions correspond to acceptance families. The robust representation is unique, and monotonicity only restricts the dual cone. Not used.
+\item[Han, Lin and Wang (2025), Thm.~1. {[read]}] Diversification quotients are characterized by six axioms on the index, relative to a monotone reference measure. This is the closest published iff of association type. It requires monotone families, so it is not applicable.
+\item[Bellini, Fadina, Wang and Wei (2022), Thm.~3. {[read, medium confidence]}] An iff axiomatization of mixtures of inter-ES differences, which are differences of Choquet integrals. Here $LR-1=I_{h-g}/I_g$ has this ``variability over premium'' structure. Not used.
+\item[Santos, Moresco, Righi and Horta (2024), Thm.~2. {[read]}] A monotone monetary risk measure is comonotonic additive iff its acceptance set and its complement are comonotonic convex. The non-monotone analogue is open. Not used.
+\item[Haezendonck and Goovaerts (1982); Bellini and Rosazza Gianin (2008). {[memory]}] Orlicz premia are defined implicitly by a level-crossing equation; this is the ancestor of the association. Not used.
+\item[Cheridito and Kromer (2013). {[memory]}] Axioms (M), (Q), (S), (D) for reward--risk ratios. Only sufficient conditions are proved, with no iff.
+\item[Fiori and Rosazza Gianin (2023). {[abstract]}] Existence and uniqueness of generalized PELVE. No iff.
+\item[Li and Wang (2023), PELVE. {[read]}] Existence, uniqueness and location-scale invariance. No iff.
+\end{description}
+
+\subsection{Decision theory and functional equations}
+
+\begin{description}
+\item[Chew (1983); Dekel (1986); Fishburn (1983). {[memory]}]
+  \begin{itemize}
+  \item Betweenness together with weak substitution gives a ratio of two linear functionals (weighted utility).
+  \item Fishburn's transitive SSB theorem has no monotonicity axiom at all.
+  \item The representation is ordinal: $LR=\psi(\rho/\Pi)$, with $(\rho,\Pi)$ unique only up to a linear-fractional transformation.
+  \item This explains why the comonotone mediant inequality alone cannot characterize $LR$. Motivation only.
+  \end{itemize}
+\item[Acz\'el (1966): Sincov and Cauchy equations. {[classical]}] Used in the alternative route of Proposal~9.
+\end{description}
+
+\subsection{Elicitability}
+
+\begin{description}
+\item[Gneiting (2011), Thm.~3.2. {[read]}] Ratios $E[r(Y)]/E[s(Y)]$ are elicitable, with identification function $\beta s(y)-r(y)$. This is the only published iff about a ratio functional; it applies to the mixture-linear case.
+\item[Wang and Ziegel (2015), Thm.~3.1; Wang and Wei (2020), Thm.~3.2 and Cor.~3.3; Steinwart et al.\ (2014), Cor.~9. {[read]}] A signed Choquet integral has convex level sets on a class containing three-point laws iff its distortion lies in an explicit class $H^*$ (mean, quantile type, extremes). Such convex level sets force monotonicity. Relevant to the withdrawn elicitability supplement. Not used.
+\end{description}
+
+\subsection{Summary}
+
+The representation steps of Theorems A, A$^0$ and B correspond, respectively, to:
+\begin{itemize}
+\item Wang, Wei and Willmot (2020, Thm.~1);
+\item Murofushi, Sugeno and Machida (1994, Thm.~4.2), together with Cerreia-Vioglio et al.\ (2012, Thm.~13 and Cor.~18; 2015, Thm.~19);
+\item Schmeidler (1986) with law invariance.
+\end{itemize}
+They are reproved below in a self-contained way. None of the ten strands found a published iff characterization of a ratio of two Choquet integrals, or of two coherent risk measures. Because web search was disabled, this negative finding is not exhaustive; see open point~7.
+
+\section{The characterization theorem}
+
+\subsection{Axioms}
+
+All axioms are stated on the extended loss ratio $LR:L^\infty\to\widehat{\mathbb R}_\star$.
+
+\begin{definition}[Unit-slope M\"obius cash profile]
+$LR$ satisfies (M) if, for every $X\in L^\infty$, there are reals $\rho(X)$ and $\Pi(X)$ such that
+\[
+LR(X+c)=[\rho(X)+c:\Pi(X)+c]\qquad\text{for all }c\in\mathbb R .
+\]
+\end{definition}
+
+\begin{lemma}[Reading Lemma]
+Suppose (M) holds at $X$ with parameters $(a,b)$.
+\begin{itemize}
+\item If $a\neq b$, then $\phi_X$ takes the value $0$ only at $c=-a$ and the value $\infty$ only at $c=-b$. It never takes the value $\star$.
+\item If $a=b$, then $\phi_X\equiv 1$ on $\mathbb R\setminus\{-a\}$ and $\phi_X(-a)=\star$.
+\end{itemize}
+Consequently:
+\begin{itemize}
+\item $-\Pi(X)$ is the unique $c$ with $\phi_X(c)\in\{\infty,\star\}$;
+\item $-\rho(X)$ is the unique $c$ with $\phi_X(c)\in\{0,\star\}$;
+\item $\rho$ and $\Pi$ are functions of $LR$, and $LR=[\rho:\Pi]$;
+\item $D=\{\Pi\neq 0\}$ and $\Pi\cdot LR=\rho$ on $D$.
+\end{itemize}
+The \emph{fair set} is $N:=\{\rho=\Pi\}=\{X:\phi_X\text{ takes the value }\star\}$.
+\end{lemma}
+
+\begin{proof}
+Direct inspection of $c\mapsto[a+c:b+c]$. Numerator and denominator vanish together only if $a=b$.
+\end{proof}
+
+\begin{definition}[Remaining axioms]
+\begin{description}
+\item[(L)] Law invariance: $X\overset{d}{=}Y$ implies $LR(X)=LR(Y)$.
+\item[(C)] Premium-weighted comonotone identity: for comonotone $X,Y\in D$ with $\Pi(X)+\Pi(Y)\neq 0$,
+\[
+LR(X+Y)=\frac{\Pi(X)\,LR(X)+\Pi(Y)\,LR(Y)}{\Pi(X)+\Pi(Y)} .
+\]
+\item[(R$_s$)] $\rho$ and $\Pi$ are uniformly norm-continuous.
+\item[(R$_m$)] $X\le Y$ a.s.\ implies $\rho(X)\le\rho(Y)$ and $\Pi(X)\le\Pi(Y)$.
+\end{description}
+\end{definition}
+
+\begin{remark}
+\begin{itemize}
+\item (R$_m$) is monotonicity of the zero and of the pole of the cash profiles. By the Reading Lemma it is a condition on the values of $LR$. It is \emph{not} pointwise monotonicity of $LR$, which F2 rules out.
+\item (R$_m$) implies (R$_s$); see Step~5.
+\item (C) is the cardinal, premium-weighted form of F1's comonotone mediant property. When both weights are positive it implies the two-sided mediant inequality.
+\end{itemize}
+\end{remark}
+
+\subsection{Main results on $L^\infty$}
+
+\begin{theorem}[A: signed tier]
+$LR$ satisfies (M), (L), (C) and (R$_s$) if and only if $LR=[I_h:I_g]$ on $L^\infty$ for some $(h,g)\in\mathcal H_1^2$.
+\end{theorem}
+
+\begin{theorem}[B: Yaari / Wang--Young--Panjer tier]
+$LR$ satisfies (M), (L), (C) and (R$_m$) if and only if $LR=[I_h:I_g]$ on $L^\infty$, with $h$ and $g$ distortion functions. No continuity axiom is needed.
+\end{theorem}
+
+\begin{theorem}[A$^0$: no law invariance]
+The following hold.
+\begin{itemize}
+\item $LR$ satisfies (M), (C) and (R$_s$) iff $LR=[C_{\nu_1}:C_{\nu_2}]$ with $\nu_1,\nu_2\in\mathcal V_1$.
+\item $LR$ satisfies (M), (C) and (R$_m$) iff the same holds with $\nu_1,\nu_2$ capacities.
+\item The pair is unique: $\nu_1(A)=\rho(\mathbf 1_A)$ and $\nu_2(A)=\Pi(\mathbf 1_A)$.
+\item No outer continuity is required; finitely additive $\nu_i$ are allowed.
+\item $LR$ satisfies (L) in addition iff $\nu_1=h\circ P$ and $\nu_2=g\circ P$. In that case $h,g\in\mathcal H_1$, which recovers Theorems A and B.
+\end{itemize}
+This is the loss-ratio form of the signed comonotone representation of Murofushi, Sugeno and Machida (1994, Thm.~4.2) and Cerreia-Vioglio et al.\ (2012, Thm.~13 and Cor.~18; 2015, Thm.~19). Only the loss-ratio packaging and the treatment of a.s.-classes are new here.
+\end{theorem}
+
+\begin{proposition}[Complements to Theorems A and B]
+\begin{enumerate}
+\item[(i)] Uniqueness. $(h,g)$ is unique, unconditionally, including when $h=g$. For $P(A)=p$, $h(p)=\rho(\mathbf 1_A)$ and $g(p)=\Pi(\mathbf 1_A)$.
+\item[(ii)] $\rho=I_h$, $\Pi=I_g$, $D=\{I_g\neq0\}$ and $N=\{I_{h-g}=0\}$.
+\item[(iii)] Within Theorem A, $\rho$ (resp.\ $\Pi$) is monotone iff $h$ (resp.\ $g$) is nondecreasing.
+\item[(iv)] In Theorem B, $\mathcal X\subset D$ iff $g>0$ on $(0,1]$. In that case $LR|_{\mathcal X}=C_h/C_g$.
+\item[(v)] Under (M), (C) is equivalent to (C$^+$): $\rho$ and $\Pi$ are comonotone additive.
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Derived consequences]
+Under the axioms of Theorem A the following hold. None of them is assumed.
+\begin{itemize}
+\item Scale invariance: $LR(\lambda X)=LR(X)$ for $\lambda>0$.
+\item $LR(c)=1$ for constants $c\neq 0$, and $LR(0)=\star$.
+\item $\rho$ and $\Pi$ are cash-additive and Lipschitz, with constants $TV(h)$ and $TV(g)$.
+\item Association. For $\beta\neq1$ put
+\[
+\rho_\beta:=\frac{\rho-\beta\Pi}{1-\beta}=I_{k_\beta},\qquad k_\beta:=\frac{h-\beta g}{1-\beta}=g+\frac{h-g}{1-\beta}\in\mathcal H_1 .
+\]
+Then $\rho_\beta(X)=0\iff LR(X)\in\{\beta,\star\}$. Hence $LR(X)=\beta\iff\rho_\beta(X)=0$ holds exactly on the complement of the star-at-zero set $\{\rho=\Pi=0\}=\{LR=\star\}$. That complement is $D\cup\{LR=\infty\}$, which strictly contains $D$ whenever $\{LR=\infty\}\neq\emptyset$. The equivalence fails, for instance, at $X=0$ and at $X-\rho(X)$ for every $X\in N$.
+\end{itemize}
+\end{proposition}
+
+\subsection{Proofs of Theorems A and B}
+
+\textit{Step 0 (reading).} By the Reading Lemma, $\rho$, $\Pi$, $D$ and $N$ are determined by $LR$, and $LR=[\rho:\Pi]$.
+
+\textit{Step 1 (cash additivity).} We have $\phi_{X+c_0}(c)=\phi_X(c_0+c)=[(\rho(X)+c_0)+c:(\Pi(X)+c_0)+c]$. By uniqueness of the reading, $\rho(X+c_0)=\rho(X)+c_0$ and $\Pi(X+c_0)=\Pi(X)+c_0$ for all $c_0\in\mathbb R$.
+
+\textit{Step 2 (law invariance of zero and pole).} If $X\overset d=Y$, then $X+c\overset d=Y+c$ for all $c$. So $\phi_X=\phi_Y$ by (L), and Step~0 gives $\rho(X)=\rho(Y)$ and $\Pi(X)=\Pi(Y)$.
+
+\textit{Step 3 (comonotone additivity, including through $N$).} Let $X,Y$ be comonotone and $Z=X+Y$. Put $r=\rho(X)+\rho(Y)$ and $q=\Pi(X)+\Pi(Y)$.
+\begin{itemize}
+\item Fix $s\neq-q$ and pick $u\notin\{-\Pi(X),\,s+\Pi(Y)\}$.
+\item Then $X+u$ and $Y+s-u$ are comonotone elements of $D$. By Step~1 their poles $\Pi(X)+u$ and $\Pi(Y)+s-u$ sum to $q+s\neq0$.
+\item Apply (C) to this pair and use $\Pi\cdot LR=\rho$ on $D$ together with Step~1:
+\[
+LR(Z+s)=\frac{(\rho(X)+u)+(\rho(Y)+s-u)}{q+s}=\frac{r+s}{q+s}\in\mathbb R .
+\]
+\item So $\phi_Z$ is real-valued on $\mathbb R\setminus\{-q\}$. By the Reading Lemma $\phi_Z$ is non-real at $-\Pi(Z)$, so $\Pi(Z)=q$.
+\item Comparing values off $-q$ then gives $\rho(Z)=r$.
+\end{itemize}
+This covers pairs in $N$, where the association is silent. Conversely, suppose $\rho$ and $\Pi$ are comonotone additive. For comonotone $X,Y\in D$ with $q\neq0$ we get $\Pi(X+Y)=q$ and $LR(X+Y)=\rho(X+Y)/q$, which is the weighted mean in (C). This proves complement (v).
+
+\textit{Step 4 (constants).} $\rho(0)=\rho(0+0)=2\rho(0)$, so $\rho(0)=0$; likewise $\Pi(0)=0$. Step~1 gives $\rho(c)=\Pi(c)=c$. Hence $LR(c)=1$ for $c\neq0$ and $LR(0)=\star$.
+
+\textit{Step 5 (homogeneity and Lipschitz continuity).} Let $F\in\{\rho,\Pi\}$. Since $X$ is comonotone with itself, $F(nX)=nF(X)$, so $F(qX)=qF(X)$ for rational $q>0$.
+\begin{itemize}
+\item Under (R$_m$): $X\le Y+\|X-Y\|$ and Step~1 give $F(X)\le F(Y)+\|X-Y\|$. So $F$ is $1$-Lipschitz (cf.\ Cerreia-Vioglio et al.\ 2015, Prop.~16(iii)), and in particular (R$_s$) holds.
+\item Under (R$_s$): continuity gives $F(\lambda X)=\lambda F(X)$ for all real $\lambda>0$. Choose $\delta>0$ such that $\|X'-Y'\|\le\delta$ implies $|F(X')-F(Y')|\le1$. Apply this to $tX,tY$ with $t=\delta/\|X-Y\|$. This gives $|F(X)-F(Y)|\le\|X-Y\|/\delta$, so $L:=1/\delta$ is a Lipschitz constant (cf.\ Wang, Wei and Willmot 2020, Remarks~2--3).
+\end{itemize}
+In both cases $F$ is positively homogeneous, so $LR(\lambda X)=[\lambda\rho(X):\lambda\Pi(X)]=LR(X)$ for $\lambda>0$.
+
+\textit{Step 6 (layer formula).} For $P(A)=p$ set $h(p):=\rho(\mathbf 1_A)$ and $g(p):=\Pi(\mathbf 1_A)$.
+\begin{itemize}
+\item These are well defined by Step~2. Every $p\in[0,1]$ is attained because the space is atomless.
+\item $h(0)=g(0)=0$ and $h(1)=g(1)=1$ by Step~4.
+\end{itemize}
+Let $C_1\supset C_2\supset\dots\supset C_m$ be a chain of events, $x_0\in\mathbb R$ and $a_i\ge0$. Each partial sum $\sum_{i<j}a_i\mathbf 1_{C_i}$ attains its maximum on $C_j$, so it is comonotone with $\mathbf 1_{C_j}$. Steps 1, 3 and 5 give
+\[
+\rho\Big(x_0+\sum_i a_i\mathbf 1_{C_i}\Big)=x_0+\sum_i a_i\,h(P(C_i)),\qquad(*)
+\]
+and likewise for $\Pi$ with $g$. Ties $a_i=0$ are allowed. A direct computation gives the same formula for $I_k$, for any bounded Borel $k$ with $k(0)=0$ and $k(1)=1$: the survival function equals $P(C_j)$ on an interval of length $a_j$.
+
+\textit{Step 7 (bounded variation).}
+\begin{itemize}
+\item Under (R$_m$): for $p\le q$ take nested $A\subset B$ with $P(A)=p$ and $P(B)=q$. Then $h(p)\le h(q)$, and likewise for $g$.
+\item Under (R$_s$): take $0=p_0<\dots<p_n=1$ and a uniform $U$, which exists on an atomless space. Put $I_j=\{1-p_j<U\le1-p_{j-1}\}$ and $\delta_j=h(p_j)-h(p_{j-1})$.
+  \begin{itemize}
+  \item For $\sigma\in\{0,1\}^n$ let $W=\sum_j2(n-j)\mathbf 1_{I_j}$ and $Y_\sigma=W+\sum_j\sigma_j\mathbf 1_{I_j}$.
+  \item The values $2(n-j)+\sigma_j$ are strictly decreasing in $j$, because consecutive differences are $2+\sigma_j-\sigma_{j+1}\ge1$. So $W$ and $Y_\sigma$ have the same upper sets $\{U>1-p_j\}$, with probabilities $p_j$.
+  \item By $(*)$ and summation by parts, $\rho(\sum_jv_j\mathbf 1_{I_j})=\sum_jv_j\delta_j$ for every nonincreasing $v\ge0$.
+  \item Hence $|\sum_j\sigma_j\delta_j|=|\rho(Y_\sigma)-\rho(W)|\le L\|Y_\sigma-W\|\le L$.
+  \item Taking $\sigma=\mathbf 1\{\delta_j>0\}$ and then $\sigma=\mathbf 1\{\delta_j<0\}$ gives $\sum_j|\delta_j|\le2L$.
+  \end{itemize}
+  So $TV(h)\le2L$, and likewise for $g$.
+\end{itemize}
+
+\textit{Step 8 (density).} Write $k=k^+-k^-$ (Jordan decomposition), with $k^\pm$ nondecreasing and $k^\pm(0)=0$.
+\begin{itemize}
+\item With the $-k(1)$ convention, $I_k=I_{k^+}-I_{k^-}$.
+\item Each $I_{k^\pm}$ is monotone with cash slope $k^\pm(1)$, hence $k^\pm(1)$-Lipschitz. So $I_k$ is $TV(k)$-Lipschitz.
+\item $\rho$ and $I_h$ are Lipschitz and agree on simple positions by $(*)$. Simple positions are dense in $L^\infty$, so $\rho=I_h$. Likewise $\Pi=I_g$.
+\end{itemize}
+In the monotone tier this is Schmeidler (1986) applied to the lift $f\mapsto\rho([f])$ on $B(\Omega,\mathcal F)$. That remark is not used.
+
+\textit{Step 9 (conclusion).} $LR=[\rho:\Pi]=[I_h:I_g]$.
+
+\textit{Step 10 (converse).} Let $LR:=[I_h:I_g]$ with $(h,g)\in\mathcal H_1^2$.
+\begin{itemize}
+\item[(a)] (M) holds, because $I_k(X+c)=I_k(X)+c\,k(1)$ and $h(1)=g(1)=1$.
+\item[(b)] (L) holds, because $I_k$ depends on $X$ only through $x\mapsto P(X>x)$.
+\item[(c)] (C) holds. Let $X,Y$ be comonotone.
+  \begin{itemize}
+  \item Each pair of sets $\{X\ge a\}$, $\{Y\ge b\}$ is a.s.\ nested; otherwise a $P\otimes P$-positive set would violate comonotonicity.
+  \item So $\lfloor nX\rfloor/n$ and $\lfloor nY\rfloor/n$ are of the form in $(*)$ on a single chain, up to null sets. $(*)$ for $I_h$ and $I_g$ is additive on such pairs.
+  \item Pass to the limit using the Lipschitz bound of Step~8, then apply (v).
+  \end{itemize}
+\item[(d)] (R$_s$) holds by the Lipschitz bound.
+\item[(e)] (R$_m$) holds when $h$ and $g$ are nondecreasing.
+\end{itemize}
+
+\emph{Proof of complement (iv).} If $g>0$ on $(0,1]$ and $X\in\mathcal X$, then $P(X>x)>0$ for $x\in[0,\operatorname{ess\,sup}X)$, so $I_g(X)>0$. If $g(p)=0$ for some $p>0$, then $\Pi(\mathbf 1_A)=0$ for $P(A)=p$, so $\mathbf 1_A\notin D$.
+
+\emph{Proof of complement (iii).} Use Step~7 and Step~10(e).
+
+\textit{Step 11 (uniqueness).} If $[I_h:I_g]=[I_{h'}:I_{g'}]$, both pairs are (M)-parameters of the same profiles. Step~0 makes them equal, and evaluating at $\mathbf 1_A$ gives $h=h'$ and $g=g'$.
+
+\subsection{Proof of Theorem A$^0$}
+
+Steps 0, 1, 3, 4 and 5 do not use (L). Set $\nu_1(A):=\rho(\mathbf 1_A)$ and $\nu_2(A):=\Pi(\mathbf 1_A)$.
+\begin{itemize}
+\item They are null-invariant, because $\rho$ and $\Pi$ act on a.s.-classes.
+\item They are normalized by Step~4.
+\item $(*)$ holds with $\nu_1(C_i)$ in place of $h(P(C_i))$.
+\end{itemize}
+
+\emph{Bounded variation.} Given a chain $\emptyset=A_0\subset\dots\subset A_n=\Omega$, run Step~7 with $I_j:=A_j\setminus A_{j-1}$ and $\sigma\in\{0,1\}^n$. Here $\{W\ge2(n-j)\}=A_j$, so $\|\nu_1\|_{bv}\le2L$. Under (R$_m$), $\nu_1$ is monotone.
+
+\emph{Jordan decomposition of a game (proved here).} Let $\nu^+(A):=\sup\sum_j(\nu(A_j)-\nu(A_{j-1}))^+$, the supremum taken over chains from $\emptyset$ to $A$. Put $\nu^-:=\nu^+-\nu$.
+\begin{itemize}
+\item For $A\subset B$, appending $B$ to a chain gives $\nu^+(B)\ge\nu^+(A)+(\nu(B)-\nu(A))^+$.
+\item Hence $\nu^+$ is nondecreasing, and $\nu^-(B)-\nu^-(A)\ge(\nu(B)-\nu(A))^+-(\nu(B)-\nu(A))\ge0$.
+\item $\nu^+(A)\le\|\nu\|_{bv}$: append $\Omega$ to the chain.
+\item Null-invariance passes to $\nu^\pm$. If $P(A\triangle A')=0$, map $A_j\mapsto A_j\cap A'$ for $j<n$ and $A_n\mapsto A'$. This preserves every $\nu$-value.
+\end{itemize}
+
+\emph{Representation.}
+\begin{itemize}
+\item $C_{\nu^\pm}$, with the $\nu^\pm(\Omega)$ correction, is monotone with cash slope $\nu^\pm(\Omega)$, hence Lipschitz.
+\item $C_\nu=C_{\nu^+}-C_{\nu^-}$, because the integral is linear in $\nu$.
+\item $\rho$ and $C_{\nu_1}$ are Lipschitz and agree on simple positions, so $\rho=C_{\nu_1}$. Likewise $\Pi=C_{\nu_2}$.
+\end{itemize}
+
+\emph{Converse.} Argue as in Step~10(a), (c), (d), with $\nu$ in place of $h\circ P$. Null-invariance makes $C_\nu$ well defined on a.s.-classes and lets a.s.-nested chains suffice. Capacities give (R$_m$).
+
+\emph{Uniqueness.} By Step~0.
+
+\emph{Law invariance.} If (L) holds, Step~2 makes $\nu_i(A)$ depend only on $P(A)$, so $\nu_i=k_i\circ P$. Since $\|k\circ P\|_{bv}=TV(k)$, we get $k_i\in\mathcal H_1$. Conversely, $k\circ P$ gives a law-invariant functional.
+
+\subsection{The actuarial domain}
+
+Let $LR_0:\mathcal X\to\mathbb R$ and $N_0:=\{X\in\mathcal X:LR_0(X)=1\}$. Only upward shifts $X+c$, $c\ge0$, are used, so everything stays inside $\mathcal X$.
+
+\begin{definition}[Axioms on $\mathcal X$]
+\begin{description}
+\item[(A0)] Definitional: $N_0$ has empty interior in $(\mathcal X,\|\cdot\|)$.
+\item[(A1)] For each $X\in\mathcal X\setminus N_0$ there are reals $a_X,b_X$ with $LR_0(X+c)=(a_X+c)/(b_X+c)$ for all $c\ge0$. By the Half-line Lemma below, $a_X\neq b_X$, the pair is unique, and $b_X>0$. Set $\rho(X):=a_X$ and $\Pi(X):=b_X$ on $\mathcal X\setminus N_0$.
+\item[(A2)] $LR_0$ is law-invariant.
+\item[(A3)] $\rho$ and $\Pi$ are monotone on $\mathcal X\setminus N_0$.
+\item[(A3$_s$)] $\rho$ and $\Pi$ are uniformly continuous on $\mathcal X\setminus N_0$.
+\item[(A4)] For comonotone $X,Y\in\mathcal X$:
+  \begin{itemize}
+  \item[(A4a)] $\bar\Pi(X+Y)=\bar\Pi(X)+\bar\Pi(Y)$;
+  \item[(A4b)] $\bar\Pi(X+Y)\,LR_0(X+Y)=\bar\Pi(X)\,LR_0(X)+\bar\Pi(Y)\,LR_0(Y)$.
+  \end{itemize}
+\item[(A5)] $LR_0$ is norm-continuous on $\mathcal X$.
+\end{description}
+\emph{Convention.} In (A4), $\bar\rho$ and $\bar\Pi$ denote the unique continuous extensions of $\rho$ and $\Pi$ from the set $\mathcal X\setminus N_0$, which is dense by (A0), to $\mathcal X$, whenever such extensions exist. Under (A3) or (A3$_s$) they exist by Lemma C3. In the necessity witnesses for (A3) and (A3$_s$) they exist because the relevant functionals are continuous on $\mathcal X$.
+\end{definition}
+
+\begin{theorem}[C: actuarial domain]
+$LR_0$ satisfies (A0)--(A5) if and only if $LR_0=C_h/C_g$ on $\mathcal X$ for distortion functions $h\neq g$ with $g>0$ on $(0,1]$. In that case:
+\begin{itemize}
+\item $(h,g)$ is unique, even among signed pairs $(h',g')\in\mathcal H_1^2$ with $C_{g'}>0$ on $\mathcal X$;
+\item $\bar\rho=C_h$, $\bar\Pi=C_g$, and $N_0=\mathcal X\cap\{C_h=C_g\}$.
+\end{itemize}
+\end{theorem}
+
+\begin{theorem}[C$'$: signed variant]
+Axioms (A0)--(A2), (A3$_s$), (A4) and (A5) hold if and only if $LR_0=C_h/C_g$ with $h,g\in\mathcal H_1$, $h\neq g$ and $g>0$ on $(0,1]$.
+\end{theorem}
+
+\begin{proposition}[Bridge]
+The following are equivalent:
+\begin{itemize}
+\item $LR_0=C_h/C_g$ with distortions $h,g$ and $g>0$ on $(0,1]$;
+\item $LR_0$ is the restriction to $\mathcal X$ of an extended loss ratio that satisfies the axioms of Theorem~B and has $\Pi>0$ on $\mathcal X$.
+\end{itemize}
+The extension is unique iff $LR_0\not\equiv1$.
+\end{proposition}
+
+\begin{lemma}[Half-line Lemma]
+Let $X\notin N_0$ satisfy (A1) with parameters $(a,b)$. Then:
+\begin{itemize}
+\item $a\neq b$ and the pair is unique;
+\item $b>0$;
+\item for $c_0\ge0$, $X+c_0\notin N_0$, with $\rho(X+c_0)=\rho(X)+c_0$ and $\Pi(X+c_0)=\Pi(X)+c_0$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+$a/b=LR_0(X)\neq1$, so $a\neq b$.
+
+\emph{Uniqueness.} Suppose $(a+c)(b'+c)=(a'+c)(b+c)$ for all $c\ge0$. Comparing coefficients gives $a+b'=a'+b$ and $ab'=a'b$. Writing $a'=a+t$ and $b'=b+t$ gives $t(a-b)=0$, so $t=0$.
+
+\emph{Positivity.} If $b\le0$, the pole $-b\ge0$, at which the numerator does not vanish, would contradict finiteness of $LR_0$.
+
+\emph{Shifts.} $LR_0(X+c_0)=(a+c_0)/(b+c_0)\neq1$, and the profile of $X+c_0$ is the shifted profile of $X$.
+\end{proof}
+
+\begin{lemma}[Lemma U]
+If $P(B)>0$, then $P(\cdot\mid B)$ carries a uniform random variable.
+\end{lemma}
+
+\begin{proof}
+$P(\cdot\mid B)$ is atomless. By Sierpi\'nski's theorem we can build sets $B_t\subset B$, increasing in dyadic $t\in[0,1]$, with $B_1=B$ and $P(B_t)=tP(B)$. Put $W:=\inf\{t:\omega\in B_t\}$. For dyadic $t$, $\{W<t\}\subset B_t\subset\{W\le t\}$, so $P(W\le t\mid B)=t$ for all $t$.
+\end{proof}
+
+\begin{lemma}[Quantile coupling]
+For every $Y\in L^\infty$ there is a uniform $U$ with $Y=q_Y(U)$ a.s. If $X\overset d=Y$ and $X_n\to X$ in norm, then $Y_n:=q_{X_n}(U)$ satisfies $Y_n\overset d=X_n$ and $\|Y_n-Y\|\le\|X_n-X\|$.
+\end{lemma}
+
+\begin{proof}
+\emph{Construction of $U$.}
+\begin{itemize}
+\item Off the atoms of $Y$, set $U:=F_Y(Y)$.
+\item On each atom $\{Y=y\}$, set $U:=F_Y(y-)+(F_Y(y)-F_Y(y-))W_y$, with $W_y$ uniform under $P(\cdot\mid Y=y)$ by Lemma~U.
+\end{itemize}
+Then $U$ is uniform and $q_Y(U)=Y$ a.s.
+
+\emph{Estimate.} If $|X_n-X|\le\varepsilon$ a.s., then quantiles move by at most $\varepsilon$. Hence $\|q_{X_n}(U)-q_X(U)\|\le\|X_n-X\|$, and $q_X=q_Y$.
+\end{proof}
+
+\begin{lemma}[Sweep]
+Let $k:[0,1]\to\mathbb R$ be bounded Borel with $k(0)=0$, and suppose $C_k$ is comonotone additive on $\mathcal X$. This holds for $k\in\mathcal H$, and also for continuous $k$; see Step~10(c) and the witness for (R$_s$). If $k(p_0)\neq0$ for some $p_0\in(0,1]$, then $\mathcal X\cap\{C_k=0\}$ has empty interior.
+\end{lemma}
+
+\begin{proof}
+Write $X=q_X(U)$ and $A=\{U>1-p_0\}$. Then $X$ and $\mathbf 1_A$ are comonotone, so $C_k(X+t\mathbf 1_A)=C_k(X)+t\,k(p_0)$ for $t>0$. This vanishes for at most one $t$. Since $\|X+t\mathbf 1_A-X\|=t$, every ball around $X$ meets $\{C_k\neq0\}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem C]
+\emph{C1.} The Half-line Lemma.
+
+\emph{C2 (law invariance).} $N_0$ is law-invariant by (A2). Off $N_0$, $\rho$ and $\Pi$ are law-invariant by uniqueness in the Half-line Lemma, since $X+c\overset d=Y+c$.
+
+\emph{C3 (extension).} Let $X,Y\notin N_0$ and $t=\|X-Y\|$. Then $Y+t\notin N_0$ by C1, and $X\le Y+t$, so (A3) gives $\rho(X)\le\rho(Y)+t$. Thus $\rho$ and $\Pi$ are $1$-Lipschitz on $\mathcal X\setminus N_0$, which is dense by (A0). Their extensions $\bar\rho,\bar\Pi$ satisfy:
+\begin{enumerate}
+\item[(i)] cash additivity for $c\ge0$, by approximation from off $N_0$;
+\item[(ii)] monotonicity on $\mathcal X$. If $X\le Y$, pick $X_n,Y_n\notin N_0$ within $1/n$ of $X$ and $Y$. Then $X_n\le Y_n+2/n$ and $Y_n+2/n\notin N_0$. Let $n\to\infty$;
+\item[(iii)] law invariance on $\mathcal X$, by the Quantile coupling Lemma applied to $X_n\to X$ off $N_0$. The coupled $Y_n$ lie off $N_0$ and satisfy $\rho(Y_n)=\rho(X_n)$;
+\item[(iv)] $\bar\Pi\ge0$, since $\Pi>0$ off $N_0$.
+\end{enumerate}
+
+\emph{C4 (pole).} $\bar\Pi$ is comonotone additive by (A4a) and continuous, hence positively homogeneous. Then $\bar\Pi(2)=2\bar\Pi(1)=\bar\Pi(1)+1$ gives $\bar\Pi(1)=1$.
+
+\emph{C5 (zero).} $\bar\rho$ and $LR_0\bar\Pi$ are continuous, by (A5) for the latter. They agree off $N_0$, where $a_X=LR_0(X)b_X$, so $\bar\rho=LR_0\bar\Pi$ on $\mathcal X$. By (A4b), $\bar\rho$ is comonotone additive and homogeneous, and $\bar\rho(1)=1$.
+
+\emph{C6 (representation).} For $P(A)=p>0$ set $h(p):=\bar\rho(\mathbf 1_A)$ and $g(p):=\bar\Pi(\mathbf 1_A)$, and set $h(0)=g(0)=0$.
+\begin{itemize}
+\item They are well defined by C3(iii) and nondecreasing on $(0,1]$ by C3(ii).
+\item $\varepsilon\mathbf 1_A\le\mathbf 1_A$ gives $(1-\varepsilon)h(p)\ge0$, so $h\ge0$; likewise $g\ge0$. Hence $h$ and $g$ are distortion functions.
+\item A simple $X\in\mathcal X$ is $\sum_i(x_i-x_{i-1})\mathbf 1_{B_i}$ with $x_{-1}=0$ and $B_i=\{X\ge x_i\}$. This is a comonotone sum of positive multiples of indicators. So $\bar\rho(X)=\sum(x_i-x_{i-1})h(P(B_i))=C_h(X)$.
+\item The simple positions $\lceil nX\rceil/n\in\mathcal X$ converge to $X$, so $\bar\rho=C_h$. Likewise $\bar\Pi=C_g$.
+\end{itemize}
+
+\emph{C7 (positivity of $g$).}
+\begin{enumerate}
+\item[(a)] If $g(p)=0$, then $h(p)=LR_0(\mathbf 1_A)\cdot0=0$ by C5.
+\item[(b)] Some $W\notin N_0$ has $\bar\rho(W)\neq\bar\Pi(W)$. So $h(q_0)\neq g(q_0)$ for some $q_0\in(0,1]$. Then $g(q_0)\ge0$ by C3(iv), and $g(q_0)\ne0$ by (a). Hence $g(q_0)>0$.
+\item[(c)] Suppose $g(p)=0$ with $p>0$. Take nested $B,C$ with $P(B)=p$ and $P(C)=q_0$, and put $X_n=\mathbf 1_B+n^{-1}\mathbf 1_C$.
+  \begin{itemize}
+  \item $\bar\Pi(X_n)=g(q_0)/n>0$ and $\bar\rho(X_n)=h(q_0)/n$, so $LR_0(X_n)=h(q_0)/g(q_0)\neq1$.
+  \item $\bar\Pi(\mathbf 1_B)=0$ forces $\mathbf 1_B\in N_0$, because $\Pi>0$ off $N_0$. So $LR_0(\mathbf 1_B)=1$.
+  \item This contradicts (A5).
+  \end{itemize}
+\end{enumerate}
+
+\emph{C8 (conclusion).} $LR_0=C_h/C_g$ by C5 and C6. If $h=g$, then $N_0=\mathcal X$, contradicting (A0).
+
+\emph{Converse.} Let $LR_0=C_h/C_g$ with $h\ne g$ and $g>0$ on $(0,1]$. Then $C_g>0$ on $\mathcal X$.
+\begin{itemize}
+\item (A1) holds with $a_X=C_h(X)$ and $b_X=C_g(X)$.
+\item (A2), (A3), (A4) and (A5) are immediate.
+\item (A0) follows from the Sweep Lemma with $k=h-g$, since $N_0=\mathcal X\cap\{C_k=0\}$.
+\end{itemize}
+Uniqueness is item~5 of the Uniqueness Proposition.
+\end{proof}
+
+\begin{proof}[Proof of Theorem C$'$]
+\begin{itemize}
+\item C1, C2 and C3(i), (iii), (iv) hold with uniform continuity in place of monotonicity. The extension is by uniform continuity, and the coupling argument is unchanged.
+\item Set $\tilde\rho(Z):=\bar\rho(Z+M)-M$ for $Z\in L^\infty$ and $M>\|Z\|$. It is independent of $M$ by C3(i).
+\item $\tilde\rho$ is law-invariant, cash additive, uniformly continuous on $L^\infty$, and comonotone additive. For the last point, $Z_1+M$ and $Z_2+M$ are comonotone elements of $\mathcal X$, and C5 together with (A4b) applies.
+\item Steps 4--8, applied to the single functional $\tilde\rho$, give $\tilde\rho=I_h$ with $h\in\mathcal H_1$. Likewise $g\in\mathcal H_1$, using (A4a).
+\item C7 holds verbatim. In C7(b), C3(iv) is used, not monotonicity of $g$. In C7(c), nested sets are comonotone in either direction.
+\item Converse: $g>0$ on $(0,1]$ gives $C_g>0$ on $\mathcal X$. The $TV$-Lipschitz bounds give (A3$_s$), and the Sweep Lemma gives (A0).
+\end{itemize}
+\end{proof}
+
+\begin{proof}[Proof of the Bridge Proposition]
+($\Rightarrow$) Extend by $[I_h:I_g]$. This satisfies Theorem~B, and $\Pi=I_g>0$ on $\mathcal X$ by complement (iv).
+
+($\Leftarrow$) Theorem B gives distortions, and complement (iv) gives $g>0$.
+
+\emph{Uniqueness.} Suppose two extensions $[I_h:I_g]$ and $[I_{h'}:I_{g'}]$ restrict to $LR_0\not\equiv1$. Then $h\neq g$ and $h'\ne g'$, and Theorem~C's uniqueness (item~5 of the Uniqueness Proposition) gives $(h,g)=(h',g')$.
+
+If $LR_0\equiv1$, then $[I_{\rm id}:I_{\rm id}]$ and $[I_{\sqrt t}:I_{\sqrt t}]$ both restrict to $1$. They differ on $L^\infty$: the $\star$ in the profile of $\mathbf 1_A$ sits at $-P(A)$ and at $-\sqrt{P(A)}$ respectively.
+\end{proof}
+
+\subsection{Uniqueness}
+
+\begin{proposition}[Uniqueness]
+\begin{enumerate}
+\item \emph{Theorems A and B.} Uniqueness is unconditional. For $P(A)=p$:
+  \begin{itemize}
+  \item $g(p)=-c^*$, where $c^*$ is the unique $c$ with $LR(\mathbf 1_A+c)\in\{\infty,\star\}$;
+  \item $h(p)=-c^{**}$, where $c^{**}$ is the unique $c$ with $LR(\mathbf 1_A+c)\in\{0,\star\}$.
+  \end{itemize}
+  This holds even when $h=g$. The exception in F3 is an artefact of discarding cash shifts.
+\item \emph{Theorem A$^0$.} $\nu_1(A)=\rho(\mathbf 1_A)$ and $\nu_2(A)=\Pi(\mathbf 1_A)$, read off as in item~1.
+\item \emph{Normalization.} The unit slopes in (M) fix the scale.
+  \begin{itemize}
+  \item $[I_{\lambda h}:I_{\lambda g}]=[I_h:I_g]$, but $\lambda h\notin\mathcal H_1$ for $\lambda\neq1$.
+  \item On $\mathcal X$ alone, $LR$ is invariant under $(\rho,\Pi)\mapsto(\psi\rho,\psi\Pi)$ for every positive functional $\psi$. So cash profiles are indispensable for uniqueness.
+  \end{itemize}
+\item \emph{Without $\star$.} Take values in $\mathbb{RP}^1$ with $[0:0]:=1$, on all of $L^\infty$. Then $LR=[I_h:I_g]$ determines $(h,g)$ iff $LR\not\equiv1$.
+  \begin{itemize}
+  \item Pick $q_0$ with $(h-g)(q_0)\neq0$.
+  \item For any $p$, take nested $B,D$ with $P(B)=p$ and $P(D)=q_0$. Then $I_{h-g}(\mathbf 1_B+\lambda\mathbf 1_D)=(h-g)(p)+\lambda(h-g)(q_0)$, which is nonzero for at least one $\lambda\in\{1,2\}$.
+  \item That position's profile has its zero at $-(h(p)+\lambda h(q_0))$ and its pole at $-(g(p)+\lambda g(q_0))$. The profile of $\mathbf 1_D$ gives $h(q_0)$ and $g(q_0)$.
+  \item This uses negative cash shifts, so it does not apply on $\mathcal X$; see item~5.
+  \end{itemize}
+\item \emph{On $\mathcal X$ (Theorems C and C$'$, and the Bridge).} Let $r(p)=LR_0(\mathbf 1_B)=h(p)/g(p)$ and $\varphi_B(t)=LR_0(1+t\mathbf 1_B)=(1+th(p))/(1+tg(p))$ for $t>0$.
+  \begin{itemize}
+  \item If $r(p)\neq1$: $g(p)=\dfrac{\varphi_B(t)-1}{t\,(r(p)-\varphi_B(t))}$ and $h=r\,g$. The denominator is nonzero, because $\varphi_B=r$ would force $r=1$.
+  \item If $r(p)=1$: $g(p)=\dfrac{h(q_0)-L\,g(q_0)}{L-1}$, where $L=LR_0(\mathbf 1_B+\mathbf 1_D)$ with $D$ nested and $r(q_0)\neq1$. Here $L\ne1$, since otherwise $h(q_0)=g(q_0)$.
+  \end{itemize}
+  Uniqueness also holds among signed pairs with $C_{g'}>0$ on $\mathcal X$:
+  \begin{itemize}
+  \item by the Half-line Lemma, $C_{h'}=\rho$ and $C_{g'}=\Pi$ off $N_0$;
+  \item $N_0$ is fixed by $LR_0$ and has dense complement, by the Sweep Lemma since $h\ne g$;
+  \item by continuity, $C_{h'}=\bar\rho$ and $C_{g'}=\bar\Pi$ on $\mathcal X$.
+  \end{itemize}
+  For the actuarial pair $h=\mathrm{id}$ one gets $g(p)=p/LR_0(\mathbf 1_B)$. In general $g(p)=h(p)/LR_0(\mathbf 1_B)$, which presupposes knowledge of $h$.
+\item \emph{The associated family.} Let $\{\rho'_\beta\}$ be unit-slope cash-additive with $\rho'_\beta(X)=0\iff LR(X)\in\{\beta,\star\}$. Then $\rho'_\beta=\rho_\beta$ on all of $L^\infty$, with no continuity needed.
+  \begin{itemize}
+  \item By cash additivity, $\rho'_\beta(X)$ is the unique $m$ with $LR(X-m)\in\{\beta,\star\}$.
+  \item For $X\notin N$ that $m$ is $\rho_\beta(X)$.
+  \item For $X\in N$ and $\beta\ne1$, $LR(X-m)\in\{\beta,\star\}$ only at $m=\rho(X)$, because the profile equals $1$ elsewhere. And $\rho_\beta(X)=\rho(X)$ on $N$.
+  \end{itemize}
+\item \emph{Kusuoka-type measures.} For concave nondecreasing $h\in\mathcal H_1$:
+  \[
+  C_h=\int_{[0,1]}ES_\alpha\,d\mu,\qquad ES_0:=\operatorname{ess\,sup},
+  \]
+  where $h(p)=\mu(\{0\})+\int_{(0,1]}\min(p/\alpha,1)\,\mu(d\alpha)$ for $p>0$ (F\"ollmer--Schied, Thm.~4.93 form).
+  \begin{itemize}
+  \item $\mu$ is unique: $\mu(\{0\})=h(0+)$ by dominated convergence.
+  \item $h'_+(p)=\int_{(p,1]}\alpha^{-1}\mu(d\alpha)$ determines $\alpha^{-1}\mu$, hence $\mu$, on $(0,1]$.
+  \end{itemize}
+  Kusuoka (2001, Thm.~7) and Jouini, Schachermayer and Touzi (2006, Thm.~2.3) state forms of this representation. The digest disagrees about whether the atom at $0$ is included, so we do not claim that either is exactly the case $h(0+)=0$.
+\end{enumerate}
+\end{proposition}
+
+\section{Necessity of the axioms}
+
+\emph{Format.} Each witness satisfies every other axiom and violates the conclusion. Axioms (M), (A0) and (A1) are definitional: the other axioms are phrased through the reading they supply. For these three, the claim is that they cannot be weakened to an explicitly stated weaker axiom.
+
+\begin{example}[(M) cannot be weakened to (M$^-$)]
+(M$^-$) requires that each profile have exactly one point in $\{0,\star\}$ and one in $\{\infty,\star\}$. $\rho$ and $\Pi$ are minus those points, and (C) is used in its additive form (C$^+$).
+
+Witness: $LR'=\psi\circ[I_h:I_g]$ with $\psi(t)=t^3$, $\psi(\infty)=\infty$, $\psi(\star)=\star$, and distortions $h\neq g$.
+\begin{itemize}
+\item It satisfies (M$^-$), (L), (C$^+$), (R$_m$) and (R$_s$), with reading $(I_h,I_g)$.
+\item A representation would make the profile M\"obius at some $X\notin N$, which exists because $h\ne g$. Equal zeros and poles would force $((\rho+c)/(\Pi+c))^2\equiv1$, which is impossible since $\rho\neq\Pi$.
+\item For $h=g$ the witness is representable, so $h\ne g$ is needed.
+\end{itemize}
+This is the ordinal indeterminacy of Chew, Dekel and Fishburn: betweenness alone gives only $\psi(\rho/\Pi)$.
+\end{example}
+
+\begin{example}[(M): unit slope cannot be weakened to (M$^\kappa$)]
+(M$^\kappa$) is $LR(X+c)=[\rho(X)+c:\Pi(X)+\kappa c]$, with $\Pi:=-\kappa\cdot\text{pole}$.
+
+Witness: fix $\kappa>0$, $\kappa\neq1$, and let $LR=[I_h:\kappa I_g]$ with distortions $h,g$.
+\begin{itemize}
+\item It satisfies (M$^\kappa$), (L), (C), (R$_m$) and (R$_s$).
+\item $LR(c)=1/\kappa\neq1$, whereas every $[I_{h'}:I_{g'}]$ equals $1$ at constants $c\ne0$.
+\end{itemize}
+For Theorem A alone any $\kappa\neq0$ works. For $\kappa<0$ the pole is decreasing, so (R$_m$) fails. For $\kappa=0$ there is no pole to read.
+\end{example}
+
+\begin{example}[(L)]
+Witness: $[E_Q:E]$, where $Z=dQ/dP$ is bounded, nonnegative and non-constant, with $E[Z]=1$, so that $Q$ is a probability. The normalization $E[Z]=1$ is needed for (M).
+\begin{itemize}
+\item It satisfies (M), (C), (R$_m$) and (R$_s$).
+\item A representation would make $E_Q=I_{h'}$, which is law-invariant. It is not, because $Q(A)\ne Q(A')$ for some $A,A'$ with $P(A)=P(A')$.
+\end{itemize}
+Without (L), the class is exactly that of Theorem A$^0$, which includes purely finitely additive integrals.
+\end{example}
+
+\begin{example}[(C)]
+Witness: $[\max(C_{\sqrt t},C_{\min(1,1.5t)}):E]$.
+\begin{itemize}
+\item It satisfies (M), because a maximum of cash-additive maps is cash-additive. It also satisfies (L), (R$_m$) and (R$_s$).
+\item Take $D\subset B$ with $P(B)=0.5$ and $P(D)=0.1$. Then $\rho(\mathbf 1_B+\mathbf 1_D)=\sqrt{.5}+\sqrt{.1}\approx1.023$, while $\rho(\mathbf 1_B)+\rho(\mathbf 1_D)=0.75+0.316=1.066$.
+\item So $\rho$ is not comonotone additive, and (C) fails by complement (v).
+\item By uniqueness of the reading, no other pair can represent this $LR$.
+\end{itemize}
+\end{example}
+
+\begin{example}[(R$_s$) in Theorem A]
+Witness: $h(t)=t\big(1+\tfrac12\sin(1/t)\big)/\big(1+\tfrac12\sin1\big)$ and $LR=[I_h:E]$.
+\begin{itemize}
+\item $h$ is continuous with $h(1)=1$. It is not of bounded variation, since $\int|h'|$ diverges at $0$.
+\item (M) and (L) are clear.
+\item (C) holds:
+  \begin{itemize}
+  \item $(*)$ gives additivity on comonotone discretizations;
+  \item $I_h$ is norm-continuous, because survival functions converge off a countable set and dominated convergence applies.
+  \end{itemize}
+\item Step~0 forces any representing $h'$ to equal $h$, which is not BV. So no representation exists, and (R$_s$) fails by Step~7.
+\end{itemize}
+A further witness shows that (M), (L) and (C) do not even force continuity. It needs a Hamel basis: $\rho=E+\varphi\circ I_k$ with $k(t)=t(1-t)$, so $k(1)=0$, and $\varphi$ additive but discontinuous.
+\end{example}
+
+\begin{example}[(R$_m$) in Theorem B]
+Witness: $[I_{t+\frac14\sin2\pi t}:E]$.
+\begin{itemize}
+\item It satisfies (M), (L), (C) and (R$_s$).
+\item $h(0.4)\approx0.547>h(0.6)\approx0.453$, so (R$_m$) fails.
+\item By uniqueness, no distortion pair represents it.
+\end{itemize}
+\end{example}
+
+\begin{remark}[Atomlessness]
+Atomlessness is needed to attain every $p\in[0,1]$. With atoms, $h$ and $g$ are identified only on the range of $P$.
+\end{remark}
+
+\begin{proposition}[Role of $\star$]
+Let $LR:L^\infty\to\mathbb{RP}^1$ with $[0:0]:=1$. Suppose there exist $\rho,\Pi:L^\infty\to\mathbb R$ such that:
+\begin{itemize}
+\item $LR(X+c)=[\rho(X)+c:\Pi(X)+c]$ for all $X$ and $c$;
+\item $\rho$ and $\Pi$ are law-invariant and comonotone additive;
+\item $\rho$ and $\Pi$ are uniformly continuous (resp.\ monotone).
+\end{itemize}
+Then $LR=[I_h:I_g]$ with $(h,g)\in\mathcal H_1^2$ (resp.\ with distortion functions), and conversely. The pair $(h,g)$ is unique iff $LR\not\equiv1$; in that case $(\rho,\Pi)=(I_h,I_g)$. So $\star$ is not necessary for the characterization. What $\star$ buys is:
+\begin{itemize}
+\item the reading of $(\rho,\Pi)$ is a function of $LR$, so the axioms become intrinsic;
+\item uniqueness is unconditional.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+\emph{Case 1: some $X_0$ has $\rho(X_0)\ne\Pi(X_0)$.}
+\begin{itemize}
+\item The profile of $X_0$ is a non-constant M\"obius map. So $X_0+c$ is again off the diagonal, and its zero and pole shift by $c$. In particular $\rho(X_0+1)=\rho(X_0)+1$.
+\item By comonotone additivity, $\rho(X_0+1)=\rho(X_0)+\rho(1)$. So $\rho(1)=1$, and likewise $\Pi(1)=1$.
+\item Comonotone additivity on constants gives $\rho(qc)=q\rho(c)$ for rational $q$. Continuity or monotonicity then gives $\rho(c)=c$. Hence $\rho(X+c)=\rho(X)+c$ for all $X$, and likewise for $\Pi$.
+\item $\rho$ and $\Pi$ now satisfy the hypotheses used in Steps 5--8, which give $\rho=I_h$ and $\Pi=I_g$. Hence $LR=[\rho:\Pi]=[I_h:I_g]$.
+\end{itemize}
+\emph{Case 2: $\rho=\Pi$ everywhere.} Then $LR\equiv1=[I_{\rm id}:I_{\rm id}]$.
+
+\emph{Converse.} Take $\rho=I_h$ and $\Pi=I_g$.
+
+\emph{Uniqueness.} Item~4 of the Uniqueness Proposition.
+\end{proof}
+
+This replaces an earlier claim that ``Steps 1 and 3--11 apply verbatim'' to the existential pair. That claim was false, because Step~1 relies on the Reading Lemma.
+
+\subsection{Theorem C}
+
+\begin{example}[(A0)]
+(A0) is definitional. It is what defines $\bar\rho$ and $\bar\Pi$, and it excludes $LR_0\equiv1=C_g/C_g$.
+\end{example}
+
+\begin{example}[(A1) cannot be weakened to (A1$^\psi$)]
+(A1$^\psi$) is $LR_0(X+c)=\psi((a_X+c)/(b_X+c))$ with $\psi(t)=t^3$, together with (A4) in additive form.
+
+Witness: $(C_h/C_g)^3$ with distortions $h\ne g$ and $g>0$ on $(0,1]$.
+\begin{itemize}
+\item Its $N_0$ equals that of $C_h/C_g$, so (A0) holds.
+\item A representation would give $((a+c)/(b+c))^3=(a'+c)/(b'+c)$ on $[0,\infty)$, hence identically. This is impossible: the left side has a third-order pole at $-b$, since $a\ne b$.
+\end{itemize}
+\end{example}
+
+\begin{example}[(A2)]
+Witness: $E_Q/E$. Here $N_0=\mathcal X\cap\{E[(Z-1)X]=0\}$ lies in a closed hyperplane, so (A0) holds.
+\end{example}
+
+\begin{example}[(A3)]
+Witness: $C_{t+\frac14\sin2\pi t}/E$.
+\begin{itemize}
+\item $\mathbf 1_A\le\mathbf 1_B$ with $P(A)=0.4$ and $P(B)=0.6$. Both lie off $N_0$, and $\rho(\mathbf 1_A)>\rho(\mathbf 1_B)$.
+\item (A0) holds by the Sweep Lemma.
+\item Uniqueness among signed pairs (item~5) excludes any distortion representation.
+\end{itemize}
+\end{example}
+
+\begin{example}[(A3$_s$) in Theorem C$'$]
+Witness: $C_h/E$ with the non-BV $h$ of the (R$_s$) witness. The Sweep Lemma applies to the continuous $k=h-\mathrm{id}$. The continuous extensions exist, namely $C_h$ and $E$.
+\end{example}
+
+\begin{example}[(A4a), pole additivity]
+Witness: $LR_0=E/\max(C_{\sqrt t},C_{\min(1,1.5t)})$.
+\begin{itemize}
+\item $\Pi:=\max(\dots)\ge C_{\sqrt t}>0$ on $\mathcal X$. Since $\sqrt t>t$ on $(0,1)$, $\Pi>E$ off constants. So $N_0$ is the set of positive constants and (A0) holds.
+\item (A1) holds with $a=E$ and $b=\Pi$. (A2), (A3) and (A5) also hold.
+\item (A4b) holds, because $\bar\Pi\,LR_0=E$ is additive.
+\item (A4a) fails, by the numbers in the (C) witness.
+\item A representation would give $C_{g'}=\bar\Pi$ by item~5. But $\bar\Pi$ is not comonotone additive.
+\end{itemize}
+\end{example}
+
+\begin{example}[(A4b)]
+Witness: $\max(C_{\sqrt t},C_{\min(1,1.5t)})/E$. $N_0$ is again the set of positive constants. (A4a) holds because $\bar\Pi=E$, and (A4b) fails. So the two clauses of (A4) are independent.
+\end{example}
+
+\begin{example}[(A5)]
+Take $g=(2t-1)^+$ and $h=g^2$. Set $LR_0:=C_h/C_g$ where $C_g>0$, and $LR_0:=1$ where $C_g=0$, that is, where $P(X>0)\le\frac12$.
+\begin{itemize}
+\item $C_h=0$ wherever $C_g=0$, so $N_0=\mathcal X\cap\{C_{h-g}=0\}$ and the Sweep Lemma gives (A0).
+\item (A1)--(A3) hold. (A4) holds because $\bar\Pi\,LR_0=C_h$ everywhere.
+\item For $P(B)\le\frac12$ and $C\supset B$ with $P(C)=\frac34$: $LR_0(\mathbf 1_B+n^{-1}\mathbf 1_C)=\tfrac12$, while $LR_0(\mathbf 1_B)=1$.
+\item Every $C_{h'}/C_{g'}$ with $g'>0$ on $(0,1]$ is continuous on $\mathcal X$, so no representation exists.
+\end{itemize}
+\end{example}
+
+\begin{remark}[What must not be used]
+\begin{itemize}
+\item Pointwise monotonicity of $LR$ cannot be used (F2).
+\item Level-set (break-even) closure combined with pole additivity cannot replace (C). Take $LR=[\max(I_h,I_g):I_g]$ with $h=t+0.1\sin2\pi t$. On $\{I_g>0\}$ it equals $\max(I_h/I_g,1)$.
+  \begin{itemize}
+  \item Its level sets are closed under comonotone sums.
+  \item The pole $I_g$ is additive.
+  \item But the zero $\max(I_h,I_g)$ is not comonotone additive, on pairs with $I_h>I_g$ on one summand and $I_h<I_g$ on the other.
+  \end{itemize}
+  Here $N=\{I_h\le I_g\}$ has nonempty interior, which is what defeats the level-closure route.
+\end{itemize}
+\end{remark}
+
+\section{Corollaries and special cases}
+
+\begin{corollary}[Consequences of Theorems A and B]
+\begin{enumerate}
+\item \emph{Scale invariance.} For $\lambda>0$: $LR(\lambda X)=LR(X)$, $\lambda D=D$ and $\lambda N=N$. This can fail for $\lambda<0$. Also $LR(c)=1$ for $c\ne0$ and $LR(0)=\star$. Assa's Proposition~1 is therefore a consequence of the axioms, not an assumption.
+\item \emph{Association.} For $\beta\neq1$, $\rho_\beta=I_{k_\beta}$ with $k_\beta=g+(h-g)/(1-\beta)\in\mathcal H_1$.
+  \begin{enumerate}
+  \item[(a)] $\rho_\beta(X)=0\iff LR(X)\in\{\beta,\star\}$. Hence $LR(X)=\beta\iff\rho_\beta(X)=0$ holds exactly off $\{\rho=\Pi=0\}$, in particular on $D$. It fails at $X=0$ and at every $X-\rho(X)$ with $X\in N$.
+  \item[(b)] For $X\notin N$: $LR(X-m)=\beta\iff m=\rho_\beta(X)$. At that point $\Pi(X)-m=(\Pi(X)-\rho(X))/(1-\beta)\neq0$.
+  \item[(c)] For $X\in N$: $LR(X-m)\in\{1,\star\}$ for every $m$.
+  \item[(d)] $\rho_\beta$ is $TV(k_\beta)$-Lipschitz. In Theorem B, $TV(k_\beta)\le(1+|\beta|)/|1-\beta|$.
+  \item[(e)] $\rho_\beta$ is monotone iff $k_\beta$ is nondecreasing. If $h\ne g$, then $h-g$ is non-constant with equal endpoints, so it is not monotone. Since $(1-\beta)k_\beta\to h-g$ uniformly as $\beta\to1$, $\rho_\beta$ is non-monotone for all $\beta$ in a punctured neighbourhood of $1$. This is F2 for the associated family.
+  \end{enumerate}
+\item \emph{Lipschitz bound.} On $\{|\Pi|\ge\delta,\ \|X\|\le M\}$, $LR$ is Lipschitz with constant $TV(h)/\delta+TV(h)\,TV(g)\,M/\delta^2$.
+\item \emph{Mediant.} For comonotone $X,Y$ with $\Pi(X),\Pi(Y)>0$, $LR(X+Y)$ is the $\Pi$-weighted mean of $LR(X)$ and $LR(Y)$. In particular it lies between them.
+\end{enumerate}
+\end{corollary}
+
+\begin{corollary}[Supplements: iff statements within the class]
+\begin{enumerate}
+\item[(a)] \emph{Endpoints.}
+  \begin{itemize}
+  \item $\rho$ is monotone iff $h$ is nondecreasing.
+  \item $\rho$ is convex iff $h$ is concave (Wang, Wei and Willmot 2020, Thm.~3).
+  \item $\rho$ is coherent iff $\rho=\int_{[0,1]}ES_\alpha\,d\mu$ with $\mu$ unique (Uniqueness Proposition, item~7).
+  \item The same statements hold for $\Pi$ and $g$.
+  \end{itemize}
+\item[(b)] \emph{Ordering.} $LR\le1$ on $\{\Pi>0\}$ iff $h\le g$.
+  \begin{itemize}
+  \item ($\Leftarrow$) $I_{g-h}\ge0$, because $g-h\ge0$ and $(g-h)(1)=0$.
+  \item ($\Rightarrow$) If $h(p)>g(p)$, then $LR(\mathbf 1_A+c)>1$ for large $c$.
+  \end{itemize}
+  If $g>0$ on $(0,1]$, then $LR$ is pointwise monotone on $\mathcal X$ iff $h=g$ (F2).
+\item[(c)] \emph{Cones.} Let $A_\beta:=\{\rho\le\beta\Pi\}=\{I_{h-\beta g}\le0\}$ for $\beta\ne1$.
+  \begin{itemize}
+  \item $A_\beta$ is convex iff $h-\beta g$ is concave. The cash slope of $I_{h-\beta g}$ is $1-\beta\ne0$, so all its sublevel sets are translates of $A_\beta$. Hence convexity of $A_\beta$ is quasi-convexity of $I_{h-\beta g}$, which is equivalent to concavity of $h-\beta g$ (Wang, Wei and Willmot 2020, Thm.~3; cf.\ Liu, Cai, Lemieux and Wang 2020, Prop.~2.7).
+  \item All $A_\beta$ with $\beta\in[0,\infty)\setminus\{1\}$ are convex iff $h$ is concave and $g$ is convex. Use $\beta=0$, and the limit $\beta\to\infty$ of $(h-\beta g)/\beta$.
+  \end{itemize}
+\item[(d)] \emph{Shape: sufficiency only.}
+  \begin{itemize}
+  \item If $g$ is convex and $h-g$ is concave, then $LR$ is quasi-convex on $D_+=\{\Pi>0\}$, and $LR\ge1$ there.
+    \begin{itemize}
+    \item $D_+$ is convex, because $I_g$ is concave.
+    \item A concave $h-g$ vanishing at $0$ and $1$ is nonnegative.
+    \item For $s\ge0$, the set $\{I_{h-g}-sI_g\le0\}$ is convex.
+    \end{itemize}
+  \item In Theorem B with $g>0$: if $h$ is convex and $g$ is concave, then $LR$ is quasi-concave on $\mathcal X$, and $LR\le1$ there, since $I_h-tI_g$ is concave for $t\ge0$.
+  \item In particular, the actuarial picture $\rho=E$ with $g$ concave gives a quasi-\emph{concave} loss ratio. This corrects F4.
+  \end{itemize}
+\item[(e)] \emph{Rigidity.} $\rho_\beta$ is convex for all $\beta\in[0,\infty)\setminus\{1\}$ iff $h=g$ and $g$ is concave. Letting $\beta\to1^-$ forces $h-g$ to be concave, and $\beta\to1^+$ forces it to be convex. So $h-g$ is affine with zero endpoints, i.e.\ $h=g$.
+\item[(f)] \emph{Continuity.} For $k\in\mathcal H$, $I_k$ is continuous along bounded a.s.-convergent sequences iff $k$ is continuous on $[0,1]$. For the converse, test monotone sequences of indicators on each side of a jump. Hence $h$ and $g$ are continuous iff $\rho$ and $\Pi$ have this continuity, and then so does $LR$ on $D$.
+\item[(g)] \emph{From Theorem A$^0$.} Within the non-law-invariant class, law invariance of $LR$ is equivalent to $\nu_i=k_i\circ P$. Ratios of purely finitely additive integrals $\int X\,d\mu_1/\int X\,d\mu_2$ are admissible.
+\end{enumerate}
+\end{corollary}
+
+\begin{example}[Special cases]
+\begin{enumerate}
+\item \emph{Wang--Young--Panjer pairs} on nonnegative losses: Theorem C.
+\item \emph{Coherent pairs} ($h,g$ concave): $\rho_\beta$ is a signed mixture of $ES_\alpha$, $\alpha\in[0,1]$.
+\item \emph{Actuarial ratio} $E/C_g$ ($h=\mathrm{id}$): $g(p)=p/LR(\mathbf 1_A)$.
+\item \emph{VaR-type pairs}:
+  \begin{itemize}
+  \item admissible in Theorem B;
+  \item $\rho_\beta$ is non-monotone near $\beta=1$;
+  \item a VaR-type premium $g=\mathbf 1_{(a,1]}$, $a\in(0,1)$, is excluded from Theorem C, since $g>0$ fails.
+  \end{itemize}
+\item \emph{Gini-type ratios}: $LR-1=I_{h-g}/I_g$, a location-invariant signed Choquet ``variability'' divided by a premium (cf.\ Bellini, Fadina, Wang and Wei 2022).
+\end{enumerate}
+\end{example}
+
+\section{Alternative routes considered by the panel}
+
+All ten proposals converged on the same architecture:
+\begin{itemize}
+\item the cash profile reveals the zero $\rho(X)$ and the pole $\Pi(X)$;
+\item comonotone additivity of the zero and the pole, together with a signed Choquet representation, gives $LR=C_h/C_g$;
+\item monotonicity is imposed only on the two endpoints $\rho_0=\rho$ and $\lim_{\beta\to\infty}\rho_\beta=\Pi$ of the associated pencil.
+\end{itemize}
+They differed in how they handled the fair set $N$, in the domain they used, and in the form of the additivity axiom. Judge~1 ranked the proposals $4,10,2,1,6,3,7,5,8,9$.
+
+\begin{itemize}
+\item \textbf{Fair-set device: $\star$ (Proposals 2, 3, 6).}
+  \begin{itemize}
+  \item These proposals give $LR$ values in $\widehat{\mathbb R}_\star$ and read the premium on $N$ as the unique $\star$-point. This is the device adopted here.
+  \item Proposal~3's Step~3 derives additivity \emph{through} $N$ from the weighted identity applied to shifted pairs. It is the Step~3 of this note.
+  \item Proposal~6 records, as its ``Lemma N'', that axioms restricted to $L^\infty\setminus N$ are insufficient without $\star$.
+  \end{itemize}
+\item \textbf{Domain as data (Proposals 4, 5).}
+  \begin{itemize}
+  \item The pair $(D,LR)$ is given, and $\Pi$ is read as the ``hole'' of each cash line. This is equivalent to the $\star$ device.
+  \item Proposal~4 was ranked first for correctness. It rests on Schmeidler with law invariance, with no continuity, and gives the rigidity statement Corollary (e).
+  \item Proposal~5 imposes break-even additivity at two levels $\beta\in\{0,\beta_1\}$ plus pole additivity. Judge~1 found that it does not derive additivity of $\rho$ through $N$.
+  \item Proposal~5's signed-kernel acceptability representation is recorded as a conditional remark only, since the signed core theorem was not verified. It states $V_\beta(X)=\max_{Z\in D_\beta}E[ZX]$ with $D_\beta=\mathrm{core}(h)-\beta\,\mathrm{anticore}(g)$ when $h-\beta g$ is concave.
+  \end{itemize}
+\item \textbf{Existential pair (Proposals 1, 10).}
+  \begin{itemize}
+  \item $LR$ takes values in $\mathbb{RP}^1$ with $[0:0]:=1$, and the axioms are stated for some pair $(\rho,\Pi)$.
+  \item On $N$ the axioms are therefore pair-level. Uniqueness is proved a posteriori, using the nested-layer device $\mathbf 1_B+\mathbf 1_D$, $\mathbf 1_B+2\mathbf 1_D$ of Proposal~10. This is item~4 of the Uniqueness Proposition.
+  \item The Proposition on the role of $\star$ shows that this existential route also yields a correct iff.
+  \end{itemize}
+\item \textbf{Actuarial domain with upward shifts (Proposals 1, 7).}
+  \begin{itemize}
+  \item Proposal~7 is the only fully $\mathcal X$-based proposal, and it became Theorem C.
+  \item Judge~1 noted that positivity of $g$ is forced by continuity at $\mathbf 1_B$, not by finiteness; this is C7(c).
+  \item Judge~1 also noted that the clean proof of (A0) is Proposal~8's upper-level-set perturbation; this is the Sweep Lemma.
+  \end{itemize}
+\item \textbf{$\beta$-capitals (Proposal 8).}
+  \begin{itemize}
+  \item The axioms are law invariance, comonotone additivity and uniform continuity of $m_{\beta_0}$ and $m_{\beta_1}$.
+  \item The density of comonotone triples off $N$ was asserted without proof. Empty interior of $N$ does not by itself make a \emph{specific} comonotone perturbation leave $N$.
+  \item Its elicitability dichotomy states: within distortion pairs, convex level sets, identifiability and elicitability are equivalent to $h=g$. This is supported by Wang and Wei (2020, Thm.~3.2 and Cor.~3.3) but was only sketched. It is withdrawn from this note.
+  \item Judge~1 reported a three-point counterexample refuting Proposal~3's contrary claim. That claim was that ratios of mixed quantiles at a common level have convex level sets.
+  \end{itemize}
+\item \textbf{Sincov--Cauchy mediant odds (Proposal 9).}
+  \begin{itemize}
+  \item This is the most intrinsic route on $\mathcal X$. The premium is revealed as the odds $\omega(X,1)$, and the axioms are Sincov and Cauchy equations.
+  \item As stated it is false. The counterexample is $g=\mathrm{id}$ with the non-BV continuous $h$ of the (R$_s$) witness.
+  \item It needs the extra axiom ``$\rho=LR\cdot\omega(\cdot,1)$ is uniformly continuous'', and was not completed.
+  \end{itemize}
+\item \textbf{Mediant inequality (Lemma M in Proposals 1, 6, 7).}
+  \begin{itemize}
+  \item Under (M), F1's mediant inequality implies additivity for comonotone pairs strictly on the same side of break-even.
+  \item Pairs straddling $1$, and pairs through $N$, are not covered; see open point~2.
+  \item The weighted identity (C) is globally valid. The inequality is false once a cash shift makes a premium negative.
+  \end{itemize}
+\item \textbf{Quasi-convexity claims.}
+  \begin{itemize}
+  \item Several proposals (2, 3, 6, 8) claimed per-$\beta$ or global iff statements on $\mathcal X$. Judge~1 refuted these: with $h=t$, $g=\sqrt t$, $\beta=2$, the set $\{LR\le2\}\cap\mathcal X=\mathcal X$ is convex, but $h-2g$ is not concave; with $h=g=t^2$ or $h=g=\sqrt t$, $LR\equiv1$ is trivially quasi-convex.
+  \item This note keeps only the $L^\infty$ cone statements in Corollary (c) and sufficiency in Corollary (d).
+  \end{itemize}
+\item \textbf{Kusuoka-supremum route.} Replacing comonotone additivity by convexity leads to suprema of concave signed Choquet integrals (Liu, Cai, Lemieux and Wang 2020). This yields no single pair and no iff with uniqueness; see open point~8.
+\end{itemize}
+
+\section{Verification status and open points}
+
+\paragraph{Status.} After two repair rounds, the final theorem received the verdicts CORRECT, CORRECT and GAP from the three referees. No referee found a counterexample to any iff statement. Referee~1 re-derived every step and tested boundary cases, including $LR\equiv1$ with $\Pi$ not comonotone additive. The $\star$ at $-\Pi(Z)$ blocks that attempt in Step~3. All necessity witnesses were spot-checked numerically by two referees.
+
+The residual ``GAP'' verdict and the referees' minor points concern side claims. They are corrected in this note as follows.
+\begin{enumerate}
+\item \emph{Role of $\star$.} The false claim that Steps 1 and 3--11 apply verbatim to an existential pair is replaced by the Proposition on the role of $\star$, with a complete proof.
+\item \emph{Association.} The equivalence $LR(X)=\beta\iff\rho_\beta(X)=0$ is stated to hold exactly off $\{\rho=\Pi=0\}$. That set's complement strictly contains $D$, which corrects the earlier phrase ``exactly on $D$, or equivalently''.
+\item \emph{Associated family.} Uniqueness item~6 now holds on all of $L^\infty$, without continuity or the Sweep Lemma, as Referee~3 suggested.
+\item \emph{Convention in Theorem C.} The convention that $\bar\rho$ and $\bar\Pi$ are the unique continuous extensions whenever they exist is stated explicitly.
+\item \emph{(L) witness.} The normalization $E[dQ/dP]=1$ is added.
+\item \emph{Attribution of Theorem A$^0$.}
+  \begin{itemize}
+  \item The game-level statement is Murofushi, Sugeno and Machida (1994, Thm.~4.2) and Cerreia-Vioglio et al.\ (2012, Thm.~13 and Cor.~18; 2015, Thm.~19).
+  \item Cerreia-Vioglio et al.\ (2015, Thm.~6) is a Riesz-space dual result.
+  \end{itemize}
+\item \emph{Kusuoka item.} Hedged as described in item~7 of the Uniqueness Proposition.
+\end{enumerate}
+These corrections postdate the last referee round and have not been re-refereed. Each is elementary, and a proof is given in the text.
+
+\paragraph{Open points.}
+\begin{enumerate}
+\item \emph{Pair-level content.}
+  \begin{itemize}
+  \item (R$_m$) and (A3) are monotonicity of the zero and the pole of the cash profiles. They are read from the values of $LR$, but they are not an order property of $LR$ itself.
+  \item Pointwise monotonicity of $LR$ is impossible (F2), and so is monotonicity of all $\rho_\beta$ near $\beta=1$.
+  \item Whether (R$_m$) is equivalent to a more natural order property of $LR$ is open.
+  \item (M) is strong: it is Assa's Proposition~1 read backwards.
+  \end{itemize}
+\item \emph{Mediant inequality versus (C).} It is open whether the comonotone mediant inequality can replace (C) when $h-g$ changes sign, and through $N$.
+\item \emph{Quasi-convexity.} Necessity of ``$g$ convex'' and of ``$h-g$ concave'' in Corollary (d) is open.
+\item \emph{(A4) off $N_0$.} It is open whether (A4), imposed only on comonotone triples with $X,Y,X+Y\notin N_0$, suffices. The (A4a) witness shows that pole additivity cannot be dropped altogether.
+\item \emph{Truncation continuity.} No Greco or Wang--Young--Panjer-type truncation-continuity version of the signed tier on the cone is known.
+\item \emph{Unbounded losses.} $L^p$ and Orlicz extensions, via Wang, Wang and Wei (2020, Thm.~1) with continuity at infinity, are not treated.
+\item \emph{Literature.}
+  \begin{itemize}
+  \item The following are quoted from memory or from the panel digest: Schmeidler, Wang--Young--Panjer, Kusuoka, the F\"ollmer--Schied numbering, Murofushi--Sugeno--Machida, Cerreia-Vioglio et al.\ (2015) numbering, and Sierpi\'nski.
+  \item All load-bearing steps are proved directly.
+  \item Web search was disabled, so the panel's finding that no published iff for the loss ratio exists is not exhaustive. Cheridito and Kromer (2013) and Fiori and Rosazza Gianin (2023) should be checked in full text for overlap.
+  \end{itemize}
+\item \emph{Kusuoka-supremum class.} The class obtained with convexity instead of comonotone additivity is not covered.
+\item \emph{Theorem A$^0$ on $B(\Omega,\mathcal F)$.} A version without null-invariance should follow as in Murofushi--Sugeno--Machida and Cerreia-Vioglio et al., but it is not written out.
+\item \emph{Choice.} The Hamel witness uses a Hamel basis. All other witnesses are constructive.
+\item \emph{Withdrawn claims, not reproved here.}
+  \begin{itemize}
+  \item The elicitability supplement (convex level sets iff $h=g$).
+  \item ``Lemma M'' (the mediant inequality implies additivity) as a global statement.
+  \item Necessity of ``$g$ convex'' in the quasi-convexity supplement.
+  \item The converse ``$LR$ continuous along a.s.\ convergence on $\mathcal X$ implies $h,g$ continuous''. This is doubtful, since jumps of $h$ and $g$ at $0$ can cancel in the ratio.
+  \end{itemize}
+\end{enumerate}
+
+\section*{References}
+
+\begin{itemize}
+\item Acerbi, C. (2002). Spectral measures of risk: a coherent representation of subjective risk aversion. \emph{Journal of Banking and Finance} 26(7), 1505--1518.
+\item Acz\'el, J. (1966). \emph{Lectures on Functional Equations and Their Applications}. Academic Press, New York.
+\item Assa, H. (2024). A note on loss ratio. Working paper.
+\item Bellini, F., Fadina, T., Wang, R., Wei, Y. (2022). Parametric measures of variability induced by risk measures. \emph{Insurance: Mathematics and Economics} 106, 270--284.
+\item Bellini, F., Rosazza Gianin, E. (2008). On Haezendonck risk measures. \emph{Journal of Banking and Finance} 32(6), 986--994.
+\item Biagini, S., Bion-Nadal, J. (2014). Dynamic quasi-concave performance measures. \emph{Journal of Mathematical Economics} 55, 143--153.
+\item Bielecki, T.R., Cialenco, I., Zhang, Z. (2014). Dynamic coherent acceptability indices and their applications to finance. \emph{Mathematical Finance} 24(3), 411--441.
+\item Cerreia-Vioglio, S., Maccheroni, F., Marinacci, M., Montrucchio, L. (2012). Signed integral representations of comonotonic additive functionals. \emph{Journal of Mathematical Analysis and Applications} 385, 895--912.
+\item Cerreia-Vioglio, S., Maccheroni, F., Marinacci, M., Montrucchio, L. (2015). Choquet integration on Riesz spaces and dual comonotonicity. \emph{Transactions of the American Mathematical Society} 367. (IGIER Working Paper 433, 2012.)
+\item Cheridito, P., Kromer, E. (2013). Reward-risk ratios. \emph{Journal of Investment Strategies} 3(1), 3--18.
+\item Cherny, A., Madan, D. (2009). New measures for performance evaluation. \emph{Review of Financial Studies} 22(7), 2571--2606.
+\item Chew, S.H. (1983). A generalization of the quasilinear mean with applications to the measurement of income inequality and decision theory resolving the Allais paradox. \emph{Econometrica} 51(4), 1065--1092.
+\item Dekel, E. (1986). An axiomatic characterization of preferences under uncertainty: weakening the independence axiom. \emph{Journal of Economic Theory} 40(2), 304--318.
+\item Denneberg, D. (1994). \emph{Non-Additive Measure and Integral}. Kluwer, Dordrecht.
+\item Drapeau, S., Kupper, M. (2013). Risk preferences and their robust representation. \emph{Mathematics of Operations Research} 38(1), 28--62.
+\item Fiori, A.M., Rosazza Gianin, E. (2023). Generalized PELVE and applications to risk measures. \emph{European Actuarial Journal} 13, 307--339.
+\item Fishburn, P.C. (1983). Transitive measurable utility. \emph{Journal of Economic Theory} 31(2), 293--317.
+\item F\"ollmer, H., Schied, A. (2016). \emph{Stochastic Finance: An Introduction in Discrete Time}, 4th ed. De Gruyter, Berlin.
+\item Gneiting, T. (2011). Making and evaluating point forecasts. \emph{Journal of the American Statistical Association} 106(494), 746--762.
+\item Greco, G.H. (1982). Sulla rappresentazione di funzionali mediante integrali. \emph{Rendiconti del Seminario Matematico della Universit\`a di Padova} 66, 21--42.
+\item Guo, N., Wang, R., Xia, C., Yang, J. (2025). Rating criteria, risk measures, and risk consistency. arXiv:2506.13435.
+\item Haezendonck, J., Goovaerts, M. (1982). A new premium calculation principle based on Orlicz norms. \emph{Insurance: Mathematics and Economics} 1, 41--53.
+\item Han, X., Lin, L., Wang, R. (2025). Diversification quotients: quantifying diversification via risk measures. \emph{Management Science} 71(9), 7990--8006.
+\item Jouini, E., Schachermayer, W., Touzi, N. (2006). Law invariant risk measures have the Fatou property. \emph{Advances in Mathematical Economics} 9, 49--71.
+\item Kusuoka, S. (2001). On law invariant coherent risk measures. \emph{Advances in Mathematical Economics} 3, 83--95.
+\item Li, H., Wang, R. (2023). PELVE: probability equivalent level of VaR and ES. \emph{Journal of Econometrics} 234(1), 353--370.
+\item Liu, F., Cai, J., Lemieux, C., Wang, R. (2020). Convex risk functionals: representation and applications. \emph{Insurance: Mathematics and Economics} 90, 66--79.
+\item Murofushi, T., Sugeno, M., Machida, M. (1994). Non-monotonic fuzzy measures and the Choquet integral. \emph{Fuzzy Sets and Systems} 64, 73--86.
+\item Santos, S.S., Moresco, M.R., Righi, M.B., Horta, E. (2024). A note on the induction of comonotonic additive risk measures from acceptance sets. \emph{Statistics and Probability Letters}; arXiv:2307.04647.
+\item Schmeidler, D. (1986). Integral representation without additivity. \emph{Proceedings of the American Mathematical Society} 97(2), 255--261.
+\item Shapiro, A. (2013). On Kusuoka representation of law invariant risk measures. \emph{Mathematics of Operations Research} 38(1), 142--152.
+\item Sierpi\'nski, W. (1922). Sur les fonctions d'ensemble additives et continues. \emph{Fundamenta Mathematicae} 3, 240--246.
+\item Steinwart, I., Pasin, C., Williamson, R.C., Zhang, S. (2014). Elicitation and identification of properties. \emph{JMLR Workshop and Conference Proceedings} 35 (COLT 2014), 482--526.
+\item Wang, Q., Wang, R., Wei, Y. (2020). Distortion riskmetrics on general spaces. \emph{ASTIN Bulletin} 50(3), 827--851.
+\item Wang, R., Wei, Y. (2020). Risk functionals with convex level sets. \emph{Mathematical Finance} 30(4), 1337--1367.
+\item Wang, R., Wei, Y., Willmot, G.E. (2020). Characterization, robustness and aggregation of signed Choquet integrals. \emph{Mathematics of Operations Research} 45(3), 993--1015.
+\item Wang, R., Ziegel, J.F. (2015). Elicitable distortion risk measures: a concise proof. \emph{Statistics and Probability Letters} 100, 172--175.
+\item Wang, S.S., Young, V.R., Panjer, H.H. (1997). Axiomatic characterization of insurance prices. \emph{Insurance: Mathematics and Economics} 21(2), 173--183.
+\item Yaari, M.E. (1987). The dual theory of choice under risk. \emph{Econometrica} 55(1), 95--115.
+\end{itemize}

@@ -1,0 +1,168 @@
+\subsection{Formal checking in Lean}\label{sec:collab-lean}
+
+\subsubsection*{Lean and what a formal check establishes}
+
+Lean~4 \citep{demoura2021} is an interactive proof assistant: a programming language in which definitions,
+statements and proofs are written in a formal language based on dependent type theory, and in which every proof is
+checked by a small trusted program, the kernel. A proof may be written step by step or with the help of tactics,
+procedures that search for parts of a proof automatically, but whatever a tactic produces is checked again by the
+kernel. Mathlib \citep{mathlib2020} is the community library of formalized mathematics for Lean; it supplies the
+real numbers, groups, limits and the other notions used below.
+
+Two features of Lean are used to state precisely what has been checked. A proof can be left unfinished by writing
+\texttt{sorry}, which Lean accepts with a warning; a finished development contains none. The command
+\texttt{\#print axioms} lists the foundational axioms on which a theorem depends; ordinary classical mathematics in
+Lean uses exactly three of them, \texttt{propext} (propositional extensionality), \texttt{Classical.choice} (the
+axiom of choice) and \texttt{Quot.sound} (soundness of quotients), and an unfinished proof shows up in this list as
+\texttt{sorryAx}.
+
+A successful check establishes that the formal statements follow from the formal definitions. It does not
+establish that the formal definitions and statements say what the paper says, which must be checked by a human
+reader, and it says nothing about results that enter as hypotheses or are not formalized.
+
+For this paper a formal check is useful for three reasons. First, the proofs were drafted with AI assistance, and
+the errors recorded in Table~\ref{tab:errors} show that such drafts can contain steps that read well and are wrong;
+the kernel does not depend on how a proof was produced. Second, the steps that are specific to loss ratios
+(Lemmas~\ref{lem:premium}--\ref{lem:LI}) are elementary but delicate, with case distinctions at $\Pi(X)=0$, at
+break-even books and at the price point, which is where informal checking is most likely to miss a case. Third,
+formalization forces the hypotheses to be stated exactly, and here it shows that those steps use only a few
+algebraic properties of comonotonicity and equality in law (see ``What was formalized'' below).
+
+\subsubsection*{What was formalized}\label{sec:lean-scope}
+
+The formalization works in an abstract setting. Positions form an additive commutative group $\Xp$ with an additive
+embedding $c\mapsto\mathrm{const}(c)$ of the sure losses, a relation ``comonotone'' under which every position is
+comonotone with every constant and which is preserved when both positions are shifted by constants, and a relation
+``equal in law'' preserved by a common cash shift. A loss ratio is a map from $\Xp$ to $\R\cup\{\mathtt{none}\}$,
+where \texttt{none} stands for a non-finite value, so that the labels $\infty$ and $\star$ are identified as in
+\axLI. The axioms read as follows; \texttt{prem} is the implied premium and \texttt{rhoD} is $\Pi\cdot\LR$.
+
+{\small
+\begin{verbatim}
+def AxP : Prop := ∀ x : X, ∃! c : ℝ, LR (x + S.const c) = none
+def AxN : Prop := ∀ c : ℝ, c ≠ 0 → LR (S.const c) = some 1
+def AxLI : Prop := ∀ x y : X, S.eqd x y → LR x = LR y
+def AxCM (hP : AxP S LR) : Prop :=
+  ∀ x y : X, S.comon x y → LR x ≠ none → LR y ≠ none →
+    prem hP x + prem hP y ≠ 0 →
+    LR (x + y) = some ((rhoD hP x + rhoD hP y) / (prem hP x + prem hP y))
+\end{verbatim}
+}
+
+These coincide with Axioms~\ref{ax:P}, \ref{ax:N}, \ref{ax:CM} and~\ref{ax:LI}. The file has about 500 lines with
+10 definitions and 26 lemmas and theorems. Table~\ref{tab:lean} lists the results of the paper that are formalized.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Result in the paper} & \textbf{Lean name}\\
+\midrule
+Implied premium, uniqueness and cash additivity (Lemma~\ref{lem:premium}) & \texttt{prem}, \texttt{prem\_shift}, \texttt{prem\_const}\\
+Implied risk measure and cash additivity (Lemma~\ref{lem:implied}) & \texttt{rho}, \texttt{rho\_cash}\\
+Möbius form and residue (Proposition~\ref{prop:readings}(a)--(c)) & \texttt{mobius}, \texttt{rho\_eq}, \texttt{residue}\\
+Comonotonic additivity, also on the break-even set (Lemma~\ref{lem:comon}) & \texttt{comon\_additive}\\
+Law invariance of the implied pair (Lemma~\ref{lem:LI}) & \texttt{LI\_transfer}\\
+Converse construction and uniqueness of the pair & \texttt{converse}, \texttt{unique\_pair}\\
+Association (Corollary~\ref{cor:assoc}(a)) & \texttt{association}\\
+Pooling at non-finite values (Corollary~\ref{cor:projpool}) & \texttt{pooling\_extended}\\
+Algebraic core of Proposition~\ref{prop:F2} & \texttt{no\_monotone\_core}\\
+Theorem~\ref{thm:A}, given the representation step & \texttt{main\_conditional}\\
+\bottomrule
+\end{tabular}
+\caption{Results formalized in Lean.}\label{tab:lean}
+\end{table}
+
+The theorem \texttt{main\_conditional} takes the representation step as a hypothesis: any cash-additive,
+comonotonic additive, law-invariant and regular functional is of the required form \citep[Thm.~1]{www2020}. From
+\axP, \axN, \axCM{} and \axLI{} it derives that the implied premium and the implied risk measure satisfy the
+hypotheses of that step and that $\LR=\bracket{\rho}{\Pi}$ everywhere. Not formalized are the representation step
+itself (Lemmas~\ref{lem:cashlip}--\ref{lem:rep}), which would require a theory of Choquet integrals that Mathlib does not
+provide, the fact that $L^\infty$ with comonotonicity and equality in law is an instance of
+the abstract setting, the layer formula, and the examples and counterexamples.
+
+\subsubsection*{How the check was carried out}
+
+The Lean file was written by the main assistant. Lean could not be installed in the assistant's cloud workspace,
+whose network policy blocks the servers that distribute Lean, so the file was compiled on the author's computer.
+The author installed Lean and created the project; the assistant read the build output from the project folder
+through the link between the Claude desktop application and the author's computer, wrote corrected versions of the
+file into the same folder, and the author ran the next build (Figure~\ref{fig:leanloop}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[node distance=6mm and 14mm,
+  box/.style={draw,rounded corners,align=center,font=\small,minimum height=10mm,text width=34mm},
+  >={Stealth[length=2mm]}]
+\node[box] (a) {Assistant writes or\\corrects \texttt{Basic.lean}};
+\node[box,right=of a] (b) {File written into the\\author's project folder};
+\node[box,below=of b] (c) {Author runs\\\texttt{lake build}};
+\node[box,left=of c] (d) {Assistant reads\\\texttt{build\_log.txt}};
+\draw[->] (a) -- (b);
+\draw[->] (b) -- (c);
+\draw[->] (c) -- (d);
+\draw[->] (d) -- node[left,font=\footnotesize,align=center]{errors}(a);
+\node[box,right=of c,text width=30mm] (e) {Build succeeds;\\axiom report};
+\draw[->] (c) -- (e);
+\end{tikzpicture}
+\caption{The build-and-repair loop used for the Lean check.}\label{fig:leanloop}
+\end{figure}
+
+Table~\ref{tab:leantime} gives the timeline. Times are in UTC and are taken from the session records and from the
+modification times of the files in the project folder.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{11.0cm}@{}}
+\toprule
+\textbf{Time (UTC)} & \textbf{Step}\\
+\midrule
+21 Oct, 21:38 & The assistant writes a first Lean file for the results in Table~\ref{tab:lean}; it cannot be compiled
+  in the cloud workspace.\\
+24 Oct, 17:08 & The author asks how a formal proof check can be used; the assistant describes what is feasible
+  (the loss-ratio steps), what is hard (the representation step) and how to install Lean.\\
+24 Oct, 17:26--17:31 & The author installs the Lean extension for the code editor and the Lean toolchain manager.\\
+24 Oct, 17:35--17:37 & The author creates the project \texttt{loss\_ratio\_lean} with Mathlib; Lean and Mathlib
+  version~4.36.0-rc1; the precompiled Mathlib files are downloaded.\\
+24 Oct, 17:38--17:39 & The assistant inspects the project configuration, confirms that it is complete, and places
+  the Lean file in it, replacing the template placeholder.\\
+25 Oct, 12:47--12:53 & First attempt to build: the command \texttt{lake} is not found, because the toolchain had not
+  been added to the terminal's search path; fixed by loading the toolchain environment.\\
+25 Oct, 12:55 & Build 1: four errors, none in a definition or statement. One proof stopped one algebraic step short;
+  in three proofs Lean's simplifier rewrote $\mathrm{const}(-c)$ as $-\mathrm{const}(c)$, so that cash additivity
+  no longer applied.\\
+25 Oct, 12:57 & The assistant writes a corrected file and appends \texttt{\#print axioms} for ten main theorems.\\
+25 Oct, 13:04 & Build 2: one error, in the converse construction, where the goal was displayed in an unexpanded
+  form. The axiom report shows the three standard axioms for nine theorems and \texttt{sorryAx} for the converse.\\
+25 Oct, 13:05 & The assistant adds one line that states the goal explicitly.\\
+25 Oct, 13:08 & Build 3 succeeds. All ten theorems depend only on the three standard axioms.\\
+25 Oct, 13:09 & The assistant compares the Lean definitions of \axP, \axN, \axCM{} and \axLI{} and the theorem
+  statements with Section~\ref{sec:axioms}.\\
+25 Oct, 13:37 & At the author's request, the project's own build output is deleted and the file is rebuilt from
+  scratch: success in 8.8\,s, with the same axiom report.\\
+\bottomrule
+\end{tabular}
+\caption{Timeline of the Lean check.}\label{tab:leantime}
+\end{table}
+
+\subsubsection*{Checks performed}
+
+The following checks were made to ensure that the outcome is what is reported.
+
+\begin{itemize}[nosep]
+\item \emph{No change to statements during repair.} The corrections after builds 1 and 2 changed proof steps only;
+  no definition and no theorem statement was altered.
+\item \emph{No unfinished proofs.} The final file contains no \texttt{sorry}, no \texttt{admit} and no added
+  \texttt{axiom}.
+\item \emph{Axiom report.} \texttt{\#print axioms} for each of the ten theorems in Table~\ref{tab:lean} lists only
+  \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+\item \emph{Clean rebuild.} The final build started from an empty build directory, so its result does not rely on
+  cached output.
+\item \emph{Identity of the file.} The file compiled in the final build was compared with the file reported here and
+  found identical.
+\item \emph{Fidelity of statements.} The formal axioms and theorem statements were compared with the paper by the
+  assistant; this comparison is to be repeated by the author before the code is released.
+\end{itemize}
+
+The remaining warnings concern style and the use of renamed library lemmas; they do not affect correctness. The Lean
+source and the build log are available from the author.

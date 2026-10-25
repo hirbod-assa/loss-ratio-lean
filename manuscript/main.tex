@@ -1,0 +1,132 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newunicodechar}
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}}
+\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{∃}{\ensuremath{\exists}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{→}{\ensuremath{\to}}
+\usepackage{mathptmx}
+\usepackage[expansion=false]{microtype}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds}
+\usepackage[authoryear,round]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+
+\setlist{itemsep=2pt,topsep=3pt,parsep=0pt}
+\setlength{\emergencystretch}{3em}
+\setlength{\parskip}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\bibliographystyle{plainnat}
+
+% ---------- theorem environments (one shared counter, numbered by section)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% ---------- purpose line printed above every formal statement
+\newcommand{\purpose}[1]{\par\smallskip\noindent{\small\upshape\leftskip=1.1em\rightskip=1.1em
+  \textsc{Purpose.}\ #1\par}\vspace{-1pt}}
+
+% ---------- notation
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathbb E}
+\newcommand{\LR}{\mathrm{LR}}
+\newcommand{\Rext}{\widehat{\mathbb R}_\star}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\ess}{\operatorname{ess\,sup}}
+\newcommand{\eqd}{\overset{d}{=}}
+\newcommand{\Hset}{\mathcal H}
+\newcommand{\Xp}{\mathcal X}
+\newcommand{\ax}[1]{\textup{(\textsf{#1})}}
+\newcommand{\axCP}{\ax{CP}}
+\newcommand{\axLI}{\ax{LI}}
+\newcommand{\axCM}{\ax{CM}}
+\newcommand{\axRC}{\ax{RC}}
+\newcommand{\axRM}{\ax{RM}}
+\newcommand{\bracket}[2]{[#1\!:\!#2]}
+
+\newtcolorbox{keybox}[1][]{colback=blue!4!white,colframe=blue!45!black,
+  boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,breakable,#1}
+
+\newcommand{\axP}{\ax{P}}
+\newcommand{\axN}{\ax{N}}
+
+\title{\textbf{An Axiomatic Characterization of the Loss Ratio}}
+\author{Hirbod Assa\thanks{Climate Parametric Risk Solutions and University College Dublin.
+  \emph{Draft of 25 October 2026.} The use of generative AI in this work is described in Section~\ref{sec:collab}
+  and in the declaration before the references. The proofs have undergone AI-assisted critical review, which is
+  fallible and does not constitute formal verification; the loss-ratio-specific steps have in addition been
+  checked in Lean in an abstract setting. See Section~\ref{sec:collab-status}.}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This paper has a twofold aim: to introduce and study in depth the loss ratio, a concept of central practical
+importance in actuarial science, and to provide a case study of how generative AI can support mathematical work in
+actuarial mathematics under close human supervision. The loss ratio $\LR(X)$ of an insurance book $X$ is
+the ratio of a loss measure $\rho(X)$ to a premium $\Pi(X)$, yet it has no axiomatic theory of its own. We show that
+both parts can be \emph{implied} by the loss ratio itself. Along the cash line $c\mapsto\LR(X+c)$, obtained by adding
+sure losses $c$ to the book, there is exactly one point where the ratio stops being finite; its location is the
+\emph{implied premium}, the sure payment at which the book changes hands. The \emph{implied risk measure}
+then follows from the accounting identity loss $=$ loss ratio $\times$ premium, and it is visible even where the
+ratio explodes, as the residue of the singularity. With this reading, four natural axioms on the loss ratio --
+a single non-finite point on each cash line, a loss ratio of one for sure losses, premium-weighted comonotone
+pooling, and law invariance -- together with continuity (respectively monotonicity) of the implied premium and risk
+measure characterize the loss ratios $\LR=I_h/I_g$, where $I_h,I_g$ are signed Choquet integrals with distortion
+functions $h,g$ (respectively distortion premia), with $(h,g)$
+unique. The unit-slope M\"obius form of the cash lines, comonotonic additivity of the implied premium, and
+the association with a family of risk measures are derived rather than assumed. We show that no non-trivial loss ratio is monotone, show by
+counterexamples that none of the axioms except the one defining the implied premium can be dropped, and state candidly which parts of the result are classical. The work used Claude (Anthropic) as a main
+assistant and to run panels of AI agents that surveyed the literature, proposed and ranked candidate statements,
+drafted proofs and counterexamples, and reviewed the proofs critically; ChatGPT and Gemini were used for an
+informal review of the proofs and for summaries of cited works. All decisions on content were the author's, and
+the AI output was treated as proposals: reviews found and corrected errors, and the steps specific to loss ratios
+were formalized and checked in the proof assistant Lean, with the classical representation step as a hypothesis.
+A final section reports this use, the errors found, the guardrails and the verification status.
+\end{abstract}
+
+\noindent\textbf{Keywords:} loss ratio; implied premium; implied risk measure; axiomatic characterization;
+distortion premium; signed Choquet integral; comonotonic additivity.
+
+\input{sec1_intro}
+\input{sec2_literature}
+\input{sec3_setting}
+\input{sec4_axioms}
+\input{sec5_results}
+\input{sec6_triviality}
+\input{sec7_proofs}
+\input{sec8_actuarial}
+\input{sec9_necessity}
+\input{sec10_consequences}
+\input{sec11_discussion}
+\input{sec12_collaboration}
+
+\appendix
+\input{app_proofs}
+
+\input{declaration}
+
+\bibliography{refs}
+\end{document}

@@ -1,0 +1,263 @@
+\section{Implied premium, implied risk measure and the axioms}\label{sec:axioms}
+
+In this section we define the premium and the risk measure implied by a loss ratio and state the axioms.
+Table~\ref{tab:axioms} at the end of the section summarizes them.
+
+\subsection{The implied premium}\label{sec:implied-premium}
+
+\begin{axiom}[\axP: one price point on each cash line]\label{ax:P}
+For every $X\in L^\infty$ there is exactly one $c\in\R$ at which $\LR(X+c)\notin\R$.
+\end{axiom}
+
+\begin{definition}[Implied premium]\label{def:impliedprem}
+Under \axP, the \emph{implied premium} of $X$ is $\Pi(X):=-c^*$, where $c^*$ is the unique point at which
+$\LR(X+c^*)$ is not finite. We call $c^*$ the \emph{price point} of $X$.
+\end{definition}
+
+Since the cash line of $X+c$ is the cash line of $X$ shifted by $c$,
+\begin{equation}\label{eq:Picash}
+ \Pi(X+c)=\Pi(X)+c\qquad\text{for all }X\in L^\infty,\ c\in\R ,
+\end{equation}
+and $X$ belongs to the finite domain $D=\{\LR\in\R\}$ if and only if $\Pi(X)\neq0$. Axiom \axP{} does not
+distinguish between the two non-finite values; they play the role of labels (Remark~\ref{rem:labels}).
+
+The definition formalizes the notion of a price. A premium is the sure amount at which a risk changes hands:
+once the insurer holds $X$ and has received $\Pi(X)$, the position $X-\Pi(X)$ commands no further premium,
+and on the cash line a zero premium is exactly a point where the loss ratio is not finite. In terms of the
+canonical family $\rho_\beta=(\rho-\beta\Pi)/(1-\beta)$, for books $X$ outside the break-even set,
+$\rho_\beta(X)$ is the sure offset $m$ at which $\LR(X-m)=\beta$ (Corollary~\ref{cor:assoc}(b)), and $\rho_\beta\to\Pi$ as $\beta\to\infty$; the implied premium is therefore the
+member of the associated family at level $\infty$, in the same way that \citet{chernymadan2009} recover a
+family of risk measures from an acceptability index $\alpha$ through $\rho_x(X)=\inf\{c:\alpha(X+c)\ge x\}$.
+The definition also agrees with ratemaking practice, in which the premium is obtained from a loss cost and
+a permissible loss ratio \citep{wernermodlin2016}. Finally, the price point measures the premium in units of
+cash, which removes the indeterminacy $(\rho,\Pi)\mapsto(\lambda\rho,\lambda\Pi)$ of the ratio. A shift
+$X+c$ with $c<0$ is the book transferred together with a sure payment $|c|$.
+
+Axiom \axP{} is ordinal: it is unchanged if $\LR$ is replaced by $\psi\circ\LR$ for any $\psi:\R\to\R$, the
+non-finite values being kept. It excludes ratios that are finite along a whole cash line, such as
+$\arctan(\rho/\Pi)$, and ratios with several singular points.
+
+\subsection{Axiom \axN: a sure loss is priced at cost}
+
+\begin{axiom}[\axN]\label{ax:N}
+$\LR(c)=1$ for every constant $c\neq0$.
+\end{axiom}
+
+A sure loss carries no risk, so its fair premium is its face value; this is the ``no unjustified loading''
+property of premium principles \citep{gerber1974}. Under \axP{}, axiom \axN{} implies $\Pi(c)=c$ for all $c$:
+the cash line of $0$ equals $1$ away from $0$, so $\Pi(0)=0$, and $\Pi(c)=c$ by \eqref{eq:Picash}. Premiums
+with a proportional loading, such as $(1+\theta)\E$, violate \axN.
+
+\subsection{Axiom \axCM: premium-weighted comonotone pooling}\label{sec:cm}
+
+\begin{axiom}[\axCM]\label{ax:CM}
+For comonotone $X,Y\in D$ with $\Pi(X)+\Pi(Y)\neq0$, where $\Pi$ is the implied premium,
+\[
+ \LR(X+Y)=\frac{\Pi(X)\,\LR(X)+\Pi(Y)\,\LR(Y)}{\Pi(X)+\Pi(Y)} .
+\]
+\end{axiom}
+
+Comonotone books do not hedge each other, and the loss ratio of the pooled book is total loss over total
+premium, that is, the premium-weighted mean of the two loss ratios. For books that are not comonotone,
+diversification will in general make the pooled premium smaller than the sum of the premiums; this is why
+\citet{yaari1987} and \citet{wyp1997} impose additivity only for comonotone risks.
+
+A constant is comonotone with every book. Taking $Y=c$ in \axCM{} and using \axN{} and $\Pi(c)=c$ gives, for
+$X\in D$, $c\ne0$ and $c\ne-\Pi(X)$,
+\begin{equation}\label{eq:pool}
+ \LR(X+c)=\frac{\Pi(X)\,\LR(X)+c}{\Pi(X)+c}.
+\end{equation}
+Proposition~\ref{prop:readings} below shows that this makes every cash line a unit-slope Möbius map.
+
+If both premiums are positive, \axCM{} implies the mediant inequality: $\LR(X+Y)$ lies between $\LR(X)$ and
+$\LR(Y)$. The inequality is a betweenness property, and, as in decision theory, where betweenness yields only
+implicit representations while weighted averages yield ratios of linear functionals
+\citep{chew1983,dekel1986}, it does not suffice for our purposes (Example~\ref{ex:cube}).
+
+Given \axP{} and \axN, \axCM{} holds if and only if the implied premium is comonotonic additive and
+$\Pi\cdot\LR$, restricted to $D$, extends to a comonotonic additive functional (Lemma~\ref{lem:comon}).
+
+\begin{remark}[A premium given from outside]\label{rem:primitive}
+Suppose that a premium functional $\Pi^\circ$ is given and \axCM{} is stated with $\Pi^\circ$ as weights. If
+$\LR(X)=a\ne b=\LR(Y)$ and $\LR(X+Y)=L$, then $\Pi^\circ(X)/\Pi^\circ(Y)=(b-L)/(L-a)$, so the weights are determined
+by the loss ratios. On books with $\LR=1$, however, the pooled ratio equals $1$ whatever the weights, and \axCM{}
+carries no information on $\Pi^\circ$. For instance, if $\LR\equiv1$ on $\{I_g\ne0\}$, then \axCM{} holds with the
+non-additive weights $\Pi^\circ=(I_g)^3$, since $a^3+b^3\ne0$ implies $a+b\ne0$. With the implied premium this
+difficulty does not arise, because \axP{} locates the price point also when the ratio equals $1$ elsewhere on
+the cash line.
+\end{remark}
+
+\subsection{The implied risk measure}\label{sec:implied-risk}
+
+\begin{definition}[Implied risk measure]\label{def:impliedrisk}
+Under \axP, put $\rho(X):=\Pi(X)\,\LR(X)$ for $X\in D$.
+\end{definition}
+
+\begin{proposition}\label{prop:readings}
+Assume \axP, \axN{} and \axCM. Then $\rho$ extends uniquely to a cash-additive functional on $L^\infty$, with
+$\rho(c)=c$, and for every $X\in L^\infty$:
+\begin{enumerate}[label=(\alph*),nosep]
+\item $\LR(X+c)=\dfrac{\rho(X)+c}{\Pi(X)+c}$ for every $c\neq-\Pi(X)$;
+\item $\rho(X)=(\Pi(X)+c)\,\LR(X+c)-c$ for every $c\neq-\Pi(X)$;
+\item $\rho(X)-\Pi(X)=\lim_{c\to-\Pi(X)}(c+\Pi(X))\,\LR(X+c)$; in particular $\rho(X)=\lim_{c\to0}c\,\LR(X+c)$
+  if $\Pi(X)=0$;
+\item if $\rho(X)\ne\Pi(X)$, then $-\rho(X)$ is the unique zero of the cash line of $X$; if $\rho(X)=\Pi(X)$, the
+  cash line equals $1$ away from the price point.
+\end{enumerate}
+\end{proposition}
+
+The proof is given in Section~\ref{sec:proofs}. By (c), the implied risk measure of a book with zero premium is
+the residue of its cash line at the price point: if a small premium $c$ is introduced, $\LR(X+c)\approx\rho(X)/c$.
+We call $N:=\{\rho=\Pi\}$ the \emph{break-even set}; $N\cap D=\{\LR=1\}$, and $N$ also contains the books with
+$\rho=\Pi=0$. On $N$ the residue vanishes and, by (d), the cash line has no zero, so that the risk measure cannot
+be read from the zero of the cash line; this is why it is defined through (b).
+
+\begin{example}[Three cash lines]\label{ex:three}
+Let $\rho=I_{\mathrm{id}}=\E$ and $\Pi=I_{\sqrt{\cdot}}$, and let $P(A)=\tfrac14$. Figure~\ref{fig:three} shows
+the cash lines of three books.
+\begin{enumerate}[label=(\roman*),nosep]
+\item $X=\1_A$: $\LR(X+c)=(\tfrac14+c)/(\tfrac12+c)$. The price point is $-\tfrac12$, so $\Pi(X)=\tfrac12$, and
+  $\rho(X)=\Pi(X)\LR(X)=\tfrac14$; the cash line vanishes at $-\tfrac14$.
+\item $Y=\1_A-\tfrac12$, a book with zero premium: $\LR(Y)=\infty$ and $\LR(Y+c)=(c-\tfrac14)/c$. The residue at
+  the price point $0$ is $-\tfrac14=\rho(Y)$.
+\item $Z\equiv\tfrac12$, a break-even book: $\LR(Z+c)=1$ for $c\ne-\tfrac12$, and $\LR(Z-\tfrac12)=\star$. The
+  price point gives $\Pi(Z)=\tfrac12$; the cash line has no zero, and $\rho(Z)=\Pi(Z)\cdot1=\tfrac12$.
+\end{enumerate}
+\end{example}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.8\textwidth,height=6.4cm,xmin=-1.2,xmax=1.2,ymin=-4,ymax=4,
+  axis lines=middle,xtick={-1,-0.5,0,0.5,1},xlabel={$c$},ylabel={$\LR(\cdot+c)$},
+  xlabel style={at={(axis cs:1.2,0)},anchor=west},ylabel style={at={(axis cs:0,4)},anchor=south},
+  samples=150,unbounded coords=jump,tick label style={font=\small},
+  legend style={font=\small,at={(0.98,0.03)},anchor=south east,cells={anchor=west}}]
+\addplot[thick,blue!70!black,domain=-1.2:-0.53] {(0.25+x)/(0.5+x)};
+\addlegendentry{(i) $X=\1_A$}
+\addplot[thick,red!70!black,dashed,domain=-1.2:-0.04] {(x-0.25)/x};
+\addlegendentry{(ii) $Y=\1_A-\frac12$}
+\addplot[thick,green!45!black,dotted,domain=-1.2:-0.52] {1};
+\addlegendentry{(iii) $Z\equiv\frac12$}
+\addplot[thick,blue!70!black,domain=-0.47:1.2,forget plot] {(0.25+x)/(0.5+x)};
+\addplot[thick,red!70!black,dashed,domain=0.04:1.2,forget plot] {(x-0.25)/x};
+\addplot[thick,green!45!black,dotted,domain=-0.48:1.2,forget plot] {1};
+\draw[gray!70] (axis cs:-0.5,-4) -- (axis cs:-0.5,4);
+\addplot[only marks,mark=*,mark size=1.8pt,blue!70!black,forget plot] coordinates {(-0.25,0)};
+\addplot[only marks,mark=*,mark size=1.8pt,red!70!black,forget plot] coordinates {(0.25,0)};
+\addplot[only marks,mark=o,mark size=2pt,green!45!black,forget plot] coordinates {(-0.5,1)};
+\end{axis}
+\end{tikzpicture}
+\caption{Cash lines of the three books of Example~\ref{ex:three}. Book (i) explodes at $c=-\frac12$ (its price
+point) and vanishes at $c=-\frac14$; book (ii) explodes at $c=0$ with residue $-\frac14$; book (iii) equals $1$
+except at its price point $c=-\frac12$, where the singularity is removable (open circle).}\label{fig:three}
+\end{figure}
+
+\begin{remark}[Labels at the price point]\label{rem:labels}
+To have $\LR=\bracket{\rho}{\Pi}$ also at price points, one may adopt the convention
+\begin{center}
+\ax{S}\quad at the price point, $\LR=\star$ if the residue in (c) is zero and $\LR=\infty$ otherwise.
+\end{center}
+Convention \ax{S} is not used in the proofs. If, instead, the loss ratio is real valued with $0/0:=1$, the price
+point of a break-even book cannot be observed and the implied premium is not defined there.
+\end{remark}
+
+\begin{remark}[A formulation by cash lines]\label{rem:oldCP}
+One may alternatively postulate (CP): every cash line is a unit-slope Möbius map,
+$\LR(X+c)=\bracket{\rho(X)+c}{\Pi(X)+c}$. Proposition~\ref{prop:readings}(a) shows that (CP) follows from \axP,
+\axN{} and \axCM, the labels agreeing under \ax{S}. Conversely, (CP) implies \axP{} and \ax{S}, and (CP) together
+with \axCM{} implies \axN: if $\pi_0:=\Pi(0)\ne0$, \axCM{} applied to the constants $a=b=-\pi_0/2$ forces
+$\LR(-\pi_0)\in\R$, although $-\pi_0$ is the price point of $0$; hence $\pi_0=0$, and \axCM{} with $X=Y=a\ne0$ gives
+$(\rho(0)+2a)/(2a)=(\rho(0)+a)/a$, i.e.\ $\rho(0)=0$ and $\LR(c)=1$. Thus \axP+\axN+\axCM+\ax{S} is equivalent to
+(CP)+\axCM.
+\end{remark}
+
+\subsection{Axiom \axLI: law invariance}\label{sec:li}
+
+\begin{axiom}[\axLI]\label{ax:LI}
+If $X\eqd Y$, then either $\LR(X)=\LR(Y)$ or both values are non-finite.
+\end{axiom}
+
+This is the standard assumption of premium and risk-measure theory \citep{wyp1997,kusuoka2001}. Because the
+implied premium and risk measure are computed from cash lines, \axLI{} passes to them (Lemma~\ref{lem:LI}).
+Ratios that weight scenarios non-uniformly, such as $\E_Q/\E$ with $Q\neq P$, violate \axLI; they are covered by
+Theorem~\ref{thm:A0}.
+
+\subsection{Axioms \axRC{} and \axRM: regularity of the implied pair}\label{sec:reg}
+
+Under \axP, write $\rho_D:=\Pi\cdot\LR$ on $D$. The regularity axioms are stated for $\Pi$ and $\rho_D$, so that
+they make sense independently of the other axioms.
+
+\begin{axiom}[\axRC]\label{ax:RC}
+$\Pi$ is uniformly continuous on $(L^\infty,\|\cdot\|_\infty)$ and $\rho_D$ is uniformly continuous on $D$.
+\end{axiom}
+
+\begin{axiom}[\axRM]\label{ax:RM}
+If $X\le Y$ almost surely, then $\Pi(X)\le\Pi(Y)$, and $\rho_D(X)\le\rho_D(Y)$ if $X,Y\in D$.
+\end{axiom}
+
+Under \axN{} and \axCM{} these axioms are equivalent to the corresponding properties of the implied risk
+measure on $L^\infty$, and \axRM{} implies \axRC{} (Lemma~\ref{lem:cashlip}). We include the signed tier
+(\axRC) because the canonical family $\rho_\beta$ is a difference of monotone functionals and is in general not
+monotone (Corollary~\ref{cor:assoc} and Example~\ref{ex:family}). Monotonicity is imposed on the implied pair and
+not on the ratio, for the following reason.
+
+\begin{proposition}[No monotone loss ratio]\label{prop:F2}
+Let $h,g\in\Hset_1$ with $g>0$ on $(0,1]$, and let $\LR=I_h/I_g$ on $\Xp:=L^\infty_+\setminus\{0\}$.
+If $\LR$ is monotone on $\Xp$ (non-decreasing or non-increasing for the almost sure order),
+then $h=g$ and $\LR\equiv1$.
+\end{proposition}
+
+\begin{proof}
+Let $P(A)=p>0$. For $c\ge0$, $\LR(\1_A+c)=\frac{h(p)+c}{g(p)+c}$ is monotone in $c$ with derivative at
+$0$ of the sign of $g(p)-h(p)$. Next let $P(E)=q>0$ and $t\ge0$. Then $X_t=1+t\1_E\in\Xp$ is
+increasing in $t$, and $I_k(X_t)=1+t\,k(q)$ for $k\in\{h,g\}$, so
+$\LR(X_t)=\frac{1+t\,h(q)}{1+t\,g(q)}$ has derivative at $t=0$ of the sign of $h(q)-g(q)$. If $\LR$
+is non-decreasing both signs are non-negative, hence $h=g$ on $(0,1]$; if $\LR$ is non-increasing both are
+non-positive, and again $h=g$. \qedhere
+\end{proof}
+
+\begin{example}\label{ex:F2}
+Let $h=\mathrm{id}$, $g=\sqrt{\cdot}$ and $p=q=\tfrac14$ in the proof. Both families of books in
+Figure~\ref{fig:F2} increase in the almost sure order, but the loss ratio increases along the first and
+decreases along the second: adding a sure loss to an over-priced book moves the ratio towards $1$ from below,
+whereas adding risk to a sure loss moves it away from $1$.
+\end{example}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.7\textwidth,height=5.4cm,xmin=0,xmax=8,ymin=0.4,ymax=1.05,
+  xlabel={$s$},ylabel={loss ratio},tick label style={font=\small},samples=100,domain=0:8,
+  legend style={font=\small,at={(0.98,0.5)},anchor=east,cells={anchor=west}}]
+\addplot[thick,blue!70!black] {(0.25+x)/(0.5+x)};
+\addlegendentry{$\LR(\1_A+s)$}
+\addplot[thick,red!70!black,dashed] {(1+0.25*x)/(1+0.5*x)};
+\addlegendentry{$\LR(1+s\1_E)$}
+\addplot[gray,dotted,domain=0:8] {1};
+\end{axis}
+\end{tikzpicture}
+\caption{Example~\ref{ex:F2}: $h=\mathrm{id}$, $g=\sqrt{\cdot}$, $P(A)=P(E)=\frac14$. Both families of books
+increase with $s$; the loss ratio increases along one and decreases along the other.}\label{fig:F2}
+\end{figure}
+
+Consequently, the theorems on acceptability indices \citep{chernymadan2009}, which require monotonicity of the
+index, do not apply to loss ratios.
+
+\subsection{Summary}
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Axiom} & \textbf{Statement} & \textbf{Interpretation and counterpart}\\
+\midrule
+\axP & one price point on each cash line & defines the premium; the level $\beta=\infty$ of the associated family\\
+\axN & $\LR(c)=1$ for $c\ne0$ & no unjustified loading \citep{gerber1974}\\
+\axCM & premium-weighted comonotone pooling & comonotonic additivity \citep{yaari1987,wyp1997}\\
+\axLI & law invariance & standard \citep{wyp1997,kusuoka2001}\\
+\axRC/\axRM & regularity of the implied pair & continuity / monotonicity of premia\\
+\bottomrule
+\end{tabularx}
+\caption{The axioms.}\label{tab:axioms}
+\end{table}

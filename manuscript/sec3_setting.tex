@@ -1,0 +1,59 @@
+\section{The extended loss ratio}\label{sec:setting}
+
+\subsection{Values and cash lines}
+
+Throughout, $(\Omega,\mathcal F,P)$ is an atomless probability space and $L^\infty$ is the space of essentially
+bounded random variables modulo null sets, with the norm $\|\cdot\|_\infty$. Elements of $L^\infty$ represent losses,
+so positive values are losses and negative values are gains.
+
+Let $\widehat{\R}_\star:=\R\cup\{\infty\}\cup\{\star\}$. For reals $r,s$ put
+\[
+ \bracket rs:=\begin{cases} r/s & s\neq0,\\ \infty & s=0\neq r,\\ \star & r=s=0.\end{cases}
+\]
+The symbol $\infty$ records ``non-zero loss, zero premium'' and $\star$ records the indeterminate $0/0$. Only
+the distinction between finite and non-finite values matters for the theory; the two labels are a
+convenience (Remark~\ref{rem:labels}).
+
+\begin{definition}[Extended loss ratio, cash line, finite domain]\label{def:LR}
+An \emph{extended loss ratio} is a map $\LR:L^\infty\to\widehat{\R}_\star$. Its \emph{cash line} at
+$X$ is $\phi_X(c):=\LR(X+c)$ for $c\in\R$. Its \emph{finite domain} is $D:=\{X:\LR(X)\in\R\}$.
+\end{definition}
+
+Evaluating $\LR$ at cash-shifted positions $X+c$, including negative $c$, is required by
+the associated family, since $\rho_\beta$ is defined through $\LR(X-m)=\beta$. Allowing $c<0$ is therefore part
+of the framework rather than an additional assumption.
+Section~\ref{sec:actuarial} treats the actuarial case of nonnegative losses where only $c\ge0$ is
+available.
+
+For instance, if $X=\1_A$ with $P(A)=p$, the ratio of the expected loss to the premium
+$\int_0^\infty\sqrt{P(X>x)}\,dx$ has cash line $c\mapsto(p+c)/(\sqrt p+c)$; Example~\ref{ex:three} and
+Figure~\ref{fig:three} discuss this case.
+
+\subsection{Choquet integrals and distortions}
+
+
+For a bounded Borel function $k:[0,1]\to\R$ with $k(0)=0$ define the \emph{(signed) Choquet integral}
+of a loss $X\in L^\infty$ by
+\[
+ I_k(X):=\int_0^\infty k\big(P(X>x)\big)\,dx+\int_{-\infty}^0\Big[k\big(P(X>x)\big)-k(1)\Big]\,dx .
+\]
+Write $\TV(k)$ for the total variation of $k$ and let
+\[
+ \Hset:=\{k:\ \TV(k)<\infty,\ k(0)=0\},\qquad \Hset_1:=\{k\in\Hset:\ k(1)=1\}.
+\]
+A \emph{distortion function} is a non-decreasing element of $\Hset_1$; jumps are allowed, so
+value-at-risk-type distortions are included. On nonnegative losses we write $C_k:=I_k$. Three facts
+are used throughout.
+
+\begin{itemize}
+\item $I_k(X+c)=I_k(X)+c\,k(1)$ (cash slope $k(1)$), and $I_k$ is law invariant.
+\item For $k\in\Hset$, $I_k$ is the signed Choquet integral of \citet[Def.~1]{www2020}, and it is
+  Lipschitz with constant $\TV(k)$ \citep{www2020}.
+\item $I_k$ is monotone if and only if $k$ is non-decreasing \citep{www2020}, and $I_k$ is convex if and
+  only if $k$ is concave \citep[Thm.~3]{www2020}.
+\end{itemize}
+
+Two random variables $X,Y$ are \emph{comonotone} if
+$(X(\omega)-X(\omega'))(Y(\omega)-Y(\omega'))\ge0$ for $P\otimes P$-almost every $(\omega,\omega')$.
+Constants are comonotone with everything. A functional $F$ is \emph{comonotonic additive} if
+$F(X+Y)=F(X)+F(Y)$ whenever $X,Y$ are comonotone. Every $I_k$ with $k\in\Hset$ is comonotonic additive (proof in Section~\ref{sec:proofs}).

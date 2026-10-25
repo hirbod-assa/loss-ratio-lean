@@ -1,0 +1,80 @@
+\section{Introduction}\label{sec:intro}
+
+The loss ratio, claims divided by premium, is among the most widely used quantities in insurance
+underwriting, portfolio management and reinsurance pricing. Ex post it is incurred claims over earned
+premium; ex ante it is the ratio of a loss measure $\rho(X)$, such as an expected or a risk-adjusted loss, to a
+premium $\Pi(X)$ of the same position $X$. When the premium is a non-linear functional of the loss, or the
+numerator is a risk measure, it is not clear which functionals of a loss should be called a loss ratio, or
+which properties a loss ratio should have when books are pooled.
+
+We work with the \emph{extended loss ratio} $\LR=\rho/\Pi$, which allows negative values and zero premiums,
+defined abstractly by \emph{association}: a family of risk measures $\{\rho_\beta\}$ is
+associated with $\LR$ if $\LR(X)=\beta\iff\rho_\beta(X)=0$; the canonical family is
+$\rho_\beta=(\rho-\beta\Pi)/(1-\beta)$, $\beta\ne1$. The present paper characterizes, by axioms stated on $\LR$
+alone, the loss ratios that are ratios of two Choquet-type functionals.
+
+Three features distinguish the problem from the classical characterizations of premium principles and risk
+measures \citep{yaari1987,wyp1997,schmeidler1986,www2020}. First, the object is a ratio, while those results
+concern a single functional. Second, the ratio does not determine its numerator and denominator: on positive
+losses, $(\rho,\Pi)$ and $(\psi\rho,\psi\Pi)$ give the same ratio for every positive functional $\psi$. Third, the
+ratio is not monotone: we show that a loss ratio of two distortion functionals is monotone only if it is
+identically $1$ (Proposition~\ref{prop:F2}), so the theory of acceptability indices, which rests on monotonicity
+\citep{chernymadan2009}, does not apply.
+
+Our approach is to recover the premium and the risk measure from the loss ratio. For a book $X$, consider the
+\emph{cash line} $c\mapsto\LR(X+c)$. A premium is the sure amount at which a risk changes hands; on the cash line,
+a zero premium is a point at which the loss ratio is not finite. We define the \emph{implied premium} $\Pi(X)$ as
+minus the unique such point, and the \emph{implied risk measure} by the accounting identity
+$\rho(X)=\Pi(X)\LR(X)$, extended by cash shifts to books with zero premium. At such books the implied risk
+measure is the residue of the cash line at its singularity (Proposition~\ref{prop:readings}). For a Bernoulli loss
+$\1_A$ with $P(A)=\tfrac14$, the expected loss and the square-root distortion premium, the cash line is
+$(\tfrac14+c)/(\tfrac12+c)$; it is singular at $c=-\tfrac12$, so $\Pi(\1_A)=\tfrac12$ and
+$\rho(\1_A)=\tfrac12\LR(\1_A)=\tfrac14$ (Figure~\ref{fig:three}).
+
+With this reading, Theorems~\ref{thm:A} and~\ref{thm:B} state the following. A map $\LR$ from bounded losses to
+$\R\cup\{\infty,\star\}$ is of the form $I_h/I_g$, with $I_h,I_g$ signed Choquet integrals of distortions $h,g$
+of bounded variation, if and only if it satisfies the following axioms, stated in Section~\ref{sec:axioms}:
+\axP{} every cash line has exactly one point where $\LR$ is not finite; \axN{} $\LR(c)=1$ for sure losses
+$c\ne0$; \axCM{} pooling comonotone books yields the premium-weighted mean of their loss ratios; \axLI{} $\LR$ is
+law invariant; and \axRC{} the implied premium and risk measure are uniformly continuous. If \axRC{} is replaced
+by \axRM, monotonicity of the implied premium and risk measure, $h$ and $g$ are distortion functions and no continuity
+assumption is needed. In both cases $(h,g)$ is unique, $\Pi=I_g$ and $\rho=I_h$. The unit-slope Möbius form of the
+cash lines, the normalization $\Pi(c)=c$, comonotonic additivity of the implied premium, scale invariance and
+the association are consequences of the axioms.
+
+Given \axP{} and \axN, axiom \axCM{} is equivalent to comonotonic additivity of the implied premium and risk measure,
+the axiom of \citet{yaari1987} and \citet{wyp1997}; once this equivalence is established, the representation step
+follows from the theory of comonotonic additive functionals \citep{schmeidler1986,msm1994,cmmm2012,www2020}. The
+contributions specific to loss ratios are: the construction of the implied premium and risk measure; the proof
+that the pooling identity yields additivity of the implied pair on all comonotone pairs, including books that
+break even, on which a premium given exogenously would not be identified (Lemma~\ref{lem:comon} and
+Remark~\ref{rem:primitive}); unconditional uniqueness of $(h,g)$; the impossibility of a monotone loss ratio and
+its consequences for the associated family (Corollary~\ref{cor:assoc}); a version for nonnegative losses
+(Theorem~\ref{thm:C}); and counterexamples showing that none of the axioms
+\axN, \axCM, \axLI, \axRC, \axRM{} can be dropped.
+
+The paper has a second aim: it is a brief case study of the use of AI in mathematical research in actuarial
+science. The work was done with Claude (Anthropic), used as a main assistant and to coordinate panels of AI
+agents on designated parts of the project: a roundtable of six agents and a larger panel covering ten literature
+strands surveyed the literature, proposed candidate statements, ranked them by judge agents, drafted proofs and
+submitted them to repeated AI-assisted critical review; the main assistant constructed examples and
+counterexamples and drafted and revised the manuscript. ChatGPT (OpenAI) was used for an informal review of the
+proofs, and Gemini (Google) for summaries of key cited works. The research questions and all decisions on content
+were the author's, and the formulation through the implied premium and the implied risk measure arose from the
+author's objections to earlier AI-drafted versions, in particular that an assumed cash-line axiom supplied $\rho$
+and $\Pi$ by fiat. The AI-generated material was treated as proposals: the reviews found errors, including a
+wrong sufficient condition for quasi-convexity and an incorrect uniqueness claim, which were corrected (Table~\ref{tab:errors}); the
+numbers in the examples were recomputed; the statements taken from three of the main sources were checked against
+those papers; and the steps specific to loss ratios were formalized in the proof assistant Lean and checked by its
+kernel, with the classical representation step taken as a hypothesis. Section~\ref{sec:collab} describes this
+process, the errors and guardrails, and what has not been verified, and illustrates a standard for reporting such
+use in a mathematical paper.
+
+The paper is organized as follows. Section~\ref{sec:lit} reviews the related literature, and
+Section~\ref{sec:setting} introduces the extended loss ratio. Section~\ref{sec:axioms} defines the implied premium
+and risk measure and states the axioms. Section~\ref{sec:results} contains the main theorems and examples, and
+Section~\ref{sec:triviality} discusses the role of the axioms. Proofs are in Section~\ref{sec:proofs}.
+Section~\ref{sec:actuarial} treats nonnegative losses, Section~\ref{sec:necessity} gives the counterexamples, and
+Section~\ref{sec:consequences} derives consequences. Section~\ref{sec:discussion} lists open problems, and
+Section~\ref{sec:collab} describes the use of AI, including the formal check in Lean
+(Section~\ref{sec:collab-lean}).

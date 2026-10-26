@@ -48,28 +48,51 @@ property of premium principles \citep{gerber1974}. Under \axP{}, axiom \axN{} im
 the cash line of $0$ equals $1$ away from $0$, so $\Pi(0)=0$, and $\Pi(c)=c$ by \eqref{eq:Picash}. Premiums
 with a proportional loading, such as $(1+\theta)\E$, violate \axN.
 
-\subsection{Axiom \axCM: premium-weighted comonotone pooling}\label{sec:cm}
+\subsection{Axiom \axCM: comonotone pooling at relative cost}\label{sec:cm}
+
+For $X,Y\in D$ with $\Pi(X)+\Pi(Y)\ne0$, where $\Pi$ is the implied premium, call
+\[
+ w_{X,Y}:=\frac{\Pi(X)}{\Pi(X)+\Pi(Y)},\qquad 1-w_{X,Y}=\frac{\Pi(Y)}{\Pi(X)+\Pi(Y)},
+\]
+the \emph{relative cost} of $X$ and of $Y$, respectively: the premium of each book as a fraction of the premiums of
+the two books together.
 
 \begin{axiom}[\axCM]\label{ax:CM}
-For comonotone $X,Y\in D$ with $\Pi(X)+\Pi(Y)\neq0$, where $\Pi$ is the implied premium,
+For comonotone $X,Y\in D$ with $\Pi(X)+\Pi(Y)\neq0$,
 \[
- \LR(X+Y)=\frac{\Pi(X)\,\LR(X)+\Pi(Y)\,\LR(Y)}{\Pi(X)+\Pi(Y)} .
+ \LR(X+Y)=w_{X,Y}\,\LR(X)+\bigl(1-w_{X,Y}\bigr)\LR(Y)
+ =\frac{\Pi(X)\,\LR(X)+\Pi(Y)\,\LR(Y)}{\Pi(X)+\Pi(Y)} .
 \]
 \end{axiom}
 
-Comonotone books do not hedge each other, and the loss ratio of the pooled book is total loss over total
-premium, that is, the premium-weighted mean of the two loss ratios. For books that are not comonotone,
-diversification will in general make the pooled premium smaller than the sum of the premiums; this is why
-\citet{yaari1987} and \citet{wyp1997} impose additivity only for comonotone risks.
+Comonotone books do not hedge each other, so the cost of the pooled book should be the sum of the costs of its
+parts, and then $w_{X,Y}$ is the share of $X$ in the cost of the pool. This is a consequence of the axioms and not
+part of \axCM: it is the comonotonic additivity $\Pi(X+Y)=\Pi(X)+\Pi(Y)$ of Lemma~\ref{lem:comon}. Axiom \axCM{} then
+says that the loss ratio of a comonotone pool is allocated to its constituents according to relative cost: the pooled
+loss ratio is the combination of the two loss ratios whose weights are their relative costs. Since
+$\rho=\Pi\cdot\LR$, this is the accounting statement that the loss of the pool is the sum of the losses of the
+parts and the premium of the pool is the sum of their premiums, so that the loss ratio of the pool is total loss over
+total premium. For books that are not comonotone, diversification will in general make the pooled premium smaller than
+the sum of the premiums; this is why \citet{yaari1987} and \citet{wyp1997} impose additivity only for comonotone risks.
+
+The weights always add up to one. They lie in $[0,1]$, and the combination is convex, exactly when $\Pi(X)$ and
+$\Pi(Y)$ have the same sign, in particular when both premiums are positive, which is the case of practical interest.
+Premiums of opposite sign do occur, since $\Pi(c)=c$ for sure losses and gains, and then one weight is negative and the
+other exceeds one, so that the combination is affine and not convex.
 
 A constant is comonotone with every book. Taking $Y=c$ in \axCM{} and using \axN{} and $\Pi(c)=c$ gives, for
 $X\in D$, $c\ne0$ and $c\ne-\Pi(X)$,
 \begin{equation}\label{eq:pool}
- \LR(X+c)=\frac{\Pi(X)\,\LR(X)+c}{\Pi(X)+c}.
+ \LR(X+c)=\frac{\Pi(X)}{\Pi(X)+c}\,\LR(X)+\frac{c}{\Pi(X)+c}\cdot1
+ =\frac{\Pi(X)\,\LR(X)+c}{\Pi(X)+c}.
 \end{equation}
+Thus along the cash line the loss ratio is the combination of the loss ratio of the book and the loss ratio $1$ of the
+sure loss, with the relative costs of the two as weights: adding a sure loss pulls the ratio towards $1$, and the
+singularity occurs where the relative cost of the book becomes infinite, that is, at $c=-\Pi(X)$.
 Proposition~\ref{prop:readings} below shows that this makes every cash line a unit-slope Möbius map.
 
-If both premiums are positive, \axCM{} implies the mediant inequality: $\LR(X+Y)$ lies between $\LR(X)$ and
+If $\Pi(X)$ and $\Pi(Y)$ have the same sign, then $w_{X,Y}\in[0,1]$ and \axCM{} makes $\LR(X+Y)$ a convex combination of
+$\LR(X)$ and $\LR(Y)$; in particular it implies the mediant inequality: $\LR(X+Y)$ lies between $\LR(X)$ and
 $\LR(Y)$. The inequality is a betweenness property, and, as in decision theory, where betweenness yields only
 implicit representations while weighted averages yield ratios of linear functionals
 \citep{chew1983,dekel1986}, it does not suffice for our purposes (Example~\ref{ex:cube}).
@@ -254,7 +277,7 @@ index, do not apply to loss ratios.
 \midrule
 \axP & one price point on each cash line & defines the premium; the level $\beta=\infty$ of the associated family\\
 \axN & $\LR(c)=1$ for $c\ne0$ & no unjustified loading \citep{gerber1974}\\
-\axCM & premium-weighted comonotone pooling & comonotonic additivity \citep{yaari1987,wyp1997}\\
+\axCM & comonotone pooling at relative cost & comonotonic additivity \citep{yaari1987,wyp1997}\\
 \axLI & law invariance & standard \citep{wyp1997,kusuoka2001}\\
 \axRC/\axRM & regularity of the implied pair & continuity / monotonicity of premia\\
 \bottomrule

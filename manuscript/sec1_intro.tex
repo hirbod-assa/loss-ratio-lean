@@ -7,6 +7,19 @@ premium $\Pi(X)$ of the same position $X$. When the premium is a non-linear func
 numerator is a risk measure, it is not clear which functionals of a loss should be called a loss ratio, or
 which properties a loss ratio should have when books are pooled.
 
+The question arises in risk reporting. Before the claims are known, a loss ratio is usually reported through
+its expected value, expected claims over premium. When the risk of a book is concentrated in the tail of its
+loss distribution, the expected loss ratio can be misleading: two books with the same expected loss ratio may
+differ greatly in their exposure to large losses. A natural remedy is to replace the mean of the claims by a tail
+measure, and to report, for instance, the value at risk or the tail value at risk (expected shortfall) of the claims divided by the
+premium \citep{adeh1999}. The loss ratio then becomes a model-based, or mark-to-model, quantity: a risk measure
+of the loss, evaluated under a model of its distribution, divided by a premium principle. The ex-post accounting
+ratio is the special case in which the model is the realized outcome. Once such ratios are admitted, the
+question is which properties are necessary and sufficient for a functional of the loss to be a loss ratio of
+this kind; this is the question addressed here. The tail value at risk and the value at risk are distortion
+functionals, so tail loss ratios over a distortion premium are covered by the results below
+(see the ratio $\mathrm{ES}_{0.9}/\E$ in Example~\ref{ex:qc}).
+
 We work with the \emph{extended loss ratio} $\LR=\rho/\Pi$, which allows negative values and zero premiums,
 defined abstractly by \emph{association}: a family of risk measures $\{\rho_\beta\}$ is
 associated with $\LR$ if $\LR(X)=\beta\iff\rho_\beta(X)=0$; the canonical family is
@@ -59,7 +72,9 @@ agents on designated parts of the project: a roundtable of six agents and a larg
 strands surveyed the literature, proposed candidate statements, ranked them by judge agents, drafted proofs and
 submitted them to repeated AI-assisted critical review; the main assistant constructed examples and
 counterexamples and drafted and revised the manuscript. ChatGPT (OpenAI) was used for an informal review of the
-proofs, and Gemini (Google) for summaries of key cited works. The research questions and all decisions on content
+proofs, and Gemini (Google) for summaries of key cited works. The problem was chosen by the author, from the
+risk-reporting question above, and in part as a deliberate test: its solution requires machinery, such as
+signed Choquet integrals, that is not routine, which makes it a demanding case for AI assistance. The research questions and all decisions on content
 were the author's, and the formulation through the implied premium and the implied risk measure arose from the
 author's objections to earlier AI-drafted versions, in particular that an assumed cash-line axiom supplied $\rho$
 and $\Pi$ by fiat. The AI-generated material was treated as proposals: the reviews found errors, including a

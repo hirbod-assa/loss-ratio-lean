@@ -54,14 +54,14 @@ For $X,Y\in D$ with $\Pi(X)+\Pi(Y)\ne0$, where $\Pi$ is the implied premium, cal
 \[
  w_{X,Y}:=\frac{\Pi(X)}{\Pi(X)+\Pi(Y)},\qquad 1-w_{X,Y}=\frac{\Pi(Y)}{\Pi(X)+\Pi(Y)},
 \]
-the \emph{relative cost} of $X$ and of $Y$, respectively: the premium of each book as a fraction of the premiums of
-the two books together.
+the \emph{relative cost} of $X$ and of $Y$, respectively: $w_{X,Y}$ is the relative price of $X$ in the comonotone
+portfolio $\{X,Y\}$, that is, the premium of $X$ as a fraction of the premiums of the two books together, and
+$w_{Y,X}=1-w_{X,Y}$ is that of $Y$.
 
 \begin{axiom}[\axCM]\label{ax:CM}
 For comonotone $X,Y\in D$ with $\Pi(X)+\Pi(Y)\neq0$,
 \[
- \LR(X+Y)=w_{X,Y}\,\LR(X)+\bigl(1-w_{X,Y}\bigr)\LR(Y)
- =\frac{\Pi(X)\,\LR(X)+\Pi(Y)\,\LR(Y)}{\Pi(X)+\Pi(Y)} .
+ \LR(X+Y)=w_{X,Y}\,\LR(X)+w_{Y,X}\,\LR(Y).
 \]
 \end{axiom}
 

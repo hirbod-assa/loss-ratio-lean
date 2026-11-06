@@ -1,8 +1,8 @@
-# Lean formalization: An Axiomatic Characterization of the Loss Ratio: A Case Study of Using AI in Mathematical Papers
+# Lean formalization: AI-Assisted Proofs in Mathematical Risk Management: An Axiomatic Characterization of the Loss Ratio and a Proposed Reporting Standard
 
 This repository contains a Lean 4 formalization of the loss-ratio-specific results of
 
-> H. Assa, *An Axiomatic Characterization of the Loss Ratio: A Case Study of Using AI in Mathematical Papers* (2026).
+> H. Assa, *AI-Assisted Proofs in Mathematical Risk Management: An Axiomatic Characterization of the Loss Ratio and a Proposed Reporting Standard* (2026).
 
 The loss ratio of a book `X` is `LR(X) = ρ(X)/Π(X)`. The paper shows that the premium `Π` and the loss
 measure `ρ` are *implied* by the loss ratio: the implied premium is minus the unique non-finite point of
@@ -17,7 +17,7 @@ specific to loss ratios.
 | `LossRatioLean/Basic.lean` | The Lean 4 formalization (Mathlib). |
 | `lakefile.toml`, `lean-toolchain`, `lake-manifest.json` | Lake project files (Lean and Mathlib `v4.36.0-rc1`). |
 | `manuscript/` | LaTeX source of the paper, `refs.bib`, and the compiled PDF `loss_ratio_paper_v18.pdf`. See `manuscript/BUILD.md`. |
-| `ai_process/` | Records behind Section 12 ("Use of artificial intelligence"): the literature-panel digest (`digest.md`), the ten candidate formulations (`proposals.md`), one judge report (`judge1.md`) and the chair agent's note (`chair_note_final.tex`). |
+| `ai_process/` | Records behind Section 12 ("The use of AI: process, verification and a reporting standard"; item 9 of the proposed reporting standard): the literature-panel digest (`digest.md`), the ten candidate formulations (`proposals.md`), one judge report (`judge1.md`) and the chair agent's note (`chair_note_final.tex`). |
 | `lean_snapshot_2026-10-25/build_log.txt` | Build log of the Lean file exactly as reported in subsection 12.6 (build successful, no `sorry`). |
 
 ## What is checked

@@ -1,12 +1,13 @@
-\section{Use of artificial intelligence}\label{sec:collab}
+\section{The use of AI: process, verification and a reporting standard}\label{sec:collab}
 
-This paper also serves as a brief case study of the use of AI in mathematical research in actuarial science. This
-section describes how AI was used and how the process was handled, and is meant to illustrate a standard for
-reporting such use in a mathematical paper. The tools are identified in the declaration before the references. The section also describes how
-the models acquire knowledge, the risks this entails for mathematical work, the guardrails used, the formal check
+This section is the second half of the paper. It reports how the result was obtained with AI, at a level of
+detail that lets a reader judge how far the result can be trusted, and it is meant to be read as a worked example
+of the reporting standard proposed in Section~\ref{sec:collab-standard}. The tools are identified in the
+declaration before the references. The section describes the organization of the work, how the models acquire
+knowledge and the risks this entails for mathematical work, the errors found, the guardrails used, the formal check
 in Lean, and what has and has not been checked.
 
-\subsection{Organization of the work}
+\subsection{Organization of the work}\label{sec:collab-org}
 
 The work used Claude (Anthropic) through the Claude desktop application in Cowork mode, which runs the assistant in
 a sandboxed environment and can coordinate several AI agents in a workflow. AI agents worked on designated parts of
@@ -90,7 +91,7 @@ AI assisted with the following tasks:
 \end{itemize}
 
 
-\subsection{How the knowledge base for this paper was assembled}
+\subsection{How the knowledge base for this paper was assembled}\label{sec:collab-kb}
 
 The agents draw on two kinds of knowledge: what their underlying models learned in training, which can be
 recalled only approximately, and documents read into their working context during the task. In this project the
@@ -172,7 +173,7 @@ mixture of expected shortfalls missing the endpoint & review with ChatGPT & $\ma
 \caption{Errors in AI-generated mathematics found during the project, and their resolution.}\label{tab:errors}
 \end{table}
 
-\subsection{Guardrails applied in this project}
+\subsection{Guardrails applied in this project}\label{sec:collab-guard}
 
 \begin{itemize}[nosep]
 \item \emph{Labels on knowledge.} Every literature statement in the digest carried a confidence label and a note on
@@ -222,3 +223,53 @@ machine-checked correctness is made beyond the results formalized in Lean, in th
 hypothesis described in Section~\ref{sec:collab-lean}. Independent human review of all proofs, and journal peer review, have not yet taken
 place, and apart from the three papers named above the references have not yet been checked against the original
 publications.
+
+\subsection{A proposed standard for reporting AI-assisted proofs}\label{sec:collab-standard}
+
+The declarations of AI use that journals now require state which tools were used and that the author takes
+responsibility for the result. For a paper whose proofs were drafted or checked with AI, this is not enough for a
+reader to judge the result. The errors in Table~\ref{tab:errors} show why: most of them are statements that are
+almost right, and a reader who knows only that AI was used cannot tell which parts of the paper were exposed to
+such errors and which checks they passed. We therefore propose that a mathematical paper in risk management or
+actuarial science whose results were obtained with substantial AI assistance report the items in
+Table~\ref{tab:standard}. The table also shows where each item is reported for the present paper.
+
+\begin{table}[ht]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.1cm}@{}}
+\toprule
+\textbf{Item} & \textbf{What to report} & \textbf{In this paper}\\
+\midrule
+1. Tools & providers, models and versions, mode of access, dates of use & declaration\\
+2. Division of labour & who posed the question, chose the formulation and decided on content; which tasks were
+  given to AI & Secs.~\ref{sec:intro}, \ref{sec:collab-org}\\
+3. Workflow & the agents or sessions used, their roles and order, the review loops, and the points at which the
+  author intervened & Figs.~\ref{fig:workflow}--\ref{fig:panelpic}\\
+4. Knowledge base & how the literature was gathered, how reliable each statement was taken to be, and which cited
+  statements were checked against the original works & Sec.~\ref{sec:collab-kb}\\
+5. Error log & every error in AI-generated mathematics that was found, how it was found, and how it was resolved &
+  Table~\ref{tab:errors}\\
+6. Guardrails & the checks applied: adversarial review, review by a second system, recomputation of numbers,
+  counterexamples, self-contained proofs of uncertain citations & Sec.~\ref{sec:collab-guard}\\
+7. Formal verification & which results were checked by a proof assistant, in what setting, and which steps were
+  taken as hypotheses & Sec.~\ref{sec:collab-lean}\\
+8. Verification status & for each part of the paper, whether it was reviewed by AI, by a human, or formally
+  checked; and what has not been checked & Sec.~\ref{sec:collab-status}\\
+9. Records & the formal proofs and the intermediate records of the AI process, publicly available & code
+  availability; \texttt{ai\_process/} in the repository\\
+\bottomrule
+\end{tabularx}
+\caption{Proposed items for reporting AI-assisted proofs, and where they are reported in this paper.}\label{tab:standard}
+\end{table}
+
+Three observations from this project motivate the items. First, the errors were found by different checks:
+checking runs within the panel, the main assistant during rewriting, and a review with a model from a different
+provider, which found three errors that the earlier checks had missed (Table~\ref{tab:errors}). Reporting the
+checks, and not only their conclusion, tells the reader which kinds of error have been looked for. Second, the
+decisive step, the reformulation through the implied premium and risk measure, came from the author's objection to
+an AI-drafted formulation that was internally correct but assumed what should have been proved; a record of the
+division of labour makes such contributions visible. Third, agreement among AI reviews does not establish
+correctness, and a formal check covers only what was formalized; the verification status must therefore be stated
+part by part. The list is a first proposal. It will need to be tested on other papers, and in particular adapted to
+results whose proofs are checked formally in full.
+

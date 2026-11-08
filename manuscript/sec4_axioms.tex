@@ -1,24 +1,129 @@
-\section{Implied premium, implied risk measure and the axioms}\label{sec:axioms}
+\section{The axioms, the implied premium and the implied risk measure}\label{sec:axioms}
 
-In this section we define the premium and the risk measure implied by a loss ratio and state the axioms.
-Table~\ref{tab:axioms} at the end of the section summarizes them.
+In this section we state the axioms and define the premium and the risk measure implied by a loss ratio. Every
+axiom refers only to values of $\LR$: it evaluates $\LR$ at books and at their cash shifts, and uses only
+arithmetic and whether a value is finite. No axiom refers to a premium, a risk measure, a weight, or a point
+of a cash line defined from $\LR$. There are five axioms: \axPe{} and \axR{} in Section~\ref{sec:R}, \axLI{} in
+Section~\ref{sec:li}, and the regularity axioms \axRC{} and \axRM{} in Section~\ref{sec:reg}. Axioms \axPe{} and
+\axR{} imply three properties, \axP, \axN{} and \axCM, which are equivalent to them and which give the axioms
+their meaning: a unique price point on each cash line, a loss ratio of one for sure losses, and comonotone pooling
+at relative price (Proposition~\ref{prop:RPNCM}). The implied premium and the implied risk measure are minus
+the price point and minus the zero of the cash line (Definition~\ref{def:impliedprem} and
+Corollary~\ref{cor:zero}). They are used to interpret the axioms and in the proofs. Table~\ref{tab:axioms} at the
+end of the section summarizes the axioms and the derived properties.
 
-\subsection{The implied premium}\label{sec:implied-premium}
+\subsection{Axioms \axPe{} and \axR: pooling of books with zero premium}\label{sec:R}
 
-\begin{axiom}[\axP: one price point on each cash line]\label{ax:P}
-For every $X\in L^\infty$ there is exactly one $c\in\R$ at which $\LR(X+c)\notin\R$.
+A premium is the sure amount at which a risk changes hands. A book whose loss ratio is not finite is one that
+changes hands at zero premium: it has been transferred together with exactly its premium and commands no further
+premium. We call such a book \emph{unpriced}.
+
+\begin{axiom}[\axPe: every book can be made unpriced]\label{ax:Pex}
+For every $X\in L^\infty$ there is $c\in\R$ with $\LR(X+c)\notin\R$.
 \end{axiom}
 
-\begin{definition}[Implied premium]\label{def:impliedprem}
-Under \axP, the \emph{implied premium} of $X$ is $\Pi(X):=-c^*$, where $c^*$ is the unique point at which
-$\LR(X+c^*)$ is not finite. We call $c^*$ the \emph{price point} of $X$.
+\begin{axiom}[\axR: comonotone pooling of unpriced books]\label{ax:R}
+Let $X,Y\in L^\infty$ be comonotone with $\LR(X)\notin\R$ and $\LR(Y)\notin\R$. Then for all
+$s,t,u\in\R\setminus\{0\}$ the values $\LR(X+s)$, $\LR(Y+t)$ and $\LR(X+Y+u)$ are real, and
+\begin{equation}\label{eq:R}
+ u\,\bigl(\LR(X+Y+u)-1\bigr)=s\,\bigl(\LR(X+s)-1\bigr)+t\,\bigl(\LR(Y+t)-1\bigr).
+\end{equation}
+\end{axiom}
+
+Axiom \axR{} is the accounting identity ``premium $\times$ (loss ratio $-1$) $=$ underwriting result'', stated in
+loss ratios alone. If $X$ is unpriced, adding a sure loss $s\ne0$ creates a book whose premium is $s$, since sure
+amounts are priced at face value, and $s\,(\LR(X+s)-1)$ is the underwriting result of that book, claims minus
+premium, in units of cash. Axiom \axR{} says two things. First, the underwriting result does not depend on the sure
+amount added, since a sure loss carries no underwriting result: this is \eqref{eq:R} with $Y=0$, once it is known
+that $0$ is unpriced and $\LR(t)=1$, both of which \axR{} implies (Proposition~\ref{prop:RPNCM}). Second, the
+underwriting results of comonotone books, which cannot hedge each other, add up when the books are pooled, and a
+pool of unpriced books is again unpriced. The hypothesis that $X$ and $Y$ are unpriced is a statement about values
+of $\LR$; it only selects the books to which the identity applies. A general book enters through its cash shifts.
+Taking $u=s+t\ne0$ in \eqref{eq:R} gives
+\begin{equation}\label{eq:Ravg}
+ \LR(X+Y+s+t)=\frac{s}{s+t}\,\LR(X+s)+\frac{t}{s+t}\,\LR(Y+t):
+\end{equation}
+two comonotone books written at the premiums $s$ and $t$ pool to the average of their loss ratios weighted by these
+premiums. This is pooling at relative price, with observed cash premiums as weights.
+
+The hypothesis that $X$ and $Y$ are unpriced cannot be removed, and it cannot be replaced by a condition on finite
+values of $\LR$. For a loss ratio $\LR$ write $\widetilde\LR$ for the real-valued map equal to $\LR$ where $\LR$ is
+finite and to $1$ elsewhere. A condition \emph{depends on $\LR$ only through its finite values} if it holds for
+$\LR$ whenever it holds for some $\LR^\circ$ with $\widetilde{\LR^\circ}=\widetilde\LR$. Conditions on limits
+of finite values along cash lines, such as $\lim_{s\to0}s(\LR(X+s)-1)$ or $\lim_{|s|\to\infty}s(\LR(X+s)-1)$, are of
+this kind, since under \axP{} the values $\LR(X+s)$ near the singular point are finite.
+
+\begin{proposition}[Non-finite values are needed]\label{prop:nofinite}
+Let $\Pi'=\max(I_{\sqrt t},I_{\min(1,1.5t)})$ and $\LR'=\bracket{\Pi'}{\Pi'}$. Then $\LR'$ satisfies \axPe, \axP,
+\axN, \axLI, \axRC{} and \axRM, its finite values are all equal to $1$, and $\LR'$ is not of the form
+$\bracket{I_h}{I_g}$ with $h,g\in\Hset_1$. Consequently, no condition that depends on $\LR$ only through its finite
+values and holds for every loss ratio $\bracket{I_h}{I_g}$ can replace \axR{} in Theorems~\ref{thm:A}
+and~\ref{thm:B}.
+\end{proposition}
+
+\begin{proof}
+$\Pi'$ is law invariant, monotone, $1$-Lipschitz and cash additive with $\Pi'(c)=c$, so the cash line of $X$ under
+$\LR'$ equals $1$ except at $c=-\Pi'(X)$, where it is not finite. This gives \axPe, \axP, \axN{} and \axLI. The sure
+amount $a$ with $\LR'(X-a)\notin\R$ is $\Pi'(X)$; a book $W$ never has $\LR'(W)=0$, and $\LR'(W)\notin\R$ with
+$\LR'(W+1)=1$ holds exactly when $\Pi'(W)=0$. Both sure amounts in \axRC{} and \axRM{} are therefore $\Pi'(X)$, and
+both axioms hold. If $\LR'=\bracket{I_h}{I_g}$, the two maps have the same non-finite books, so $I_g(X)=\Pi'(X)$ for
+every $X$ by \axP, and $\Pi'$ would be comonotonic additive; Example~\ref{ex:indepR} shows that it is not. Finally,
+$\widetilde{\LR'}\equiv1=\widetilde{\LR^\circ}$ for $\LR^\circ=\bracket{\E}{\E}$, which is of the form
+$\bracket{I_h}{I_g}$; so every condition of the stated kind holds for $\LR'$. \qedhere
+\end{proof}
+
+On books that break even, the finite values of the cash line carry no information about the premium, and only the
+location of the non-finite values does (Proposition~\ref{prop:explicit}). The following remark shows the same
+for the limit at a vanishing premium.
+
+\begin{remark}[The limit at zero premium]\label{rem:limzero}
+For $\LR=\bracket{I_h}{I_g}$, $s(\LR(X+s)-1)=s\,(I_h(X)-I_g(X))/(I_g(X)+s)$. Its limit as $s\to0$ exists for every
+$X$: it is $I_h(X)$ if $X$ is unpriced and $0$ otherwise. An axiom requiring that this limit exist is therefore
+automatic, and the limit is $0$ on unpriced books with $I_h(X)=0$ as well as on all books with a premium, so it
+does not identify the unpriced books. Nor can \eqref{eq:R} be stated for the limits on all comonotone pairs: take
+$\rho=\E$, $\Pi=I_{\sqrt t}$, $X=\1_A$ with $P(A)=\tfrac14$ and $Y=-\tfrac12$. The limits for $X$ and $Y$ are $0$,
+since $\Pi(X)=\tfrac12$ and $Y$ is a sure amount, while $X+Y$ is unpriced and its limit is $\E(X+Y)=-\tfrac14$. The
+hypothesis of \axR{} accounts for such pools, whose premiums cancel.
+\end{remark}
+
+\begin{proposition}[The derived properties]\label{prop:RPNCM}
+Axioms \axPe{} and \axR{} hold if and only if the properties \axP, \axN{} and \axCM{} below hold.
+\end{proposition}
+
+The proof is in Section~\ref{sec:proofs}. The rest of this section states the three properties, reads off the
+implied premium and risk measure, and explains their meaning.
+
+\subsection{The price point, the zero and the implied premium}\label{sec:implied-premium}
+
+\begin{property}[\axP: one price point on each cash line]\label{ax:P}
+For every $X\in L^\infty$ there is exactly one $c\in\R$ at which $\LR(X+c)\notin\R$.
+\end{property}
+
+\begin{definition}[Price point and zero of a cash line]\label{def:points}
+Under \axP, the \emph{price point} of $X$ is the unique $\cinf X\in\R$ at which $\LR(X+\cinf X)$ is not finite.
+If the cash line of $X$ has at most one zero, its \emph{zero} $\czero X$ is the unique $c\in\R$ with
+$\LR(X+c)=0$ if there is one, and $\czero X:=\cinf X$ if the cash line has no zero.
 \end{definition}
 
-Since the cash line of $X+c$ is the cash line of $X$ shifted by $c$,
+Both points are read off the cash line: $\cinf X$ is where the loss ratio explodes and $\czero X$ is where it
+vanishes. They are the cash offsets at the levels $\beta=\infty$ and $\beta=0$, that is, the sure amounts $c$ with
+$\LR(X+c)=\beta$; this is the analogue for loss ratios of the recovery $\rho_x(X)=\inf\{c:\alpha(X+c)\ge x\}$ of a
+family of risk measures from an acceptability index $\alpha$ \citep{chernymadan2009}. The convention for a cash line
+without a zero is explained after Proposition~\ref{prop:readings}: under the axioms, such a cash line equals $1$
+away from its price point. Since the cash line of $X+c$ is the cash line of $X$ shifted by $c$,
+\begin{equation}\label{eq:pointscash}
+ \cinf{X+c}=\cinf X-c,\qquad \czero{X+c}=\czero X-c\qquad\text{for all }X\in L^\infty,\ c\in\R .
+\end{equation}
+
+\begin{definition}[Implied premium]\label{def:impliedprem}
+Under \axP, the \emph{implied premium} of $X$ is $\Pi(X):=-\cinf X$, minus the price point of $X$.
+\end{definition}
+
+By \eqref{eq:pointscash},
 \begin{equation}\label{eq:Picash}
  \Pi(X+c)=\Pi(X)+c\qquad\text{for all }X\in L^\infty,\ c\in\R ,
 \end{equation}
-and $X$ belongs to the finite domain $D=\{\LR\in\R\}$ if and only if $\Pi(X)\neq0$. Axiom \axP{} does not
+and $X$ belongs to the finite domain $D=\{\LR\in\R\}$ if and only if $\cinf X\neq0$, that is, $\Pi(X)\neq0$. Property \axP{} does not
 distinguish between the two non-finite values; they play the role of labels (Remark~\ref{rem:labels}).
 
 The definition formalizes the notion of a price. A premium is the sure amount at which a risk changes hands:
@@ -33,41 +138,42 @@ a permissible loss ratio \citep{wernermodlin2016}. Finally, the price point meas
 cash, which removes the indeterminacy $(\rho,\Pi)\mapsto(\lambda\rho,\lambda\Pi)$ of the ratio. A shift
 $X+c$ with $c<0$ is the book transferred together with a sure payment $|c|$.
 
-Axiom \axP{} is ordinal: it is unchanged if $\LR$ is replaced by $\psi\circ\LR$ for any $\psi:\R\to\R$, the
+Property \axP{} is ordinal: it is unchanged if $\LR$ is replaced by $\psi\circ\LR$ for any $\psi:\R\to\R$, the
 non-finite values being kept. It excludes ratios that are finite along a whole cash line, such as
 $\arctan(\rho/\Pi)$, and ratios with several singular points.
 
-\subsection{Axiom \axN: a sure loss is priced at cost}
+\subsection{Property \axN: a sure loss is priced at cost}
 
-\begin{axiom}[\axN]\label{ax:N}
+\begin{property}[\axN]\label{ax:N}
 $\LR(c)=1$ for every constant $c\neq0$.
-\end{axiom}
+\end{property}
 
 A sure loss carries no risk, so its fair premium is its face value; this is the ``no unjustified loading''
-property of premium principles \citep{gerber1974}. Under \axP{}, axiom \axN{} implies $\Pi(c)=c$ for all $c$:
+property of premium principles \citep{gerber1974}. Under \axP{}, property \axN{} implies $\Pi(c)=c$ for all $c$:
 the cash line of $0$ equals $1$ away from $0$, so $\Pi(0)=0$, and $\Pi(c)=c$ by \eqref{eq:Picash}. Premiums
 with a proportional loading, such as $(1+\theta)\E$, violate \axN.
 
-\subsection{Axiom \axCM: comonotone pooling at relative cost}\label{sec:cm}
+\subsection{Property \axCM: comonotone pooling at relative cost}\label{sec:cm}
 
-For $X,Y\in D$ with $\Pi(X)+\Pi(Y)\ne0$, where $\Pi$ is the implied premium, call
+For $X,Y\in D$ with $\cinf X+\cinf Y\ne0$ call
 \[
- w_{X,Y}:=\frac{\Pi(X)}{\Pi(X)+\Pi(Y)},\qquad 1-w_{X,Y}=\frac{\Pi(Y)}{\Pi(X)+\Pi(Y)},
+ w_{X,Y}:=\frac{\cinf X}{\cinf X+\cinf Y},\qquad w_{Y,X}=1-w_{X,Y}=\frac{\cinf Y}{\cinf X+\cinf Y},
 \]
-the \emph{relative cost} of $X$ and of $Y$, respectively: $w_{X,Y}$ is the relative price of $X$ in the comonotone
-portfolio $\{X,Y\}$, that is, the premium of $X$ as a fraction of the premiums of the two books together, and
-$w_{Y,X}=1-w_{X,Y}$ is that of $Y$.
+the \emph{relative cost} of $X$ and of $Y$, respectively. Since $-\cinf X$ is the sure payment at which $X$ changes
+hands, $w_{X,Y}$ is the relative price of $X$ in the comonotone portfolio $\{X,Y\}$: the price of $X$ as a fraction
+of the prices of the two books together, read off their cash lines. In terms of the implied premium,
+$w_{X,Y}=\Pi(X)/(\Pi(X)+\Pi(Y))$.
 
-\begin{axiom}[\axCM]\label{ax:CM}
-For comonotone $X,Y\in D$ with $\Pi(X)+\Pi(Y)\neq0$,
+\begin{property}[\axCM]\label{ax:CM}
+For comonotone $X,Y\in D$ with $\cinf X+\cinf Y\neq0$,
 \[
  \LR(X+Y)=w_{X,Y}\,\LR(X)+w_{Y,X}\,\LR(Y).
 \]
-\end{axiom}
+\end{property}
 
 Comonotone books do not hedge each other, so the cost of the pooled book should be the sum of the costs of its
-parts, and then $w_{X,Y}$ is the share of $X$ in the cost of the pool. This is a consequence of the axioms and not
-part of \axCM: it is the comonotonic additivity $\Pi(X+Y)=\Pi(X)+\Pi(Y)$ of Lemma~\ref{lem:comon}. Axiom \axCM{} then
+parts, and then $w_{X,Y}$ is the share of $X$ in the cost of the pool. This is a consequence of \axCM{} and not
+part of it: it is the comonotonic additivity $\Pi(X+Y)=\Pi(X)+\Pi(Y)$ of Lemma~\ref{lem:comon}. Property \axCM{} then
 says that the loss ratio of a comonotone pool is allocated to its constituents according to relative cost: the pooled
 loss ratio is the combination of the two loss ratios whose weights are their relative costs. Since
 $\rho=\Pi\cdot\LR$, this is the accounting statement that the loss of the pool is the sum of the losses of the
@@ -134,6 +240,85 @@ the residue of its cash line at the price point: if a small premium $c$ is intro
 We call $N:=\{\rho=\Pi\}$ the \emph{break-even set}; $N\cap D=\{\LR=1\}$, and $N$ also contains the books with
 $\rho=\Pi=0$. On $N$ the residue vanishes and, by (d), the cash line has no zero, so that the risk measure cannot
 be read from the zero of the cash line; this is why it is defined through (b).
+
+\begin{corollary}[The implied risk measure is minus the zero]\label{cor:zero}
+Assume \axP, \axN{} and \axCM. Then every cash line has at most one zero, and $\rho(X)=-\czero X$ for every
+$X\in L^\infty$.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:readings}(d), if $\rho(X)\ne\Pi(X)$ the cash line of $X$ has the unique zero $-\rho(X)$. If
+$\rho(X)=\Pi(X)$, it equals $1$ away from the price point and has no zero, so $\czero X=\cinf X=-\Pi(X)=-\rho(X)$.
+\qedhere
+\end{proof}
+
+Thus the implied risk measure, like the implied premium, is a point of the cash line: $\rho(X)$ is minus the sure
+amount at which the loss ratio of $X$ vanishes, and on the break-even set the convention of
+Definition~\ref{def:points} makes the two points coincide.
+
+Away from the break-even set, the premium can be computed explicitly from two values of the loss ratio. Solving
+\eqref{eq:pool} for $\Pi(X)$ gives the following formulas.
+
+\begin{proposition}[Explicit formulas]\label{prop:explicit}
+Assume \axP, \axN{} and \axCM, and let $X\in D$ with $\LR(X)\ne1$. Write $\phi_X(c)=\LR(X+c)$.
+\begin{enumerate}[label=(\alph*),nosep]
+\item \emph{Two quotes.} For every $c\notin\{0,-\Pi(X)\}$, $\phi_X(c)\ne\LR(X)$ and
+  \[
+   \Pi(X)=\frac{c\,\bigl(1-\phi_X(c)\bigr)}{\phi_X(c)-\LR(X)},\qquad
+   \rho(X)=\LR(X)\,\frac{c\,\bigl(1-\phi_X(c)\bigr)}{\phi_X(c)-\LR(X)} .
+  \]
+\item \emph{Sensitivity to a sure loss.} $\phi_X$ is differentiable at $0$, $\phi_X'(0)=(1-\LR(X))/\Pi(X)\ne0$, and
+  \[
+   \Pi(X)=\frac{1-\LR(X)}{\phi_X'(0)},\qquad \rho(X)=\frac{\LR(X)\,\bigl(1-\LR(X)\bigr)}{\phi_X'(0)} .
+  \]
+\item \emph{Underwriting result.} $\Pi(X)-\rho(X)=\lim_{|c|\to\infty}c\,\bigl(1-\phi_X(c)\bigr)$.
+\end{enumerate}
+If $\LR(X)=1$, then $\phi_X\equiv1$ away from the price point, and $\Pi(X)$ is not determined by the finite values
+of the cash line.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:readings}(a), $\phi_X(c)=(\rho+c)/(\Pi+c)$ with $\rho=\rho(X)$, $\Pi=\Pi(X)\ne0$, so
+\[
+ 1-\phi_X(c)=\frac{\Pi-\rho}{\Pi+c},\qquad \phi_X(c)-\LR(X)=\frac{c\,(\Pi-\rho)}{\Pi\,(\Pi+c)} .
+\]
+Since $\LR(X)\ne1$ means $\rho\ne\Pi$, the second expression is non-zero for $c\ne0$, and the quotient gives (a).
+Differentiating, $\phi_X'(c)=(\Pi-\rho)/(\Pi+c)^2$, so $\phi_X'(0)=(1-\LR(X))/\Pi$, which gives (b); and
+$c\,(1-\phi_X(c))=c\,(\Pi-\rho)/(\Pi+c)\to\Pi-\rho$, which gives (c). If $\LR(X)=1$, then $\rho=\Pi$ and
+$\phi_X(c)=1$ for $c\ne-\Pi$. \qedhere
+\end{proof}
+
+Formula (b) reads: the implied premium is the underwriting margin $1-\LR(X)$ divided by the sensitivity of the
+loss ratio to a sure loss; formula (a) is its finite-difference version, which needs only two quoted loss ratios,
+with and without a sure loss $c$. For $X=\1_A$ in Example~\ref{ex:three}, $\LR(X)=\tfrac12$ and
+$\phi_X(1)=\tfrac56$, so (a) gives $\Pi(X)=\tfrac16/\tfrac13=\tfrac12$. For books outside $D$ the formulas apply to
+$X+c$ with $X+c\in D$, and $\Pi(X)=\Pi(X+c)-c$ by \eqref{eq:Picash}.
+
+The last statement of Proposition~\ref{prop:explicit} is the reason why the axioms must refer to non-finite
+values of $\LR$, as \axPe{} and \axR{} do. On the break-even set the cash line carries no information about the premium except the
+location of its singularity, and Remark~\ref{rem:primitive} shows that the weights in \axCM{} are then not
+identified by the values of the ratio. Off the break-even set, the weights of \axCM{} could equally be written with
+the explicit premium of (a) or (b) in place of $-\cinf{}$; but \axCM{} must also govern pools that contain
+break-even books, and there only the price point locates the premium. Axiom \axR{} avoids weights altogether: it
+moves each book to zero premium by a sure payment, which is a statement about non-finite values, and pools there.
+
+\begin{remark}[A weight-free form of \axCM]\label{rem:weightfree}
+Property \axCM{} is a cardinal statement whose weights are read off the price points. Given \axP, the pair
+\axN+\axCM{} is equivalent to the following two statements, which use no weights:
+\begin{enumerate}[label=(\Alph*),nosep]
+\item[(M)] every cash line has at most one zero, and $\LR(X+c)=\dfrac{c-\czero X}{c-\cinf X}$ for all $c\ne\cinf X$;
+\item[(A)] if $X,Y$ are comonotone, then $\cinf{X+Y}=\cinf X+\cinf Y$ and $\czero{X+Y}=\czero X+\czero Y$.
+\end{enumerate}
+(M) says that every cash line is the unit-slope Möbius map determined by its own zero and price point; (A) says
+that comonotone pooling adds the cash offsets at the levels $0$ and $\infty$. Indeed, \axN{} and \axCM{} imply (M) by
+Proposition~\ref{prop:readings}(a) and Corollary~\ref{cor:zero}, and (A) by Lemma~\ref{lem:comon}(a). Conversely,
+(A) with $X=Y=0$ gives $\cinf0=\czero0=0$, so (M) gives $\LR(c)=c/c=1$ for $c\ne0$, which is \axN. If $X,Y\in D$ are
+comonotone with $\cinf X+\cinf Y\ne0$, then $X+Y\in D$ by (A), and (M) at $c=0$ gives
+$\LR(Z)=\czero Z/\cinf Z$ for $Z\in\{X,Y,X+Y\}$; by (A),
+$\LR(X+Y)=(\czero X+\czero Y)/(\cinf X+\cinf Y)=w_{X,Y}\LR(X)+w_{Y,X}\LR(Y)$, which is \axCM. Unlike the formulation
+(CP) of Remark~\ref{rem:oldCP}, (M) refers to no functional other than $\LR$, but it still uses the points
+$\cinf X$ and $\czero X$. Axiom \axR{} states the content of (M) and (A) without them.
+\end{remark}
 
 \begin{example}[Three cash lines]\label{ex:three}
 Let $\rho=I_{\mathrm{id}}=\E$ and $\Pi=I_{\sqrt{\cdot}}$, and let $P(A)=\tfrac14$. Figure~\ref{fig:three} shows
@@ -206,24 +391,44 @@ implied premium and risk measure are computed from cash lines, \axLI{} passes to
 Ratios that weight scenarios non-uniformly, such as $\E_Q/\E$ with $Q\neq P$, violate \axLI; they are covered by
 Theorem~\ref{thm:A0}.
 
-\subsection{Axioms \axRC{} and \axRM: regularity of the implied pair}\label{sec:reg}
+\subsection{Axioms \axRC{} and \axRM: regularity of the cash offsets}\label{sec:reg}
 
-Under \axP, write $\rho_D:=\Pi\cdot\LR$ on $D$. The regularity axioms are stated for $\Pi$ and $\rho_D$, so that
-they make sense independently of the other axioms.
+The regularity axioms concern two sure amounts attached to a book: the amount $a$ whose payment leaves the book
+unpriced, $\LR(X-a)\notin\R$, and the amount $a$ whose payment leaves it without loss. A book $W$ has no loss if
+$\LR(W)=0$, or, when $W$ is unpriced, if $\LR(W+1)=1$, that is, if $W$ written at the premium $1$ costs exactly
+that premium.
 
 \begin{axiom}[\axRC]\label{ax:RC}
-$\Pi$ is uniformly continuous on $(L^\infty,\|\cdot\|_\infty)$ and $\rho_D$ is uniformly continuous on $D$.
+For every $\varepsilon>0$ there is $\delta>0$ such that for all $X,Y\in L^\infty$ with $\|X-Y\|_\infty<\delta$ and
+all $a,b\in\R$:
+\begin{enumerate}[label=(\roman*),nosep]
+\item if $\LR(X-a)\notin\R$ and $\LR(Y-b)\notin\R$, then $|a-b|<\varepsilon$;
+\item if each $W\in\{X-a,\,Y-b\}$ satisfies [$\LR(W)=0$, or $\LR(W)\notin\R$ and $\LR(W+1)=1$], then
+  $|a-b|<\varepsilon$.
+\end{enumerate}
 \end{axiom}
 
 \begin{axiom}[\axRM]\label{ax:RM}
-If $X\le Y$ almost surely, then $\Pi(X)\le\Pi(Y)$, and $\rho_D(X)\le\rho_D(Y)$ if $X,Y\in D$.
+Let $X\le Y$ almost surely and $a,b\in\R$.
+\begin{enumerate}[label=(\roman*),nosep]
+\item If $\LR(X-a)\notin\R$ and $\LR(Y-b)\notin\R$, then $a\le b$.
+\item If each $W\in\{X-a,\,Y-b\}$ satisfies [$\LR(W)=0$, or $\LR(W)\notin\R$ and $\LR(W+1)=1$], then $a\le b$.
+\end{enumerate}
 \end{axiom}
 
-Under \axN{} and \axCM{} these axioms are equivalent to the corresponding properties of the implied risk
-measure on $L^\infty$, and \axRM{} implies \axRC{} (Lemma~\ref{lem:cashlip}). We include the signed tier
-(\axRC) because the canonical family $\rho_\beta$ is a difference of monotone functionals and is in general not
-monotone (Corollary~\ref{cor:assoc} and Example~\ref{ex:family}). Monotonicity is imposed on the implied pair and
-not on the ratio, for the following reason.
+Taking $X=Y$ shows that each axiom forces the two amounts to be unique, so the axioms make sense independently of
+the others. Under \axPe{} and \axR, the amount in (i) is the implied premium $\Pi(X)$ and the amount in (ii) is the
+implied risk measure $\rho(X)$ (Lemma~\ref{lem:offsets}); thus \axRC{} (respectively \axRM) says exactly that $\Pi$ and $\rho$
+are uniformly continuous (monotone) on $L^\infty$, and \axRM{} implies \axRC{} (Lemma~\ref{lem:cashlip}). In
+terms of the cash lines, the two amounts are minus the price point and minus the zero. Axiom \axRM{} says that a
+larger loss must be offset by a larger sure amount, both to be priced at zero (level $\infty$) and to have no loss
+(level $0$). This is the monotonicity of the cash offsets familiar from acceptability indices
+\citep{chernymadan2009}, imposed at the two levels that determine the cash line; \axRC{} is the corresponding
+continuity. For a ratio $\bracket{A}{B}$ with $A,B$ cash additive, the two amounts are $B(X)$ and $A(X)$, so that
+the axioms reduce to continuity or monotonicity of $A$ and $B$. We include the signed tier \axRC{} because the
+canonical family $\rho_\beta$ is a difference of monotone functionals and is in general not monotone
+(Corollary~\ref{cor:assoc} and Example~\ref{ex:family}). Monotonicity is imposed on the cash offsets and not on the
+values of the ratio, for the following reason.
 
 \begin{proposition}[No monotone loss ratio]\label{prop:F2}
 Let $h,g\in\Hset_1$ with $g>0$ on $(0,1]$, and let $\LR=I_h/I_g$ on $\Xp:=L^\infty_+\setminus\{0\}$.
@@ -265,22 +470,27 @@ increase with $s$; the loss ratio increases along one and decreases along the ot
 \end{figure}
 
 Consequently, the theorems on acceptability indices \citep{chernymadan2009}, which require monotonicity of the
-index, do not apply to loss ratios.
+index, do not apply to loss ratios. Axiom \axRM{} is nevertheless an order property of $\LR$: it concerns the
+sure amounts at which the ratio becomes non-finite or vanishes, not the size of the ratio.
 
 \subsection{Summary}
 
 \begin{table}[ht]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}X@{}}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}p{4.4cm}>{\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Axiom} & \textbf{Statement} & \textbf{Interpretation and counterpart}\\
 \midrule
+\axPe & each cash line has a non-finite value & every book can be made unpriced by a sure payment\\
+\axR & comonotone pooling of unpriced books, \eqref{eq:R} & underwriting results add; comonotonic additivity \citep{yaari1987,wyp1997}\\
+\axLI & law invariance & standard \citep{wyp1997,kusuoka2001}\\
+\axRC/\axRM & regularity of the sure amounts that make a book unpriced and loss-free & continuity / monotonicity of premium and risk measure; cash offsets \citep{chernymadan2009}\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Derived properties, equivalent to \axPe{} and \axR{} (Proposition~\ref{prop:RPNCM})}}\\
 \axP & one price point on each cash line & defines the premium; the level $\beta=\infty$ of the associated family\\
 \axN & $\LR(c)=1$ for $c\ne0$ & no unjustified loading \citep{gerber1974}\\
-\axCM & comonotone pooling at relative cost & comonotonic additivity \citep{yaari1987,wyp1997}\\
-\axLI & law invariance & standard \citep{wyp1997,kusuoka2001}\\
-\axRC/\axRM & regularity of the implied pair & continuity / monotonicity of premia\\
+\axCM & comonotone pooling, weighted by relative price read off the price points & premium-weighted average\\
 \bottomrule
 \end{tabularx}
-\caption{The axioms.}\label{tab:axioms}
+\caption{The axioms and the derived properties. Every axiom refers only to values of $\LR$.}\label{tab:axioms}
 \end{table}

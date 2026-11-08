@@ -1,9 +1,11 @@
 \section{Independence of the axioms}\label{sec:necessity}
 
-For each of the axioms \axN, \axCM, \axLI, \axRC{} and \axRM{} we give a loss ratio that satisfies the
-remaining axioms and is not of the form in Theorem~\ref{thm:A} or~\ref{thm:B}. Axiom \axP{} defines the implied
-premium, through which the other axioms are formulated, and is therefore not treated in the same way; see
-Remark~\ref{rem:labels} for what is lost without it. Table~\ref{tab:witnesses} summarizes the examples.
+For each of the axioms \axPe, \axR, \axLI, \axRC{} and \axRM{} we give a loss ratio that satisfies the
+remaining axioms and is not of the form in Theorem~\ref{thm:A} or~\ref{thm:B}. Two facts shorten the verifications.
+First, by Proposition~\ref{prop:RPNCM}, a ratio satisfies \axPe{} and \axR{} exactly when it has the properties
+\axP, \axN{} and \axCM. Second, for a ratio $\bracket{A}{B}$ of cash-additive functionals the sure amounts that
+make $X$ unpriced and loss-free are $B(X)$ and $A(X)$ (Section~\ref{sec:reg}), so \axRC{} and \axRM{} reduce to
+continuity and monotonicity of $A$ and $B$. Table~\ref{tab:witnesses} summarizes the examples.
 
 \begin{table}[ht]
 \centering\small
@@ -11,10 +13,10 @@ Remark~\ref{rem:labels} for what is lost without it. Table~\ref{tab:witnesses} s
 \toprule
 \textbf{Dropped} & \textbf{Witness} & \textbf{Why it is a witness}\\
 \midrule
-\axN & $\bracket{I_h}{\kappa I_g}$, $\kappa>0$, $\kappa\ne1$
- & All other axioms hold; $\LR(c)=1/\kappa\ne1$.\\
-\axCM & $\bracket{\max(I_{\sqrt t},I_{\min(1,1.5t)})}{\E}$
- & Implied risk measure is cash additive but not comonotonic additive.\\
+\axPe & $\LR\equiv1$
+ & No value is non-finite; \axR, \axLI, \axRC, \axRM{} hold vacuously.\\
+\axR & $\bracket{\max(I_{\sqrt t},I_{\min(1,1.5t)})}{\E}$; also $\psi\circ\bracket{I_h}{I_g}$, $\psi(t)=t^3$ (Example~\ref{ex:cube}), and $\bracket{\Pi'}{\Pi'}$
+ & Implied risk measure (resp.\ premium) is cash additive but not comonotonic additive; the cube has poles of order three.\\
 \axLI & $\bracket{\E_Q}{\E}$, $Q\ne P$ with bounded density
  & All other axioms hold; $\E_Q$ is not law invariant.\\
 \axRC{} (Thm.~\ref{thm:A}) & $\bracket{I_h}{\E}$ with $h$ continuous, not of bounded variation
@@ -23,43 +25,58 @@ Remark~\ref{rem:labels} for what is lost without it. Table~\ref{tab:witnesses} s
  & $h$ is not monotone, so no distortion pair represents it.\\
 \bottomrule
 \end{tabularx}
-\caption{Witnesses for the axioms of Theorems~\ref{thm:A} and~\ref{thm:B}.}\label{tab:witnesses}
+\caption{Witnesses for the axioms of Theorems~\ref{thm:A} and~\ref{thm:B}. Here $\Pi'=\max(I_{\sqrt t},I_{\min(1,1.5t)})$.}\label{tab:witnesses}
 \end{table}
 
-\begin{example}[Independence of \axN: a loading on sure losses]
+\begin{example}[Independence of \axPe]
+The constant ratio $\LR\equiv1$ takes no non-finite value, so \axPe{} fails. Axioms \axR, \axRC{} and \axRM{} hold
+vacuously, since their hypotheses require a non-finite value or a zero, and \axLI{} is clear. It is not of the form
+in Theorem~\ref{thm:A}: every such ratio is non-finite at $X=0$, since $I_g(0)=0$.
+\end{example}
+
+\begin{example}[A loading on sure losses violates \axR]
 Fix $\kappa>0$, $\kappa\neq1$, and let $\LR=\bracket{I_h}{\kappa I_g}$ with distortions $h,g$. The cash line of
-$X$ is $(I_h(X)+c)/(\kappa(I_g(X)+c))$, non-finite only at $c=-I_g(X)$, so \axP{} holds with $\Pi=I_g$. With these
-weights the pooling identity holds because $I_h$ and $I_g$ are comonotonic additive; \axLI{} holds, and so do
-\axRM{} and \axRC, since $\Pi=I_g$ and $\rho_D=\Pi\cdot\LR=I_h/\kappa$ are monotone and Lipschitz. But $\LR(c)=1/\kappa\ne1$, whereas every ratio in Theorem~\ref{thm:A} has value $1$ at sure losses. So the
-normalization is not harmless: it is what excludes loadings on sure losses. (We conjecture, but have not proved,
-that an analogue of Theorem~\ref{thm:A} with a known loading $\kappa$ holds with $\LR=\bracket{I_h}{\kappa I_g}$.)
+$X$ is $(I_h(X)+c)/(\kappa(I_g(X)+c))$, non-finite only at $c=-I_g(X)$, so \axPe{} and \axP{} hold with $\Pi=I_g$,
+and with these weights the pooling identity \axCM{} holds because $I_h$ and $I_g$ are comonotonic additive. But
+$\LR(c)=1/\kappa\ne1$, so \axN{} fails and, by Proposition~\ref{prop:RPNCM}, so does \axR. Directly: for unpriced
+$X$, $s(\LR(X+s)-1)=(I_h(X)+s(1-\kappa))/\kappa$ depends on $s$. The normalization on sure losses is therefore built
+into \axR: it is what excludes loadings on sure losses. (We conjecture, but have not proved, that an analogue of
+Theorem~\ref{thm:A} with a known loading $\kappa$ holds with $\LR=\bracket{I_h}{\kappa I_g}$.)
 \end{example}
 
 \begin{example}[Ordinal information is not enough]\label{ex:cube}
 Let $h\ne g$ be distortions and $\LR'=\psi\circ\bracket{I_h}{I_g}$ with $\psi(t)=t^3$ and $\psi$ fixing the
 non-finite values. Since $\psi$ maps $\R$ to $\R$, $\LR'$ has the same price points as $\bracket{I_h}{I_g}$, so
-\axP{} holds with $\Pi=I_g$; \axN{} holds because $1^3=1$; \axLI{} holds, and so does the mediant inequality,
+\axPe{} and \axP{} hold with $\Pi=I_g$; \axN{} holds because $1^3=1$; \axLI{} holds, and so does the mediant inequality,
 because $\psi$ is increasing. But $\LR'$ is not of the form in Theorem~\ref{thm:A}: at a book $X$ with
 $I_h(X)\neq I_g(X)$ (for instance an indicator at a point where $h\ne g$), the cash line
 $\big((I_h(X)+c)/(I_g(X)+c)\big)^3$ has a pole of order three, while every cash line in Theorem~\ref{thm:A} has a
-simple pole. Hence \axCM{} fails. (This example is an illustration, not a witness in the strict sense: on
-$D$, $\Pi\cdot\LR'=I_h^3/I_g^2$ is neither uniformly continuous nor monotone.) Betweenness-type, ordinal information determines the loss ratio only up to an
-increasing transformation, as for \citet{chew1983} and \citet{dekel1986}; the cardinal axiom \axCM{} cannot be
+simple pole. Hence \axCM{} fails, and so does \axR{} by Proposition~\ref{prop:RPNCM}. Since $\psi$ maps $0$ to $0$, $1$
+to $1$ and only $1$ to $1$, and keeps the non-finite values, the sure amounts that make a book unpriced or loss-free
+are the same for $\LR'$ as for $\bracket{I_h}{I_g}$, namely $I_g(X)$ and $I_h(X)$; so \axRC{} and \axRM{} hold as well,
+and the example satisfies every axiom except \axR. Betweenness-type, ordinal information determines the loss ratio only up to an
+increasing transformation, as for \citet{chew1983} and \citet{dekel1986}; the cardinal axiom \axR{} cannot be
 avoided.
 \end{example}
 
-\begin{example}[Independence of \axCM]
-Let $\LR=\bracket{\rho}{\E}$ with $\rho=\max(I_{\sqrt t},I_{\min(1,1.5t)})$. \axP{} holds with $\Pi=\E$, \axN{}
+\begin{example}[Independence of \axR]\label{ex:indepR}
+Let $\LR=\bracket{\rho}{\E}$ with $\rho=\max(I_{\sqrt t},I_{\min(1,1.5t)})$. \axPe{} and \axP{} hold with $\Pi=\E$, \axN{}
 holds, and the implied risk measure is $\rho$, a maximum of cash-additive maps; \axLI, \axRM{} and \axRC{} hold. Take
 $E\subset B$ with $P(B)=0.5$, $P(E)=0.1$ and $X=\1_B+\1_E$. Then $\rho(\1_B)=\max(0.707,0.75)=0.75$ and
 $\rho(\1_E)=\max(0.316,0.15)=0.316$, with sum $1.066$, while $\rho(X)=\max(0.707+0.316,\ 0.75+0.15)=1.023$. So $\rho$
-is not comonotonic additive and \axCM{} fails by Lemma~\ref{lem:comon}(a).
+is not comonotonic additive and \axCM{} fails by Lemma~\ref{lem:comon}(a); hence \axR{} fails.
+
+The ratio $\bracket{\Pi'}{\Pi'}$ with $\Pi'=\rho$ shows more: it equals $1$ wherever it is finite, and satisfies
+\axPe, \axLI, \axRC{} and \axRM{} (both sure amounts equal $\Pi'(X)$, which is monotone and $1$-Lipschitz). It fails
+\axR{} only through the clause that a pool of unpriced books is unpriced: for the books above, $\1_B-\Pi'(\1_B)$ and
+$\1_E-\Pi'(\1_E)$ are unpriced but their sum is not: its premium is $1.023-1.066=-0.043$. Hence no axiom that
+depends on $\LR$ only through its finite values can replace \axR{} (Proposition~\ref{prop:nofinite}).
 \end{example}
 
 \begin{example}[Independence of \axLI]
 Let $Z=dQ/dP$ be bounded, non-constant, $Z\ge0$ and $\E Z=1$, and $\LR=\bracket{\E_Q}{\E}$. \axP{} holds with
-$\Pi=\E$, \axN{} holds, \axCM{} holds by Lemma~\ref{lem:comon}(b) because $\E_Q$ and $\E$ are additive, and \axRM,
-\axRC{} hold. But $\E_Q(\1_A)=Q(A)$ is not a function of $P(A)$, so the implied risk measure is not of the form
+$\Pi=\E$, \axN{} holds, \axCM{} holds by Lemma~\ref{lem:comon}(b) because $\E_Q$ and $\E$ are additive, so \axPe{} and
+\axR{} hold, and \axRM, \axRC{} hold. But $\E_Q(\1_A)=Q(A)$ is not a function of $P(A)$, so the implied risk measure is not of the form
 $I_h$. Without \axLI{} the class is exactly that of Theorem~\ref{thm:A0}.
 \end{example}
 
@@ -68,14 +85,14 @@ Let $h(t)=t\big(1+\tfrac12\sin(1/t)\big)/\big(1+\tfrac12\sin1\big)$, continuous 
 bounded variation (Figure~\ref{fig:witness}) ($\int|h'|$ diverges at $0$). Let $\LR=\bracket{I_h}{\E}$. \axP, \axN{} and \axLI{} are clear;
 $I_h$ is norm continuous (survival functions converge off a countable set, and dominated convergence applies)
 and additive on simple comonotone positions by the layer computation, hence comonotonic additive, so \axCM{}
-holds. The implied risk measure is $I_h$, and by Lemma~\ref{lem:bv} \axRC{} would force $h$ to be of bounded
+holds, and with it \axPe{} and \axR. The implied risk measure is $I_h$, and by Lemma~\ref{lem:bv} \axRC{} would force $h$ to be of bounded
 variation. So \axRC{} fails and no pair in $\Hset_1^2$ represents $\LR$.
 \end{example}
 
 \begin{remark}[Some regularity is indispensable]
 \axP, \axN, \axCM{} and \axLI{} alone do not force continuity. Using a Hamel basis one obtains
 $\rho=\E+\varphi\circ I_k$ with $k(t)=t(1-t)$ (so that $I_k$ vanishes on constants and is cash invariant) and
-$\varphi$ additive but discontinuous. Then $\bracket{\rho}{\E}$ satisfies \axP, \axN, \axCM{} and \axLI{} and is not of
+$\varphi$ additive but discontinuous. Then $\bracket{\rho}{\E}$ satisfies \axP, \axN, \axCM{} and \axLI, hence \axPe{} and \axR, and is not of
 the form in Theorem~\ref{thm:A}. This witness uses the axiom of choice; all the others are constructive.
 \end{remark}
 

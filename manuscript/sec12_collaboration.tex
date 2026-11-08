@@ -164,10 +164,17 @@ association claimed to hold exactly on the finite domain & checking run & holds 
 ``$h-g$ concave'' as a sufficient condition for quasi-convexity & main assistant, during rewriting & $h$ concave, $g$ convex\\
 converse of Theorem~\ref{thm:A} failed for \axLI{} (labels unconstrained) & checking run & \axLI{} compares finite values only\\
 claimed equivalence with the cash-line formulation & checking run & convention \ax{S} added; Remark~\ref{rem:oldCP}\\
-regularity axioms undefined for two counterexamples & checking run & \axRC, \axRM{} stated for $\Pi$ and $\rho_D$\\
+regularity axioms undefined for two counterexamples & checking run & \axRC, \axRM{} stated for the price point and the zero of the cash lines\\
 uniqueness of the extension in Prop.~\ref{prop:bridge} & review with ChatGPT & unique up to labels, unique under \ax{S}\\
 independence claimed for (A0) and (A1) & review with ChatGPT & treated as illustrations; Sec.~\ref{sec:necessity}\\
 mixture of expected shortfalls missing the endpoint & review with ChatGPT & $\mathrm{ES}_1:=\operatorname{ess\,sup}$; Cor.~\ref{cor:shape}(a)\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Revision of Section~\ref{sec:collab-revision}}}\\
+implied risk measure identified before \axCM{} was derived (circular citation) & adversarial agent of the panel & identified after Step~3; Lemma~\ref{lem:R}\\
+regularity axioms in a multiplied form excluded the witness of Example~\ref{ex:cube} & two adversarial agents & \axRC, \axRM{} use only the predicates ``not finite'', ``$=0$'', ``$=1$''\\
+test of ``$\LR(W+c)=1$ for all $c\ne0$'' by sampling $c$ gave false results on break-even books & adversarial agent & finite predicate $\LR(W+1)=1$\\
+failure of \axR{} for $\bracket{\Pi'}{\Pi'}$ claimed from random trials, which never hit the pole & adversarial agent & explicit books; Example~\ref{ex:indepR}\\
+non-finite point of $\bracket{I_h}{I_g}$ misplaced in the example for \axPe & main assistant, on rereading & non-finite at $X=0$\\
 \bottomrule
 \end{tabularx}
 \caption{Errors in AI-generated mathematics found during the project, and their resolution.}\label{tab:errors}
@@ -190,7 +197,7 @@ mixture of expected shortfalls missing the endpoint & review with ChatGPT & $\ma
   $\LR\equiv1$ and $c=0$.
 \item \emph{Repair loop.} Reported gaps were returned to the prover agent; the panel's proofs went through two
   repair rounds before the final checking round.
-\item \emph{Counterexamples.} Each axiom other than \axP{} is tested against an explicit loss ratio
+\item \emph{Counterexamples.} Each axiom is tested against an explicit loss ratio
   (Section~\ref{sec:necessity}).
 \item \emph{Recomputation.} The values in Examples~\ref{ex:PH}, \ref{ex:ES}, \ref{ex:qc} and in the counterexamples
   were recomputed by script, and the monotonicity range in Example~\ref{ex:family} was confirmed on a grid.
@@ -215,14 +222,57 @@ The loss-ratio-specific steps were also checked formally in Lean (Section~\ref{s
 
 \input{sec13_lean}
 
+\subsection{A revision: axioms on the loss ratio alone}\label{sec:collab-revision}
+
+In an earlier version, the pooling axiom \axCM{} and the regularity axioms were stated through the implied premium
+and the implied risk measure. A reviewer remarked that some axioms were therefore based on derived quantities, and
+that axioms stated on the loss ratio itself would be preferable. This subsection records how the present
+formulation, in which every axiom refers only to values of $\LR$ (Section~\ref{sec:R}), was obtained.
+
+\emph{Exploration by the author.} With the main assistant, the author first tried to replace the implicit premium by
+explicit formulas in terms of $\LR$: the premium as the limit of $c(1-\LR(X+c))$ for $|c|\to\infty$ divided by
+$1-\LR(X)$, a two-quote formula on the cash line, and, for books that break even, the limit of the premium of
+$X+\varepsilon Y$ as $\varepsilon\to0$. The main assistant checked each proposal. All of them agree with the
+implied premium where they are defined, but on books that break even, and for $h=g$, the finite values of the cash
+line are all equal to $1$ and the formulas are $0/0$ (Proposition~\ref{prop:explicit}); the perturbation repairs this
+only if the premium is already known to be continuous. An intermediate version stated \axCM{} with weights
+given by the points at which the cash lines are not finite. The author rejected it: such a point is the premium
+under another name, and the requirement was that no axiom use the premium, a risk measure or a point read off a
+cash line, but only values of $\LR$.
+
+\emph{The panel.} The author then asked for a panel to replace \axCM{}. It was run as a workflow of nine agents.
+Four proposal agents worked from different angles: stability of level sets under comonotone pooling together with a
+condition on the shape of the cash lines; a single pooling identity on cash lines; elimination of the weight from
+\axCM; and the limits of what a pure loss-ratio axiom can achieve. Each proposal was passed to its own adversarial
+agent, instructed to refute it and to recompute its numbers. All four survived with repairs; the errors the
+adversarial agents found are in the last part of Table~\ref{tab:errors}. A judge agent ranked the four, chose the
+proposal that became \axPe{} and \axR, adopted the form of the regularity axioms from another proposal, and
+collected the impossibility results that became Proposition~\ref{prop:nofinite} and the witnesses of
+Section~\ref{sec:necessity}. The judge also checked the combined system in exact rational arithmetic on a
+four-point space for three representing pairs, a pair of distortions, $h=g$ and a signed pair: \axR{} held on
+every test pair (600 for each of the first and third, 450 for $h=g$), including, for the first, 75 pairs of
+non-constant break-even books, 75 mixed pairs and 150 pairs whose premiums cancel; the sure amounts in \axRC{} and
+\axRM{} equalled $I_g$ and $I_h$; and each witness of Section~\ref{sec:necessity} failed. The judge's report and its
+script are in \texttt{ai\_process/} in the repository.
+The main assistant then wrote Section~\ref{sec:R}, Lemmas~\ref{lem:R} and~\ref{lem:offsets} and the changes in
+the other sections, and repeated the numerical checks.
+
+\emph{The author's decisions.} The author adopted the judge's recommendation and asked whether the hypothesis that the
+pooled books are unpriced could be replaced by the existence of $\lim_{s\to0}s(\LR(X+s)-1)$. The answer is no
+(Remark~\ref{rem:limzero}), and the reason, that no condition on finite values suffices, was stated as
+Proposition~\ref{prop:nofinite}. The nonnegative case of Section~\ref{sec:actuarial} was left in its earlier form.
+
+\emph{What was checked.} The proofs of Lemmas~\ref{lem:R} and~\ref{lem:offsets} and of
+Proposition~\ref{prop:nofinite} were checked by one adversarial agent and the judge and by computation; they are not
+formalized in Lean and were not part of the review with ChatGPT.
+
 \subsection{Verification status}\label{sec:collab-status}
 
 The proofs have undergone AI-assisted critical review. Such review is fallible and does not
 constitute formal verification; this applies equally to the informal review with ChatGPT. No claim of
 machine-checked correctness is made beyond the results formalized in Lean, in the abstract setting and with the
-hypothesis described in Section~\ref{sec:collab-lean}. Independent human review of all proofs, and journal peer review, have not yet taken
-place, and apart from the three papers named above the references have not yet been checked against the original
-publications.
+hypothesis described in Section~\ref{sec:collab-lean}. Independent human review of all proofs has not yet taken place; the reviewer's remark reported in
+Section~\ref{sec:collab-revision} concerned the formulation of the axioms. Apart from the three papers named above, the references have not been checked against the original publications.
 
 \subsection{A proposed standard for reporting AI-assisted proofs}\label{sec:collab-standard}
 
@@ -244,7 +294,7 @@ Table~\ref{tab:standard}. The table also shows where each item is reported for t
 2. Division of labour & who posed the question, chose the formulation and decided on content; which tasks were
   given to AI & Secs.~\ref{sec:intro}, \ref{sec:collab-org}\\
 3. Workflow & the agents or sessions used, their roles and order, the review loops, and the points at which the
-  author intervened & Figs.~\ref{fig:workflow}--\ref{fig:panelpic}\\
+  author intervened & Figs.~\ref{fig:workflow}--\ref{fig:panelpic}; Sec.~\ref{sec:collab-revision}\\
 4. Knowledge base & how the literature was gathered, how reliable each statement was taken to be, and which cited
   statements were checked against the original works & Sec.~\ref{sec:collab-kb}\\
 5. Error log & every error in AI-generated mathematics that was found, how it was found, and how it was resolved &

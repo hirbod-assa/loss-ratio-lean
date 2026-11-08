@@ -5,8 +5,9 @@
 The proof of Theorem~\ref{thm:A} has three steps.
 
 \begin{enumerate}[label=(\Alph*),leftmargin=*,itemsep=2pt]
-\item \emph{Implied pair.} Axiom \axP{} defines $\Pi$; \axN{} and \axCM{}, applied with sure losses, define $\rho$ and
-  give the Möbius form of the cash lines (Lemmas~\ref{lem:premium} and~\ref{lem:implied}).
+\item \emph{Implied pair.} Axioms \axPe{} and \axR{} give \axP, \axN{} and \axCM{} (Lemma~\ref{lem:R}). Property \axP{}
+  defines $\Pi$; \axR{} with a sure loss, equivalently \axN{} and \axCM{} applied with sure losses, defines $\rho$ and
+  gives the Möbius form of the cash lines (Lemmas~\ref{lem:R}, \ref{lem:premium} and~\ref{lem:implied}).
 \item \emph{Transfer.} Given \axP{} and \axN, \axCM{} holds if and only if $\rho$ and $\Pi$ are comonotonic
   additive (Lemma~\ref{lem:comon}), and \axLI{} passes from $\LR$ to $\rho$ and $\Pi$ (Lemma~\ref{lem:LI}).
 \item \emph{Representation.} A law-invariant, comonotonic additive, uniformly continuous functional on an
@@ -16,14 +17,14 @@ The proof of Theorem~\ref{thm:A} has three steps.
 
 Step (C) is classical; we reprove it in Section~\ref{sec:proofs} to keep the constants explicit and to show that
 no continuity is needed in the monotone case. Steps (A) and (B) are specific to loss ratios. Together, axioms
-\axP, \axN{} and \axCM{} state that $\LR$ is the ratio of a pair of comonotonic additive functionals that coincide
+\axPe{} and \axR{} state that $\LR$ is the ratio of a pair of comonotonic additive functionals that coincide
 with the identity on constants, and that this pair can be read off $\LR$.
 
 \subsection{Assumed and derived properties}
 
-Table~\ref{tab:derived} lists the properties of the representation and their source. Axiom \axP{} is ordinal and
-serves as a definition, \axN{} is a normalization, and \axLI, \axRC, \axRM{} select the class of representing
-functions. The cardinal content of the axioms lies in \axCM: given \axP{} and \axN, it is equivalent to
+Table~\ref{tab:derived} lists the properties of the representation and their source. Axiom \axPe{} is ordinal,
+and \axLI, \axRC, \axRM{} select the class of representing functions. The cardinal content of the axioms lies in
+\axR, which contains the normalization \axN{} and the pooling property \axCM; given \axP{} and \axN, \axCM{} is equivalent to
 comonotonic additivity of the implied premium and risk measure, which is the axiom that produces Choquet
 representations in \citet{yaari1987}, \citet{schmeidler1986} and \citet{wyp1997}. The Choquet form of the numerator
 and the denominator is therefore a consequence of comonotonic additivity, as in the single-functional case.
@@ -34,10 +35,10 @@ and the denominator is therefore a consequence of comonotonic additivity, as in 
 \toprule
 \textbf{Property} & \textbf{Source} & \textbf{Status}\\
 \midrule
-$\Pi$ exists and is cash additive & \axP{} & definition\\
-$\Pi(c)=c$, $\rho(c)=c$ & \axN{} and \axP & derived\\
-$\rho$ defined on $L^\infty$; Möbius cash lines & \axCM{} with sure losses (Prop.~\ref{prop:readings}) & derived\\
-$\rho,\Pi$ comonotonic additive & \axCM{} (Lemma~\ref{lem:comon}) & equivalent\\
+unique price point (\axP); $\Pi$ cash additive & \axPe{} and \axR{} (Lemma~\ref{lem:R}) & derived\\
+$\LR(c)=1$ (\axN); $\Pi(c)=c$, $\rho(c)=c$ & \axR{} (Lemma~\ref{lem:R}) & derived\\
+$\rho$ defined on $L^\infty$; Möbius cash lines & \axR{} with a sure loss (Lemma~\ref{lem:R}) & derived\\
+$\rho,\Pi$ comonotonic additive; \axCM & \axR{} (Lemmas~\ref{lem:R} and~\ref{lem:comon}) & equivalent\\
 $\rho,\Pi$ law invariant & \axLI{} (Lemma~\ref{lem:LI}) & assumed\\
 $\rho,\Pi$ continuous or monotone & \axRC, \axRM{} & assumed\\
 $h,g$ of bounded variation & Lemma~\ref{lem:bv} & derived\\
@@ -53,7 +54,7 @@ uniqueness of $(h,g)$ & Proposition~\ref{prop:unique} & derived\\
 \subsection{Relation to the single-functional theory}
 
 The characterizations in the literature concern premiums and risk measures; they cannot be applied to $\LR$
-directly, since a loss ratio is not additive and \axCM{} is a weighted-mean identity. What is specific to the
+directly, since a loss ratio is not additive and \axR{} is an identity between loss ratios. What is specific to the
 loss ratio is the construction of the implied pair, the derivation of additivity on all comonotone pairs, in
 particular on the break-even set where the weights of \axCM{} are not identified (Remark~\ref{rem:primitive}),
 uniqueness of $(h,g)$ also when $\LR\equiv1$, the impossibility of a monotone loss ratio
@@ -63,9 +64,10 @@ extrapolated.
 
 \subsection{Loss ratios excluded and included}
 
-Ratios with a proportional loading, $\E/((1+\theta)\E)$, violate \axN; scenario-weighted ratios $\E_Q/\E$ violate
-\axLI; the ratio $\max(I_{\sqrt t},I_{\min(1,1.5t)})/\E$ violates \axCM, its numerator being cash additive but not
-comonotonic additive; and ordinal transforms such as $(\rho/\Pi)^3$ satisfy \axP{} and \axN{} but violate \axCM.
+Ratios with a proportional loading, $\E/((1+\theta)\E)$, violate \axR{} through \axN; scenario-weighted ratios
+$\E_Q/\E$ violate \axLI; the ratio $\max(I_{\sqrt t},I_{\min(1,1.5t)})/\E$ violates \axR, its numerator being cash
+additive but not comonotonic additive; and ordinal transforms such as $(\rho/\Pi)^3$ satisfy \axPe, \axP{} and \axN{}
+but violate \axR.
 The class characterized contains, among others, the expected loss over any distortion premium
 (Example~\ref{ex:PH}), ratios of expected shortfalls (Example~\ref{ex:ES}), value-at-risk over expected shortfall,
 and ratios that take values on both sides of $1$.

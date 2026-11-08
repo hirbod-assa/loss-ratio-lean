@@ -51,8 +51,10 @@ Theorem and lemma numbers refer to the version of the paper dated 25 October 202
   counterexamples of the paper.
 
 A successful build shows that the formal statements follow from the formal definitions. Whether the
-definitions of the axioms `AxP`, `AxN`, `AxCM`, `AxLI` match the paper should be checked by the reader;
-they are at the top of `Basic.lean`.
+definitions `AxP`, `AxN`, `AxCM`, `AxLI` match the paper should be checked by the reader; they are at the top
+of `Basic.lean`. In the current manuscript `AxLI` is an axiom, while `AxP`, `AxN` and `AxCM` are properties that
+the manuscript derives from its axioms (P∃) and (R), which refer only to values of the loss ratio; that derivation
+(Lemma 7.1 of the manuscript) is not yet formalized.
 
 ## Building
 

@@ -37,6 +37,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{property}[theorem]{Property}
 \newtheorem{example}[theorem]{Example}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
@@ -68,13 +69,17 @@
   boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,breakable,#1}
 
 \newcommand{\axP}{\ax{P}}
+\newcommand{\cinf}[1]{c^{\infty}_{#1}}
+\newcommand{\czero}[1]{c^{0}_{#1}}
 \newcommand{\axN}{\ax{N}}
+\newcommand{\axPe}{\textup{(\textsf{P}$_{\exists}$)}}
+\newcommand{\axR}{\ax{R}}
 
 \title{\textbf{AI-Assisted Proofs in Mathematical Risk Management:\\[2pt]
   An Axiomatic Characterization of the Loss Ratio\\[2pt] and a Proposed Reporting Standard}}
 \author{Hirbod Assa\thanks{Department of Mathematics and Statistics, University College Dublin, and
   Model Library Ltd.
-  \emph{Draft of 6 November 2026.} The use of generative AI in this work is described in Section~\ref{sec:collab}
+  \emph{Draft of 8 November 2026.} The use of generative AI in this work is described in Section~\ref{sec:collab}
   and in the declaration before the references. The proofs have undergone AI-assisted critical review, which is
   fallible and does not constitute formal verification; the loss-ratio-specific steps have in addition been
   checked in Lean in an abstract setting. See Section~\ref{sec:collab-status}.}}
@@ -97,13 +102,15 @@ itself. Along the cash line $c\mapsto\LR(X+c)$, obtained by adding sure losses $
 one point where the ratio stops being finite; its location is the \emph{implied premium}, the sure payment at which
 the book changes hands. The \emph{implied risk measure} then follows from the accounting identity loss $=$ loss
 ratio $\times$ premium, and it is visible even where the ratio explodes, as the residue of the singularity. With
-this reading, four natural axioms on the loss ratio -- a single non-finite point on each cash line, a loss ratio of
-one for sure losses, premium-weighted comonotone pooling, and law invariance -- together with continuity
-(respectively monotonicity) of the implied premium and risk measure characterize the loss ratios $\LR=I_h/I_g$,
+this reading, axioms that refer only to values of the loss ratio -- a point on each cash line at which the ratio is
+not finite, an identity for pooling comonotone books of zero premium (their underwriting results add), law
+invariance, and continuity (respectively monotonicity) of the sure amounts that remove the premium and the loss of
+a book -- characterize the loss ratios $\LR=I_h/I_g$,
 where $I_h,I_g$ are signed Choquet integrals with distortion functions $h,g$ (respectively distortion premia), with
-$(h,g)$ unique. The unit-slope M\"obius form of the cash lines, comonotonic additivity of the implied premium, and
-the association with a family of risk measures are derived rather than assumed. We show that no non-trivial loss ratio is monotone, show by counterexamples that none of the axioms
-except the one defining the implied premium can be dropped, and state candidly which parts of the result are
+$(h,g)$ unique. The uniqueness of the singular point, the value one at sure losses, pooling at relative price, the
+unit-slope M\"obius form of the cash lines, comonotonic additivity of the implied premium, and the association with a
+family of risk measures are derived rather than assumed. We show that no non-trivial loss ratio is monotone, show by
+counterexamples that none of the axioms can be dropped, and state candidly which parts of the result are
 classical.
 
 The work used Claude (Anthropic) as a main assistant and to run panels of AI agents that surveyed the literature,

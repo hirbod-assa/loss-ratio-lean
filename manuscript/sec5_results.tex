@@ -9,32 +9,34 @@ Proposition~\ref{prop:readings}).
 \begin{theorem}[Signed tier]\label{thm:A}
 The following are equivalent.
 \begin{enumerate}[label=(\roman*),nosep]
-\item $\LR$ satisfies \axP, \axN, \axCM, \axLI{} and \axRC.
+\item $\LR$ satisfies \axPe, \axR, \axLI{} and \axRC.
 \item There is a pair $(h,g)\in\Hset_1^2$ such that $\LR(X)=I_h(X)/I_g(X)$ whenever $I_g(X)\neq0$, and
   $\LR(X)\notin\R$ whenever $I_g(X)=0$.
 \end{enumerate}
-In that case the implied premium is $\Pi=I_g$ and the implied risk measure is $\rho=I_h$. If, in addition,
+In that case the price point and the zero of the cash line of $X$ are $-I_g(X)$ and $-I_h(X)$; that is, the
+implied premium is $\Pi=I_g$ and the implied risk measure is $\rho=I_h$. If, in addition,
 the labelling convention \ax{S} holds, then $\LR=\bracket{I_h}{I_g}$ on all of $L^\infty$.
 \end{theorem}
 
 \begin{theorem}[Distortion tier]\label{thm:B}
 The following are equivalent.
 \begin{enumerate}[label=(\roman*),nosep]
-\item $\LR$ satisfies \axP, \axN, \axCM, \axLI{} and \axRM.
+\item $\LR$ satisfies \axPe, \axR, \axLI{} and \axRM.
 \item Statement (ii) of Theorem~\ref{thm:A} holds with $h,g$ distortion functions (non-decreasing elements
   of $\Hset_1$).
 \end{enumerate}
 \end{theorem}
 
-The proofs are given in Section~\ref{sec:proofs}; Section~\ref{sec:necessity} shows that none of the axioms
-can be dropped.
+By Proposition~\ref{prop:RPNCM}, condition (i) may equivalently be stated with the properties \axP, \axN{} and
+\axCM{} in place of the axioms \axPe{} and \axR. The proofs are given in Section~\ref{sec:proofs};
+Section~\ref{sec:necessity} shows that none of the axioms can be dropped.
 
 \subsection{Uniqueness and derived properties}
 
 \begin{proposition}\label{prop:unique}
 In Theorems~\ref{thm:A} and~\ref{thm:B}, $(h,g)$ is unique. For an event $A$ with $P(A)=p$,
 \begin{align*}
- g(p)&=-c^*,\qquad c^*=\text{the price point of }\1_A;\\
+ g(p)&=-\cinf{\1_A},\qquad \cinf{\1_A}=\text{the price point of }\1_A;\\
  h(p)&=\big(g(p)+c\big)\,\LR(\1_A+c)-c\qquad\text{for any }c\neq-g(p).
 \end{align*}
 Moreover $D=\{I_g\ne0\}$ and the break-even set is $N:=\{\rho=\Pi\}=\{I_{h-g}=0\}$. Within
@@ -107,7 +109,7 @@ $\|\nu\|_{bv}<\infty$ and $\nu(\Omega)=1$, and for $\nu\in\mathcal V_1$ let
 $C_\nu(X)=\int_0^\infty\nu(X>x)\,dx+\int_{-\infty}^0[\nu(X>x)-1]\,dx$. A \emph{capacity} is a monotone game.
 
 \begin{theorem}[Without law invariance]\label{thm:A0}
-$\LR$ satisfies \axP, \axN, \axCM{} and \axRC{} if and only if $\LR=C_{\nu_1}/C_{\nu_2}$ where
+$\LR$ satisfies \axPe, \axR{} and \axRC{} if and only if $\LR=C_{\nu_1}/C_{\nu_2}$ where
 $C_{\nu_2}\ne0$ and $\LR\notin\R$ where $C_{\nu_2}=0$, for $\nu_1,\nu_2\in\mathcal V_1$; with \axRM{} in place
 of \axRC{}, if and only if the same holds with capacities $\nu_1,\nu_2$. The pair is unique:
 $\nu_1(A)=\rho(\1_A)$ and $\nu_2(A)=\Pi(\1_A)$. The loss ratio is in addition law invariant if and only if

@@ -1,15 +1,22 @@
 # Building the manuscript
 
 Requires a LaTeX distribution with `pdflatex` and `bibtex` (TeX Live 2023 or later) and the packages
-`mathptmx`, `microtype`, `pgfplots`, `tikz`, `natbib`, `hyperref`, `newunicodechar`, `enumitem`, `booktabs`.
+`mathptmx`, `microtype`, `pgfplots`, `tikz`, `natbib`, `hyperref`, `xr-hyper`, `newunicodechar`, `enumitem`,
+`booktabs`, `tcolorbox`.
+
+The paper (`main.tex`) and the Supplement (`supplement.tex`) share `preamble.tex` and refer to each other through
+`xr-hyper`, so they are built together:
 
 ```
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
+pdflatex main.tex && pdflatex supplement.tex
+bibtex main && bibtex supplement
+pdflatex main.tex && pdflatex supplement.tex
+pdflatex main.tex && pdflatex supplement.tex
 ```
 
-`main.tex` includes `sec1_intro.tex` ... `sec12_collaboration.tex`, `app_proofs.tex`, `declaration.tex`.
-`sec12_collaboration.tex` itself includes `fig_panelpic.tex` and `sec13_lean.tex` (subsection 12.6).
-`loss_ratio_paper_v18.pdf` is the compiled result of this source.
+Paper: `sec1_intro`, `sec_standard`, `sec2_literature`, `sec3_setting`, `sec4_axioms`, `sec5_results`,
+`sec9_necessity`, `sec12_collaboration` (which includes `fig_panelpic` and `sec13_lean`), `sec11_discussion`,
+`declaration`.
+Supplement: `sec7_proofs`, `sec6_triviality`, `supp_remarks`, `supp_A0`, `supp_A0_proof`, `sec8_actuarial`,
+`supp_act`, `supp_C_proof`, `sec10_consequences`, `supp_lit`, `supp_lean`.
+`loss_ratio_paper_v19.pdf` and `loss_ratio_supplement_v19.pdf` are the compiled result.

@@ -1,88 +1,15 @@
 \documentclass[11pt,a4paper]{article}
+\input{preamble}
+\externaldocument{supplement}
 
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{newunicodechar}
-\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}}
-\newunicodechar{∀}{\ensuremath{\forall}}
-\newunicodechar{∃}{\ensuremath{\exists}}
-\newunicodechar{≠}{\ensuremath{\neq}}
-\newunicodechar{→}{\ensuremath{\to}}
-\usepackage{mathptmx}
-\usepackage[expansion=false]{microtype}
-\usepackage[margin=2.6cm]{geometry}
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{booktabs,tabularx,array}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage[most]{tcolorbox}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.16}
-\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds}
-\usepackage[authoryear,round]{natbib}
-\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
-
-\setlist{itemsep=2pt,topsep=3pt,parsep=0pt}
-\setlength{\emergencystretch}{3em}
-\setlength{\parskip}{3pt}
-\renewcommand{\arraystretch}{1.15}
-\bibliographystyle{plainnat}
-
-% ---------- theorem environments (one shared counter, numbered by section)
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{axiom}[theorem]{Axiom}
-\newtheorem{property}[theorem]{Property}
-\newtheorem{example}[theorem]{Example}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-
-% ---------- purpose line printed above every formal statement
-\newcommand{\purpose}[1]{\par\smallskip\noindent{\small\upshape\leftskip=1.1em\rightskip=1.1em
-  \textsc{Purpose.}\ #1\par}\vspace{-1pt}}
-
-% ---------- notation
-\newcommand{\R}{\mathbb R}
-\newcommand{\E}{\mathbb E}
-\newcommand{\LR}{\mathrm{LR}}
-\newcommand{\Rext}{\widehat{\mathbb R}_\star}
-\newcommand{\1}{\mathbf 1}
-\newcommand{\TV}{\mathrm{TV}}
-\newcommand{\ess}{\operatorname{ess\,sup}}
-\newcommand{\eqd}{\overset{d}{=}}
-\newcommand{\Hset}{\mathcal H}
-\newcommand{\Xp}{\mathcal X}
-\newcommand{\ax}[1]{\textup{(\textsf{#1})}}
-\newcommand{\axCP}{\ax{CP}}
-\newcommand{\axLI}{\ax{LI}}
-\newcommand{\axCM}{\ax{CM}}
-\newcommand{\axRC}{\ax{RC}}
-\newcommand{\axRM}{\ax{RM}}
-\newcommand{\bracket}[2]{[#1\!:\!#2]}
-
-\newtcolorbox{keybox}[1][]{colback=blue!4!white,colframe=blue!45!black,
-  boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,breakable,#1}
-
-\newcommand{\axP}{\ax{P}}
-\newcommand{\cinf}[1]{c^{\infty}_{#1}}
-\newcommand{\czero}[1]{c^{0}_{#1}}
-\newcommand{\axN}{\ax{N}}
-\newcommand{\axPe}{\textup{(\textsf{P}$_{\exists}$)}}
-\newcommand{\axR}{\ax{R}}
-
-\title{\textbf{AI-Assisted Proofs in Mathematical Risk Management:\\[2pt]
-  An Axiomatic Characterization of the Loss Ratio\\[2pt] and a Proposed Reporting Standard}}
+\title{\textbf{Reporting AI-Assisted Proofs in Mathematical Risk Management:\\[2pt]
+  A Proposed Standard, with an Axiomatic Characterization\\[2pt] of the Loss Ratio as a Case Study}}
 \author{Hirbod Assa\thanks{Department of Mathematics and Statistics, University College Dublin, and
   Model Library Ltd.
-  \emph{Draft of 8 November 2026.} The use of generative AI in this work is described in Section~\ref{sec:collab}
+  \emph{Draft of 9 November 2026.} The use of generative AI in this work is described in Section~\ref{sec:collab}
   and in the declaration before the references. The proofs have undergone AI-assisted critical review, which is
-  fallible and does not constitute formal verification; the loss-ratio-specific steps have in addition been
-  checked in Lean in an abstract setting. See Section~\ref{sec:collab-status}.}}
+  fallible and does not constitute formal verification; the loss-ratio-specific steps of an earlier formulation
+  have in addition been checked in Lean in an abstract setting. See Section~\ref{sec:collab-status}.}}
 \date{}
 
 \begin{document}
@@ -90,58 +17,40 @@
 
 \begin{abstract}
 \noindent
-This paper has two aims of equal weight. The first is mathematical: to characterize the loss ratio as a risk
-indicator by necessary and sufficient conditions, as Cherny and Madan characterized performance measures such as
-the Sharpe ratio and the RAROC. The second is methodological: the result was obtained by putting AI to the test on
-this problem, with a panel of AI agents working under the author's direction, and the paper reports this process
-in full and proposes a standard for reporting AI-assisted proofs in mathematical risk management.
+Mathematical results in risk management and actuarial science are increasingly obtained with substantial help from
+AI, from a chatbot that suggests a lemma to panels of AI agents that propose, prove and attack theorems. The
+declarations of AI use that journals now require do not tell a reader which parts of such a result were exposed to
+AI error and which checks they passed. This paper proposes a standard for reporting AI-assisted proofs: nine items,
+applied in proportion to how heavily AI was used, each marked by whether an editor or reviewer can verify it, and
+designed so that honest reporting is in the author's interest. Formal verification in a proof assistant and a
+public repository of the proof records are encouraged rather than required.
 
-The loss ratio $\LR(X)$ of an insurance book $X$ is the ratio of a loss measure $\rho(X)$, such as the expected
-loss or a tail measure, to a premium $\Pi(X)$. We show that both parts can be \emph{implied} by the loss ratio
-itself. Along the cash line $c\mapsto\LR(X+c)$, obtained by adding sure losses $c$ to the book, there is exactly
-one point where the ratio stops being finite; its location is the \emph{implied premium}, the sure payment at which
-the book changes hands. The \emph{implied risk measure} then follows from the accounting identity loss $=$ loss
-ratio $\times$ premium, and it is visible even where the ratio explodes, as the residue of the singularity. With
-this reading, axioms that refer only to values of the loss ratio -- a point on each cash line at which the ratio is
-not finite, an identity for pooling comonotone books of zero premium (their underwriting results add), law
-invariance, and continuity (respectively monotonicity) of the sure amounts that remove the premium and the loss of
-a book -- characterize the loss ratios $\LR=I_h/I_g$,
-where $I_h,I_g$ are signed Choquet integrals with distortion functions $h,g$ (respectively distortion premia), with
-$(h,g)$ unique. The uniqueness of the singular point, the value one at sure losses, pooling at relative price, the
-unit-slope M\"obius form of the cash lines, comonotonic additivity of the implied premium, and the association with a
-family of risk measures are derived rather than assumed. We show that no non-trivial loss ratio is monotone, show by
-counterexamples that none of the axioms can be dropped, and state candidly which parts of the result are
-classical.
-
-The work used Claude (Anthropic) as a main assistant and to run panels of AI agents that surveyed the literature,
-proposed and ranked candidate theorems, drafted proofs and counterexamples, and reviewed the proofs adversarially;
-ChatGPT (OpenAI) and Gemini (Google) were used for an independent review of the proofs and for summaries of cited
-works. All decisions on content were the author's, and the central idea, the implied premium and risk measure,
-arose from the author's objections to AI-drafted formulations. We report the organization of the work, how the
-knowledge base was assembled, the errors in AI-generated mathematics that were found and corrected, the guardrails,
-a formal check in Lean of the steps specific to loss ratios, and what has not been verified, and distil these into
-a checklist for reporting AI-assisted proofs.
+The standard is applied to a case study, carried out with a panel of AI agents under the author's direction: an
+axiomatic characterization of the loss ratio as a risk indicator, in the spirit of Cherny and Madan's theory of
+performance measures. The premium and the risk measure are implied by the loss ratio itself, the premium as the
+point at which the ratio stops being finite along the cash line $c\mapsto\LR(X+c)$. Axioms that refer only to values
+of the loss ratio -- a non-finite point on each cash line, comonotone pooling of books with zero premium, law
+invariance, and continuity (respectively monotonicity) of the sure amounts that remove the premium and the loss of a
+book -- characterize the loss ratios $I_h/I_g$, ratios of signed Choquet integrals (respectively distortion premia),
+with $(h,g)$ unique; none of the axioms can be dropped, and no axiom on finite values alone can replace the pooling
+axiom. The report of the case study records the organization of the agents, the seventeen errors in AI-generated
+mathematics that were found, the checks applied, a formal check in Lean, the revisions prompted by readers, and
+what has not been verified. We compare the approach with recent large-scale multi-agent efforts in mathematics.
 \end{abstract}
 
-\noindent\textbf{Keywords:} loss ratio; implied premium; implied risk measure; axiomatic characterization;
-distortion premium; signed Choquet integral; comonotonic additivity; AI-assisted proofs; large language models;
-reporting standards; Lean.
+\noindent\textbf{Keywords:} AI-assisted proofs; reporting standards; large language models; multi-agent systems;
+formal verification; Lean; loss ratio; implied premium; axiomatic characterization; signed Choquet integral;
+comonotonic additivity.
 
 \input{sec1_intro}
+\input{sec_standard}
 \input{sec2_literature}
 \input{sec3_setting}
 \input{sec4_axioms}
 \input{sec5_results}
-\input{sec6_triviality}
-\input{sec7_proofs}
-\input{sec8_actuarial}
 \input{sec9_necessity}
-\input{sec10_consequences}
-\input{sec11_discussion}
 \input{sec12_collaboration}
-
-\appendix
-\input{app_proofs}
+\input{sec11_discussion}
 
 \input{declaration}
 

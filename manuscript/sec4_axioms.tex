@@ -86,6 +86,17 @@ since $\Pi(X)=\tfrac12$ and $Y$ is a sure amount, while $X+Y$ is unpriced and it
 hypothesis of \axR{} accounts for such pools, whose premiums cancel.
 \end{remark}
 
+\begin{discussion}[the hypothesis of \axR]
+The author required that no axiom refer to the premium, to a risk measure or even to the price point of a cash
+line, which is the premium under another name, and that the axioms use the values of $\LR$ only. Axiom \axR{} was
+obtained in response (Section~\ref{sec:collab-revision}). The author then found its hypothesis that $\LR(X)$ and
+$\LR(Y)$ are not finite an awkward part of an axiom, and asked whether it could be replaced by the requirement that
+$\lim_{s\to0}s\,(\LR(X+s)-1)$ exist. Remark~\ref{rem:limzero} and Proposition~\ref{prop:nofinite} give the answer
+worked out with the main assistant: the limit exists for every ratio of the representation and does not single out
+the books with zero premium, and no condition on finite values can replace \axR. The hypothesis was kept, and it is
+stated through the economic notion of an unpriced book.
+\end{discussion}
+
 \begin{proposition}[The derived properties]\label{prop:RPNCM}
 Axioms \axPe{} and \axR{} hold if and only if the properties \axP, \axN{} and \axCM{} below hold.
 \end{proposition}
@@ -163,6 +174,13 @@ the \emph{relative cost} of $X$ and of $Y$, respectively. Since $-\cinf X$ is th
 hands, $w_{X,Y}$ is the relative price of $X$ in the comonotone portfolio $\{X,Y\}$: the price of $X$ as a fraction
 of the prices of the two books together, read off their cash lines. In terms of the implied premium,
 $w_{X,Y}=\Pi(X)/(\Pi(X)+\Pi(Y))$.
+
+\begin{discussion}[relative price]
+In an earlier version the pooling property was written with the premiums inside a single fraction. The author
+asked that it be written as the combination $w_{X,Y}\LR(X)+w_{Y,X}\LR(Y)$ of the two loss ratios, and that the
+weight be explained as the relative price of $X$ in the comonotone portfolio $\{X,Y\}$, since this is the form in
+which an underwriter reads a pooled loss ratio. The paragraph above records that reading.
+\end{discussion}
 
 \begin{property}[\axCM]\label{ax:CM}
 For comonotone $X,Y\in D$ with $\cinf X+\cinf Y\neq0$,
@@ -302,23 +320,38 @@ the explicit premium of (a) or (b) in place of $-\cinf{}$; but \axCM{} must also
 break-even books, and there only the price point locates the premium. Axiom \axR{} avoids weights altogether: it
 moves each book to zero premium by a sure payment, which is a statement about non-finite values, and pools there.
 
-\begin{remark}[A weight-free form of \axCM]\label{rem:weightfree}
-Property \axCM{} is a cardinal statement whose weights are read off the price points. Given \axP, the pair
-\axN+\axCM{} is equivalent to the following two statements, which use no weights:
-\begin{enumerate}[label=(\Alph*),nosep]
-\item[(M)] every cash line has at most one zero, and $\LR(X+c)=\dfrac{c-\czero X}{c-\cinf X}$ for all $c\ne\cinf X$;
-\item[(A)] if $X,Y$ are comonotone, then $\cinf{X+Y}=\cinf X+\cinf Y$ and $\czero{X+Y}=\czero X+\czero Y$.
-\end{enumerate}
-(M) says that every cash line is the unit-slope Möbius map determined by its own zero and price point; (A) says
-that comonotone pooling adds the cash offsets at the levels $0$ and $\infty$. Indeed, \axN{} and \axCM{} imply (M) by
-Proposition~\ref{prop:readings}(a) and Corollary~\ref{cor:zero}, and (A) by Lemma~\ref{lem:comon}(a). Conversely,
-(A) with $X=Y=0$ gives $\cinf0=\czero0=0$, so (M) gives $\LR(c)=c/c=1$ for $c\ne0$, which is \axN. If $X,Y\in D$ are
-comonotone with $\cinf X+\cinf Y\ne0$, then $X+Y\in D$ by (A), and (M) at $c=0$ gives
-$\LR(Z)=\czero Z/\cinf Z$ for $Z\in\{X,Y,X+Y\}$; by (A),
-$\LR(X+Y)=(\czero X+\czero Y)/(\cinf X+\cinf Y)=w_{X,Y}\LR(X)+w_{Y,X}\LR(Y)$, which is \axCM. Unlike the formulation
-(CP) of Remark~\ref{rem:oldCP}, (M) refers to no functional other than $\LR$, but it still uses the points
-$\cinf X$ and $\czero X$. Axiom \axR{} states the content of (M) and (A) without them.
-\end{remark}
+\begin{discussion}[explicit premium formulas]
+After the remark of Peng Liu reported in Section~\ref{sec:collab-revision}, the author asked whether the implicitly
+defined premium could be replaced by an explicit formula in the values of $\LR$, so that the axioms could be
+restated in terms of the loss ratio. Three proposals were examined. The first solves the identity \eqref{eq:pool}
+for $\Pi(X)$, which gives (a) and (b) of Proposition~\ref{prop:explicit}. The second, proposed by the author, takes
+the existence of $M(X):=\lim_{|c|\to\infty}c\,(1-\LR(X+c))$ as a condition and defines the premium as
+$M(X)/(1-\LR(X))$; by (c) it agrees with the implied premium off the break-even set. The third, also proposed by
+the author, treats a break-even book $X$ by perturbation, setting $\Pi(X):=\lim_{\varepsilon\to0}\Pi(X+\varepsilon
+Y)$ for a book $Y$ such that $X+\varepsilon Y$ is outside the break-even set, with $\Pi(X+\varepsilon Y)$ given by
+the second formula. The main assistant checked that each proposal agrees with the implied premium wherever it is
+defined, and that the perturbation recovers it on the break-even set provided the premium is already known to be
+continuous, which is part of what the axioms are meant to deliver. The conclusion was that no explicit formula can
+serve as a definition on its own: on break-even books, and for $h=g$ on every book, the finite values of the cash
+line carry no information about the premium. This led to the formulation of Section~\ref{sec:R}, in which the
+premium enters only through the non-finite values of $\LR$.
+\end{discussion}
+
+\begin{discussion}[the margin ratio]
+The author also asked how the cash-line formulation of an earlier version (Remark~\ref{rem:oldCP} in the
+Supplement) could be written with the loss ratio alone. Under the representation,
+$1-\LR(X+c)=(\Pi(X)-\rho(X))/(\Pi(X)+c)$, so off the break-even set the map $c\mapsto1/(1-\LR(X+c))$ is affine; it
+vanishes at the price point and equals $1$ where the cash line vanishes. The author proposed to call
+$\mathrm{MR}:=1-\LR$ the \emph{margin ratio}, the underwriting margin per unit of premium, and to state the
+condition through the ratio of the two: since $1/(1-\LR)=1+\LR/\mathrm{MR}$, every cash line off the break-even set
+is a unit-slope Möbius map if and only if $c\mapsto\LR(X+c)/\mathrm{MR}(X+c)$ is affine, with slope
+$1/(\Pi(X)-\rho(X))$. The author's first version of the identity had the quotient inverted, and the main assistant
+corrected it. Both forms degenerate on the break-even set, where the margin ratio vanishes along the whole cash line
+except at the price point, so they do not locate the premium of a break-even book. The condition was therefore kept
+as a reading of Proposition~\ref{prop:readings}(a), not as an axiom.
+\end{discussion}
+
+
 
 \begin{example}[Three cash lines]\label{ex:three}
 Let $\rho=I_{\mathrm{id}}=\E$ and $\Pi=I_{\sqrt{\cdot}}$, and let $P(A)=\tfrac14$. Figure~\ref{fig:three} shows
@@ -370,15 +403,7 @@ Convention \ax{S} is not used in the proofs. If, instead, the loss ratio is real
 point of a break-even book cannot be observed and the implied premium is not defined there.
 \end{remark}
 
-\begin{remark}[A formulation by cash lines]\label{rem:oldCP}
-One may alternatively postulate (CP): every cash line is a unit-slope Möbius map,
-$\LR(X+c)=\bracket{\rho(X)+c}{\Pi(X)+c}$. Proposition~\ref{prop:readings}(a) shows that (CP) follows from \axP,
-\axN{} and \axCM, the labels agreeing under \ax{S}. Conversely, (CP) implies \axP{} and \ax{S}, and (CP) together
-with \axCM{} implies \axN: if $\pi_0:=\Pi(0)\ne0$, \axCM{} applied to the constants $a=b=-\pi_0/2$ forces
-$\LR(-\pi_0)\in\R$, although $-\pi_0$ is the price point of $0$; hence $\pi_0=0$, and \axCM{} with $X=Y=a\ne0$ gives
-$(\rho(0)+2a)/(2a)=(\rho(0)+a)/a$, i.e.\ $\rho(0)=0$ and $\LR(c)=1$. Thus \axP+\axN+\axCM+\ax{S} is equivalent to
-(CP)+\axCM.
-\end{remark}
+
 
 \subsection{Axiom \axLI: law invariance}\label{sec:li}
 
@@ -445,29 +470,7 @@ is non-decreasing both signs are non-negative, hence $h=g$ on $(0,1]$; if $\LR$ 
 non-positive, and again $h=g$. \qedhere
 \end{proof}
 
-\begin{example}\label{ex:F2}
-Let $h=\mathrm{id}$, $g=\sqrt{\cdot}$ and $p=q=\tfrac14$ in the proof. Both families of books in
-Figure~\ref{fig:F2} increase in the almost sure order, but the loss ratio increases along the first and
-decreases along the second: adding a sure loss to an over-priced book moves the ratio towards $1$ from below,
-whereas adding risk to a sure loss moves it away from $1$.
-\end{example}
 
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=0.7\textwidth,height=5.4cm,xmin=0,xmax=8,ymin=0.4,ymax=1.05,
-  xlabel={$s$},ylabel={loss ratio},tick label style={font=\small},samples=100,domain=0:8,
-  legend style={font=\small,at={(0.98,0.5)},anchor=east,cells={anchor=west}}]
-\addplot[thick,blue!70!black] {(0.25+x)/(0.5+x)};
-\addlegendentry{$\LR(\1_A+s)$}
-\addplot[thick,red!70!black,dashed] {(1+0.25*x)/(1+0.5*x)};
-\addlegendentry{$\LR(1+s\1_E)$}
-\addplot[gray,dotted,domain=0:8] {1};
-\end{axis}
-\end{tikzpicture}
-\caption{Example~\ref{ex:F2}: $h=\mathrm{id}$, $g=\sqrt{\cdot}$, $P(A)=P(E)=\frac14$. Both families of books
-increase with $s$; the loss ratio increases along one and decreases along the other.}\label{fig:F2}
-\end{figure}
 
 Consequently, the theorems on acceptability indices \citep{chernymadan2009}, which require monotonicity of the
 index, do not apply to loss ratios. Axiom \axRM{} is nevertheless an order property of $\LR$: it concerns the

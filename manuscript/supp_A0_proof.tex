@@ -1,0 +1,33 @@
+\subsection{Proof of Theorem~\ref{thm:A0}}\label{app:A0}
+
+
+Lemmas~\ref{lem:premium}, \ref{lem:implied}, \ref{lem:comon} and~\ref{lem:cashlip} do not use \axLI. Put
+$\nu_1(A):=\rho(\1_A)$ and $\nu_2(A):=\Pi(\1_A)$. They are null-invariant, because $\rho$ and $\Pi$ act on
+almost-sure classes, normalized by $\rho(1)=\Pi(1)=1$, and the layer formula \eqref{eq:layer} holds with
+$\nu_i(C_j)$ in place of $h(P(C_j))$, for every chain $C_1\supset\dots\supset C_m$.
+
+\emph{Bounded variation.} Given a chain $\emptyset=A_0\subset\dots\subset A_n=\Omega$, run the proof of
+Lemma~\ref{lem:bv} with $I_j:=A_j\setminus A_{j-1}$; then $\{W\ge2(n-j)\}=A_j$, and one obtains
+$\|\nu_1\|_{bv}\le2L$. Under \axRM, $\nu_1$ is monotone, i.e.\ a capacity.
+
+\emph{Jordan decomposition of a game.} For $\nu\in\mathcal V$ let $\nu^+(A):=\sup\sum_j(\nu(A_j)-\nu(A_{j-1}))^+$
+over chains from $\emptyset$ to $A$, and $\nu^-:=\nu^+-\nu$.
+For $A\subset B$, appending $B$ to a chain for $A$ gives $\nu^+(B)\ge\nu^+(A)+(\nu(B)-\nu(A))^+$. Hence $\nu^+$ is
+non-decreasing, and $\nu^-(B)-\nu^-(A)\ge(\nu(B)-\nu(A))^+-(\nu(B)-\nu(A))\ge0$, so $\nu^-$ is non-decreasing.
+Moreover $\nu^+(A)\le\|\nu\|_{bv}$ (append $\Omega$), and null-invariance passes to $\nu^\pm$ (if $P(A\triangle A')=0$,
+map $A_j\mapsto A_j\cap A'$ for $j<n$ and $A_n\mapsto A'$, which preserves all $\nu$-values).
+
+\emph{Representation.} $C_{\nu^\pm}$ (with the correction term by $\nu^\pm(\Omega)$) is monotone with cash slope
+$\nu^\pm(\Omega)$, hence Lipschitz, and $C_\nu=C_{\nu^+}-C_{\nu^-}$ by linearity in $\nu$. Now $\rho$ and
+$C_{\nu_1}$ are Lipschitz and agree on simple positions by \eqref{eq:layer}, so $\rho=C_{\nu_1}$; likewise
+$\Pi=C_{\nu_2}$.
+
+\emph{Converse and uniqueness.} As in the proof of Theorems~\ref{thm:A} and~\ref{thm:B}, with $\nu$ in place of
+$h\circ P$; null-invariance makes $C_\nu$ well defined on almost-sure classes and makes almost-sure nestedness
+sufficient. Uniqueness follows because $\Pi(\1_A)$ is minus the price point of $\1_A$ and $\rho(\1_A)$ is given by
+Proposition~\ref{prop:readings}(b).
+
+\emph{Law invariance.} If \axLI{} holds, Lemma~\ref{lem:LI} makes $\nu_i(A)$ a function of $P(A)$ alone, so
+$\nu_i=k_i\circ P$; since the space is atomless, $\|k\circ P\|_{bv}=\TV(k)$, so $k_i\in\Hset_1$. Conversely
+$k\circ P$ gives a law-invariant functional. \qed
+

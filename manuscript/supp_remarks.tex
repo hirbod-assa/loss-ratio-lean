@@ -1,0 +1,55 @@
+\subsection{Further remarks on the axioms}\label{supp:remarks}
+
+\begin{remark}[A weight-free form of \axCM]\label{rem:weightfree}
+Property \axCM{} is a cardinal statement whose weights are read off the price points. Given \axP, the pair
+\axN+\axCM{} is equivalent to the following two statements, which use no weights:
+\begin{enumerate}[label=(\Alph*),nosep]
+\item[(M)] every cash line has at most one zero, and $\LR(X+c)=\dfrac{c-\czero X}{c-\cinf X}$ for all $c\ne\cinf X$;
+\item[(A)] if $X,Y$ are comonotone, then $\cinf{X+Y}=\cinf X+\cinf Y$ and $\czero{X+Y}=\czero X+\czero Y$.
+\end{enumerate}
+(M) says that every cash line is the unit-slope Möbius map determined by its own zero and price point; (A) says
+that comonotone pooling adds the cash offsets at the levels $0$ and $\infty$. Indeed, \axN{} and \axCM{} imply (M) by
+Proposition~\ref{prop:readings}(a) and Corollary~\ref{cor:zero}, and (A) by Lemma~\ref{lem:comon}(a). Conversely,
+(A) with $X=Y=0$ gives $\cinf0=\czero0=0$, so (M) gives $\LR(c)=c/c=1$ for $c\ne0$, which is \axN. If $X,Y\in D$ are
+comonotone with $\cinf X+\cinf Y\ne0$, then $X+Y\in D$ by (A), and (M) at $c=0$ gives
+$\LR(Z)=\czero Z/\cinf Z$ for $Z\in\{X,Y,X+Y\}$; by (A),
+$\LR(X+Y)=(\czero X+\czero Y)/(\cinf X+\cinf Y)=w_{X,Y}\LR(X)+w_{Y,X}\LR(Y)$, which is \axCM. Unlike the formulation
+(CP) of Remark~\ref{rem:oldCP}, (M) refers to no functional other than $\LR$, but it still uses the points
+$\cinf X$ and $\czero X$. Axiom \axR{} states the content of (M) and (A) without them.
+\end{remark}
+
+\begin{remark}[A formulation by cash lines]\label{rem:oldCP}
+One may alternatively postulate (CP): every cash line is a unit-slope Möbius map,
+$\LR(X+c)=\bracket{\rho(X)+c}{\Pi(X)+c}$. Proposition~\ref{prop:readings}(a) shows that (CP) follows from \axP,
+\axN{} and \axCM, the labels agreeing under \ax{S}. Conversely, (CP) implies \axP{} and \ax{S}, and (CP) together
+with \axCM{} implies \axN: if $\pi_0:=\Pi(0)\ne0$, \axCM{} applied to the constants $a=b=-\pi_0/2$ forces
+$\LR(-\pi_0)\in\R$, although $-\pi_0$ is the price point of $0$; hence $\pi_0=0$, and \axCM{} with $X=Y=a\ne0$ gives
+$(\rho(0)+2a)/(2a)=(\rho(0)+a)/a$, i.e.\ $\rho(0)=0$ and $\LR(c)=1$. Thus \axP+\axN+\axCM+\ax{S} is equivalent to
+(CP)+\axCM.
+\end{remark}
+
+The following example illustrates Proposition~\ref{prop:F2}.
+
+\begin{example}\label{ex:F2}
+Let $h=\mathrm{id}$, $g=\sqrt{\cdot}$ and $p=q=\tfrac14$ in the proof. Both families of books in
+Figure~\ref{fig:F2} increase in the almost sure order, but the loss ratio increases along the first and
+decreases along the second: adding a sure loss to an over-priced book moves the ratio towards $1$ from below,
+whereas adding risk to a sure loss moves it away from $1$.
+\end{example}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.7\textwidth,height=5.4cm,xmin=0,xmax=8,ymin=0.4,ymax=1.05,
+  xlabel={$s$},ylabel={loss ratio},tick label style={font=\small},samples=100,domain=0:8,
+  legend style={font=\small,at={(0.98,0.5)},anchor=east,cells={anchor=west}}]
+\addplot[thick,blue!70!black] {(0.25+x)/(0.5+x)};
+\addlegendentry{$\LR(\1_A+s)$}
+\addplot[thick,red!70!black,dashed] {(1+0.25*x)/(1+0.5*x)};
+\addlegendentry{$\LR(1+s\1_E)$}
+\addplot[gray,dotted,domain=0:8] {1};
+\end{axis}
+\end{tikzpicture}
+\caption{Example~\ref{ex:F2}: $h=\mathrm{id}$, $g=\sqrt{\cdot}$, $P(A)=P(E)=\frac14$. Both families of books
+increase with $s$; the loss ratio increases along one and decreases along the other.}\label{fig:F2}
+\end{figure}

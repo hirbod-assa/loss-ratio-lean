@@ -1,0 +1,364 @@
+\section{AI-assisted proofs and a proposed reporting standard}\label{sec:standard}
+
+This section describes current practice in the use of AI for mathematical proofs, compares the approach of this
+paper with recent large-scale efforts, and proposes the reporting standard. The standard is applied to the case
+study in Section~\ref{sec:collab}.
+
+\subsection{Current practice}\label{sec:std-practice}
+
+In most papers in our field that acknowledge AI, a general-purpose chatbot was asked for help with a step, a lemma,
+a computation or the wording, and the acknowledgement says so in a sentence. The proofs remain the author's, and a
+one-line declaration is adequate. A different mode of work has appeared in which AI agents, instances of a language
+model given a role, tools and a task, are organized to propose, prove, criticize and formalize results, and the
+human contribution is to choose problems, direct the work and decide what to accept.
+
+The most visible examples are the releases of OpenAI in 2026, which illustrate several distinct ways of combining
+AI discovery with verification. In February, OpenAI submitted proof attempts by an internal model to First Proof,
+a set of ten research-level problems posed by experts in their fields \citep{openai_firstproof_2026}. The model
+was run ``with limited human supervision'': the researchers sometimes suggested retrying strategies that had
+appeared fruitful, asked the model to expand or clarify parts of a proof after expert feedback, facilitated a
+back-and-forth between the model and ChatGPT ``for verification, formatting, and style'', and for some problems
+presented the best of a few attempts selected by human judgment. One attempt first believed likely correct was
+later judged incorrect in the light of the official commentary, OpenAI states that the process was not as clean as a
+properly controlled evaluation, and the accompanying preprint includes an appendix of prompt patterns. In
+August, OpenAI published ten results in mathematics and theoretical computer science, with certificates in the
+proof assistant Lean \citep{openai_tenproofs_2026}. In September it announced a resolution of the Navier--Stokes
+problem, with a written proof and a Lean formalization \citep{openai_navierstokes_2026}. OpenAI describes a
+system of coordinating agents, powered by an internal model, with access to a cached copy of the internet and to
+code execution, and subdivided into groups that communicate internally; the group that produced the result
+involved of the order of ten thousand concurrent agents. Different groups were prompted with different variants of
+the problem statement, two leading to a proof of regularity and two to a counterexample. A run on easier problems
+produced, with nearly a hundred agents over about fifty hours, a result on the Euler equations, after which the
+researchers moved agents to Navier--Stokes, prompted them with the Euler result, and switched them to a further
+trained version of the model. Groups were encouraged to explore diverse approaches and were then
+``cross-pollinated'' by using a coding agent to consolidate the most useful insights of each group into follow-up
+prompts. The resolution came after about 88 hours and 2.7 million messages between agents, and the Lean
+formalization took another 17 hours. In October OpenAI released about seven hundred
+manuscripts produced by an internal model by one fixed procedure on some four thousand posed problems, together
+with a Lean library covering a part of the results and a change log recording retractions and repairs
+\citep{openai_math_2026}; this release did not use the large communicating configuration of the Navier--Stokes
+run. The repository describes the manuscripts as ``raw research data, rather than polished academic papers'', and
+states that unformalized results could contain errors. Later in October, OpenAI announced three further results, in
+harmonic analysis, complexity theory and quantum field theory, again described its manuscripts as raw research
+data, and tested three ways of turning them into understanding: releasing the materials and leaving researchers to
+organize themselves; forming an external group of collaborators while releasing the materials; and forming an
+external group and leaving the release to it \citep{openai_academic_2026}. The collaborations follow four stated
+principles: transparency, no academic credit claimed by OpenAI for discoveries of its models, recognition of the
+groups for the understanding they develop, and independence of the groups. OpenAI notes that the choice of
+coordinators gives some researchers earlier access to the materials than others.
+
+The mathematical community has responded on three points that bear directly on reporting. First, on
+\emph{understanding and disclosure}: the Advisory Group on Mathematics and Artificial Intelligence (AGMAI), a group
+of mathematicians independent of AI companies, distinguishes papers that a human understands, to which the usual
+norms apply, from results not yet understood by anybody, and asks for the latter that the model, the prompts, a
+summary of the reasoning, the time and the cost of computation be disclosed, that it be stated how problems were
+chosen and how many were not solved, and that results be deposited in repositories not controlled by the releasing
+company \citep{agmai_guidelines_2026}. Second, on \emph{formal verification}: a formal check establishes the formal
+statement, not that it says what the paper says. A human audit of the August release found no confirmed substantive
+error in a principal result but stressed that Lean ``checks the encoded proposition'' while human scrutiny must
+establish its intended meaning, and recommended a standardized report header \citep{sienicki_audit_2026}; a study
+of the Navier--Stokes release argues that its formal proof does not correspond to the natural-language proof
+\citep{bastounis_lost_2026}. The Lean community's own checklist for formal claims asks the same questions: whether
+the proof is complete, which axioms it depends on, and whether it proves the statement that is claimed
+\citep{lean_didyouproveit}. Third, on \emph{records}: press reports noted that only a small fraction of the
+October manuscripts came with summaries of the model's reasoning, and that natural-language and formal artifacts
+were not linked by machine-readable metadata \citep{fernholz_techcrunch_2026,howlett_sciam_2026}.
+
+\begin{discussion}[the prevailing practice and the role of repositories]
+In preparing this paper the author observed that most reported uses of AI in our field are of the first kind, a
+chatbot that helps to establish a lemma and is then acknowledged, and that the second kind needs a fuller account:
+the form of the panel, the use of a proof assistant, and the place of the human in the loop. The author and the
+main assistant also noted that this way of working resembles programming more than writing: the proof assistant
+code, the records of the process and the manuscript source are kept and published together in a version-controlled
+repository, rather than as a single preprint. These observations motivated the items on workflow, formal
+verification and records in Table~\ref{tab:standard}.
+\end{discussion}
+
+\subsection{The approach of this paper compared with large-scale efforts}\label{sec:std-compare}
+
+The case study used a panel of AI agents run by one researcher (Section~\ref{sec:collab-org}). Its design shares
+several features with the large-scale efforts, and differs from them in scale and in the role of the human.
+Table~\ref{tab:compare} summarizes the comparison. OpenAI's descriptions cover the organization of the agents into groups, the
+variants they received and the consolidation of their findings, but not roles such as reviewer or judge within a
+group, and the table does not attribute such roles to them.
+
+\begin{table}[ht]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Feature} & \textbf{Large-scale efforts (OpenAI, 2026)} & \textbf{This paper}\\
+\midrule
+Parallel work on variants & communicating groups prompted with different variants of the problem statement
+  (Navier--Stokes) & proposal agents on distinct angles of one question\\
+Synthesis & a coding agent consolidates the most useful insights of each group into follow-up prompts & judge agents
+  rank the proposals, choose one and graft parts of others onto it\\
+Criticism & model-to-model checking and expert feedback, with human selection among attempts (First Proof);
+  dedicated adversarial reviewers not documented & each proposal and proof attacked by agents instructed to refute
+  it; a review by a model of a second provider\\
+Formal verification & Lean certificates for part of the results & Lean check of the loss-ratio-specific steps of
+  the first formulation, in an abstract setting (Section~\ref{sec:collab-lean})\\
+Release & public repositories with change logs of retractions and repairs & public repository with version
+  history, proof records and process records\\
+Error record & retractions and repairs in a change log & every error found in AI-generated mathematics, with how it
+  was found (Table~\ref{tab:errors})\\
+Scale & of the order of $10^4$ concurrent agents, 88 hours and 2.7 million messages for one problem; thousands
+  of posed problems in the October release & a few to about ten agents per stage; one problem\\
+Configurations & a large communicating run for one problem, with the model updated during the run; a fixed
+  procedure for thousands of problems & one panel design, reused with new roles for the revision; several model
+  versions across sessions (declaration)\\
+Role of the human & choice of problems and of where to direct computation; suggestions of strategies, requests
+  for clarification and selection among attempts (First Proof); external working groups after release
+  & choice of the problem and of every formulation; objections to AI drafts changed the result\\
+Credit and responsibility & no academic credit claimed for discoveries of the models; credit to external groups
+  for the understanding they develop & the author takes responsibility for the result; the division of labour
+  records what the AI contributed\\
+Disclosure of prompts & prompt patterns in an appendix (First Proof); for Navier--Stokes, offered privately to
+  concurrent researchers & the prompts of the latest panel are kept with its records\\
+\bottomrule
+\end{tabularx}
+\caption{The approach of the case study compared with large-scale multi-agent efforts in mathematics.}\label{tab:compare}
+\end{table}
+
+The resemblance is in the design principles: several independent attempts from different angles, selection and
+synthesis of the most useful findings (by a coding agent in the Navier--Stokes run, by judge agents here),
+criticism, formal verification of what can be formalized, and release of the records with
+a history of corrections. These principles do not depend on scale, and a single researcher can apply them to a
+problem in risk management at modest cost. The closest analogue to the case study is OpenAI's First Proof work,
+in which humans suggested strategies, asked for clarification after expert feedback, used a second model to check
+the proofs and selected among attempts, which is the role the author and the review with ChatGPT played here; what
+the case study adds is a record of the errors found at each step and of the author's interventions. The difference is in the human role. In the large-scale efforts the
+human chooses problems and allocates computation, and the results may not yet be understood by anybody; in the case
+study the author directed every stage, and the central idea of the result came from the author's objections to
+drafts produced by the agents. The assignment of credit differs accordingly: OpenAI claims no academic credit for its models' discoveries and
+credits external groups with the understanding they develop, whereas here the author, who directed the work and
+understands the result, takes responsibility for it, and the report records what came from the AI. The paper
+therefore falls under the first category of the AGMAI guidelines, a result
+that its author understands, but its proofs were developed by agents, which is why the fuller report of
+Section~\ref{sec:collab} is given.
+
+\begin{discussion}[the design of the panel]
+When the author decided to make the use of AI central to the paper, the panel was described to the main assistant
+as organized in the manner of the recent multi-agent efforts in mathematics, and the paper was conceived as having
+two parts: the mathematical question, and the demonstration, open to inspection, of how AI was used to answer it.
+To check this description, two accounts of OpenAI's methods were prepared independently: one by an agent of the
+main assistant, which read OpenAI's public repositories, the arXiv audits, the AGMAI guidelines and press reports
+but could not retrieve OpenAI's own pages, and one by ChatGPT, at the author's request, which cited OpenAI's posts
+directly. The author then retrieved OpenAI's Navier--Stokes and First Proof posts and its October post on academic
+collaborations in a browser, and the main assistant
+compared them with both accounts; the posts confirm the facts that both accounts reported, and the text above
+quotes them directly. The two accounts agree on
+the facts used here. Both find that the resemblance holds for the principles
+listed above, that OpenAI used model-to-model checking and coordinated groups of agents, and that no published
+record specifies dedicated reviewer or judge roles; the comparison in Table~\ref{tab:compare} is stated
+accordingly. The use of a second provider to cross-check a description of the literature is an instance of the
+guardrail of Section~\ref{sec:collab-guard}.
+\end{discussion}
+
+\subsection{The proposed standard}\label{sec:collab-standard}
+
+We propose that a mathematical paper in risk management or actuarial science whose results were obtained with
+substantial AI assistance report the items in Table~\ref{tab:standard}, in the tier that fits its use of AI
+(Section~\ref{sec:std-tiers}). For each item the table states whether an editor or reviewer can verify it from
+public artifacts (V), can inspect it without being able to establish its completeness (P), or must take it on the
+author's word (S), and where it is reported for the case study.
+
+\begin{table}[ht]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}X>{\centering\arraybackslash}p{0.75cm}>{\centering\arraybackslash}p{0.55cm}>{\raggedright\arraybackslash}p{2.5cm}@{}}
+\toprule
+\textbf{Item} & \textbf{What to report} & \textbf{Tier} & \textbf{Ver.} & \textbf{Case study}\\
+\midrule
+1. Tools & providers, models and versions, mode of access, dates of use & 1--3 & S/P & declaration\\
+2. Division of labour & who posed the question, chose the formulation and decided on content; which tasks were
+  given to AI & 1--3 & S & Secs.~\ref{sec:intro}, \ref{sec:collab-org}\\
+3. Workflow & the agents or sessions used, their roles and order, the review loops, and the points at which the
+  author intervened & 3 & P & Sec.~\ref{sec:collab-org}, \ref{sec:collab-revision}\\
+4. Knowledge base & how the literature was gathered, how reliable each statement was taken to be, which cited
+  statements were checked against the original works & 3 & P & Sec.~\ref{sec:collab-kb}\\
+5. Error log & every error in AI-generated mathematics that was found, how it was found, how it was resolved
+  & 2--3 & S/P & Table~\ref{tab:errors}\\
+6. Guardrails & the checks applied: adversarial review, review by a second system, recomputation of numbers,
+  counterexamples, self-contained proofs of uncertain citations & 2--3 & P & Sec.~\ref{sec:collab-guard}\\
+7. Formal verification & which results were checked by a proof assistant, in what setting, which steps were taken
+  as hypotheses, and how the formal statements were compared with the paper & 3\textsuperscript{*} & V &
+  Sec.~\ref{sec:collab-lean}\\
+8. Verification status & for each part of the paper, whether it was reviewed by AI, by a human, or formally
+  checked, and what has not been checked & 2--3 & S/V & Sec.~\ref{sec:collab-status}\\
+9. Records & the formal proofs, the scripts and the records of the AI process, in a public repository with version
+  history & 3\textsuperscript{*} & V & \texttt{ai\_process/}, \texttt{skill/}, \texttt{agents/} in the
+  repository\\
+\bottomrule
+\end{tabularx}
+\caption{Proposed items for reporting AI-assisted proofs. Tier: the tiers in which the item applies
+(Section~\ref{sec:std-tiers}); $^*$ encouraged, not required. Ver.: V verifiable from public artifacts, P open to
+inspection, S self-declared (Section~\ref{sec:std-verify}).}\label{tab:standard}
+\end{table}
+
+\subsection{Proportionality}\label{sec:std-tiers}
+
+A reporting requirement must be proportionate to the use of AI, or it will be ignored or will burden papers that do
+not need it. We propose three tiers.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Incidental use}: AI was used for language, literature search, coding unrelated to proofs, or similar
+  tasks, and contributed no mathematical content. Items~1 and~2, which a declaration of AI use covers.
+\item \emph{Assisted proofs}: AI proposed or checked individual steps, lemmas, examples or counterexamples, which
+  the author verified and which appear in the paper. In addition, items~5, 6 and~8: the errors found in the AI
+  contributions, the checks applied to them, and the verification status of the parts concerned.
+\item \emph{Agent-developed proofs}: proofs of main results were drafted or developed by AI agents, with the
+  author directing and reviewing. All nine items, with formal verification and a public repository encouraged.
+\end{enumerate}
+The tier is determined by the most substantial use: a paper whose main theorem was first proved by agents is in
+tier~(iii) even if most of its text was written by the author. The case study is in tier~(iii).
+
+\subsection{Verifiability and incentives}\label{sec:std-verify}
+
+A journal cannot enforce rules that it cannot check; it can, for instance, not prohibit the use of AI in proofs.
+The standard therefore asks for information rather than imposing restrictions, and it relies on two mechanisms to
+make honest reporting the author's best course.
+
+First, items differ in what can be checked. A formal proof can be rebuilt by anyone (V), and a repository with
+version history shows when each part of the paper and of the formal proof was written and changed (V). Process
+records and scripts can be inspected and rerun, although their completeness cannot be proved (P). The division of
+labour and the error log are statements of the author (S). Self-declared items are not unverifiable in isolation:
+a version history, records and a formal proof constrain them, and an inconsistency between the report and the
+records is visible to any reader.
+
+Second, the items that cost the author effort are those that save the reviewer effort. A formal check removes the
+verified steps from the reviewer's work, a verification-status table directs the reviewer to what remains, and an
+error log shows where AI drafts went wrong and how this was detected. A reviewer who is given these can review an
+AI-heavy paper faster and with more confidence than one who is told only that AI was used. An author who reports
+errors found and corrected signals that the result was checked; an author who reports none in an agent-developed
+paper invites the question of how hard the result was examined. Under these conditions a candid report is in the
+author's interest.
+
+\subsection{Formal verification, repositories and the reviewer}\label{sec:std-repo}
+
+Formal verification in a proof assistant should be encouraged for AI-assisted proofs, but not required. Mathlib
+does not yet cover all the mathematics used in risk management, and in the case study the classical representation
+step could not be formalized and entered as a hypothesis (Section~\ref{sec:collab-lean}). When a formal check is
+made, its scope must be reported precisely, as the Navier--Stokes discussion shows: what was formalized, in what
+setting, which steps were hypotheses, and how the formal statements were compared with the statements of the paper.
+
+A public repository that holds the formal proofs, the scripts and the records of the process, with a version
+history, should eventually be expected for agent-developed work. Such a repository changes the reviewer's task:
+part of the verification is done by the proof assistant, and the reviewer's attention shifts to whether the formal
+statements and definitions say what the paper says, whether the hypotheses are reasonable, and whether the
+unverified parts are sound. This requires skills that the actuarial research community will have to acquire,
+notably reading formal statements and rebuilding a formal proof, and it raises the question of how reviewers may
+themselves use AI. The standard does not settle these questions.
+
+\begin{discussion}[the editorial perspective]
+An editor of an actuarial journal, asked for an opinion on an earlier version of the standard, pointed out that
+editors are at present more concerned with the volume of submissions and the strain on reviewers than with
+correctness, that a reporting framework should apply only to AI-heavy work and be proportionate and flexible, that
+rules which cannot be verified should not be imposed and that a framework should give authors an incentive to
+report honestly, that formal verification should be encouraged although requiring it is premature, and that
+repositories should eventually be expected and will change the role of reviewers. In reading these comments with
+the main assistant, the author identified the changes made in this version: the tiers of
+Section~\ref{sec:std-tiers}, the verifiability column of Table~\ref{tab:standard} and
+Section~\ref{sec:std-verify}, the emphasis on the reviewer's work in this subsection, and the restructuring of the
+paper around the standard, with the mathematical result as its case study and its proofs in the Supplement.
+\end{discussion}
+
+\subsection{Using the standard: recommendations and a reusable skill}\label{sec:std-use}
+
+The experience of the case study suggests the following recommendations.
+
+\emph{For authors who apply the standard.} Decide the tier at the start of the work rather than at submission, and
+set up the repository then. Record errors, discussions and decisions when they occur; reconstructing them
+afterwards is unreliable. Keep the prompts and outputs of every panel. If a formal check is planned, formalize the
+definitions early, since this exposes ambiguities in the statements. State the verification status part by part and
+with dates, so that a later revision of the mathematics does not silently fall outside an earlier check. Name readers
+or referees whose comments changed the work only with their consent.
+
+\emph{For researchers who want to carry out a similar case study.} Choose a problem whose answer is not known but
+whose correctness can be checked, and list its degenerate cases in advance; most of the errors found here occurred
+at such cases. Give the proposal agents distinct angles, one of which should always be the limits of what can be
+achieved. Give each proposal its own adversarial checker, and test claims at the points where they can fail rather
+than at random points (Table~\ref{tab:errors}). Use a model of a second provider for review. Above all, keep the
+human role active: in the case study the decisive steps came from the author's objections, not from the agents.
+
+\emph{For editors and reviewers.} Read the verification status first, since it shows where the unverified parts are.
+Where a formal proof is provided, rebuild it and spend the review effort on whether the formal definitions and
+statements say what the paper says. Compare the report with the version history of the repository, and check a few
+entries of the error log against the records.
+
+\emph{Practical advice for proofs with agents.} The following points summarize what the case study taught about
+working with agents on proofs; the last three are general experience rather than findings of this project.
+\begin{itemize}[nosep]
+\item \emph{Fix the statement before proving it}, with all quantifiers, the domain and the conventions, and ask each
+  agent to restate it; differences between the restatements expose ambiguities.
+\item \emph{Give every agent the list of degenerate cases} and of established facts; almost every error in
+  Table~\ref{tab:errors} occurred at a degenerate case, and a list of known facts prevents their rediscovery.
+\item \emph{Freeze the statement while a proof is checked.} The typical failure is a correct argument for a slightly
+  weaker statement; checkers should compare what was proved with what was claimed.
+\item \emph{Search for counterexamples before proofs.} The witnesses of Section~\ref{sec:necessity} and
+  Proposition~\ref{prop:nofinite} arose in this way.
+\item \emph{Ask for the dependency structure of a proof}, with the hypotheses of each lemma, so that circular
+  citations become visible; treat ``clearly'' as a gap to be expanded.
+\item \emph{Require concrete objections}, a counterexample or a failing step, and test on small finite models in
+  exact arithmetic at the points where a claim can fail.
+\item \emph{Check citations that carry weight} against the source or reprove them; agents misremember hypotheses
+  and numbering.
+\item \emph{Formalize definitions and statements first}, and have a human compare them with the paper before formal
+  proofs are attempted.
+\item \emph{Keep the failed approaches}; several became impossibility results of the case study.
+\item \emph{Ask what a formulation assumes.} The first complete theorem of the case study supplied the premium and
+  the risk measure by assumption, and the author's objection to it produced the central idea of the paper.
+\item \emph{Give checkers the statement and the proof, not the prover's reasoning}, so that they are not anchored on
+  it; stop checking only when consecutive rounds find nothing new; and keep the working context in files rather
+  than in one long session.
+\end{itemize}
+
+\emph{A reusable skill.} To make the method usable by others, the protocol of the case study has been written as a
+\emph{skill}: a structured instruction file that an AI assistant loads when a task matches its description, and that
+a human can read as a written protocol. It is in the directory \texttt{skill/} of the repository. It sets out the
+roles of author, assistant and agents; the repository layout; the stages of the work (knowledge base, proposal
+panel, adversarial check, judge, checking runs and repair, second provider, numerical checks, formal verification);
+the pitfalls met in the case study; templates for the error log, the records of discussions and revisions, and the
+verification status; the nine items with their tiers; and notes on running the panels in different tools, with the
+workflow script of the revision as an example. Assistants that support skill files load it directly; with other
+tools, the roles can be run as separate sessions that share one context document. The skill encodes procedure, not
+judgment, and it was distilled from one case study; it is offered, like the standard, as a starting point for others
+to adapt.
+
+\emph{Reusable agents.} The agent roles of the case study are also provided in a form that others can use, in the
+directory \texttt{agents/} of the repository. Each agent is a text file with a short header, giving its name, a
+description of when it should be used and the tools it may use, followed by its instructions; this is the format in
+which Claude Code defines subagents, and with other assistants the instructions can be given to a separate session
+as its role. The roles are those of Figures~\ref{fig:workflow} and~\ref{fig:panel} and of the revision panel: a
+literature agent for one strand, a proposer working from an assigned angle, an adversarial checker instructed to
+refute one proposal, a judge, a chair who writes the note to the author, a prover, a checking run with a specific
+brief, a Lean formalizer, and a prompt for an independent review by a model of another provider. All of them read
+a shared context file, for which a template is given, that fixes the setting, the target, the established facts,
+the degenerate cases, the author's constraints and the notation; in the case study, a precise context of this kind
+was the single most effective safeguard. A workflow script runs a complete panel, with proposers in parallel, each
+followed by its checker, then the judge and the chair. The instructions of each role encode the lessons listed
+above; for instance, the checker compares the proved statement with the claimed one and tests claims at the points
+where they can fail. The agent files and the workflow were tested on a problem with a known answer, the
+characterization of the functionals $a\max+(1-a)\min$ on a two-point space by cash additivity, comonotonic
+additivity, monotonicity and law invariance. The panel of six agents recovered the answer with an independence
+witness for each axiom; an adversarial checker found three presentational errors in one proposal, and the chair
+marked as a gap the one step that needs the axiom of choice. The test also showed that agent definitions are read
+when a session starts, so the workflow can instead tell each agent to read its role file directly. The test run is
+included in \texttt{agents/} as a worked example.
+
+\begin{discussion}[a skill for others]
+Towards the end of the work the author asked that the method be written up as a skill file, so that the paper could
+be used by others, and asked whether such a file can serve someone who wants to carry out a similar case study. The
+author also asked for the agents designed for the project to be written up in a form that others can use, which led
+to the agent files described above. The conclusion was that both can serve others, as a protocol, a set of roles and
+a set of templates: the file is plain text, it is loaded directly by
+assistants that support skills and can be followed by hand otherwise, and it records the pitfalls that the case
+study met. It cannot transfer the author's understanding of a problem, which the case study shows to be decisive,
+and it should be revised as it is used on other problems.
+\end{discussion}
+
+\subsection{Limits of the proposal}
+
+The list is a first proposal. It is based on one project, and it will need to be tested on other papers, adapted
+to results whose proofs are checked formally in full, and revised as the tools change; what AI-assisted research
+looks like may change within months. It addresses the reporting of results whose authors understand them, and it
+does not address results produced at scale without human understanding, for which the AGMAI guidelines are more
+appropriate. Agreement among AI reviews does not establish correctness, and a formal check covers only what was
+formalized, so the verification status must be stated part by part.

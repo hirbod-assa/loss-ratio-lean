@@ -1,16 +1,18 @@
-\section{The use of AI: process, verification and a reporting standard}\label{sec:collab}
+\section{The case study: report of the AI process}\label{sec:collab}
 
-This section is the second half of the paper. It reports how the result was obtained with AI, at a level of
-detail that lets a reader judge how far the result can be trusted, and it is meant to be read as a worked example
-of the reporting standard proposed in Section~\ref{sec:collab-standard}. The tools are identified in the
-declaration before the references. The section describes the organization of the work, how the models acquire
-knowledge and the risks this entails for mathematical work, the errors found, the guardrails used, the formal check
-in Lean, and what has and has not been checked.
+This section reports how the result of Sections~\ref{sec:lit}--\ref{sec:necessity} was obtained with AI, following
+the items of the standard in Table~\ref{tab:standard}; the case study is in tier~(iii). The tools are identified in
+the declaration before the references (item~1). The section describes the organization of the work (items~2
+and~3), the knowledge base (item~4), the errors found (item~5), the guardrails (item~6), the formal check in Lean
+(item~7), the revisions prompted by readers, and the verification status (item~8). The records (item~9) are in the
+repository named in the code availability statement.
 
 \subsection{Organization of the work}\label{sec:collab-org}
 
 The work used Claude (Anthropic) through the Claude desktop application in Cowork mode, which runs the assistant in
-a sandboxed environment and can coordinate several AI agents in a workflow. AI agents worked on designated parts of
+a sandboxed environment and can coordinate several AI agents in a workflow; the later revisions, including the
+second panel of Section~\ref{sec:collab-revision}, used Claude Code in the author's code editor, which ran the panel
+as a scripted workflow. AI agents worked on designated parts of
 the project, under the author's direction. A main assistant organized the work and drafted and revised the
 manuscript. A roundtable of six agents, five of them each assigned a strand of the literature and one acting as
 chair, surveyed the axiomatic theory of premiums, risk measures and performance ratios and produced a synthesis. A
@@ -136,6 +138,14 @@ axioms and the two characterization theorems of \citet{hlw2025}. No discrepancy 
 could differ between these versions and the published articles were removed, and the description of
 \citet{hlw2025} in Section~\ref{sec:lit} was rewritten from the paper.
 
+The account of OpenAI's work and of the responses of the mathematical community in
+Section~\ref{sec:std-practice} was assembled later, from two independent AI-prepared reports (see the Discussion in
+Section~\ref{sec:std-compare}). Statements were kept where the two reports agree or where a primary source was read
+directly (the GitHub repositories, the two arXiv papers and the AGMAI guidelines); OpenAI's own pages could not be
+retrieved automatically; the texts of its Navier--Stokes and First Proof posts, and a localized version of its October post on academic
+collaborations, were retrieved by the author in a browser, and the details of those projects are taken from them;
+the October post is paraphrased rather than quoted.
+
 \subsection{Hallucinations and semantic errors encountered}
 
 \emph{Statements about the literature.} The main risk of hallucination concerned the exact hypotheses, conclusions
@@ -192,7 +202,7 @@ non-finite point of $\bracket{I_h}{I_g}$ misplaced in the example for \axPe & ma
   reproved in Lemmas~\ref{lem:cashlip}--\ref{lem:rep}.
 \item \emph{Adversarial checking.} The three checking runs on the panel's proofs were instructed to refute; one tested
   the degenerate case $\LR\equiv1$ with a premium that is not comonotonic additive, and two recomputed the numbers in
-  the counterexamples. The restructured formulation of Sections~\ref{sec:axioms}--\ref{sec:proofs} was given to a
+  the counterexamples. The formulation through the implied premium and risk measure (Section~\ref{sec:axioms} and Section~\ref{sec:proofs} of the Supplement) was given to a
   further checking run with instructions to look for circularity and for the cases $\Pi(X)=0$, break-even books,
   $\LR\equiv1$ and $c=0$.
 \item \emph{Repair loop.} Reported gaps were returned to the prover agent; the panel's proofs went through two
@@ -212,7 +222,7 @@ non-finite point of $\bracket{I_h}{I_g}$ misplaced in the example for \axPe & ma
 The ``prover'' of Figure~\ref{fig:panel} is a language-model agent that writes proofs in ordinary mathematical
 language; it is not a formal theorem prover. In this project it drafted the first complete if-and-only-if theorem,
 in a formulation based on an assumed cash-line axiom, with proofs of the results that are now
-Theorems~\ref{thm:A}, \ref{thm:B}, \ref{thm:A0}, \ref{thm:C} and~\ref{thm:Cp} and of the appendix lemmas; the final
+Theorems~\ref{thm:A}, \ref{thm:B}, \ref{thm:A0}, \ref{thm:C} and~\ref{thm:Cp} (the last three in the Supplement) and of the supporting lemmas; the final
 checking round of these proofs returned two reports without objections and one report of gaps in side claims, which
 were repaired. The present formulation through the implied premium and risk measure
 (Lemmas~\ref{lem:premium}--\ref{lem:LI} and Proposition~\ref{prop:readings}) was drafted afterwards by the main
@@ -222,104 +232,90 @@ The loss-ratio-specific steps were also checked formally in Lean (Section~\ref{s
 
 \input{sec13_lean}
 
-\subsection{A revision: axioms on the loss ratio alone}\label{sec:collab-revision}
+\subsection{Revisions prompted by readers}\label{sec:collab-revision}
 
-In an earlier version, the pooling axiom \axCM{} and the regularity axioms were stated through the implied premium
-and the implied risk measure. A reviewer remarked that some axioms were therefore based on derived quantities, and
-that axioms stated on the loss ratio itself would be preferable. This subsection records how the present
-formulation, in which every axiom refers only to values of $\LR$ (Section~\ref{sec:R}), was obtained.
+Three comments from readers of earlier versions changed the paper. They are reported here because they show where
+the direction of the work came from, and because each led to further work with AI agents that the standard asks to
+be recorded.
 
-\emph{Exploration by the author.} With the main assistant, the author first tried to replace the implicit premium by
-explicit formulas in terms of $\LR$: the premium as the limit of $c(1-\LR(X+c))$ for $|c|\to\infty$ divided by
-$1-\LR(X)$, a two-quote formula on the cash line, and, for books that break even, the limit of the premium of
-$X+\varepsilon Y$ as $\varepsilon\to0$. The main assistant checked each proposal. All of them agree with the
-implied premium where they are defined, but on books that break even, and for $h=g$, the finite values of the cash
-line are all equal to $1$ and the formulas are $0/0$ (Proposition~\ref{prop:explicit}); the perturbation repairs this
-only if the premium is already known to be continuous. An intermediate version stated \axCM{} with weights
-given by the points at which the cash lines are not finite. The author rejected it: such a point is the premium
-under another name, and the requirement was that no axiom use the premium, a risk measure or a point read off a
-cash line, but only values of $\LR$.
+\paragraph{A public comment on the research question.}
+A reader of the announcement of an earlier version questioned whether an accounting ratio deserves an axiomatic
+characterization. The exchange that followed between the author and the main assistant is summarized in the
+Discussion in Section~\ref{sec:intro}; it led to the motivation from risk reporting given there and changed no
+mathematics.
 
-\emph{The panel.} The author then asked for a panel to replace \axCM{}. It was run as a workflow of nine agents.
-Four proposal agents worked from different angles: stability of level sets under comonotone pooling together with a
-condition on the shape of the cash lines; a single pooling identity on cash lines; elimination of the weight from
-\axCM; and the limits of what a pure loss-ratio axiom can achieve. Each proposal was passed to its own adversarial
-agent, instructed to refute it and to recompute its numbers. All four survived with repairs; the errors the
-adversarial agents found are in the last part of Table~\ref{tab:errors}. A judge agent ranked the four, chose the
-proposal that became \axPe{} and \axR, adopted the form of the regularity axioms from another proposal, and
+\paragraph{Axioms on the loss ratio alone.}
+In an earlier version the pooling axiom \axCM{} and the regularity axioms were stated through the implied premium
+and the implied risk measure. Peng Liu, who read that version, found the characterization clean but remarked that
+some axioms were therefore based on derived quantities, and that it would be preferable to state all axioms
+explicitly on the loss ratio itself. The present formulation, in which every axiom refers only to values of $\LR$
+(Section~\ref{sec:R}), was obtained in three steps.
+
+\emph{Exploration by the author with the main assistant.} The author first tried to replace the implicit premium by
+explicit formulas in terms of $\LR$; these attempts, and the reason they cannot suffice, are recorded in the
+Discussions after Proposition~\ref{prop:explicit}. An intermediate version stated \axCM{} with weights given by the
+points at which the cash lines are not finite. The author rejected it: such a point is the premium under another
+name, and the requirement was that no axiom use the premium, a risk measure or a point read off a cash line.
+
+\emph{The panel.} The author then asked for a panel to replace \axCM. It was run as a scripted workflow of nine
+agents. Four proposal agents worked from different angles: stability of level sets under comonotone pooling together
+with a condition on the shape of the cash lines; a single pooling identity on cash lines; elimination of the weight
+from \axCM; and the limits of what a pure loss-ratio axiom can achieve. Each proposal was passed to its own
+adversarial agent, instructed to refute it and to recompute its numbers. All four survived with repairs; the errors
+the adversarial agents found are in the last part of Table~\ref{tab:errors}. A judge agent ranked the four, chose
+the proposal that became \axPe{} and \axR, adopted the form of the regularity axioms from another proposal, and
 collected the impossibility results that became Proposition~\ref{prop:nofinite} and the witnesses of
 Section~\ref{sec:necessity}. The judge also checked the combined system in exact rational arithmetic on a
 four-point space for three representing pairs, a pair of distortions, $h=g$ and a signed pair: \axR{} held on
 every test pair (600 for each of the first and third, 450 for $h=g$), including, for the first, 75 pairs of
 non-constant break-even books, 75 mixed pairs and 150 pairs whose premiums cancel; the sure amounts in \axRC{} and
-\axRM{} equalled $I_g$ and $I_h$; and each witness of Section~\ref{sec:necessity} failed. The judge's report and its
-script are in \texttt{ai\_process/} in the repository.
+\axRM{} equalled $I_g$ and $I_h$; and each witness of Section~\ref{sec:necessity} failed. The prompts of the
+workflow, the judge's report and its script are kept with the records of the project (\texttt{ai\_process/}).
 The main assistant then wrote Section~\ref{sec:R}, Lemmas~\ref{lem:R} and~\ref{lem:offsets} and the changes in
 the other sections, and repeated the numerical checks.
 
-\emph{The author's decisions.} The author adopted the judge's recommendation and asked whether the hypothesis that the
-pooled books are unpriced could be replaced by the existence of $\lim_{s\to0}s(\LR(X+s)-1)$. The answer is no
-(Remark~\ref{rem:limzero}), and the reason, that no condition on finite values suffices, was stated as
-Proposition~\ref{prop:nofinite}. The nonnegative case of Section~\ref{sec:actuarial} was left in its earlier form.
+\emph{The author's decisions.} The author adopted the judge's recommendation and questioned the remaining
+hypothesis of \axR{} (the last Discussion in Section~\ref{sec:R}); the answer became Remark~\ref{rem:limzero} and
+Proposition~\ref{prop:nofinite}. The nonnegative case (Section~\ref{sec:actuarial} of the Supplement) was left in
+its earlier form. The proofs of Lemmas~\ref{lem:R} and~\ref{lem:offsets} and of Proposition~\ref{prop:nofinite}
+were checked by one adversarial agent, by the judge and by computation; they are not formalized in Lean and were not
+part of the review with ChatGPT.
 
-\emph{What was checked.} The proofs of Lemmas~\ref{lem:R} and~\ref{lem:offsets} and of
-Proposition~\ref{prop:nofinite} were checked by one adversarial agent and the judge and by computation; they are not
-formalized in Lean and were not part of the review with ChatGPT.
+\paragraph{The structure of the paper.}
+An editor of an actuarial journal, to whom the author sent an earlier version for an opinion on the reporting
+standard, suggested that the paper was long, that it was structured around the mathematical contribution with the
+report on AI as a detailed acknowledgement, and that the standard should instead be a contribution in its own right,
+with the mathematical result as its case study; the editor also noted that faster derivation tends to produce more
+results and examples than a reader needs. The comments on the standard itself are summarized in the last Discussion
+of Section~\ref{sec:std-repo}. In response, the paper was restructured with the main assistant: the standard and the
+comparison with large-scale efforts now come first (Section~\ref{sec:standard}); the literature review was
+shortened; the proofs, the version without law invariance, the version for nonnegative losses, the consequences of
+the representation and the record of the Lean check moved to the Supplement; and the Discussions recording the
+author's exchanges with the main assistant were added. The mathematical statements were not changed in this step.
 
 \subsection{Verification status}\label{sec:collab-status}
 
-The proofs have undergone AI-assisted critical review. Such review is fallible and does not
-constitute formal verification; this applies equally to the informal review with ChatGPT. No claim of
-machine-checked correctness is made beyond the results formalized in Lean, in the abstract setting and with the
-hypothesis described in Section~\ref{sec:collab-lean}. Independent human review of all proofs has not yet taken place; the reviewer's remark reported in
-Section~\ref{sec:collab-revision} concerned the formulation of the axioms. Apart from the three papers named above, the references have not been checked against the original publications.
+The proofs have undergone AI-assisted critical review. Such review is fallible and does not constitute formal
+verification; this applies equally to the informal review with ChatGPT. No claim of machine-checked correctness is
+made beyond the results formalized in Lean, in the abstract setting and with the hypothesis described in
+Section~\ref{sec:collab-lean}; those results concern the formulation with \axP, \axN{} and \axCM, and the
+equivalence with the present axioms (Lemma~\ref{lem:R}) is not formalized. Independent human review of all proofs
+has not yet taken place; the comments reported in Section~\ref{sec:collab-revision} concerned the formulation of
+the axioms and the structure of the paper. Apart from the three papers named in Section~\ref{sec:collab-kb}, the
+references have not been checked against the original publications. Section~\ref{sec:standard} and the
+comparison with OpenAI's work rely on the cited public sources; where these are press reports, this is stated.
 
-\subsection{A proposed standard for reporting AI-assisted proofs}\label{sec:collab-standard}
+\subsection{What the case study shows about the standard}\label{sec:collab-lessons}
 
-The declarations of AI use that journals now require state which tools were used and that the author takes
-responsibility for the result. For a paper whose proofs were drafted or checked with AI, this is not enough for a
-reader to judge the result. The errors in Table~\ref{tab:errors} show why: most of them are statements that are
-almost right, and a reader who knows only that AI was used cannot tell which parts of the paper were exposed to
-such errors and which checks they passed. We therefore propose that a mathematical paper in risk management or
-actuarial science whose results were obtained with substantial AI assistance report the items in
-Table~\ref{tab:standard}. The table also shows where each item is reported for the present paper.
-
-\begin{table}[ht]
-\centering\footnotesize
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.1cm}@{}}
-\toprule
-\textbf{Item} & \textbf{What to report} & \textbf{In this paper}\\
-\midrule
-1. Tools & providers, models and versions, mode of access, dates of use & declaration\\
-2. Division of labour & who posed the question, chose the formulation and decided on content; which tasks were
-  given to AI & Secs.~\ref{sec:intro}, \ref{sec:collab-org}\\
-3. Workflow & the agents or sessions used, their roles and order, the review loops, and the points at which the
-  author intervened & Figs.~\ref{fig:workflow}--\ref{fig:panelpic}; Sec.~\ref{sec:collab-revision}\\
-4. Knowledge base & how the literature was gathered, how reliable each statement was taken to be, and which cited
-  statements were checked against the original works & Sec.~\ref{sec:collab-kb}\\
-5. Error log & every error in AI-generated mathematics that was found, how it was found, and how it was resolved &
-  Table~\ref{tab:errors}\\
-6. Guardrails & the checks applied: adversarial review, review by a second system, recomputation of numbers,
-  counterexamples, self-contained proofs of uncertain citations & Sec.~\ref{sec:collab-guard}\\
-7. Formal verification & which results were checked by a proof assistant, in what setting, and which steps were
-  taken as hypotheses & Sec.~\ref{sec:collab-lean}\\
-8. Verification status & for each part of the paper, whether it was reviewed by AI, by a human, or formally
-  checked; and what has not been checked & Sec.~\ref{sec:collab-status}\\
-9. Records & the formal proofs and the intermediate records of the AI process, publicly available & code
-  availability; \texttt{ai\_process/} in the repository\\
-\bottomrule
-\end{tabularx}
-\caption{Proposed items for reporting AI-assisted proofs, and where they are reported in this paper.}\label{tab:standard}
-\end{table}
-
-Three observations from this project motivate the items. First, the errors were found by different checks:
-checking runs within the panel, the main assistant during rewriting, and a review with a model from a different
-provider, which found three errors that the earlier checks had missed (Table~\ref{tab:errors}). Reporting the
-checks, and not only their conclusion, tells the reader which kinds of error have been looked for. Second, the
-decisive step, the reformulation through the implied premium and risk measure, came from the author's objection to
-an AI-drafted formulation that was internally correct but assumed what should have been proved; a record of the
-division of labour makes such contributions visible. Third, agreement among AI reviews does not establish
-correctness, and a formal check covers only what was formalized; the verification status must therefore be stated
-part by part. The list is a first proposal. It will need to be tested on other papers, and in particular adapted to
-results whose proofs are checked formally in full.
-
+Four observations from the case study motivate the items of Table~\ref{tab:standard}. First, the errors were found
+by different checks: checking runs within the panel, adversarial agents, the main assistant during rewriting, and a
+review with a model from a different provider, which found three errors that the earlier checks had missed
+(Table~\ref{tab:errors}). Reporting the checks, and not only their conclusion, tells the reader which kinds of
+error have been looked for. Second, the decisive steps came from the author: the reformulation through the implied
+premium and risk measure came from an objection to an AI-drafted formulation that was internally correct but
+assumed what should have been proved, and the axioms on the loss ratio alone came from insisting, after a reader's
+remark, that no derived quantity appear in an axiom. A record of the division of labour makes such contributions
+visible. Third, the revisions after the Lean check changed the axioms, so that the formal check now covers an
+equivalent earlier formulation rather than the present one; a verification status stated part by part, with dates,
+makes this visible instead of hiding it. Fourth, agreement among AI reviews does not establish correctness, and a
+formal check covers only what was formalized.

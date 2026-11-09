@@ -1,0 +1,64 @@
+\section{The Lean check: process record}\label{supp:lean}
+
+The Lean file was written by the main assistant. Lean could not be installed in the assistant's cloud workspace,
+whose network policy blocks the servers that distribute Lean, so the file was compiled on the author's computer.
+The author installed Lean and created the project; the assistant read the build output from the project folder
+through the link between the Claude desktop application and the author's computer, wrote corrected versions of the
+file into the same folder, and the author ran the next build (Figure~\ref{fig:leanloop}).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[node distance=6mm and 14mm,
+  box/.style={draw,rounded corners,align=center,font=\small,minimum height=10mm,text width=34mm},
+  >={Stealth[length=2mm]}]
+\node[box] (a) {Assistant writes or\\corrects \texttt{Basic.lean}};
+\node[box,right=of a] (b) {File written into the\\author's project folder};
+\node[box,below=of b] (c) {Author runs\\\texttt{lake build}};
+\node[box,left=of c] (d) {Assistant reads\\\texttt{build\_log.txt}};
+\draw[->] (a) -- (b);
+\draw[->] (b) -- (c);
+\draw[->] (c) -- (d);
+\draw[->] (d) -- node[left,font=\footnotesize,align=center]{errors}(a);
+\node[box,right=of c,text width=30mm] (e) {Build succeeds;\\axiom report};
+\draw[->] (c) -- (e);
+\end{tikzpicture}
+\caption{The build-and-repair loop used for the Lean check.}\label{fig:leanloop}
+\end{figure}
+
+Table~\ref{tab:leantime} gives the timeline. Times are in UTC and are taken from the session records and from the
+modification times of the files in the project folder.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{11.0cm}@{}}
+\toprule
+\textbf{Time (UTC)} & \textbf{Step}\\
+\midrule
+21 Oct, 21:38 & The assistant writes a first Lean file for the results in Table~\ref{tab:lean}; it cannot be compiled
+  in the cloud workspace.\\
+24 Oct, 17:08 & The author asks how a formal proof check can be used; the assistant describes what is feasible
+  (the loss-ratio steps), what is hard (the representation step) and how to install Lean.\\
+24 Oct, 17:26--17:31 & The author installs the Lean extension for the code editor and the Lean toolchain manager.\\
+24 Oct, 17:35--17:37 & The author creates the project \texttt{loss\_ratio\_lean} with Mathlib; Lean and Mathlib
+  version~4.36.0-rc1; the precompiled Mathlib files are downloaded.\\
+24 Oct, 17:38--17:39 & The assistant inspects the project configuration, confirms that it is complete, and places
+  the Lean file in it, replacing the template placeholder.\\
+25 Oct, 12:47--12:53 & First attempt to build: the command \texttt{lake} is not found, because the toolchain had not
+  been added to the terminal's search path; fixed by loading the toolchain environment.\\
+25 Oct, 12:55 & Build 1: four errors, none in a definition or statement. One proof stopped one algebraic step short;
+  in three proofs Lean's simplifier rewrote $\mathrm{const}(-c)$ as $-\mathrm{const}(c)$, so that cash additivity
+  no longer applied.\\
+25 Oct, 12:57 & The assistant writes a corrected file and appends \texttt{\#print axioms} for ten main theorems.\\
+25 Oct, 13:04 & Build 2: one error, in the converse construction, where the goal was displayed in an unexpanded
+  form. The axiom report shows the three standard axioms for nine theorems and \texttt{sorryAx} for the converse.\\
+25 Oct, 13:05 & The assistant adds one line that states the goal explicitly.\\
+25 Oct, 13:08 & Build 3 succeeds. All ten theorems depend only on the three standard axioms.\\
+25 Oct, 13:09 & The assistant compares the Lean definitions of \axP, \axN, \axCM{} and \axLI{} and the theorem
+  statements with Section~\ref{sec:axioms}.\\
+25 Oct, 13:37 & At the author's request, the project's own build output is deleted and the file is rebuilt from
+  scratch: success in 8.8\,s, with the same axiom report.\\
+\bottomrule
+\end{tabular}
+\caption{Timeline of the Lean check.}\label{tab:leantime}
+\end{table}
+

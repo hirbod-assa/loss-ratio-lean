@@ -1,17 +1,28 @@
 \section{Discussion and open problems}\label{sec:discussion}
 
-\paragraph{Summary.}
-A loss ratio carries its own premium and its own risk measure. The premium is the price point of the cash
-line, the sure payment at which the book changes hands, and the risk measure is loss ratio times premium,
-visible even where the ratio explodes as the residue of the singularity. With this reading, a single
-substantive axiom, comonotone pooling at relative cost, together with law invariance and regularity of the
-price point and the zero of the cash lines, characterizes the loss ratios that are ratios of two Choquet-type functionals. The
-characterization is sharp, and the pair is unique. At the level of representations it is a transfer of the
-theory of \citet{yaari1987}, \citet{schmeidler1986}, \citet{wyp1997} and \citet{www2020}; at the level of the
-loss ratio it is new, and it comes with facts that have no single-functional counterpart: no non-trivial loss
-ratio is monotone (Proposition~\ref{prop:F2}), the association holds exactly off $\{\rho=\Pi=0\}$ and is
-signed (Corollary~\ref{cor:assoc}), and pooling extends consistently to books with infinite or indeterminate
-loss ratios (Corollary~\ref{cor:projpool}).
+\paragraph{The standard.}
+The proposed standard asks authors of AI-heavy work for information that a reviewer can use, in proportion to how
+heavily AI was used, and it separates what can be verified from what must be declared. Several questions are open.
+Where exactly the boundaries between the tiers lie will become clear only from use. How reviewers may themselves use
+AI, and whether the verification of formal statements against the paper can be shared between author, reviewer and
+the community, are questions for journals. The standard also presupposes that formal verification is feasible for
+part of the work; for risk management this depends on libraries of formalized probability and Choquet integration
+that do not yet exist. Finally, the comparison with large-scale efforts suggests that the design principles of
+multi-agent work, and the records needed to report it, are largely independent of scale, but this is based on one
+case study.
+
+\paragraph{The case study.}
+A loss ratio carries its own premium and its own risk measure. The premium is the price point of the cash line,
+the sure payment at which the book changes hands, and the risk measure is loss ratio times premium, visible even
+where the ratio explodes as the residue of the singularity. With this reading, axioms on the values of the loss
+ratio alone, whose substance is that the underwriting results of comonotone books of zero premium add, together with
+law invariance and regularity of two sure amounts, characterize the loss ratios that are ratios of two Choquet-type
+functionals. The characterization is sharp, and the pair is unique. At the level of representations it is a
+transfer of the theory of \citet{yaari1987}, \citet{schmeidler1986}, \citet{wyp1997} and \citet{www2020}; at the
+level of the loss ratio it is new, and it comes with facts that have no single-functional counterpart: no non-trivial
+loss ratio is monotone (Proposition~\ref{prop:F2}), the association with a family of risk measures holds exactly
+off $\{\rho=\Pi=0\}$ and is signed (Corollary~\ref{cor:assoc} in the Supplement), and no axiom on finite values of
+the ratio can replace the pooling axiom (Proposition~\ref{prop:nofinite}).
 
 \paragraph{Open problems.}
 \begin{enumerate}[label=(\arabic*)]
@@ -31,7 +42,8 @@ loss ratios (Corollary~\ref{cor:projpool}).
 \item \emph{Loadings on sure losses.} We conjecture that an analogue of Theorem~\ref{thm:A} holds for ratios
   $\bracket{I_h}{\kappa I_g}$ with a known loading $\kappa>0$, which would admit constant loss ratios $\ne1$.
 \item \emph{Quasi-convexity.} Necessity of the conditions in Corollary~\ref{cor:shape}(d) is open.
-\item \emph{Actuarial domain.} Whether (A4) imposed only on pairs with $X,Y,X+Y\notin N_0$ suffices is open; a
+\item \emph{Actuarial domain.} The axioms for nonnegative losses (Section~\ref{sec:actuarial} of the Supplement)
+  are not yet stated on values of the loss ratio alone. Whether (A4) imposed only on pairs with $X,Y,X+Y\notin N_0$ suffices is open; a
   truncation-continuity (Greco-type) version of the signed tier on the cone is not known.
 \item \emph{Unbounded losses.} Extensions to $L^p$ and Orlicz spaces via \citet{www2020b} are not treated.
 \end{enumerate}

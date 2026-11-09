@@ -1,0 +1,19 @@
+\section{Dropping law invariance}\label{supp:A0}
+
+We state the version without \axLI, which covers scenario-dependent loss ratios. A \emph{game} is a map $\nu:\mathcal F\to\R$ with $\nu(\emptyset)=0$. It is
+\emph{null-invariant} if $P(A\triangle B)=0$ implies $\nu(A)=\nu(B)$; its \emph{chain variation} is
+$\|\nu\|_{bv}=\sup\sum_j|\nu(A_j)-\nu(A_{j-1})|$ over chains
+$\emptyset=A_0\subset\dots\subset A_n=\Omega$. Let $\mathcal V_1$ be the null-invariant games with
+$\|\nu\|_{bv}<\infty$ and $\nu(\Omega)=1$, and for $\nu\in\mathcal V_1$ let
+$C_\nu(X)=\int_0^\infty\nu(X>x)\,dx+\int_{-\infty}^0[\nu(X>x)-1]\,dx$. A \emph{capacity} is a monotone game.
+
+\begin{theorem}[Without law invariance]\label{thm:A0}
+$\LR$ satisfies \axPe, \axR{} and \axRC{} if and only if $\LR=C_{\nu_1}/C_{\nu_2}$ where
+$C_{\nu_2}\ne0$ and $\LR\notin\R$ where $C_{\nu_2}=0$, for $\nu_1,\nu_2\in\mathcal V_1$; with \axRM{} in place
+of \axRC{}, if and only if the same holds with capacities $\nu_1,\nu_2$. The pair is unique:
+$\nu_1(A)=\rho(\1_A)$ and $\nu_2(A)=\Pi(\1_A)$. The loss ratio is in addition law invariant if and only if
+$\nu_i=k_i\circ P$ with $k_i\in\Hset_1$, which recovers Theorems~\ref{thm:A} and~\ref{thm:B}.
+\end{theorem}
+
+The set-function representation in Theorem~\ref{thm:A0} is that of \citet{msm1994} and
+\citet{cmmm2012,cmmm2015}; the proof is in Section~\ref{app:A0}.

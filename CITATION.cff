@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this formalization, please cite the paper."
-title: "Lean formalization of: AI-Assisted Proofs in Mathematical Risk Management: An Axiomatic Characterization of the Loss Ratio and a Proposed Reporting Standard"
+title: "Lean formalization of: Reporting AI-Assisted Proofs in Mathematical Risk Management: A Proposed Standard, with an Axiomatic Characterization of the Loss Ratio as a Case Study"
 authors:
   - family-names: Assa
     given-names: Hirbod

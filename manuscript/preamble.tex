@@ -1,0 +1,82 @@
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newunicodechar}
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}}
+\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{∃}{\ensuremath{\exists}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{→}{\ensuremath{\to}}
+\usepackage{mathptmx}
+\usepackage[expansion=false]{microtype}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds}
+\usepackage[authoryear,round]{natbib}
+\usepackage{xr-hyper}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+
+\setlist{itemsep=2pt,topsep=3pt,parsep=0pt}
+\setlength{\emergencystretch}{3em}
+\setlength{\parskip}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\bibliographystyle{plainnat}
+
+% ---------- theorem environments (one shared counter, numbered by section)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% ---------- purpose line printed above every formal statement
+\newcommand{\purpose}[1]{\par\smallskip\noindent{\small\upshape\leftskip=1.1em\rightskip=1.1em
+  \textsc{Purpose.}\ #1\par}\vspace{-1pt}}
+
+% ---------- notation
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathbb E}
+\newcommand{\LR}{\mathrm{LR}}
+\newcommand{\Rext}{\widehat{\mathbb R}_\star}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\ess}{\operatorname{ess\,sup}}
+\newcommand{\eqd}{\overset{d}{=}}
+\newcommand{\Hset}{\mathcal H}
+\newcommand{\Xp}{\mathcal X}
+\newcommand{\ax}[1]{\textup{(\textsf{#1})}}
+\newcommand{\axCP}{\ax{CP}}
+\newcommand{\axLI}{\ax{LI}}
+\newcommand{\axCM}{\ax{CM}}
+\newcommand{\axRC}{\ax{RC}}
+\newcommand{\axRM}{\ax{RM}}
+\newcommand{\bracket}[2]{[#1\!:\!#2]}
+
+\newtcolorbox{keybox}[1][]{colback=blue!4!white,colframe=blue!45!black,
+  boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,breakable,#1}
+
+\newcommand{\axP}{\ax{P}}
+\newcommand{\cinf}[1]{c^{\infty}_{#1}}
+\newcommand{\czero}[1]{c^{0}_{#1}}
+\newcommand{\axN}{\ax{N}}
+\newcommand{\axPe}{\textup{(\textsf{P}$_{\exists}$)}}
+\newcommand{\axR}{\ax{R}}
+
+% ---------- passages that record discussions between the author and the main assistant
+\newenvironment{discussion}[1][]{\par\smallskip
+  \begin{list}{}{\leftmargin=1.4em\rightmargin=1.4em\topsep=2pt\parsep=2pt}\item[]\small\itshape
+  \textup{\textbf{$\diamond$\,Discussion}\if\relax\detokenize{#1}\relax\else\ \textmd{(#1)}\fi.}\ }
+  {\end{list}\smallskip}

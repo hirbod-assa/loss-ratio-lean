@@ -1,130 +1,87 @@
 \section{Introduction}\label{sec:intro}
 
-Like most mathematicians, the author has long carried a few questions that seemed worth answering. One
-of them, in actuarial science, is to characterize the loss ratio as a risk indicator by necessary and sufficient
-conditions, in the way that \citet{chernymadan2009} characterized performance measures such as the Sharpe ratio
-and the RAROC through their theory of acceptability indices. The loss ratio, claims divided by premium, is among
-the most widely used quantities in insurance underwriting, portfolio management and reinsurance pricing. Ex post
-it is incurred claims over earned premium; ex ante it is the ratio of a loss measure $\rho(X)$, such as an
-expected or a risk-adjusted loss, to a premium $\Pi(X)$ of the same position $X$. When the premium is a non-linear
-functional of the loss, or the numerator is a risk measure, it is not clear which functionals of a loss should be
-called a loss ratio, or which properties a loss ratio should have when books are pooled.
+AI is now used in mathematical research in many ways. At one end, a researcher asks a chatbot for help with a
+lemma and records this in a line of the acknowledgements. At the other end, organizations run large numbers of AI
+agents that propose results, write proofs, attack them and, in some cases, check them in a proof assistant
+(Section~\ref{sec:std-practice}). Between the two lies a mode of work that is within reach of an individual
+researcher: a panel of AI agents, each with an assigned role, working on one problem under the direction of a
+mathematician who poses the questions, rejects formulations and decides on content. This paper is about how results
+obtained in this way should be reported.
 
-The question arose in risk reporting. Before the claims are known, a loss ratio is usually reported through
-its expected value, expected claims over premium. When the risk of a book is concentrated in the tail of its
-loss distribution, the expected loss ratio can be misleading: two books with the same expected loss ratio may
-differ greatly in their exposure to large losses. A natural remedy is to replace the mean of the claims by a tail
-measure, and to report, for instance, the value at risk or the tail value at risk (expected shortfall) of the claims divided by the
-premium \citep{adeh1999}. The loss ratio then becomes a model-based, or mark-to-model, quantity: a risk measure
-of the loss, evaluated under a model of its distribution, divided by a premium principle. The ex-post accounting
-ratio is the special case in which the model is the realized outcome. Once such ratios are admitted, the
-question is which properties are necessary and sufficient for a functional of the loss to be a loss ratio of
-this kind. The tail value at risk and the value at risk are distortion
-functionals, so tail loss ratios over a distortion premium are covered by the results below
-(see the ratio $\mathrm{ES}_{0.9}/\E$ in Example~\ref{ex:qc}).
-
-This paper reports what happened when this question was put to AI. The author posed it to a panel of AI agents,
-in the manner of recent multi-agent efforts to obtain mathematical results with AI: agents surveyed ten strands of
-the literature, proposed candidate theorems, ranked them through judge agents, drafted proofs and
-counterexamples, and submitted the proofs to repeated adversarial review, while the author set the questions,
-rejected formulations and made every decision on content. The problem was chosen in part as a deliberate test.
-It is not a textbook exercise, its answer was not known in advance, and its solution needs machinery that is not
-routine, such as signed Choquet integrals. The paper therefore has two aims of equal weight: to answer the
-mathematical question, and to show, in a form that others can inspect, how AI was used to answer it.
-
-The second aim makes transparency a requirement. A proof drafted by AI can be fluent and wrong, and the errors
-found in this project were mostly semantic: a correct argument for a slightly different statement, typically at a
+The question is practical. A proof drafted by AI can read well and be wrong, and the errors found in the work
+reported here were mostly semantic: a correct argument for a slightly different statement, typically at a
 degenerate case, which careful reading can miss (Table~\ref{tab:errors}). A reader therefore needs to know not
 only that AI was used, but for what, under whose direction, with which checks, which errors were found, and what
-has and has not been verified; the declarations of AI use that journals ask for record much less.
-Section~\ref{sec:collab} gives this account for the present paper and, in Section~\ref{sec:collab-standard},
-distils it into a checklist for reporting AI-assisted proofs. To the author's knowledge, this is the first attempt
-to set such a standard in mathematical risk management and actuarial mathematics. It is offered as a proposal,
-for the community to test and improve.
+has and has not been verified. The declarations of AI use that journals ask for record much less. At the same time,
+editors face a growing volume of submissions and a limited supply of reviewers, and a reporting requirement that
+adds to the reviewer's burden, or that cannot be checked, will not be adopted. A standard must therefore be
+proportionate, verifiable where possible, and useful to the reviewer.
 
-We now describe the mathematical content. We work with the \emph{extended loss ratio} $\LR=\rho/\Pi$, which allows negative values and zero premiums,
-defined abstractly by \emph{association}: a family of risk measures $\{\rho_\beta\}$ is
-associated with $\LR$ if $\LR(X)=\beta\iff\rho_\beta(X)=0$; the canonical family is
-$\rho_\beta=(\rho-\beta\Pi)/(1-\beta)$, $\beta\ne1$. The present paper characterizes, by axioms stated on $\LR$
-alone, the loss ratios that are ratios of two Choquet-type functionals.
+The paper makes two contributions. The first is a proposed standard for reporting AI-assisted proofs in
+mathematical risk management and actuarial science (Section~\ref{sec:standard}). It consists of nine items, from
+the tools used to the public records of the process. The items are applied in three tiers according to how heavily
+AI was used, so that a paper in which AI helped with editing is not asked for what a paper whose proofs were
+developed by agents must report. Each item is marked by whether an editor or reviewer can verify it, and the
+standard is designed so that reporting errors and checks honestly strengthens a paper rather than weakens it.
+Formal verification in a proof assistant and a public repository are encouraged, and their scope is to be
+reported precisely, but they are not required. To the author's knowledge, this is the first proposal of such a
+standard in our field. It is offered for the community to test and improve.
 
-Three features distinguish the problem from the classical characterizations of premium principles and risk
-measures \citep{yaari1987,wyp1997,schmeidler1986,www2020}. First, the object is a ratio, while those results
-concern a single functional. Second, the ratio does not determine its numerator and denominator: on positive
-losses, $(\rho,\Pi)$ and $(\psi\rho,\psi\Pi)$ give the same ratio for every positive functional $\psi$. Third, the
-ratio is not monotone: we show that a loss ratio of two distortion functionals is monotone only if it is
-identically $1$ (Proposition~\ref{prop:F2}). The theory of acceptability indices of \citet{chernymadan2009},
-which rests on monotonicity, therefore does not apply, and the analogy that motivated the question has to be
-pursued by a different route.
+The second contribution is a case study to which the standard is applied in full: a mathematical result obtained
+with a panel of AI agents, together with the report of how it was obtained. The problem was chosen by the author as
+a test. It is not a textbook exercise, its answer was not known in advance, and its solution needs machinery that is
+not routine. Like most mathematicians, the author had long carried a few questions that seemed worth answering. One
+of them is to characterize the loss ratio as a risk indicator by necessary and sufficient conditions, in the way
+that \citet{chernymadan2009} characterized performance measures such as the Sharpe ratio and the RAROC through
+their theory of acceptability indices.
 
-Our approach is to recover the premium and the risk measure from the loss ratio. For a book $X$, consider the
-\emph{cash line} $c\mapsto\LR(X+c)$. A premium is the sure amount at which a risk changes hands; on the cash line,
-a zero premium is a point at which the loss ratio is not finite. We define the \emph{implied premium} $\Pi(X)$ as
-minus the unique such point, and the \emph{implied risk measure} by the accounting identity
-$\rho(X)=\Pi(X)\LR(X)$, extended by cash shifts to books with zero premium. The implied risk measure is then
-minus the point at which the cash line vanishes (Corollary~\ref{cor:zero}), and at books with zero premium it is
-the residue of the cash line at its singularity (Proposition~\ref{prop:readings}). For a Bernoulli loss
-$\1_A$ with $P(A)=\tfrac14$, the expected loss and the square-root distortion premium, the cash line is
-$(\tfrac14+c)/(\tfrac12+c)$; it is singular at $c=-\tfrac12$, so $\Pi(\1_A)=\tfrac12$ and
-$\rho(\1_A)=\tfrac12\LR(\1_A)=\tfrac14$ (Figure~\ref{fig:three}).
+The loss ratio, claims divided by premium, is among the most widely used quantities in insurance. Ex post it is
+incurred claims over earned premium. Ex ante it is reported through its expected value, which can be misleading
+when the risk of a book is concentrated in the tail: two books with the same expected loss ratio may differ greatly
+in their exposure to large losses. A natural remedy is to report a tail measure of the claims, such as the value at
+risk or the expected shortfall, divided by the premium \citep{adeh1999}. The loss ratio then becomes a model-based,
+or mark-to-model, quantity: a risk measure of the loss divided by a premium principle, of which the ex-post ratio is
+the special case in which the model is the realized outcome. The question is which properties are necessary and
+sufficient for a functional of the loss to be a loss ratio of this kind.
 
-With this reading, Theorems~\ref{thm:A} and~\ref{thm:B} state the following. A map $\LR$ from bounded losses to
-$\R\cup\{\infty,\star\}$ is of the form $I_h/I_g$, with $I_h,I_g$ signed Choquet integrals of distortions $h,g$
-of bounded variation, if and only if it satisfies the following axioms, stated in Section~\ref{sec:axioms}. Each refers only to
-values of $\LR$. \axPe{} every cash line has a point where $\LR$ is not finite; that is, every book can be made
-unpriced by a sure payment. \axR{} if $X,Y$ are comonotone and unpriced, $\LR(X)\notin\R$ and $\LR(Y)\notin\R$, then
-$u(\LR(X+Y+u)-1)=s(\LR(X+s)-1)+t(\LR(Y+t)-1)$ for all non-zero $s,t,u$, all three values being finite: written at
-the premium $s$, an unpriced book has the underwriting result $s(\LR(X+s)-1)$, and the underwriting results of
-comonotone books add. \axLI{} $\LR$ is law invariant. \axRC{} the sure amounts that make $X$ unpriced and that
-remove its loss depend uniformly continuously on $X$. If \axRC{} is replaced by \axRM, monotonicity of these two
-amounts in $X$, then $h$ and $g$ are distortion functions and no continuity assumption is needed. In both cases
-$(h,g)$ is unique, $\Pi=I_g$ and $\rho=I_h$. No axiom refers to a premium, a risk measure or a weight. The following
-are consequences: \axP{} each cash line has exactly one non-finite point; \axN{} $\LR(c)=1$ for sure losses $c\ne0$;
-\axCM{} the loss ratio of a pool of comonotone books is the combination of their loss ratios weighted by their
-relative prices; and, further, the unit-slope Möbius form of the cash lines, comonotonic additivity of the implied
-premium, scale invariance and the association.
+\begin{discussion}[motivation of the problem]
+When an earlier version was circulated, a reader asked publicly why one should characterize an accounting ratio
+axiomatically at all, and whether the choice of such a problem undermined the demonstration of what AI can do. In
+answering, the author and the main assistant separated the ex-post accounting ratio from the ex-ante ratio used in
+risk reporting, where a tail measure over the premium is a model-based quantity whose defining properties are not
+obvious. The paragraph above, and the statement that the problem was chosen deliberately as a test, are the outcome
+of that exchange.
+\end{discussion}
 
-Axioms \axPe{} and \axR{} are equivalent to \axP, \axN{} and \axCM{} together, and, given \axP{} and \axN, \axCM{} is
-equivalent to comonotonic additivity of the implied premium and risk measure,
-the axiom of \citet{yaari1987} and \citet{wyp1997}; once this equivalence is established, the representation step
-follows from the theory of comonotonic additive functionals \citep{schmeidler1986,msm1994,cmmm2012,www2020}. The
-contributions specific to loss ratios are: the construction of the implied premium and risk measure; the proof
-that the pooling identity yields additivity of the implied pair on all comonotone pairs, including books that
-break even, on which a premium given exogenously would not be identified (Lemma~\ref{lem:comon} and
-Remark~\ref{rem:primitive}); unconditional uniqueness of $(h,g)$; the impossibility of a monotone loss ratio and
-its consequences for the associated family (Corollary~\ref{cor:assoc}); a version for nonnegative losses
-(Theorem~\ref{thm:C}); and counterexamples showing that none of the axioms
-\axPe, \axR, \axLI, \axRC, \axRM{} can be dropped, together with a proof that no pooling axiom using only the
-finite values of $\LR$ can replace \axR.
+Our answer recovers the premium and the risk measure from the loss ratio itself. Along the \emph{cash line}
+$c\mapsto\LR(X+c)$ of a book $X$ there is exactly one point at which the ratio is not finite; the premium is minus
+this point, the sure payment at which the book changes hands, and the risk measure follows from the accounting
+identity loss $=$ loss ratio $\times$ premium. With this reading, axioms that refer only to values of the loss ratio
+characterize the loss ratios that are ratios $I_h/I_g$ of signed Choquet integrals (Theorems~\ref{thm:A}
+and~\ref{thm:B}). The central axiom states that the underwriting results of comonotone books of zero premium add
+when the books are pooled. None of the axioms can be dropped, and no axiom that depends only on finite values of the
+loss ratio can replace the pooling axiom (Section~\ref{sec:necessity} and Proposition~\ref{prop:nofinite}).
 
-On the side of AI, the outcome of the experiment was as follows. The work was done with Claude (Anthropic), used
-as a main assistant and to coordinate panels of AI agents on designated parts of the project: a roundtable of six
-agents and a larger panel covering ten literature strands surveyed the literature, proposed candidate statements,
-ranked them by judge agents, drafted proofs and submitted them to repeated AI-assisted critical review; the main
-assistant constructed examples and counterexamples and drafted and revised the manuscript. ChatGPT (OpenAI) was
-used for an independent informal review of the proofs, and Gemini (Google) for summaries of key cited works. The
-agents produced a complete if-and-only-if theorem with proofs, but in a formulation that assumed a cash-line axiom
-and so supplied $\rho$ and $\Pi$ by fiat. The formulation through the implied premium and the implied risk measure,
-which is the central idea of the paper, arose from the author's objections to these AI-drafted versions. The
-AI-generated material was treated as proposals throughout. The reviews found seventeen errors in AI-generated
-mathematics, including a wrong sufficient condition for quasi-convexity and an incorrect uniqueness claim, all of
-which were corrected (Table~\ref{tab:errors}); three of them had been missed by the earlier checks and were
-found by the review with a model from a different provider. The numbers in the examples were recomputed; the statements taken from three of the main
-sources were checked against those papers; and the steps specific to loss ratios were formalized in the proof
-assistant Lean and checked by its kernel, with the classical representation step taken as a hypothesis. In an
-earlier version the pooling and regularity axioms were stated through the implied premium and risk measure; following a
-reviewer's remark, the author required that every axiom refer only to values of the loss ratio, and a panel of
-nine agents, with an adversarial check of each proposal, produced the axioms \axPe{} and \axR{} used here
-(Section~\ref{sec:collab-revision}).
+The case study is reported in Section~\ref{sec:collab}, item by item against the proposed standard. Three facts
+from it shaped this paper. First, the central idea of the result, the reading of the premium and the risk measure
+from the loss ratio, arose from the author's objections to AI-drafted formulations that assumed what should have
+been proved. Second, Peng Liu, who read an earlier version, remarked that some of its axioms were stated through the
+implied premium and risk measure and asked for axioms stated more explicitly on the loss ratio itself; the present
+axioms were obtained in response, with a second panel of agents (Section~\ref{sec:collab-revision}). Third, an
+editor of an actuarial journal, asked for an opinion on the reporting standard, suggested that the actuarial part
+be condensed and that the standard be presented as a contribution in its own right, with the mathematical result as
+its case study; the paper has been restructured accordingly, and the proofs and secondary results have moved to a
+Supplement.
 
-The paper is organized as follows. Section~\ref{sec:lit} reviews the related literature, and
-Section~\ref{sec:setting} introduces the extended loss ratio. Section~\ref{sec:axioms} defines the implied premium
-and risk measure and states the axioms. Section~\ref{sec:results} contains the main theorems and examples, and
-Section~\ref{sec:triviality} discusses the role of the axioms. Proofs are in Section~\ref{sec:proofs}.
-Section~\ref{sec:actuarial} treats nonnegative losses, Section~\ref{sec:necessity} gives the counterexamples, and
-Section~\ref{sec:consequences} derives consequences. Section~\ref{sec:discussion} lists open problems.
-Section~\ref{sec:collab} reports the use of AI: the organization of the work, the knowledge base, the errors
-found, the guardrails, the formal check in Lean (Section~\ref{sec:collab-lean}), the verification status, and
-the proposed reporting standard (Section~\ref{sec:collab-standard}). Readers mainly interested in the use of AI
-can read Section~\ref{sec:collab} directly after this introduction; it refers to the mathematical sections only
-for the errors found and for the results checked in Lean.
+Several passages of the paper record exchanges between the author and the main AI assistant in the course of the
+work. They are set in italics and introduced by the mark $\diamond$\,\emph{Discussion}. They are formal summaries
+of what was discussed and concluded, not transcripts, and they are included so that the reader can see where the
+author's questions and objections changed the mathematics or the presentation.
+
+The paper is organized as follows. Section~\ref{sec:standard} reviews current practice, compares the approach of
+this paper with large-scale multi-agent efforts, and proposes the reporting standard. Sections~\ref{sec:lit}
+to~\ref{sec:necessity} present the mathematical case study: the related literature, the setting, the axioms, the
+main results and the independence of the axioms. Section~\ref{sec:collab} reports the AI process of the case study
+against the standard, including the formal check in Lean and the revisions. Section~\ref{sec:discussion} discusses
+open problems on both sides. The Supplement contains the proofs, the version without law invariance, the version
+for nonnegative losses, further consequences, and the timed record of the Lean check.

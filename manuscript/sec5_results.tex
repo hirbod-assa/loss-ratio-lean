@@ -28,8 +28,22 @@ The following are equivalent.
 \end{theorem}
 
 By Proposition~\ref{prop:RPNCM}, condition (i) may equivalently be stated with the properties \axP, \axN{} and
-\axCM{} in place of the axioms \axPe{} and \axR. The proofs are given in Section~\ref{sec:proofs};
-Section~\ref{sec:necessity} shows that none of the axioms can be dropped.
+\axCM{} in place of the axioms \axPe{} and \axR. Section~\ref{sec:necessity} shows that none of the axioms can be
+dropped. The version without \axLI, with a representation by set functions, is Theorem~\ref{thm:A0} in the
+Supplement.
+
+The proofs are given in Section~\ref{sec:proofs} of the Supplement. The argument runs as follows. (1) Applied to a
+book with zero premium and itself, \axR{} shows that the non-finite point of each cash line is unique, which defines
+the implied premium $\Pi$; applied to sure losses it gives $\LR(c)=1$. (2) Applied to an unpriced book $W$ and the
+sure loss $0$, it shows that $r(W)=s\,(\LR(W+s)-1)$ does not depend on $s$; with $\rho(X):=\Pi(X)+r(X-\Pi(X))$,
+every cash line is the unit-slope Möbius map $c\mapsto(\rho(X)+c)/(\Pi(X)+c)$. (3) Applied to the unpriced books
+$X-\Pi(X)$ and $Y-\Pi(Y)$, \axR{} gives $\Pi(X+Y)=\Pi(X)+\Pi(Y)$ and $\rho(X+Y)=\rho(X)+\rho(Y)$ for all comonotone
+$X,Y$, including books that break even, on which no finite value of $\LR$ identifies the premium. (4) The sure
+amounts in \axRC{} and \axRM{} are $\Pi(X)$ and $\rho(X)$, so these axioms are continuity and monotonicity of $\Pi$
+and $\rho$, and \axLI{} passes to both. (5) A law-invariant, comonotonic additive functional with $F(c)=c$ that is
+uniformly continuous (respectively monotone) is a signed Choquet integral (respectively a distortion premium)
+\citep{www2020,wyp1997}; this step is reproved in the Supplement. The converse follows from comonotonic additivity
+and Lipschitz continuity of $I_h$ and $I_g$.
 
 \subsection{Uniqueness and derived properties}
 
@@ -99,22 +113,4 @@ proportional hazard premium (Example~\ref{ex:PH}); the curves identify $g_r(p)=p
 shortfall over expected loss (Example~\ref{ex:ES}).}\label{fig:examples}
 \end{figure}
 
-\subsection{Dropping law invariance}
 
-We state the version without \axLI, which covers scenario-dependent loss ratios. A \emph{game} is a map $\nu:\mathcal F\to\R$ with $\nu(\emptyset)=0$. It is
-\emph{null-invariant} if $P(A\triangle B)=0$ implies $\nu(A)=\nu(B)$; its \emph{chain variation} is
-$\|\nu\|_{bv}=\sup\sum_j|\nu(A_j)-\nu(A_{j-1})|$ over chains
-$\emptyset=A_0\subset\dots\subset A_n=\Omega$. Let $\mathcal V_1$ be the null-invariant games with
-$\|\nu\|_{bv}<\infty$ and $\nu(\Omega)=1$, and for $\nu\in\mathcal V_1$ let
-$C_\nu(X)=\int_0^\infty\nu(X>x)\,dx+\int_{-\infty}^0[\nu(X>x)-1]\,dx$. A \emph{capacity} is a monotone game.
-
-\begin{theorem}[Without law invariance]\label{thm:A0}
-$\LR$ satisfies \axPe, \axR{} and \axRC{} if and only if $\LR=C_{\nu_1}/C_{\nu_2}$ where
-$C_{\nu_2}\ne0$ and $\LR\notin\R$ where $C_{\nu_2}=0$, for $\nu_1,\nu_2\in\mathcal V_1$; with \axRM{} in place
-of \axRC{}, if and only if the same holds with capacities $\nu_1,\nu_2$. The pair is unique:
-$\nu_1(A)=\rho(\1_A)$ and $\nu_2(A)=\Pi(\1_A)$. The loss ratio is in addition law invariant if and only if
-$\nu_i=k_i\circ P$ with $k_i\in\Hset_1$, which recovers Theorems~\ref{thm:A} and~\ref{thm:B}.
-\end{theorem}
-
-The set-function representation in Theorem~\ref{thm:A0} is that of \citet{msm1994} and
-\citet{cmmm2012,cmmm2015}; the proof is in Appendix~\ref{app:A0}.

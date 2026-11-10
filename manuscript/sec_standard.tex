@@ -210,26 +210,14 @@ not need it. We propose three tiers.
 The tier is determined by the most substantial use: a paper whose main theorem was first proved by agents is in
 tier~(iii) even if most of its text was written by the author. The case study is in tier~(iii).
 
-\subsection{Verifiability and incentives}\label{sec:std-verify}
+\subsection{Verifiability}\label{sec:std-verify}
 
-A journal cannot enforce rules that it cannot check; it can, for instance, not prohibit the use of AI in proofs.
-The standard therefore asks for information rather than imposing restrictions, and it relies on two mechanisms to
-make honest reporting the author's best course.
-
-First, items differ in what can be checked. A formal proof can be rebuilt by anyone (V), and a repository with
+The items differ in what can be checked. A formal proof can be rebuilt by anyone (V), and a repository with
 version history shows when each part of the paper and of the formal proof was written and changed (V). Process
 records and scripts can be inspected and rerun, although their completeness cannot be proved (P). The division of
 labour and the error log are statements of the author (S). Self-declared items are not unverifiable in isolation:
 a version history, records and a formal proof constrain them, and an inconsistency between the report and the
 records is visible to any reader.
-
-Second, the items that cost the author effort are those that save the reviewer effort. A formal check removes the
-verified steps from the reviewer's work, a verification-status table directs the reviewer to what remains, and an
-error log shows where AI drafts went wrong and how this was detected. A reviewer who is given these can review an
-AI-heavy paper faster and with more confidence than one who is told only that AI was used. An author who reports
-errors found and corrected signals that the result was checked; an author who reports none in an agent-developed
-paper invites the question of how hard the result was examined. Under these conditions a candid report is in the
-author's interest.
 
 \subsection{Formal verification, repositories and the reviewer}\label{sec:std-repo}
 
@@ -244,20 +232,17 @@ history, should eventually be expected for agent-developed work. Such a reposito
 part of the verification is done by the proof assistant, and the reviewer's attention shifts to whether the formal
 statements and definitions say what the paper says, whether the hypotheses are reasonable, and whether the
 unverified parts are sound. This requires skills that the actuarial research community will have to acquire,
-notably reading formal statements and rebuilding a formal proof, and it raises the question of how reviewers may
-themselves use AI. The standard does not settle these questions.
+notably reading formal statements and rebuilding a formal proof. The standard does not settle these questions.
 
 \begin{discussion}[the editorial perspective]
-An editor of an actuarial journal, asked for an opinion on an earlier version of the standard, pointed out that
-editors are at present more concerned with the volume of submissions and the strain on reviewers than with
-correctness, that a reporting framework should apply only to AI-heavy work and be proportionate and flexible, that
-rules which cannot be verified should not be imposed and that a framework should give authors an incentive to
-report honestly, that formal verification should be encouraged although requiring it is premature, and that
-repositories should eventually be expected and will change the role of reviewers. In reading these comments with
+An editor of an actuarial journal, asked for an opinion on an earlier version of the standard, suggested that a
+reporting framework should not cover every use of AI and should be flexible and proportionate, that formal
+verification should be encouraged although requiring it is premature, and that repositories should eventually be
+expected and will change the role of reviewers and the skills the community needs. In reading these comments with
 the main assistant, the author identified the changes made in this version: the tiers of
-Section~\ref{sec:std-tiers}, the verifiability column of Table~\ref{tab:standard} and
-Section~\ref{sec:std-verify}, the emphasis on the reviewer's work in this subsection, and the restructuring of the
-paper around the standard, with the mathematical result as its case study and its proofs in the Supplement.
+Section~\ref{sec:std-tiers}, the treatment of formal verification and repositories in this subsection, and the
+restructuring of the paper around the standard, with the mathematical result as its case study and its proofs in
+the Supplement.
 \end{discussion}
 
 \subsection{Using the standard: recommendations and a reusable skill}\label{sec:std-use}
@@ -310,6 +295,13 @@ working with agents on proofs; the last three are general experience rather than
   than in one long session.
 \end{itemize}
 
+\emph{A method rather than a private practice.} The use of AI in mathematical proofs should become methodological:
+a procedure that is written down, tested, improved and reused by others, rather than each researcher's private way
+of prompting a chatbot. The method of the case study combines the practice of mathematical research with the
+practices of AI-assisted coding that have become common, namely version control, agents with defined roles,
+adversarial checks, and records kept as files. The skill and the agent files described next are the means by which
+it can be reused.
+
 \emph{A reusable skill.} To make the method usable by others, the protocol of the case study has been written as a
 \emph{skill}: a structured instruction file that an AI assistant loads when a task matches its description, and that
 a human can read as a written protocol. It is in the directory \texttt{skill/} of the repository. It sets out the
@@ -357,8 +349,7 @@ and it should be revised as it is used on other problems.
 \subsection{Limits of the proposal}
 
 The list is a first proposal. It is based on one project, and it will need to be tested on other papers, adapted
-to results whose proofs are checked formally in full, and revised as the tools change; what AI-assisted research
-looks like may change within months. It addresses the reporting of results whose authors understand them, and it
+to results whose proofs are checked formally in full, and revised as the tools change. It addresses the reporting of results whose authors understand them, and it
 does not address results produced at scale without human understanding, for which the AGMAI guidelines are more
 appropriate. Agreement among AI reviews does not establish correctness, and a formal check covers only what was
 formalized, so the verification status must be stated part by part.

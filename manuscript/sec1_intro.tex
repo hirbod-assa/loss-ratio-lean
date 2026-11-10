@@ -12,20 +12,24 @@ The question is practical. A proof drafted by AI can read well and be wrong, and
 reported here were mostly semantic: a correct argument for a slightly different statement, typically at a
 degenerate case, which careful reading can miss (Table~\ref{tab:errors}). A reader therefore needs to know not
 only that AI was used, but for what, under whose direction, with which checks, which errors were found, and what
-has and has not been verified. The declarations of AI use that journals ask for record much less. At the same time,
-editors face a growing volume of submissions and a limited supply of reviewers, and a reporting requirement that
-adds to the reviewer's burden, or that cannot be checked, will not be adopted. A standard must therefore be
-proportionate, verifiable where possible, and useful to the reviewer.
+has and has not been verified. The declarations of AI use that journals ask for record much less.
 
 The paper makes two contributions. The first is a proposed standard for reporting AI-assisted proofs in
 mathematical risk management and actuarial science (Section~\ref{sec:standard}). It consists of nine items, from
 the tools used to the public records of the process. The items are applied in three tiers according to how heavily
 AI was used, so that a paper in which AI helped with editing is not asked for what a paper whose proofs were
-developed by agents must report. Each item is marked by whether an editor or reviewer can verify it, and the
-standard is designed so that reporting errors and checks honestly strengthens a paper rather than weakens it.
+developed by agents must report. Each item is marked by whether it can be verified from public records.
 Formal verification in a proof assistant and a public repository are encouraged, and their scope is to be
 reported precisely, but they are not required. To the author's knowledge, this is the first proposal of such a
 standard in our field. It is offered for the community to test and improve.
+
+Behind the standard lies a broader view: the use of AI in mathematical proofs should become methodological. It
+should be a procedure that is written down, tested, improved and reused by others, rather than each researcher's
+private way of prompting a chatbot. This paper introduces one such method. It combines the author's background in
+mathematics with the practices of AI-assisted coding that have become common: version control, agents with defined
+roles, adversarial checks, and records kept as files. The repository of the paper contains a skill file that
+describes the method and a set of agent definitions that others can run directly, tested on a small example
+problem (Section~\ref{sec:std-use}).
 
 The second contribution is a case study to which the standard is applied in full: a mathematical result obtained
 with a panel of AI agents, together with the report of how it was obtained. The problem was chosen by the author as

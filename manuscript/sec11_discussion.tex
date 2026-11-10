@@ -11,6 +11,16 @@ that do not yet exist. Finally, the comparison with large-scale efforts suggests
 multi-agent work, and the records needed to report it, are largely independent of scale, but this is based on one
 case study.
 
+\paragraph{A method for AI-assisted proofs.}
+The broader lesson the author draws from the case study is that the use of AI in mathematical proofs should become
+methodological. It should be a procedure that is written down, tested, improved and reused by others, rather than
+each researcher's private way of prompting a chatbot. This paper introduces one such method. It combines the
+author's background in mathematics with the practices of AI-assisted coding that have become common: version
+control, agents with defined roles, adversarial checks, and records kept as files. The repository of the paper
+contains a skill file that describes the method and a set of agent definitions that others can run directly, tested
+on a small example problem (Section~\ref{sec:std-use}). Whether the method carries over to other problems and other
+authors can only be learned from use, and the skill and the agents are offered so that this can be tried.
+
 \paragraph{The case study.}
 A loss ratio carries its own premium and its own risk measure. The premium is the price point of the cash line,
 the sure payment at which the book changes hands, and the risk measure is loss ratio times premium, visible even
@@ -47,3 +57,16 @@ the ratio can replace the pooling axiom (Proposition~\ref{prop:nofinite}).
   truncation-continuity (Greco-type) version of the signed tier on the cone is not known.
 \item \emph{Unbounded losses.} Extensions to $L^p$ and Orlicz spaces via \citet{www2020b} are not treated.
 \end{enumerate}
+
+\section{Conclusion}\label{sec:conclusion}
+
+This paper has proposed a standard for reporting AI-assisted proofs in mathematical risk management and actuarial
+science, with nine items applied in three tiers according to how heavily AI was used, and it has applied the
+standard in full to a case study: the characterization of the loss ratio by axioms on its values, obtained with a
+panel of AI agents under the author's direction. The broader lesson is that the use of AI in mathematical proofs
+should become methodological: a procedure that is written down, tested, improved and reused by others, rather than
+each researcher's private way of prompting a chatbot. The method introduced here combines the author's background in
+mathematics with the practices of AI-assisted coding that have become common, namely version control, agents with
+defined roles, adversarial checks, and records kept as files. The standard, the skill file that describes the
+method and the agent definitions that others can run directly, tested on a small example problem, are offered as a
+first version for the community to test and improve.

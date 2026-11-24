@@ -1,0 +1,57 @@
+\section{Large-scale efforts in AI-assisted mathematics}\label{supp:practice}
+
+This section gives the fuller account of OpenAI's work summarized in Section~\ref{sec:std-practice}, and records how
+the accounts used in Section~\ref{sec:std-compare} were prepared.
+
+The most visible examples are the releases of OpenAI in 2026, which illustrate several distinct ways of combining
+AI discovery with verification. In February, OpenAI submitted proof attempts by an internal model to First Proof,
+a set of ten research-level problems posed by experts in their fields \citep{openai_firstproof_2026}. The model
+was run ``with limited human supervision'': the researchers sometimes suggested retrying strategies that had
+appeared fruitful, asked the model to expand or clarify parts of a proof after expert feedback, facilitated a
+back-and-forth between the model and ChatGPT ``for verification, formatting, and style'', and for some problems
+presented the best of a few attempts selected by human judgment. One attempt first believed likely correct was
+later judged incorrect in the light of the official commentary, OpenAI states that the process was not as clean as a
+properly controlled evaluation, and the accompanying preprint includes an appendix of prompt patterns. In
+August, OpenAI published ten results in mathematics and theoretical computer science, with certificates in the
+proof assistant Lean \citep{openai_tenproofs_2026}. In September it announced a resolution of the Navier--Stokes
+problem, with a written proof and a Lean formalization \citep{openai_navierstokes_2026}. OpenAI describes a
+system of coordinating agents, powered by an internal model, with access to a cached copy of the internet and to
+code execution, and subdivided into groups that communicate internally; the group that produced the result
+involved of the order of ten thousand concurrent agents. Different groups were prompted with different variants of
+the problem statement, two leading to a proof of regularity and two to a counterexample. A run on easier problems
+produced, with nearly a hundred agents over about fifty hours, a result on the Euler equations, after which the
+researchers moved agents to Navier--Stokes, prompted them with the Euler result, and switched them to a further
+trained version of the model. Groups were encouraged to explore diverse approaches and were then
+``cross-pollinated'' by using a coding agent to consolidate the most useful insights of each group into follow-up
+prompts. The resolution came after about 88 hours and 2.7 million messages between agents, and the Lean
+formalization took another 17 hours. In October OpenAI released about seven hundred
+manuscripts produced by an internal model by one fixed procedure on some four thousand posed problems, together
+with a Lean library covering a part of the results and a change log recording retractions and repairs
+\citep{openai_math_2026}; this release did not use the large communicating configuration of the Navier--Stokes
+run. The repository describes the manuscripts as ``raw research data, rather than polished academic papers'', and
+states that unformalized results could contain errors. Later in October, OpenAI announced three further results, in
+harmonic analysis, complexity theory and quantum field theory, again described its manuscripts as raw research
+data, and tested three ways of turning them into understanding: releasing the materials and leaving researchers to
+organize themselves; forming an external group of collaborators while releasing the materials; and forming an
+external group and leaving the release to it \citep{openai_academic_2026}. The collaborations follow four stated
+principles: transparency, no academic credit claimed by OpenAI for discoveries of its models, recognition of the
+groups for the understanding they develop, and independence of the groups. OpenAI notes that the choice of
+coordinators gives some researchers earlier access to the materials than others.
+
+\begin{discussion}[the design of the panel]
+When the author decided to make the use of AI central to the paper, the panel was described to the main assistant
+as organized in the manner of the recent multi-agent efforts in mathematics, and the paper was conceived as having
+two parts: the mathematical question, and the demonstration, open to inspection, of how AI was used to answer it.
+To check this description, two accounts of OpenAI's methods were prepared independently: one by an agent of the
+main assistant, which read OpenAI's public repositories, the arXiv audits, the AGMAI guidelines and press reports
+but could not retrieve OpenAI's own pages, and one by ChatGPT, at the author's request, which cited OpenAI's posts
+directly. The author then retrieved OpenAI's Navier--Stokes and First Proof posts and its October post on academic
+collaborations in a browser, and the main assistant
+compared them with both accounts; the posts confirm the facts that both accounts reported, and the text above
+quotes them directly. The two accounts agree on
+the facts used here. Both find that the resemblance holds for the principles
+listed in Section~\ref{sec:std-compare}, that OpenAI used model-to-model checking and coordinated groups of agents, and that no published
+record specifies dedicated reviewer or judge roles; the comparison in Table~\ref{tab:compare} is stated
+accordingly. The use of a second provider to cross-check a description of the literature is an instance of the
+guardrail of Section~\ref{sec:collab-guard}.
+\end{discussion}

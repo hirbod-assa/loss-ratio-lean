@@ -1,0 +1,158 @@
+\subsection{Further results on the axioms}\label{supp:axioms-more}
+
+This subsection contains results on the axioms of Section~\ref{sec:axioms} that are not needed to follow the paper:
+why the hypothesis of \axR{} cannot be replaced by a condition on finite values of $\LR$, why the weights of \axCM{}
+cannot be given from outside, explicit formulas for the implied premium, and why monotonicity is imposed on the
+cash offsets rather than on the values of the ratio. The Discussions record the author's questions that led to them.
+
+The hypothesis of \axR{} that $X$ and $Y$ are unpriced cannot be removed, and it cannot be replaced by a condition on finite
+values of $\LR$. For a loss ratio $\LR$ write $\widetilde\LR$ for the real-valued map equal to $\LR$ where $\LR$ is
+finite and to $1$ elsewhere. A condition \emph{depends on $\LR$ only through its finite values} if it holds for
+$\LR$ whenever it holds for some $\LR^\circ$ with $\widetilde{\LR^\circ}=\widetilde\LR$. Conditions on limits
+of finite values along cash lines, such as $\lim_{s\to0}s(\LR(X+s)-1)$ or $\lim_{|s|\to\infty}s(\LR(X+s)-1)$, are of
+this kind, since under \axP{} the values $\LR(X+s)$ near the singular point are finite.
+
+\begin{proposition}[Non-finite values are needed]\label{prop:nofinite}
+Let $\Pi'=\max(I_{\sqrt t},I_{\min(1,1.5t)})$ and $\LR'=\bracket{\Pi'}{\Pi'}$. Then $\LR'$ satisfies \axPe, \axP,
+\axN, \axLI, \axRC{} and \axRM, its finite values are all equal to $1$, and $\LR'$ is not of the form
+$\bracket{I_h}{I_g}$ with $h,g\in\Hset_1$. Consequently, no condition that depends on $\LR$ only through its finite
+values and holds for every loss ratio $\bracket{I_h}{I_g}$ can replace \axR{} in Theorems~\ref{thm:A}
+and~\ref{thm:B}.
+\end{proposition}
+
+\begin{proof}
+$\Pi'$ is law invariant, monotone, $1$-Lipschitz and cash additive with $\Pi'(c)=c$, so the cash line of $X$ under
+$\LR'$ equals $1$ except at $c=-\Pi'(X)$, where it is not finite. This gives \axPe, \axP, \axN{} and \axLI. The sure
+amount $a$ with $\LR'(X-a)\notin\R$ is $\Pi'(X)$; a book $W$ never has $\LR'(W)=0$, and $\LR'(W)\notin\R$ with
+$\LR'(W+1)=1$ holds exactly when $\Pi'(W)=0$. Both sure amounts in \axRC{} and \axRM{} are therefore $\Pi'(X)$, and
+both axioms hold. If $\LR'=\bracket{I_h}{I_g}$, the two maps have the same non-finite books, so $I_g(X)=\Pi'(X)$ for
+every $X$ by \axP, and $\Pi'$ would be comonotonic additive; Example~\ref{ex:indepR} shows that it is not. Finally,
+$\widetilde{\LR'}\equiv1=\widetilde{\LR^\circ}$ for $\LR^\circ=\bracket{\E}{\E}$, which is of the form
+$\bracket{I_h}{I_g}$; so every condition of the stated kind holds for $\LR'$. \qedhere
+\end{proof}
+
+On books that break even, the finite values of the cash line carry no information about the premium, and only the
+location of the non-finite values does (Proposition~\ref{prop:explicit} below). The following remark shows the same
+for the limit at a vanishing premium.
+
+\begin{remark}[The limit at zero premium]\label{rem:limzero}
+For $\LR=\bracket{I_h}{I_g}$, $s(\LR(X+s)-1)=s\,(I_h(X)-I_g(X))/(I_g(X)+s)$. Its limit as $s\to0$ exists for every
+$X$: it is $I_h(X)$ if $X$ is unpriced and $0$ otherwise. An axiom requiring that this limit exist is therefore
+automatic, and the limit is $0$ on unpriced books with $I_h(X)=0$ as well as on all books with a premium, so it
+does not identify the unpriced books. Nor can \eqref{eq:R} be stated for the limits on all comonotone pairs: take
+$\rho=\E$, $\Pi=I_{\sqrt t}$, $X=\1_A$ with $P(A)=\tfrac14$ and $Y=-\tfrac12$. The limits for $X$ and $Y$ are $0$,
+since $\Pi(X)=\tfrac12$ and $Y$ is a sure amount, while $X+Y$ is unpriced and its limit is $\E(X+Y)=-\tfrac14$. The
+hypothesis of \axR{} accounts for such pools, whose premiums cancel.
+\end{remark}
+
+\begin{discussion}[relative price]
+In an earlier version the pooling property was written with the premiums inside a single fraction. The author
+asked that it be written as the combination $w_{X,Y}\LR(X)+w_{Y,X}\LR(Y)$ of the two loss ratios, and that the
+weight be explained as the relative price of $X$ in the comonotone portfolio $\{X,Y\}$, since this is the form in
+which an underwriter reads a pooled loss ratio. The paragraph before Property~\ref{ax:CM} records that reading.
+\end{discussion}
+
+\begin{remark}[A premium given from outside]\label{rem:primitive}
+Suppose that a premium functional $\Pi^\circ$ is given and \axCM{} is stated with $\Pi^\circ$ as weights. If
+$\LR(X)=a\ne b=\LR(Y)$ and $\LR(X+Y)=L$, then $\Pi^\circ(X)/\Pi^\circ(Y)=(b-L)/(L-a)$, so the weights are determined
+by the loss ratios. On books with $\LR=1$, however, the pooled ratio equals $1$ whatever the weights, and \axCM{}
+carries no information on $\Pi^\circ$. For instance, if $\LR\equiv1$ on $\{I_g\ne0\}$, then \axCM{} holds with the
+non-additive weights $\Pi^\circ=(I_g)^3$, since $a^3+b^3\ne0$ implies $a+b\ne0$. With the implied premium this
+difficulty does not arise, because \axP{} locates the price point also when the ratio equals $1$ elsewhere on
+the cash line.
+\end{remark}
+
+Away from the break-even set, the premium can be computed explicitly from two values of the loss ratio. Solving
+\eqref{eq:pool} for $\Pi(X)$ gives the following formulas.
+
+\begin{proposition}[Explicit formulas]\label{prop:explicit}
+Assume \axP, \axN{} and \axCM, and let $X\in D$ with $\LR(X)\ne1$. Write $\phi_X(c)=\LR(X+c)$.
+\begin{enumerate}[label=(\alph*),nosep]
+\item \emph{Two quotes.} For every $c\notin\{0,-\Pi(X)\}$, $\phi_X(c)\ne\LR(X)$ and
+  \[
+   \Pi(X)=\frac{c\,\bigl(1-\phi_X(c)\bigr)}{\phi_X(c)-\LR(X)},\qquad
+   \rho(X)=\LR(X)\,\frac{c\,\bigl(1-\phi_X(c)\bigr)}{\phi_X(c)-\LR(X)} .
+  \]
+\item \emph{Sensitivity to a sure loss.} $\phi_X$ is differentiable at $0$, $\phi_X'(0)=(1-\LR(X))/\Pi(X)\ne0$, and
+  \[
+   \Pi(X)=\frac{1-\LR(X)}{\phi_X'(0)},\qquad \rho(X)=\frac{\LR(X)\,\bigl(1-\LR(X)\bigr)}{\phi_X'(0)} .
+  \]
+\item \emph{Underwriting result.} $\Pi(X)-\rho(X)=\lim_{|c|\to\infty}c\,\bigl(1-\phi_X(c)\bigr)$.
+\end{enumerate}
+If $\LR(X)=1$, then $\phi_X\equiv1$ away from the price point, and $\Pi(X)$ is not determined by the finite values
+of the cash line.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:readings}(a), $\phi_X(c)=(\rho+c)/(\Pi+c)$ with $\rho=\rho(X)$, $\Pi=\Pi(X)\ne0$, so
+\[
+ 1-\phi_X(c)=\frac{\Pi-\rho}{\Pi+c},\qquad \phi_X(c)-\LR(X)=\frac{c\,(\Pi-\rho)}{\Pi\,(\Pi+c)} .
+\]
+Since $\LR(X)\ne1$ means $\rho\ne\Pi$, the second expression is non-zero for $c\ne0$, and the quotient gives (a).
+Differentiating, $\phi_X'(c)=(\Pi-\rho)/(\Pi+c)^2$, so $\phi_X'(0)=(1-\LR(X))/\Pi$, which gives (b); and
+$c\,(1-\phi_X(c))=c\,(\Pi-\rho)/(\Pi+c)\to\Pi-\rho$, which gives (c). If $\LR(X)=1$, then $\rho=\Pi$ and
+$\phi_X(c)=1$ for $c\ne-\Pi$. \qedhere
+\end{proof}
+
+Formula (b) reads: the implied premium is the underwriting margin $1-\LR(X)$ divided by the sensitivity of the
+loss ratio to a sure loss; formula (a) is its finite-difference version, which needs only two quoted loss ratios,
+with and without a sure loss $c$. For $X=\1_A$ in Example~\ref{ex:three}, $\LR(X)=\tfrac12$ and
+$\phi_X(1)=\tfrac56$, so (a) gives $\Pi(X)=\tfrac16/\tfrac13=\tfrac12$. For books outside $D$ the formulas apply to
+$X+c$ with $X+c\in D$, and $\Pi(X)=\Pi(X+c)-c$ by \eqref{eq:Picash}.
+
+The last statement of Proposition~\ref{prop:explicit} is the reason why the axioms must refer to non-finite
+values of $\LR$, as \axPe{} and \axR{} do. On the break-even set the cash line carries no information about the premium except the
+location of its singularity, and Remark~\ref{rem:primitive} shows that the weights in \axCM{} are then not
+identified by the values of the ratio. Off the break-even set, the weights of \axCM{} could equally be written with
+the explicit premium of (a) or (b) in place of $-\cinf{}$; but \axCM{} must also govern pools that contain
+break-even books, and there only the price point locates the premium. Axiom \axR{} avoids weights altogether: it
+moves each book to zero premium by a sure payment, which is a statement about non-finite values, and pools there.
+
+\begin{discussion}[explicit premium formulas]
+After the remark of Peng Liu reported in Section~\ref{sec:collab-revision}, the author asked whether the implicitly
+defined premium could be replaced by an explicit formula in the values of $\LR$, so that the axioms could be
+restated in terms of the loss ratio. Three proposals were examined. The first solves the identity \eqref{eq:pool}
+for $\Pi(X)$, which gives (a) and (b) of Proposition~\ref{prop:explicit}. The second, proposed by the author, takes
+the existence of $M(X):=\lim_{|c|\to\infty}c\,(1-\LR(X+c))$ as a condition and defines the premium as
+$M(X)/(1-\LR(X))$; by (c) it agrees with the implied premium off the break-even set. The third, also proposed by
+the author, treats a break-even book $X$ by perturbation, setting $\Pi(X):=\lim_{\varepsilon\to0}\Pi(X+\varepsilon
+Y)$ for a book $Y$ such that $X+\varepsilon Y$ is outside the break-even set, with $\Pi(X+\varepsilon Y)$ given by
+the second formula. The main assistant checked that each proposal agrees with the implied premium wherever it is
+defined, and that the perturbation recovers it on the break-even set provided the premium is already known to be
+continuous, which is part of what the axioms are meant to deliver. The conclusion was that no explicit formula can
+serve as a definition on its own: on break-even books, and for $h=g$ on every book, the finite values of the cash
+line carry no information about the premium. This led to the formulation of Section~\ref{sec:R}, in which the
+premium enters only through the non-finite values of $\LR$.
+\end{discussion}
+
+\begin{discussion}[the margin ratio]
+The author also asked how the cash-line formulation of an earlier version (Remark~\ref{rem:oldCP} in the
+Supplement) could be written with the loss ratio alone. Under the representation,
+$1-\LR(X+c)=(\Pi(X)-\rho(X))/(\Pi(X)+c)$, so off the break-even set the map $c\mapsto1/(1-\LR(X+c))$ is affine; it
+vanishes at the price point and equals $1$ where the cash line vanishes. The author proposed to call
+$\mathrm{MR}:=1-\LR$ the \emph{margin ratio}, the underwriting margin per unit of premium, and to state the
+condition through the ratio of the two: since $1/(1-\LR)=1+\LR/\mathrm{MR}$, every cash line off the break-even set
+is a unit-slope Möbius map if and only if $c\mapsto\LR(X+c)/\mathrm{MR}(X+c)$ is affine, with slope
+$1/(\Pi(X)-\rho(X))$. The author's first version of the identity had the quotient inverted, and the main assistant
+corrected it. Both forms degenerate on the break-even set, where the margin ratio vanishes along the whole cash line
+except at the price point, so they do not locate the premium of a break-even book. The condition was therefore kept
+as a reading of Proposition~\ref{prop:readings}(a), not as an axiom.
+\end{discussion}
+
+Monotonicity is imposed on the cash offsets in \axRM{} and not on the values of the ratio, for the following
+reason.
+
+\begin{proposition}[No monotone loss ratio]\label{prop:F2}
+Let $h,g\in\Hset_1$ with $g>0$ on $(0,1]$, and let $\LR=I_h/I_g$ on $\Xp:=L^\infty_+\setminus\{0\}$.
+If $\LR$ is monotone on $\Xp$ (non-decreasing or non-increasing for the almost sure order),
+then $h=g$ and $\LR\equiv1$.
+\end{proposition}
+
+\begin{proof}
+Let $P(A)=p>0$. For $c\ge0$, $\LR(\1_A+c)=\frac{h(p)+c}{g(p)+c}$ is monotone in $c$ with derivative at
+$0$ of the sign of $g(p)-h(p)$. Next let $P(E)=q>0$ and $t\ge0$. Then $X_t=1+t\1_E\in\Xp$ is
+increasing in $t$, and $I_k(X_t)=1+t\,k(q)$ for $k\in\{h,g\}$, so
+$\LR(X_t)=\frac{1+t\,h(q)}{1+t\,g(q)}$ has derivative at $t=0$ of the sign of $h(q)-g(q)$. If $\LR$
+is non-decreasing both signs are non-negative, hence $h=g$ on $(0,1]$; if $\LR$ is non-increasing both are
+non-positive, and again $h=g$. \qedhere
+\end{proof}

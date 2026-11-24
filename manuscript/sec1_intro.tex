@@ -23,13 +23,10 @@ Formal verification in a proof assistant and a public repository are encouraged,
 reported precisely, but they are not required. To the author's knowledge, this is the first proposal of such a
 standard in our field. It is offered for the community to test and improve.
 
-Behind the standard lies a broader view: the use of AI in mathematical proofs should become methodological. It
-should be a procedure that is written down, tested, improved and reused by others, rather than each researcher's
-private way of prompting a chatbot. This paper introduces one such method. It combines the author's background in
-mathematics with the practices of AI-assisted coding that have become common: version control, agents with defined
-roles, adversarial checks, and records kept as files. The repository of the paper contains a skill file that
-describes the method and a set of agent definitions that others can run directly, tested on a small example
-problem (Section~\ref{sec:std-use}).
+Behind the standard lies a broader view: the use of AI in mathematical proofs should become methodological, a
+procedure that is written down, tested and reused by others. The repository of the paper contains a skill file and
+agent definitions that make the method of the case study reusable (Sections~\ref{sec:std-use}
+and~\ref{sec:discussion}).
 
 The second contribution is a case study to which the standard is applied in full: a mathematical result obtained
 with a panel of AI agents, together with the report of how it was obtained. The problem was chosen by the author as
@@ -64,7 +61,7 @@ identity loss $=$ loss ratio $\times$ premium. With this reading, axioms that re
 characterize the loss ratios that are ratios $I_h/I_g$ of signed Choquet integrals (Theorems~\ref{thm:A}
 and~\ref{thm:B}). The central axiom states that the underwriting results of comonotone books of zero premium add
 when the books are pooled. None of the axioms can be dropped, and no axiom that depends only on finite values of the
-loss ratio can replace the pooling axiom (Section~\ref{sec:necessity} and Proposition~\ref{prop:nofinite}).
+loss ratio can replace the pooling axiom (Section~\ref{sec:necessity} and Proposition~\ref{prop:nofinite} in the Supplement).
 
 The case study is reported in Section~\ref{sec:collab}, item by item against the proposed standard. Three facts
 from it shaped this paper. First, the central idea of the result, the reading of the premium and the risk measure
@@ -86,6 +83,7 @@ The paper is organized as follows. Section~\ref{sec:standard} reviews current pr
 this paper with large-scale multi-agent efforts, and proposes the reporting standard. Sections~\ref{sec:lit}
 to~\ref{sec:necessity} present the mathematical case study: the related literature, the setting, the axioms, the
 main results and the independence of the axioms. Section~\ref{sec:collab} reports the AI process of the case study
-against the standard, including the formal check in Lean and the revisions. Section~\ref{sec:discussion} discusses
-the method and open problems on both sides, and Section~\ref{sec:conclusion} concludes. The Supplement contains the proofs, the version without law invariance, the version
-for nonnegative losses, further consequences, and the timed record of the Lean check.
+against the standard, including the formal check in Lean and the revisions. Section~\ref{sec:discussion} discusses the standard, the method, the concern
+that AI will diminish the credit that comes from research, and open problems, and Section~\ref{sec:conclusion} concludes. The Supplement, available at
+\url{https://github.com/hirbod-assa/loss-ratio-lean/blob/main/manuscript/loss_ratio_supplement.pdf}, contains the proofs, the witnesses for independence, the version without law invariance, the
+version for nonnegative losses, further consequences, and further records of the AI process.

@@ -12,40 +12,19 @@ one-line declaration is adequate. A different mode of work has appeared in which
 model given a role, tools and a task, are organized to propose, prove, criticize and formalize results, and the
 human contribution is to choose problems, direct the work and decide what to accept.
 
-The most visible examples are the releases of OpenAI in 2026, which illustrate several distinct ways of combining
-AI discovery with verification. In February, OpenAI submitted proof attempts by an internal model to First Proof,
-a set of ten research-level problems posed by experts in their fields \citep{openai_firstproof_2026}. The model
-was run ``with limited human supervision'': the researchers sometimes suggested retrying strategies that had
-appeared fruitful, asked the model to expand or clarify parts of a proof after expert feedback, facilitated a
-back-and-forth between the model and ChatGPT ``for verification, formatting, and style'', and for some problems
-presented the best of a few attempts selected by human judgment. One attempt first believed likely correct was
-later judged incorrect in the light of the official commentary, OpenAI states that the process was not as clean as a
-properly controlled evaluation, and the accompanying preprint includes an appendix of prompt patterns. In
-August, OpenAI published ten results in mathematics and theoretical computer science, with certificates in the
-proof assistant Lean \citep{openai_tenproofs_2026}. In September it announced a resolution of the Navier--Stokes
-problem, with a written proof and a Lean formalization \citep{openai_navierstokes_2026}. OpenAI describes a
-system of coordinating agents, powered by an internal model, with access to a cached copy of the internet and to
-code execution, and subdivided into groups that communicate internally; the group that produced the result
-involved of the order of ten thousand concurrent agents. Different groups were prompted with different variants of
-the problem statement, two leading to a proof of regularity and two to a counterexample. A run on easier problems
-produced, with nearly a hundred agents over about fifty hours, a result on the Euler equations, after which the
-researchers moved agents to Navier--Stokes, prompted them with the Euler result, and switched them to a further
-trained version of the model. Groups were encouraged to explore diverse approaches and were then
-``cross-pollinated'' by using a coding agent to consolidate the most useful insights of each group into follow-up
-prompts. The resolution came after about 88 hours and 2.7 million messages between agents, and the Lean
-formalization took another 17 hours. In October OpenAI released about seven hundred
-manuscripts produced by an internal model by one fixed procedure on some four thousand posed problems, together
-with a Lean library covering a part of the results and a change log recording retractions and repairs
-\citep{openai_math_2026}; this release did not use the large communicating configuration of the Navier--Stokes
-run. The repository describes the manuscripts as ``raw research data, rather than polished academic papers'', and
-states that unformalized results could contain errors. Later in October, OpenAI announced three further results, in
-harmonic analysis, complexity theory and quantum field theory, again described its manuscripts as raw research
-data, and tested three ways of turning them into understanding: releasing the materials and leaving researchers to
-organize themselves; forming an external group of collaborators while releasing the materials; and forming an
-external group and leaving the release to it \citep{openai_academic_2026}. The collaborations follow four stated
-principles: transparency, no academic credit claimed by OpenAI for discoveries of its models, recognition of the
-groups for the understanding they develop, and independence of the groups. OpenAI notes that the choice of
-coordinators gives some researchers earlier access to the materials than others.
+The most visible examples are the releases of OpenAI in 2026, which combine AI discovery with verification in several
+ways. In February, OpenAI submitted proof attempts by an internal model to First Proof, a set of ten research-level
+problems, with ``limited human supervision'': researchers suggested strategies, asked for clarification after expert
+feedback, used ChatGPT ``for verification, formatting, and style'', and selected among attempts
+\citep{openai_firstproof_2026}. In August it published ten results with certificates in the proof assistant Lean
+\citep{openai_tenproofs_2026}, and in September a resolution of the Navier--Stokes problem with a Lean formalization,
+produced by groups of the order of ten thousand concurrent agents that were prompted with variants of the problem and
+``cross-pollinated'' by a coding agent, over about 88 hours and 2.7 million messages
+\citep{openai_navierstokes_2026}. In October it released about seven hundred manuscripts produced by one fixed
+procedure and described as ``raw research data'', with a Lean library for part of the results and a change log of
+retractions and repairs \citep{openai_math_2026}, and it announced collaborations on three further results under four
+principles, among them that OpenAI claims no academic credit for discoveries of its models
+\citep{openai_academic_2026}. A fuller account is in Section~\ref{supp:practice} of the Supplement.
 
 The mathematical community has responded on three points that bear directly on reporting. First, on
 \emph{understanding and disclosure}: the Advisory Group on Mathematics and Artificial Intelligence (AGMAI), a group
@@ -120,39 +99,21 @@ Disclosure of prompts & prompt patterns in an appendix (First Proof); for Navier
 \end{table}
 
 The resemblance is in the design principles: several independent attempts from different angles, selection and
-synthesis of the most useful findings (by a coding agent in the Navier--Stokes run, by judge agents here),
-criticism, formal verification of what can be formalized, and release of the records with
-a history of corrections. These principles do not depend on scale, and a single researcher can apply them to a
-problem in risk management at modest cost. The closest analogue to the case study is OpenAI's First Proof work,
-in which humans suggested strategies, asked for clarification after expert feedback, used a second model to check
-the proofs and selected among attempts, which is the role the author and the review with ChatGPT played here; what
-the case study adds is a record of the errors found at each step and of the author's interventions. The difference is in the human role. In the large-scale efforts the
-human chooses problems and allocates computation, and the results may not yet be understood by anybody; in the case
-study the author directed every stage, and the central idea of the result came from the author's objections to
-drafts produced by the agents. The assignment of credit differs accordingly: OpenAI claims no academic credit for its models' discoveries and
-credits external groups with the understanding they develop, whereas here the author, who directed the work and
-understands the result, takes responsibility for it, and the report records what came from the AI. The paper
-therefore falls under the first category of the AGMAI guidelines, a result
-that its author understands, but its proofs were developed by agents, which is why the fuller report of
-Section~\ref{sec:collab} is given.
+synthesis of the most useful findings (by a coding agent in the Navier--Stokes run, by judge agents here), criticism,
+formal verification of what can be formalized, and release of the records with a history of corrections. These
+principles do not depend on scale, and a single researcher can apply them to a problem in risk management at modest
+cost. The closest analogue is OpenAI's First Proof work, in which humans suggested strategies, used a second model to
+check the proofs and selected among attempts, as the author and the review with ChatGPT did here; what the case study
+adds is a record of the errors found at each step and of the author's interventions. The difference is in the human
+role. In the large-scale efforts the human chooses problems and allocates computation, and the results may not yet
+be understood by anybody; OpenAI accordingly claims no academic credit for its models' discoveries and credits
+external groups with the understanding they develop. In the case study the author directed every stage, the central
+idea came from the author's objections to drafts of the agents, and the author takes responsibility for the result.
+The paper therefore falls under the first category of the AGMAI guidelines, a result that its author understands, but
+its proofs were developed by agents, which is why the fuller report of Section~\ref{sec:collab} is given. How the
+accounts of OpenAI's methods were prepared and cross-checked is recorded in Section~\ref{supp:practice} of the
+Supplement.
 
-\begin{discussion}[the design of the panel]
-When the author decided to make the use of AI central to the paper, the panel was described to the main assistant
-as organized in the manner of the recent multi-agent efforts in mathematics, and the paper was conceived as having
-two parts: the mathematical question, and the demonstration, open to inspection, of how AI was used to answer it.
-To check this description, two accounts of OpenAI's methods were prepared independently: one by an agent of the
-main assistant, which read OpenAI's public repositories, the arXiv audits, the AGMAI guidelines and press reports
-but could not retrieve OpenAI's own pages, and one by ChatGPT, at the author's request, which cited OpenAI's posts
-directly. The author then retrieved OpenAI's Navier--Stokes and First Proof posts and its October post on academic
-collaborations in a browser, and the main assistant
-compared them with both accounts; the posts confirm the facts that both accounts reported, and the text above
-quotes them directly. The two accounts agree on
-the facts used here. Both find that the resemblance holds for the principles
-listed above, that OpenAI used model-to-model checking and coordinated groups of agents, and that no published
-record specifies dedicated reviewer or judge roles; the comparison in Table~\ref{tab:compare} is stated
-accordingly. The use of a second provider to cross-check a description of the literature is an instance of the
-guardrail of Section~\ref{sec:collab-guard}.
-\end{discussion}
 
 \subsection{The proposed standard}\label{sec:collab-standard}
 
@@ -257,93 +218,46 @@ with dates, so that a later revision of the mathematics does not silently fall o
 or referees whose comments changed the work only with their consent.
 
 \emph{For researchers who want to carry out a similar case study.} Choose a problem whose answer is not known but
-whose correctness can be checked, and list its degenerate cases in advance; most of the errors found here occurred
-at such cases. Give the proposal agents distinct angles, one of which should always be the limits of what can be
-achieved. Give each proposal its own adversarial checker, and test claims at the points where they can fail rather
-than at random points (Table~\ref{tab:errors}). Use a model of a second provider for review. Above all, keep the
-human role active: in the case study the decisive steps came from the author's objections, not from the agents.
+whose correctness can be checked, and list its degenerate cases in advance; almost every error in
+Table~\ref{tab:errors} occurred at such a case. Fix the statement, with all quantifiers and conventions, before a
+proof is attempted, and freeze it while the proof is checked: the typical failure is a correct argument for a
+slightly weaker statement. Give the proposal agents distinct angles, one of which should always be the limits of what
+can be achieved, and search for counterexamples before proofs; the witnesses of Section~\ref{sec:necessity} arose in
+this way. Give each proposal its own adversarial checker, which sees the statement and the proof but not the
+prover's reasoning, and test claims at the points where they can fail rather than at random points. Check citations
+that carry weight against the source, and use a model of a second provider for review. Above all, keep the human
+role active: in the case study the decisive steps came from the author's objections to what a formulation assumed,
+not from the agents. Further practical advice is collected in the skill described below.
 
 \emph{For editors and reviewers.} Read the verification status first, since it shows where the unverified parts are.
 Where a formal proof is provided, rebuild it and spend the review effort on whether the formal definitions and
 statements say what the paper says. Compare the report with the version history of the repository, and check a few
 entries of the error log against the records.
 
-\emph{Practical advice for proofs with agents.} The following points summarize what the case study taught about
-working with agents on proofs; the last three are general experience rather than findings of this project.
-\begin{itemize}[nosep]
-\item \emph{Fix the statement before proving it}, with all quantifiers, the domain and the conventions, and ask each
-  agent to restate it; differences between the restatements expose ambiguities.
-\item \emph{Give every agent the list of degenerate cases} and of established facts; almost every error in
-  Table~\ref{tab:errors} occurred at a degenerate case, and a list of known facts prevents their rediscovery.
-\item \emph{Freeze the statement while a proof is checked.} The typical failure is a correct argument for a slightly
-  weaker statement; checkers should compare what was proved with what was claimed.
-\item \emph{Search for counterexamples before proofs.} The witnesses of Section~\ref{sec:necessity} and
-  Proposition~\ref{prop:nofinite} arose in this way.
-\item \emph{Ask for the dependency structure of a proof}, with the hypotheses of each lemma, so that circular
-  citations become visible; treat ``clearly'' as a gap to be expanded.
-\item \emph{Require concrete objections}, a counterexample or a failing step, and test on small finite models in
-  exact arithmetic at the points where a claim can fail.
-\item \emph{Check citations that carry weight} against the source or reprove them; agents misremember hypotheses
-  and numbering.
-\item \emph{Formalize definitions and statements first}, and have a human compare them with the paper before formal
-  proofs are attempted.
-\item \emph{Keep the failed approaches}; several became impossibility results of the case study.
-\item \emph{Ask what a formulation assumes.} The first complete theorem of the case study supplied the premium and
-  the risk measure by assumption, and the author's objection to it produced the central idea of the paper.
-\item \emph{Give checkers the statement and the proof, not the prover's reasoning}, so that they are not anchored on
-  it; stop checking only when consecutive rounds find nothing new; and keep the working context in files rather
-  than in one long session.
-\end{itemize}
-
-\emph{A method rather than a private practice.} The use of AI in mathematical proofs should become methodological:
-a procedure that is written down, tested, improved and reused by others, rather than each researcher's private way
-of prompting a chatbot. The method of the case study combines the practice of mathematical research with the
-practices of AI-assisted coding that have become common, namely version control, agents with defined roles,
-adversarial checks, and records kept as files. The skill and the agent files described next are the means by which
-it can be reused.
-
-\emph{A reusable skill.} To make the method usable by others, the protocol of the case study has been written as a
-\emph{skill}: a structured instruction file that an AI assistant loads when a task matches its description, and that
-a human can read as a written protocol. It is in the directory \texttt{skill/} of the repository. It sets out the
-roles of author, assistant and agents; the repository layout; the stages of the work (knowledge base, proposal
-panel, adversarial check, judge, checking runs and repair, second provider, numerical checks, formal verification);
-the pitfalls met in the case study; templates for the error log, the records of discussions and revisions, and the
-verification status; the nine items with their tiers; and notes on running the panels in different tools, with the
-workflow script of the revision as an example. Assistants that support skill files load it directly; with other
-tools, the roles can be run as separate sessions that share one context document. The skill encodes procedure, not
-judgment, and it was distilled from one case study; it is offered, like the standard, as a starting point for others
-to adapt.
-
-\emph{Reusable agents.} The agent roles of the case study are also provided in a form that others can use, in the
-directory \texttt{agents/} of the repository. Each agent is a text file with a short header, giving its name, a
-description of when it should be used and the tools it may use, followed by its instructions; this is the format in
-which Claude Code defines subagents, and with other assistants the instructions can be given to a separate session
-as its role. The roles are those of Figures~\ref{fig:workflow} and~\ref{fig:panel} and of the revision panel: a
-literature agent for one strand, a proposer working from an assigned angle, an adversarial checker instructed to
-refute one proposal, a judge, a chair who writes the note to the author, a prover, a checking run with a specific
-brief, a Lean formalizer, and a prompt for an independent review by a model of another provider. All of them read
-a shared context file, for which a template is given, that fixes the setting, the target, the established facts,
-the degenerate cases, the author's constraints and the notation; in the case study, a precise context of this kind
-was the single most effective safeguard. A workflow script runs a complete panel, with proposers in parallel, each
-followed by its checker, then the judge and the chair. The instructions of each role encode the lessons listed
-above; for instance, the checker compares the proved statement with the claimed one and tests claims at the points
-where they can fail. The agent files and the workflow were tested on a problem with a known answer, the
-characterization of the functionals $a\max+(1-a)\min$ on a two-point space by cash additivity, comonotonic
-additivity, monotonicity and law invariance. The panel of six agents recovered the answer with an independence
-witness for each axiom; an adversarial checker found three presentational errors in one proposal, and the chair
-marked as a gap the one step that needs the axiom of choice. The test also showed that agent definitions are read
-when a session starts, so the workflow can instead tell each agent to read its role file directly. The test run is
-included in \texttt{agents/} as a worked example.
+\emph{A reusable skill and reusable agents.} To make the method of the case study reusable by others
+(Section~\ref{sec:discussion}), its protocol is written as a \emph{skill}: a structured instruction file that an AI
+assistant loads when a task matches its description, and that a human can read as a written protocol (directory
+\texttt{skill/} of the repository). It sets out the roles of author, assistant and agents, the repository layout, the
+stages of the work from the knowledge base to formal verification, practical advice for proofs with agents,
+templates for the records, and the nine items with their tiers. The agent roles of Figures~\ref{fig:workflow}
+and~\ref{fig:panel} and of the revision panel are provided as text files in the directory \texttt{agents/}, in the
+format in which Claude Code defines subagents; with other assistants each file can be given to a separate session as
+its role. All agents read a shared context file that fixes the setting, the target, the established facts, the
+degenerate cases, the author's constraints and the notation; in the case study, a precise context of this kind was
+the single most effective safeguard. A workflow script runs a complete panel. The agent files and the workflow were
+tested on a problem with a known answer, the characterization of the functionals $a\max+(1-a)\min$ on a two-point
+space by cash additivity, comonotonic additivity, monotonicity and law invariance: a panel of six agents recovered the
+answer with an independence witness for each axiom, an adversarial checker found three presentational errors in one
+proposal, and the chair marked as a gap the one step that needs the axiom of choice. The test run is included in the
+repository as a worked example. The skill and the agents encode procedure, not judgment, and were distilled from one
+case study; they are offered, like the standard, as a starting point for others to adapt.
 
 \begin{discussion}[a skill for others]
-Towards the end of the work the author asked that the method be written up as a skill file, so that the paper could
-be used by others, and asked whether such a file can serve someone who wants to carry out a similar case study. The
-author also asked for the agents designed for the project to be written up in a form that others can use, which led
-to the agent files described above. The conclusion was that both can serve others, as a protocol, a set of roles and
-a set of templates: the file is plain text, it is loaded directly by
-assistants that support skills and can be followed by hand otherwise, and it records the pitfalls that the case
-study met. It cannot transfer the author's understanding of a problem, which the case study shows to be decisive,
-and it should be revised as it is used on other problems.
+Towards the end of the work the author asked that the method be written up as a skill file, and the agents of the
+project in a form that others can use, and asked whether these can serve someone who wants to carry out a similar
+case study. The conclusion was that they can serve as a protocol, a set of roles and a set of templates, but cannot
+transfer the author's understanding of a problem, which the case study shows to be decisive, and that they should be
+revised as they are used on other problems.
 \end{discussion}
 
 \subsection{Limits of the proposal}

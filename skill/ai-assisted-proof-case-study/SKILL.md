@@ -49,6 +49,21 @@ Remove machine-specific paths and personal data from records before publishing t
 
 ## 2. The work, stage by stage
 
+### 2.0 Pre-commit each panel
+A panel can be steered by whoever runs it, because the conductor decides which objections count. Before any panel
+runs (proposal, checking, revision or literature), write down and commit to `ai_process/panels/<panel>/PRECOMMIT.md`:
+- the reviewers: roles, models and the brief of each;
+- the scale of findings, for instance blocker, major, minor, note, with what each level means;
+- the rule for accepting a finding, for instance evidence the assistant can rerun by script, or the same finding
+  raised independently by a second reviewer;
+- what counts as discrediting a challenger (a counterexample shown to be wrong) as opposed to showing only that its
+  outcome is uncertain. Only the first may count in favour of the claim.
+
+Do not change these rules after seeing the output. If a change is needed, record it with its reason and the time.
+Judge a claim by the strongest accepted finding against it, not by counting agreements. More agents of the same
+design add little, since they share blind spots. A reviewer of a different design (another provider, Lean, a targeted
+numerical test, a human reader) is worth more than another copy.
+
 ### 2.1 Frame the question (author)
 State the question as a target theorem type, for example "characterize X by necessary and sufficient conditions".
 List the known traps: degenerate cases, boundary values, conventions such as 0/0.
@@ -151,6 +166,8 @@ The assistant should therefore:
 - **Record model versions** and rerun the checks after switching models.
 - **Keep failed approaches.** They often become impossibility results.
 - **Favour diversity of angles over the number of agents.**
+- **Fix the rules of a panel before it runs** (Section 2.0). In the case study the checkers' verdicts were fixed by
+  their output format, but the rule for accepting a finding was not written down in advance. Do better.
 - **Ask what a formulation assumes.** A formulation that supplies the key objects by assumption should be challenged.
 
 ## 4. Records to keep while working
@@ -164,6 +181,10 @@ The assistant should therefore:
 **Discussion record** (`ai_process/discussions.md`). Date; the question or objection; what was examined; the
 conclusion; what changed in the paper. In the paper, a Discussion is a formal summary in italics, marked
 "◇ Discussion", never a transcript. A LaTeX environment for this is in the case study's `preamble.tex`.
+
+**Panel record** (`ai_process/panels/<panel>/`). The pre-commitment (Section 2.0), written before the run; the
+prompts; the outputs; **every** finding with its level and disposition (accepted, dismissed, repaired), including
+findings that were dismissed and findings against challengers, with the reason for each dismissal.
 
 **Revision record.** Which comment (reader, referee, editor) prompted the revision; the panel run in response
 (prompts, roles, number of agents); the errors it found; what the author decided. Name a commenter only with their
@@ -184,6 +205,9 @@ consent; editors and referees are usually anonymous.
 | 9. Records | formal proofs, scripts, process records, in a public repository with history | iii (encouraged) | V |
 
 V: verifiable from public artifacts. P: open to inspection. S: self-declared.
+
+For agent-developed work (tier iii), items 3, 5 and 6 should include the pre-commitment of each panel and all its
+findings with their dispositions, including those dismissed.
 
 **Verification status table** (`ai_process/status.md` and the paper):
 

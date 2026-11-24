@@ -17,6 +17,10 @@ pdflatex main.tex && pdflatex supplement.tex
 Paper: `sec1_intro`, `sec_standard`, `sec2_literature`, `sec3_setting`, `sec4_axioms`, `sec5_results`,
 `sec9_necessity`, `sec12_collaboration` (which includes `fig_panelpic` and `sec13_lean`), `sec11_discussion`,
 `declaration`.
-Supplement: `sec7_proofs`, `sec6_triviality`, `supp_remarks`, `supp_A0`, `supp_A0_proof`, `sec8_actuarial`,
-`supp_act`, `supp_C_proof`, `sec10_consequences`, `supp_lit`, `supp_lean`.
-`loss_ratio_paper_v19.pdf` and `loss_ratio_supplement_v19.pdf` are the compiled result.
+Supplement: `sec7_proofs`, `sec6_triviality`, `supp_remarks` (which includes `supp_axioms_more`), `supp_witnesses`,
+`supp_A0`, `supp_A0_proof`, `sec8_actuarial`, `supp_act`, `supp_C_proof`, `sec10_consequences`, `supp_open`,
+`supp_lit`, `supp_practice`, `supp_kb`, `supp_lean`.
+
+`loss_ratio_paper.pdf` and `loss_ratio_supplement.pdf` are the compiled current version; the paper links to the
+Supplement under this fixed name. `loss_ratio_paper_v19.pdf` and `loss_ratio_supplement_v19.pdf` are kept as the
+earlier version.

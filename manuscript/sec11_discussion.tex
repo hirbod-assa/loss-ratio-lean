@@ -11,6 +11,15 @@ that do not yet exist. Finally, the comparison with large-scale efforts suggests
 multi-agent work, and the records needed to report it, are largely independent of scale, but this is based on one
 case study.
 
+The case study itself bears on the standard in four ways. The errors were found by different checks, and a model of
+another provider found three that all earlier checks had missed (Table~\ref{tab:errors}); reporting the checks, not
+only their conclusion, tells the reader which kinds of error were looked for. The decisive steps came from the
+author's objections, to an AI-drafted formulation that assumed what should have been proved and to axioms that used
+derived quantities; a record of the division of labour makes such contributions visible. The revisions after the
+Lean check changed the axioms, so that the formal check covers an equivalent earlier formulation; a verification
+status stated part by part, with dates, makes this visible. And agreement among AI reviews does not establish
+correctness, nor does a formal check cover more than was formalized.
+
 \paragraph{A method for AI-assisted proofs.}
 The broader lesson the author draws from the case study is that the use of AI in mathematical proofs should become
 methodological. It should be a procedure that is written down, tested, improved and reused by others, rather than
@@ -21,6 +30,20 @@ contains a skill file that describes the method and a set of agent definitions t
 on a small example problem (Section~\ref{sec:std-use}). Whether the method carries over to other problems and other
 authors can only be learned from use, and the skill and the agents are offered so that this can be tried.
 
+\paragraph{The research community.}
+There is a concern in the actuarial research community, which the author shares, that AI will diminish the credit
+that comes from research. If agents can propose, prove and check results of the kind reported here within days, the
+signal carried by such a result weakens. The concern is sharper for a community of the size of actuarial science, in
+which research, education and the profession are closely linked: doctoral students learn by proving, and if the
+proving is delegated it is not clear how that ability is acquired or shown; and access to agents at scale is unequal,
+so that credit could come to follow computing resources rather than ideas. The case study suggests two partial
+answers. Its decisive contributions were the choice of the question and the objections to AI-drafted formulations, so
+credit may move from producing proofs to posing questions, judging formulations and taking responsibility for what is
+certified; and a report of the kind proposed here makes the division of labour visible (item~2), which is a
+precondition for assigning credit fairly. Whether journals, hiring committees and the profession adopt such signals,
+and how the training of young researchers should change, are questions for the community as a whole, and they
+deserve discussion before practice settles them by default.
+
 \paragraph{The case study.}
 A loss ratio carries its own premium and its own risk measure. The premium is the price point of the cash line,
 the sure payment at which the book changes hands, and the risk measure is loss ratio times premium, visible even
@@ -30,7 +53,7 @@ law invariance and regularity of two sure amounts, characterize the loss ratios 
 functionals. The characterization is sharp, and the pair is unique. At the level of representations it is a
 transfer of the theory of \citet{yaari1987}, \citet{schmeidler1986}, \citet{wyp1997} and \citet{www2020}; at the
 level of the loss ratio it is new, and it comes with facts that have no single-functional counterpart: no non-trivial
-loss ratio is monotone (Proposition~\ref{prop:F2}), the association with a family of risk measures holds exactly
+loss ratio is monotone (Proposition~\ref{prop:F2} in the Supplement), the association with a family of risk measures holds exactly
 off $\{\rho=\Pi=0\}$ and is signed (Corollary~\ref{cor:assoc} in the Supplement), and no axiom on finite values of
 the ratio can replace the pooling axiom (Proposition~\ref{prop:nofinite}).
 
@@ -49,14 +72,9 @@ the ratio can replace the pooling axiom (Proposition~\ref{prop:nofinite}).
 \item \emph{Order properties of $\LR$.} \axRM{} is an order property of $\LR$, but of the sure amounts at which
   its cash lines become non-finite or vanish. Whether it is equivalent to an order property of the values of $\LR$ alone is open; by
   Proposition~\ref{prop:F2} it cannot be pointwise monotonicity.
-\item \emph{Loadings on sure losses.} We conjecture that an analogue of Theorem~\ref{thm:A} holds for ratios
-  $\bracket{I_h}{\kappa I_g}$ with a known loading $\kappa>0$, which would admit constant loss ratios $\ne1$.
-\item \emph{Quasi-convexity.} Necessity of the conditions in Corollary~\ref{cor:shape}(d) is open.
-\item \emph{Actuarial domain.} The axioms for nonnegative losses (Section~\ref{sec:actuarial} of the Supplement)
-  are not yet stated on values of the loss ratio alone. Whether (A4) imposed only on pairs with $X,Y,X+Y\notin N_0$ suffices is open; a
-  truncation-continuity (Greco-type) version of the signed tier on the cone is not known.
-\item \emph{Unbounded losses.} Extensions to $L^p$ and Orlicz spaces via \citet{www2020b} are not treated.
 \end{enumerate}
+Further open problems, on loadings on sure losses, quasi-convexity, the actuarial domain and unbounded losses, are
+listed in Section~\ref{supp:open} of the Supplement.
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -64,9 +82,8 @@ This paper has proposed a standard for reporting AI-assisted proofs in mathemati
 science, with nine items applied in three tiers according to how heavily AI was used, and it has applied the
 standard in full to a case study: the characterization of the loss ratio by axioms on its values, obtained with a
 panel of AI agents under the author's direction. The broader lesson is that the use of AI in mathematical proofs
-should become methodological: a procedure that is written down, tested, improved and reused by others, rather than
-each researcher's private way of prompting a chatbot. The method introduced here combines the author's background in
-mathematics with the practices of AI-assisted coding that have become common, namely version control, agents with
-defined roles, adversarial checks, and records kept as files. The standard, the skill file that describes the
+should become methodological, written down, tested, improved and reused, combining a background in mathematics with
+the practices of AI-assisted coding: version control, agents with defined roles, adversarial checks, and records kept
+as files. The standard, the skill file that describes the
 method and the agent definitions that others can run directly, tested on a small example problem, are offered as a
 first version for the community to test and improve.

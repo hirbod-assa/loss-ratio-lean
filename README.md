@@ -16,11 +16,11 @@ specific to loss ratios.
 |---|---|
 | `LossRatioLean/Basic.lean` | The Lean 4 formalization (Mathlib). |
 | `lakefile.toml`, `lean-toolchain`, `lake-manifest.json` | Lake project files (Lean and Mathlib `v4.36.0-rc1`). |
-| `manuscript/` | LaTeX source of the paper and of its Supplement, `refs.bib`, and the compiled PDFs `loss_ratio_paper_v19.pdf` and `loss_ratio_supplement_v19.pdf`. See `manuscript/BUILD.md`. |
-| `ai_process/` | Records behind Section 8 of the paper (the report of the AI process; item 9 of the proposed reporting standard): the literature-panel digest (`digest.md`), the ten candidate formulations (`proposals.md`), one judge report (`judge1.md`), the chair agent's note (`chair_note_final.tex`), and, for the revision with axioms on the loss ratio alone (Section 8.7), the panel's workflow script with its prompts (`revision_pureLR_workflow.js`), the judge's report (`revision_pureLR_judge.md`) and its check script (`revision_pureLR_check.py`). |
+| `manuscript/` | LaTeX source of the paper and of its Supplement, `refs.bib`, and the compiled PDFs `loss_ratio_paper.pdf` and `loss_ratio_supplement.pdf` (current version; the v19 PDFs are kept as the earlier version). See `manuscript/BUILD.md`. |
+| `ai_process/` | Records behind Section 8 of the paper (the report of the AI process; item 9 of the proposed reporting standard): the literature-panel digest (`digest.md`), the ten candidate formulations (`proposals.md`), one judge report (`judge1.md`), the chair agent's note (`chair_note_final.tex`), and, for the revision with axioms on the loss ratio alone (Section 8.6), the panel's workflow script with its prompts (`revision_pureLR_workflow.js`), the judge's report (`revision_pureLR_judge.md`) and its check script (`revision_pureLR_check.py`). |
 | `skill/` | A skill file (`ai-assisted-proof-case-study/SKILL.md`) that packages the method of the case study and the reporting standard for others (Section 2.7 of the paper). |
 | `agents/` | Reusable definitions of the agent roles (proposer, adversarial checker, judge, chair, prover, checking run, literature strand, Lean formalizer, second-provider review), a context template, a generic panel workflow, and a worked example (Section 2.7). See `agents/README.md`. |
-| `lean_snapshot_2026-10-25/build_log.txt` | Build log of the Lean file exactly as reported in Section 8.6 (build successful, no `sorry`). |
+| `lean_snapshot_2026-10-25/build_log.txt` | Build log of the Lean file exactly as reported in Section 8.5 (build successful, no `sorry`). |
 
 ## What is checked
 
@@ -83,15 +83,13 @@ Versions: Lean `v4.36.0-rc1`, Mathlib `v4.36.0-rc1`.
 
 ## Building the manuscript
 
-```
-cd manuscript
-pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
-```
+The paper and the Supplement cross-reference each other and are built together; see
+[`manuscript/BUILD.md`](manuscript/BUILD.md).
 
 ## How this was produced
 
 The Lean file was written with AI assistance (Claude, Anthropic) and compiled by the author; the process,
-including the build history, is described in Section 12.6 of the paper.
+including the build history, is described in Section 8.5 of the paper and Section S11 of the Supplement.
 
 ## License
 

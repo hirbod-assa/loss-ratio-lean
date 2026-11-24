@@ -1,5 +1,64 @@
 \section{The Lean check: process record}\label{supp:lean}
 
+\subsection{What was formalized and the checks made}\label{supp:lean-detail}
+
+Lean~4 \citep{demoura2021} is an interactive proof assistant: a programming language in which definitions,
+statements and proofs are written in a formal language based on dependent type theory, and in which every proof is
+checked by a small trusted program, the kernel. A proof may be written step by step or with the help of tactics,
+procedures that search for parts of a proof automatically, but whatever a tactic produces is checked again by the
+kernel. Mathlib \citep{mathlib2020} is the community library of formalized mathematics for Lean; it supplies the
+real numbers, groups, limits and the other notions used below.
+
+Two features of Lean are used to state precisely what has been checked. A proof can be left unfinished by writing
+\texttt{sorry}, which Lean accepts with a warning; a finished development contains none. The command
+\texttt{\#print axioms} lists the foundational axioms on which a theorem depends; ordinary classical mathematics in
+Lean uses exactly three of them, \texttt{propext} (propositional extensionality), \texttt{Classical.choice} (the
+axiom of choice) and \texttt{Quot.sound} (soundness of quotients), and an unfinished proof shows up in this list as
+\texttt{sorryAx}.
+
+The formalization works in an abstract setting. Positions form an additive commutative group $\Xp$ with an additive
+embedding $c\mapsto\mathrm{const}(c)$ of the sure losses, a relation ``comonotone'' under which every position is
+comonotone with every constant and which is preserved when both positions are shifted by constants, and a relation
+``equal in law'' preserved by a common cash shift. A loss ratio is a map from $\Xp$ to $\R\cup\{\mathtt{none}\}$,
+where \texttt{none} stands for a non-finite value, so that the labels $\infty$ and $\star$ are identified as in
+\axLI. The axioms read as follows; \texttt{prem} is the implied premium and \texttt{rhoD} is $\Pi\cdot\LR$.
+
+{\small
+\begin{verbatim}
+def AxP : Prop := ∀ x : X, ∃! c : ℝ, LR (x + S.const c) = none
+def AxN : Prop := ∀ c : ℝ, c ≠ 0 → LR (S.const c) = some 1
+def AxLI : Prop := ∀ x y : X, S.eqd x y → LR x = LR y
+def AxCM (hP : AxP S LR) : Prop :=
+  ∀ x y : X, S.comon x y → LR x ≠ none → LR y ≠ none →
+    prem hP x + prem hP y ≠ 0 →
+    LR (x + y) = some ((rhoD hP x + rhoD hP y) / (prem hP x + prem hP y))
+\end{verbatim}
+}
+
+These coincide with Properties~\ref{ax:P}, \ref{ax:N} and~\ref{ax:CM} and Axiom~\ref{ax:LI}, with one difference of
+form: \texttt{AxCM} is stated with the products $\Pi\cdot\LR$ over the sum of the premiums, which is \axCM{} with
+the weights $w_{X,Y}$ multiplied out.
+
+The following checks were made to ensure that the outcome is what is reported.
+
+\begin{itemize}[nosep]
+\item \emph{No change to statements during repair.} The corrections after builds 1 and 2 changed proof steps only;
+  no definition and no theorem statement was altered.
+\item \emph{No unfinished proofs.} The final file contains no \texttt{sorry}, no \texttt{admit} and no added
+  \texttt{axiom}.
+\item \emph{Axiom report.} \texttt{\#print axioms} for each of the ten theorems in Table~\ref{tab:lean} lists only
+  \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+\item \emph{Clean rebuild.} The final build started from an empty build directory, so its result does not rely on
+  cached output.
+\item \emph{Identity of the file.} The file compiled in the final build was compared with the file reported here and
+  found identical.
+\item \emph{Fidelity of statements.} The formal axioms and theorem statements were compared with the paper by the
+  assistant; this comparison is to be repeated by the author before the code is released.
+\end{itemize}
+
+
+\subsection{The build-and-repair loop}
+
 The Lean file was written by the main assistant. Lean could not be installed in the assistant's cloud workspace,
 whose network policy blocks the servers that distribute Lean, so the file was compiled on the author's computer.
 The author installed Lean and created the project; the assistant read the build output from the project folder

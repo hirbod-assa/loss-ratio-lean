@@ -95,56 +95,19 @@ AI assisted with the following tasks:
 
 \subsection{How the knowledge base for this paper was assembled}\label{sec:collab-kb}
 
-The agents draw on two kinds of knowledge: what their underlying models learned in training, which can be
-recalled only approximately, and documents read into their working context during the task. In this project the
-second kind was organized as follows.
-
-The five strands of the roundtable were identified by the author: premium principles and capital allocation;
-conic finance and performance ratios; coherent risk measures and acceptance sets; axiomatic risk measures and
-elicitability; and the extended-loss-ratio framework with its association. Its synthesis served as the starting
-point of the panel.
-
-The panel divided the literature into ten strands: insurance-pricing axiomatics; Choquet integrals and comonotonic
-additivity; signed Choquet integrals; law-invariant coherent and convex risk measures; acceptability indices and
-quasi-convex duality; return and star-shaped risk measures; elicitability; performance-ratio axiomatics; decision
-theory and functional equations; and a critique of the earlier synthesis. Each strand agent returned exact
-statements of if-and-only-if theorems with their hypotheses, a confidence label (high, medium or low) and a note
-on its source. For example, the signed representation results of
-\citet{cmmm2012,cmmm2015} were taken from their working paper versions.
-
-There was no separate retrieval index. Instead, the strand reports were merged into a written digest of about
-415{,}000 characters, which, together with the ten candidate formulations (about 245{,}000 characters), formed the
-shared knowledge base of the later stages: the judge and prover agents were instructed to read these files in full
-before working, and Section~\ref{sec:lit} was written from the digest. The confidence labels therefore
-travelled with each statement into the stages that used it.
-
-In addition, the author used Gemini (Google) to prepare summaries of the key works cited in
-Section~\ref{sec:lit}: \citet{gerber1974}, \citet{yaari1987} and \citet{wyp1997} on premium principles;
-\citet{msm1994}, \citet{cmmm2012,cmmm2015} and \citet{www2020} on signed Choquet integrals; \citet{adeh1999} and
-\citet{kusuoka2001} on coherent risk measures; and \citet{chernymadan2009}, \citet{chew1983} and \citet{dekel1986} on
-performance ratios and ratio representations. Each summary stated the core results of the work and their role in
-this paper. The descriptions in Section~\ref{sec:lit} and the uses of these works in Sections~\ref{sec:axioms},
-\ref{sec:results}, \ref{sec:necessity} and~\ref{sec:consequences} were compared with these summaries; no
-discrepancy was found, and three descriptions in Section~\ref{sec:lit} were made more precise. Since the summaries
-are themselves AI output, this comparison is a consistency check, not a check against the original publications.
-
-Later, the author supplied author versions of three cited papers: \citet{www2020} (working paper of June 2019),
-\citet{www2020b} (version of May 2020, with a correction of May 2023) and \citet{hlw2025} (version of June 2024).
-The statements taken from them were checked against these versions: the definition of $I_h$, the
-characterization theorem used in the representation step and the convexity theorem of \citet{www2020}; the
-monotonicity criterion and Lipschitz bound, which are also stated there; the extension to general spaces, the
-convention $\mathrm{ES}_1=\operatorname{ess\,sup}$ and the mixture representation of \citet{www2020b}; and the
-axioms and the two characterization theorems of \citet{hlw2025}. No discrepancy was found. Lemma numbers that
-could differ between these versions and the published articles were removed, and the description of
-\citet{hlw2025} in Section~\ref{sec:lit} was rewritten from the paper.
-
-The account of OpenAI's work and of the responses of the mathematical community in
-Section~\ref{sec:std-practice} was assembled later, from two independent AI-prepared reports (see the Discussion in
-Section~\ref{sec:std-compare}). Statements were kept where the two reports agree or where a primary source was read
-directly (the GitHub repositories, the two arXiv papers and the AGMAI guidelines); OpenAI's own pages could not be
-retrieved automatically; the texts of its Navier--Stokes and First Proof posts, and a localized version of its October post on academic
-collaborations, were retrieved by the author in a browser, and the details of those projects are taken from them;
-the October post is paraphrased rather than quoted.
+The agents draw on what their models learned in training, which can be recalled only approximately, and on
+documents read into their working context during the task. The five strands of the roundtable were identified by
+the author, and its synthesis was the starting point of the panel, which divided the literature into ten strands.
+Each strand agent returned exact statements of if-and-only-if theorems with their hypotheses, a confidence label
+(high, medium or low) and a note on its source. There was no separate retrieval index: the strand reports were merged
+into a written digest of about 415{,}000 characters, which the judge and prover agents read in full together with the
+ten candidate formulations, so that the confidence labels travelled with each statement into the stages that used
+it. Summaries of the key cited works prepared with Gemini were compared with their descriptions and uses in the
+paper; since the summaries are themselves AI output, this is a consistency check, not a check against the original
+publications. The statements taken from \citet{www2020}, \citet{www2020b} and \citet{hlw2025} were checked against
+author versions of these papers, and no discrepancy was found. The account of OpenAI's work in
+Section~\ref{sec:std-practice} was assembled from two independent AI-prepared reports and from primary sources read
+directly. The strands, the works summarized and the checks are listed in Section~\ref{supp:kb} of the Supplement.
 
 \subsection{Hallucinations and semantic errors encountered}
 
@@ -193,42 +156,30 @@ non-finite point of $\bracket{I_h}{I_g}$ misplaced in the example for \axPe & ma
 \subsection{Guardrails applied in this project}\label{sec:collab-guard}
 
 \begin{itemize}[nosep]
-\item \emph{Labels on knowledge.} Every literature statement in the digest carried a confidence label and a note on
-  its source, as described above.
-\item \emph{Independent summaries.} Summaries of the key cited works prepared with Gemini were compared with their
-  descriptions and uses in the paper.
+\item \emph{Labels and summaries.} Every literature statement in the digest carried a confidence label and a note on
+  its source, and the key cited works were compared with independent summaries (Section~\ref{sec:collab-kb}).
 \item \emph{Self-contained proofs.} Results whose exact statements were uncertain are reproved; in particular the
   representation of comonotonic additive functionals, for which the proof cites \citet[Thm.~1]{www2020}, is
   reproved in Lemmas~\ref{lem:cashlip}--\ref{lem:rep}.
-\item \emph{Adversarial checking.} The three checking runs on the panel's proofs were instructed to refute; one tested
-  the degenerate case $\LR\equiv1$ with a premium that is not comonotonic additive, and two recomputed the numbers in
-  the counterexamples. The formulation through the implied premium and risk measure (Section~\ref{sec:axioms} and Section~\ref{sec:proofs} of the Supplement) was given to a
-  further checking run with instructions to look for circularity and for the cases $\Pi(X)=0$, break-even books,
-  $\LR\equiv1$ and $c=0$.
-\item \emph{Repair loop.} Reported gaps were returned to the prover agent; the panel's proofs went through two
-  repair rounds before the final checking round.
+\item \emph{Adversarial checking and repair.} The ``prover'' of Figure~\ref{fig:panel} is a language-model agent that
+  writes proofs in ordinary mathematical language, not a formal theorem prover. It drafted the first complete
+  if-and-only-if theorem, with proofs of the results that are now Theorems~\ref{thm:A}, \ref{thm:B}, \ref{thm:A0},
+  \ref{thm:C} and~\ref{thm:Cp} (the last three in the Supplement) and of the supporting lemmas. Three checking runs were instructed to refute these
+  proofs; one tested the degenerate case $\LR\equiv1$ with a premium that is not comonotonic additive, and two
+  recomputed the numbers in the counterexamples. Reported gaps were returned to the prover over two repair rounds,
+  and the final round returned two reports without objections and one report of gaps in side claims, which were
+  repaired. The formulation through the implied premium and risk measure was drafted afterwards by the main
+  assistant and given to a further run with instructions to look for circularity and for the cases $\Pi(X)=0$,
+  break-even books, $\LR\equiv1$ and $c=0$.
 \item \emph{Counterexamples.} Each axiom is tested against an explicit loss ratio
   (Section~\ref{sec:necessity}).
 \item \emph{Recomputation.} The values in Examples~\ref{ex:PH}, \ref{ex:ES}, \ref{ex:qc} and in the counterexamples
   were recomputed by script, and the monotonicity range in Example~\ref{ex:family} was confirmed on a grid.
-\item \emph{Formal checking.} The loss-ratio-specific steps were formalized in Lean and compiled; see
-  Section~\ref{sec:collab-lean}.
+\item \emph{Formal checking.} The loss-ratio-specific steps were formalized in Lean
+  (Section~\ref{sec:collab-lean}).
 \item \emph{A second system.} The review with ChatGPT, a model from a different provider, found three of the errors in
   Table~\ref{tab:errors} that the earlier checks had missed.
 \end{itemize}
-
-\subsection{What the prover produced and what was formally checked}
-
-The ``prover'' of Figure~\ref{fig:panel} is a language-model agent that writes proofs in ordinary mathematical
-language; it is not a formal theorem prover. In this project it drafted the first complete if-and-only-if theorem,
-in a formulation based on an assumed cash-line axiom, with proofs of the results that are now
-Theorems~\ref{thm:A}, \ref{thm:B}, \ref{thm:A0}, \ref{thm:C} and~\ref{thm:Cp} (the last three in the Supplement) and of the supporting lemmas; the final
-checking round of these proofs returned two reports without objections and one report of gaps in side claims, which
-were repaired. The present formulation through the implied premium and risk measure
-(Lemmas~\ref{lem:premium}--\ref{lem:LI} and Proposition~\ref{prop:readings}) was drafted afterwards by the main
-assistant and checked by one further run, whose findings appear in Table~\ref{tab:errors}.
-
-The loss-ratio-specific steps were also checked formally in Lean (Section~\ref{sec:collab-lean}).
 
 \input{sec13_lean}
 
@@ -253,7 +204,7 @@ explicitly on the loss ratio itself. The present formulation, in which every axi
 
 \emph{Exploration by the author with the main assistant.} The author first tried to replace the implicit premium by
 explicit formulas in terms of $\LR$; these attempts, and the reason they cannot suffice, are recorded in the
-Discussions after Proposition~\ref{prop:explicit}. An intermediate version stated \axCM{} with weights given by the
+Discussions after Proposition~\ref{prop:explicit} in the Supplement. An intermediate version stated \axCM{} with weights given by the
 points at which the cash lines are not finite. The author rejected it: such a point is the premium under another
 name, and the requirement was that no axiom use the premium, a risk measure or a point read off a cash line.
 
@@ -275,8 +226,8 @@ The main assistant then wrote Section~\ref{sec:R}, Lemmas~\ref{lem:R} and~\ref{l
 the other sections, and repeated the numerical checks.
 
 \emph{The author's decisions.} The author adopted the judge's recommendation and questioned the remaining
-hypothesis of \axR{} (the last Discussion in Section~\ref{sec:R}); the answer became Remark~\ref{rem:limzero} and
-Proposition~\ref{prop:nofinite}. The nonnegative case (Section~\ref{sec:actuarial} of the Supplement) was left in
+hypothesis of \axR{} (the Discussion in Section~\ref{sec:R}); the answer became Remark~\ref{rem:limzero} and
+Proposition~\ref{prop:nofinite} in the Supplement. The nonnegative case (Section~\ref{sec:actuarial} of the Supplement) was left in
 its earlier form. The proofs of Lemmas~\ref{lem:R} and~\ref{lem:offsets} and of Proposition~\ref{prop:nofinite}
 were checked by one adversarial agent, by the judge and by computation; they are not formalized in Lean and were not
 part of the review with ChatGPT.
@@ -304,18 +255,3 @@ has not yet taken place; the comments reported in Section~\ref{sec:collab-revisi
 the axioms and the structure of the paper. Apart from the three papers named in Section~\ref{sec:collab-kb}, the
 references have not been checked against the original publications. Section~\ref{sec:standard} and the
 comparison with OpenAI's work rely on the cited public sources; where these are press reports, this is stated.
-
-\subsection{What the case study shows about the standard}\label{sec:collab-lessons}
-
-Four observations from the case study motivate the items of Table~\ref{tab:standard}. First, the errors were found
-by different checks: checking runs within the panel, adversarial agents, the main assistant during rewriting, and a
-review with a model from a different provider, which found three errors that the earlier checks had missed
-(Table~\ref{tab:errors}). Reporting the checks, and not only their conclusion, tells the reader which kinds of
-error have been looked for. Second, the decisive steps came from the author: the reformulation through the implied
-premium and risk measure came from an objection to an AI-drafted formulation that was internally correct but
-assumed what should have been proved, and the axioms on the loss ratio alone came from insisting, after a reader's
-remark, that no derived quantity appear in an axiom. A record of the division of labour makes such contributions
-visible. Third, the revisions after the Lean check changed the axioms, so that the formal check now covers an
-equivalent earlier formulation rather than the present one; a verification status stated part by part, with dates,
-makes this visible instead of hiding it. Fourth, agreement among AI reviews does not establish correctness, and a
-formal check covers only what was formalized.

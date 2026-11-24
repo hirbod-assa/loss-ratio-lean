@@ -3,16 +3,21 @@ import Mathlib
 /-!
 # Implied premium and implied risk measure of a loss ratio
 
-Formalization of the loss-ratio specific part of
-"An Axiomatic Characterization of the Loss Ratio" (H. Assa, draft of 24 October 2026):
-Steps (A) and (B) of Section 6,
-i.e. Lemmas 7.1--7.4, Proposition 4.7, the association (Corollary 10.1(a)), extended
-pooling (Corollary 10.3), the converse/uniqueness of the representing pair, and the
-algebraic core of Proposition 4.14 (no monotone loss ratio).
+Formalization of the loss-ratio specific part of the proofs in
+"Reporting AI-Assisted Proofs in Mathematical Risk Management: A Proposed Standard, with an
+Axiomatic Characterization of the Loss Ratio as a Case Study" (H. Assa, draft of 24 November 2026),
+i.e. Lemmas S1.3--S1.6 of the Supplement, Proposition 5.10, the association
+(Corollary S6.1(a)), extended pooling (Corollary S6.3), the converse/uniqueness of the
+representing pair, and the algebraic core of Proposition S2.5 (no monotone loss ratio).
+Numbers starting with S refer to the Supplement.
 
-The classical representation step (Step (C): comonotonic additive functionals are signed
-Choquet integrals) is *not* formalized; `main_conditional` states the theorem
-conditionally on it.
+The classical representation step (Lemmas S1.7--S1.10: comonotonic additive functionals are
+signed Choquet integrals) is *not* formalized; `main_conditional` states Theorem 6.1
+conditionally on it. The derivation of (P), (N) and (CM) from the axioms (P∃) and (R) of the
+current paper (Lemma S1.1) is not formalized either.
+
+The comments were updated to the numbering of the paper of 24 November 2026; the code is
+unchanged from the file built on 25 October 2026, kept in `lean_snapshot_2026-10-25/`.
 
 ## Setting
 Positions form an additive commutative group `X` with an additive embedding of sure
@@ -66,7 +71,7 @@ lemma const_add_const (x : X) (a b : ℝ) :
     x + S.const a + S.const b = x + S.const (a + b) := by
   rw [add_assoc, map_add]
 
-/-! ### The implied premium (Definition 4.2, Lemma 7.1) -/
+/-! ### The implied premium (Definition 5.6, Lemma S1.3) -/
 
 /-- The implied premium: minus the price point. -/
 def prem (hP : AxP S LR) (x : X) : ℝ := -Classical.choose (hP x).exists
@@ -79,7 +84,7 @@ lemma prem_unique (hP : AxP S LR) (x : X) {c : ℝ} (hc : LR (x + S.const c) = n
     c = -prem hP x :=
   (hP x).unique hc (prem_spec hP x)
 
-/-- Equation (4.1): the implied premium is cash additive. -/
+/-- Equation (4): the implied premium is cash additive. -/
 lemma prem_shift (hP : AxP S LR) (x : X) (c : ℝ) :
     prem hP (x + S.const c) = prem hP x + c := by
   have h : LR (x + S.const c + S.const (-prem hP x - c)) = none := by
@@ -118,7 +123,7 @@ lemma prem_const (hP : AxP S LR) (hN : AxN S LR) (c : ℝ) : prem hP (S.const c)
   rw [zero_add, prem_zero hP hN, zero_add] at this
   exact this
 
-/-! ### The implied risk measure (Definition 4.6, Lemma 7.2, Proposition 4.7) -/
+/-! ### The implied risk measure (Definition 5.9, Lemma S1.4, Proposition 5.10) -/
 
 /-- Loss = loss ratio × premium, on the finite domain. -/
 def rhoD (hP : AxP S LR) (x : X) : ℝ := prem hP x * val (LR x)
@@ -132,7 +137,7 @@ section Implied
 variable (hP : AxP S LR) (hN : AxN S LR) (hCM : AxCM hP)
 include hN hCM
 
-/-- Lemma 7.2, first part: pooling with a sure loss. -/
+/-- Lemma S1.4, first part: pooling with a sure loss. -/
 lemma rhoD_shift (x : X) (hx : LR x ≠ none) (c : ℝ) (hc : prem hP x + c ≠ 0) :
     rhoD hP (x + S.const c) = rhoD hP x + c := by
   by_cases h0 : c = 0
@@ -181,7 +186,7 @@ section Implied2
 variable (hP : AxP S LR) (hN : AxN S LR) (hCM : AxCM hP)
 include hN hCM
 
-/-- Proposition 4.7(b): the accounting reading. -/
+/-- Proposition 5.10(b): the accounting reading. -/
 lemma rho_eq (x : X) {c : ℝ} (hc : prem hP x + c ≠ 0) :
     rho hP x = rhoD hP (x + S.const c) - c := by
   unfold rho
@@ -204,7 +209,7 @@ lemma rho_cash (x : X) (c : ℝ) : rho hP (x + S.const c) = rho hP x + c := by
   unfold rho
   ring
 
-/-- Proposition 4.7(a): every cash line is a unit-slope Möbius map. -/
+/-- Proposition 5.10(a): every cash line is a unit-slope Möbius map. -/
 theorem mobius (x : X) (c : ℝ) (hc : prem hP x + c ≠ 0) :
     LR (x + S.const c) = some ((rho hP x + c) / (prem hP x + c)) := by
   have hfin : LR (x + S.const c) ≠ none := by
@@ -218,7 +223,7 @@ theorem mobius (x : X) (c : ℝ) (hc : prem hP x + c ≠ 0) :
   field_simp
   ring
 
-/-- Proposition 4.7(c): the residue at the price point. -/
+/-- Proposition 5.10(c): the residue at the price point. -/
 theorem residue (x : X) :
     Filter.Tendsto (fun c => (c + prem hP x) * val (LR (x + S.const c)))
       (nhdsWithin (-prem hP x) {-prem hP x}ᶜ) (nhds (rho hP x - prem hP x)) := by
@@ -239,7 +244,7 @@ theorem residue (x : X) :
     exact ((continuous_const.add continuous_id).tendsto _).mono_left nhdsWithin_le_nhds
   exact hlim.congr' (hev.mono fun c hc => hc.symm)
 
-/-! ### Lemma 7.3: comonotonic additivity, including on the break-even set -/
+/-! ### Lemma S1.5: comonotonic additivity, including on the break-even set -/
 
 theorem comon_additive {x y : X} (hxy : S.comon x y) :
     prem hP (x + y) = prem hP x + prem hP y ∧ rho hP (x + y) = rho hP x + rho hP y := by
@@ -301,7 +306,7 @@ theorem comon_additive {x y : X} (hxy : S.comon x y) :
   simp only [val, Option.getD_some, one_mul, div_one]
   ring
 
-/-! ### Lemma 7.4: law invariance passes to the implied pair -/
+/-! ### Lemma S1.6: law invariance passes to the implied pair -/
 
 theorem LI_transfer (hLI : AxLI S LR) {x y : X} (h : S.eqd x y) :
     prem hP x = prem hP y ∧ rho hP x = rho hP y := by
@@ -319,7 +324,7 @@ theorem LI_transfer (hLI : AxLI S LR) {x y : X} (h : S.eqd x y) :
   unfold rhoD
   rw [prem_shift, prem_shift, hp, line]
 
-/-! ### Corollary 10.3: pooling at non-finite values -/
+/-! ### Corollary S6.3: pooling at non-finite values -/
 
 theorem pooling_extended {x y : X} (hxy : S.comon x y) :
     LR (x + y) = if prem hP x + prem hP y = 0 then none
@@ -332,7 +337,7 @@ theorem pooling_extended {x y : X} (hxy : S.comon x y) :
     simp only [map_zero, add_zero] at hm
     rw [hm, hp, hr]
 
-/-! ### Corollary 10.1(a): Assa's association -/
+/-! ### Corollary S6.1(a): Assa's association -/
 
 theorem association (x : X) (β : ℝ) (hβ : β ≠ 1) :
     (rho hP x - β * prem hP x) / (1 - β) = 0 ↔
@@ -358,7 +363,7 @@ end Implied2
 /-- The extended ratio of two functionals. -/
 def ratio (r p : X → ℝ) (x : X) : Option ℝ := if p x = 0 then none else some (r x / p x)
 
-/-- Converse direction (Lemma 7.3(b) and the algebraic part of (ii) ⇒ (i) in Theorem 5.1):
+/-- Converse direction (Lemma S1.5(b) and the algebraic part of (ii) ⇒ (i) in Theorem 6.1):
 the ratio of a cash-additive, comonotonic additive pair satisfies (P), (N), (CM), and its
 implied premium and implied risk measure are the pair itself. -/
 theorem converse (r p : X → ℝ)
@@ -431,7 +436,7 @@ theorem unique_pair (hP : AxP S LR) (r p : X → ℝ)
   field_simp
   ring
 
-/-! ### Proposition 4.14: the algebraic core of "no monotone loss ratio"
+/-! ### Proposition S2.5: the algebraic core of "no monotone loss ratio"
 
 For the Bernoulli book `1_A` with `P(A) = p`, `I_k(1_A + c) = k(p) + c`, and for
 `1 + t 1_E` with `P(E) = q`, `I_k(1 + t 1_E) = 1 + t k(q)` (layer formula, not formalized).
@@ -462,10 +467,10 @@ theorem no_monotone_core (h g : ℝ → ℝ) (p : ℝ) (hg : 0 < g p)
 
 /-! ### The main theorem, conditional on the classical representation step -/
 
-/-- Theorem 5.1, conditional on Step (C). `Rep F` stands for "F is a signed Choquet integral
-`I_k` with `k` of bounded variation and `k(1) = 1`" and `classical` for the theorem of
-Wang, Wei and Willmot (2020) (or Schmeidler (1986) in the monotone tier). Regularity is
-imposed directly on the implied pair. -/
+/-- Theorem 6.1, conditional on the representation step (Lemmas S1.7--S1.10).
+`Rep F` stands for "F is a signed Choquet integral `I_k` with `k` of bounded variation
+and `k(1) = 1`" and `classical` for the theorem of Wang, Wei and Willmot (2020) (or
+Schmeidler (1986) in the monotone tier). Regularity is imposed directly on the implied pair. -/
 theorem main_conditional (Regular Rep : (X → ℝ) → Prop)
     (classical : ∀ F : X → ℝ, (∀ x c, F (x + S.const c) = F x + c) →
         (∀ x y, S.comon x y → F (x + y) = F x + F y) → (∀ x y, S.eqd x y → F x = F y) →

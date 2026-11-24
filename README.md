@@ -20,7 +20,7 @@ specific to loss ratios.
 | `ai_process/` | Records behind Section 8 of the paper (the report of the AI process; item 9 of the proposed reporting standard): the literature-panel digest (`digest.md`), the ten candidate formulations (`proposals.md`), one judge report (`judge1.md`), the chair agent's note (`chair_note_final.tex`), and, for the revision with axioms on the loss ratio alone (Section 8.6), the panel's workflow script with its prompts (`revision_pureLR_workflow.js`), the judge's report (`revision_pureLR_judge.md`) and its check script (`revision_pureLR_check.py`). |
 | `skill/` | A skill file (`ai-assisted-proof-case-study/SKILL.md`) that packages the method of the case study and the reporting standard for others (Section 2.7 of the paper). |
 | `agents/` | Reusable definitions of the agent roles (proposer, adversarial checker, judge, chair, prover, checking run, literature strand, Lean formalizer, second-provider review), a context template, a generic panel workflow, and a worked example (Section 2.7). See `agents/README.md`. |
-| `lean_snapshot_2026-10-25/build_log.txt` | Build log of the Lean file exactly as reported in Section 8.5 (build successful, no `sorry`). |
+| `lean_snapshot_2026-10-25/` | The Lean file as built on 25 October 2026 (`Basic.lean`) and its build log (`build_log.txt`), as reported in Section 8.5 (build successful, no `sorry`). The current `LossRatioLean/Basic.lean` differs from it only in comments, updated to the current numbering. |
 
 ## What is checked
 
@@ -39,7 +39,7 @@ specific to loss ratios.
 
 Numbers refer to the current version of the paper (`manuscript/loss_ratio_paper.pdf`, draft of 24 November 2026)
 and its Supplement (numbers starting with S); this table is Table 6 of the paper. The comments in `Basic.lean`
-use the numbering of the version of 25 October 2026, against which the file was built.
+use the same numbering.
 
 ## Scope
 

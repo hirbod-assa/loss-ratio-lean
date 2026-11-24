@@ -26,18 +26,20 @@ specific to loss ratios.
 
 | Result in the paper | Lean name |
 |---|---|
-| Implied premium: existence, uniqueness, cash additivity (Lemma 7.1) | `prem`, `prem_shift`, `prem_const` |
-| Implied risk measure and cash additivity (Lemma 7.2) | `rho`, `rho_cash` |
-| Möbius form of cash lines and residue (Proposition 4.7(a)–(c)) | `mobius`, `rho_eq`, `residue` |
-| Comonotonic additivity, also on the break-even set (Lemma 7.3) | `comon_additive` |
-| Law invariance of the implied pair (Lemma 7.4) | `LI_transfer` |
+| Implied premium: existence, uniqueness, cash additivity (Lemma S1.3) | `prem`, `prem_shift`, `prem_const` |
+| Implied risk measure and cash additivity (Lemma S1.4) | `rho`, `rho_cash` |
+| Möbius form of cash lines and residue (Proposition 5.10(a)–(c)) | `mobius`, `rho_eq`, `residue` |
+| Comonotonic additivity, also on the break-even set (Lemma S1.5) | `comon_additive` |
+| Law invariance of the implied pair (Lemma S1.6) | `LI_transfer` |
 | Converse construction and uniqueness of the pair | `converse`, `unique_pair` |
-| Association (Corollary 10.1(a)) | `association` |
-| Pooling at non-finite values (Corollary 10.3) | `pooling_extended` |
-| Algebraic core of "no monotone loss ratio" (Proposition 4.14) | `no_monotone_core` |
-| Theorem 5.1, given the representation step | `main_conditional` |
+| Association (Corollary S6.1(a)) | `association` |
+| Pooling at non-finite values (Corollary S6.3) | `pooling_extended` |
+| Algebraic core of "no monotone loss ratio" (Proposition S2.5) | `no_monotone_core` |
+| Theorem 6.1, given the representation step | `main_conditional` |
 
-Theorem and lemma numbers refer to the version of the paper dated 25 October 2026.
+Numbers refer to the current version of the paper (`manuscript/loss_ratio_paper.pdf`, draft of 24 November 2026)
+and its Supplement (numbers starting with S); this table is Table 6 of the paper. The comments in `Basic.lean`
+use the numbering of the version of 25 October 2026, against which the file was built.
 
 ## Scope
 
